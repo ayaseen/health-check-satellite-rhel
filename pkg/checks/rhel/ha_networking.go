@@ -177,7 +177,7 @@ func checkMulticast(r *report.AsciiDocReport) {
 		report.AddRecommendation(&check.Result, "Recommended: Add 'transport: udpu' for unicast in corosync.conf")
 
 		// Add RHEL documentation reference directly as a link
-		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/configuring_and_managing_high_availability_clusters/assembly_creating-cluster-configuring-managing-high-availability-clusters", rhelVersion))
+		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/configuring_and_managing_high_availability_clusters/assembly_creating-cluster-configuring-managing-high-availability-clusters", rhelVersion))
 	} else if usesMulticast && !multicastEnabled {
 		check.Result = report.NewResult(report.StatusWarning,
 			"Multicast is used by Corosync but may be disabled in kernel",
@@ -186,7 +186,7 @@ func checkMulticast(r *report.AsciiDocReport) {
 		report.AddRecommendation(&check.Result, "Make the change persistent: 'echo \"net.ipv4.icmp_echo_ignore_broadcasts = 0\" >> /etc/sysctl.conf'")
 
 		// Add RHEL documentation reference directly as a link
-		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/configuring_and_managing_networking/configuring-system-network-parameters_configuring-and-managing-networking", rhelVersion))
+		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/configuring_and_managing_networking/configuring-system-network-parameters_configuring-and-managing-networking", rhelVersion))
 	} else if usesMulticast && ompingAvailable && !multicastWorking {
 		check.Result = report.NewResult(report.StatusWarning,
 			"Multicast test failed, cluster communication may be impacted",
@@ -196,7 +196,7 @@ func checkMulticast(r *report.AsciiDocReport) {
 		report.AddRecommendation(&check.Result, "Consider switching to unicast (transport: udpu) if multicast cannot be fixed")
 
 		// Add RHEL documentation reference directly as a link
-		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/configuring_and_managing_high_availability_clusters/troubleshooting-cluster-components-configuring-and-managing-high-availability-clusters", rhelVersion))
+		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/configuring_and_managing_high_availability_clusters/troubleshooting-cluster-components-configuring-and-managing-high-availability-clusters", rhelVersion))
 	} else if usesMulticast && !hasMulticastFirewallRules {
 		check.Result = report.NewResult(report.StatusWarning,
 			"No specific firewall rules for multicast detected",
@@ -205,7 +205,7 @@ func checkMulticast(r *report.AsciiDocReport) {
 		report.AddRecommendation(&check.Result, "For firewalld: 'firewall-cmd --permanent --add-rich-rule=\"rule family=ipv4 destination address=239.255.0.0/16 protocol=udp accept\"'")
 
 		// Add RHEL documentation reference directly as a link
-		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/configuring_and_managing_high_availability_clusters/assembly_creating-cluster-configuring-managing-high-availability-clusters#high-availability-firewall-configuring-managing-high-availability-clusters", rhelVersion))
+		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/configuring_and_managing_high_availability_clusters/assembly_creating-cluster-configuring-managing-high-availability-clusters#high-availability-firewall-configuring-managing-high-availability-clusters", rhelVersion))
 	} else if usesMulticast {
 		check.Result = report.NewResult(report.StatusOK,
 			"Multicast is properly configured for Corosync",
@@ -221,7 +221,7 @@ func checkMulticast(r *report.AsciiDocReport) {
 		report.AddRecommendation(&check.Result, "Verify Corosync configuration is properly set up")
 
 		// Add RHEL documentation reference directly as a link
-		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/configuring_and_managing_high_availability_clusters/assembly_creating-cluster-configuring-managing-high-availability-clusters", rhelVersion))
+		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/configuring_and_managing_high_availability_clusters/assembly_creating-cluster-configuring-managing-high-availability-clusters", rhelVersion))
 	}
 
 	report.SetDetail(&check.Result, detail.String())
@@ -377,7 +377,7 @@ func checkFencingNetworking(r *report.AsciiDocReport) {
 		report.AddRecommendation(&check.Result, "Use 'pcs stonith create' to configure fencing")
 
 		// Add RHEL documentation reference directly as a link
-		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/configuring_and_managing_high_availability_clusters/assembly_fencing-configuring-managing-high-availability-clusters", rhelVersion))
+		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/configuring_and_managing_high_availability_clusters/assembly_fencing-configuring-managing-high-availability-clusters", rhelVersion))
 	} else if len(fencingTargets) == 0 {
 		check.Result = report.NewResult(report.StatusWarning,
 			"Fencing devices configured but couldn't identify targets",
@@ -386,7 +386,7 @@ func checkFencingNetworking(r *report.AsciiDocReport) {
 		report.AddRecommendation(&check.Result, "Ensure fencing device parameters are properly set")
 
 		// Add RHEL documentation reference directly as a link
-		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/configuring_and_managing_high_availability_clusters/assembly_fencing-configuring-managing-high-availability-clusters", rhelVersion))
+		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/configuring_and_managing_high_availability_clusters/assembly_fencing-configuring-managing-high-availability-clusters", rhelVersion))
 	} else if len(unreachableTargets) > 0 {
 		check.Result = report.NewResult(report.StatusCritical,
 			fmt.Sprintf("%d fencing targets are unreachable", len(unreachableTargets)),
@@ -400,7 +400,7 @@ func checkFencingNetworking(r *report.AsciiDocReport) {
 		report.AddRecommendation(&check.Result, "Ensure fencing devices are powered on and connected to the network")
 
 		// Add RHEL documentation reference directly as a link
-		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/configuring_and_managing_high_availability_clusters/assembly_troubleshooting-configuring-high-availability-clusters#fence-troubleshooting-configuring-high-availability-clusters", rhelVersion))
+		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/configuring_and_managing_high_availability_clusters/assembly_troubleshooting-configuring-high-availability-clusters#fence-troubleshooting-configuring-high-availability-clusters", rhelVersion))
 	} else if !separateInterface {
 		check.Result = report.NewResult(report.StatusWarning,
 			"Fencing devices use same network interface as cluster traffic",
@@ -409,7 +409,7 @@ func checkFencingNetworking(r *report.AsciiDocReport) {
 		report.AddRecommendation(&check.Result, "This provides additional redundancy in case of network failures")
 
 		// Add RHEL documentation reference directly as a link
-		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/configuring_and_managing_high_availability_clusters/assembly_creating-cluster-configuring-managing-high-availability-clusters", rhelVersion))
+		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/configuring_and_managing_high_availability_clusters/assembly_creating-cluster-configuring-managing-high-availability-clusters", rhelVersion))
 	} else {
 		check.Result = report.NewResult(report.StatusOK,
 			"Fencing network is properly configured and reachable",

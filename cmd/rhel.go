@@ -6,11 +6,11 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/schollz/progressbar/v3"
+	"github.com/spf13/cobra"
 	"gitlab.consulting.redhat.com/ksa/health-check-satellite-rhel/pkg/checks/rhel"
 	"gitlab.consulting.redhat.com/ksa/health-check-satellite-rhel/pkg/report"
 	"gitlab.consulting.redhat.com/ksa/health-check-satellite-rhel/pkg/utils"
-	"github.com/schollz/progressbar/v3"
-	"github.com/spf13/cobra"
 )
 
 // newRhelCmd creates the RHEL subcommand
@@ -74,11 +74,11 @@ func runRhelChecks(cmd *cobra.Command, args []string) error {
 		"services":    {rhel.RunServicesChecks},
 		"logs":        {rhel.RunLogsChecks, rhel.RunMonitoringChecks},
 		"packages":    {rhel.RunPackagesChecks},
-		//"cluster":       {rhel.RunClusterChecks},
-		"auth":    {rhel.RunAuthChecks},
-		"backup":  {rhel.RunBackupChecks},
-		"kernel":  {rhel.RunKernelChecks},
-		"storage": {rhel.RunStorageChecks, rhel.RunStorageConsiderationsChecks},
+		"cluster":     {rhel.RunClusterChecks},
+		"auth":        {rhel.RunAuthChecks},
+		"backup":      {rhel.RunBackupChecks},
+		"kernel":      {rhel.RunKernelChecks},
+		"storage":     {rhel.RunStorageChecks, rhel.RunStorageConsiderationsChecks},
 	}
 
 	// Build the list of enabled checks

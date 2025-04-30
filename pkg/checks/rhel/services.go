@@ -120,7 +120,7 @@ func checkUnnecessaryServices(r *report.AsciiDocReport) {
 
 		// Add RHEL documentation reference directly
 		rhelVersion := utils.GetRedHatVersion()
-		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/configuring_basic_system_settings/managing-services-with-systemd", rhelVersion, rhelVersion))
+		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/using_systemd_unit_files_to_customize_and_optimize_your_system/index", rhelVersion))
 	} else {
 		check.Result = report.NewResult(report.StatusOK,
 			"No unnecessary services were identified",
@@ -209,7 +209,7 @@ func checkRequiredServices(r *report.AsciiDocReport) {
 
 		// Add RHEL documentation reference directly
 		rhelVersion := utils.GetRedHatVersion()
-		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/configuring_basic_system_settings/assembly_working-with-systemd-targets", rhelVersion, rhelVersion))
+		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/using_systemd_unit_files_to_customize_and_optimize_your_system/index", rhelVersion))
 	} else {
 		check.Result = report.NewResult(report.StatusOK,
 			"All required services are active and enabled",
@@ -319,7 +319,7 @@ func checkBootTarget(r *report.AsciiDocReport) {
 
 		// Add RHEL documentation reference directly
 		rhelVersion := utils.GetRedHatVersion()
-		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/configuring_basic_system_settings/managing-services-with-systemd_configuring-basic-system-settings#changing-the-default-target_managing-services-with-systemd", rhelVersion, rhelVersion))
+		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/using_systemd_unit_files_to_customize_and_optimize_your_system/index", rhelVersion))
 	} else if defaultTarget != "multi-user.target" {
 		// Non-standard targets are generally not recommended
 		check.Result = report.NewResult(report.StatusWarning,
@@ -330,7 +330,7 @@ func checkBootTarget(r *report.AsciiDocReport) {
 
 		// Add RHEL documentation reference directly
 		rhelVersion := utils.GetRedHatVersion()
-		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/configuring_basic_system_settings/managing-services-with-systemd_configuring-basic-system-settings#changing-the-default-target_managing-services-with-systemd", rhelVersion, rhelVersion))
+		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/using_systemd_unit_files_to_customize_and_optimize_your_system/index", rhelVersion))
 	} else {
 		// multi-user.target is the recommended setting
 		check.Result = report.NewResult(report.StatusOK,
@@ -438,7 +438,7 @@ func checkBootErrors(r *report.AsciiDocReport) {
 
 		// Add RHEL documentation reference directly
 		rhelVersion := utils.GetRedHatVersion()
-		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/configuring_basic_system_settings/troubleshooting-systemd_troubleshooting-systemd", rhelVersion, rhelVersion))
+		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/configuring_basic_system_settings/assembly_troubleshooting-problems-using-log-files_configuring-basic-system-settings", rhelVersion))
 	} else {
 		check.Result = report.NewResult(report.StatusOK,
 			"No boot errors or failed services detected",

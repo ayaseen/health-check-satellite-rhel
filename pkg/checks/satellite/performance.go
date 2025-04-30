@@ -239,7 +239,7 @@ func checkHealthStatus(r *report.AsciiDocReport) {
 
 	// Add reference link using version info
 	versionInfo := GetSatelliteVersion()
-	docsUrl := fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_satellite/%s.%s/html/administering_red_hat_satellite/chap-red_hat_satellite-administering_red_hat_satellite-maintaining_satellite",
+	docsUrl := fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_satellite/%s.%s/html/tuning_performance_of_red_hat_satellite/index",
 		versionInfo.MajorVersion, versionInfo.MinorVersion)
 	report.AddReferenceLink(&check.Result, docsUrl)
 
@@ -780,7 +780,7 @@ func checkSystemResources(r *report.AsciiDocReport) {
 
 	// Add reference link using version info
 	versionInfo := GetSatelliteVersion()
-	docsUrl := fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_satellite/%s.%s/html/administering_red_hat_satellite/chap-red_hat_satellite-administering_red_hat_satellite-tuning",
+	docsUrl := fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_satellite/%s.%s/html/tuning_performance_of_red_hat_satellite/index",
 		versionInfo.MajorVersion, versionInfo.MinorVersion)
 	report.AddReferenceLink(&check.Result, docsUrl)
 
@@ -927,7 +927,7 @@ func checkTunedProfile(r *report.AsciiDocReport) {
 
 	// Add reference link using version info
 	versionInfo := GetSatelliteVersion()
-	docsUrl := fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_satellite/%s.%s/html/administering_red_hat_satellite/chap-red_hat_satellite-administering_red_hat_satellite-tuning",
+	docsUrl := fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_satellite/%s.%s/html/tuning_performance_of_red_hat_satellite/index",
 		versionInfo.MajorVersion, versionInfo.MinorVersion)
 	report.AddReferenceLink(&check.Result, docsUrl)
 
@@ -1094,7 +1094,7 @@ func checkServiceRestarts(r *report.AsciiDocReport) {
 
 	// Add reference link using version info
 	versionInfo := GetSatelliteVersion()
-	docsUrl := fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_satellite/%s.%s/html/administering_red_hat_satellite/chap-red_hat_satellite-administering_red_hat_satellite-maintaining_satellite",
+	docsUrl := fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_satellite/%s.%s/html/administering_red_hat_satellite/index",
 		versionInfo.MajorVersion, versionInfo.MinorVersion)
 	report.AddReferenceLink(&check.Result, docsUrl)
 
@@ -1396,7 +1396,7 @@ func checkPerformanceBottlenecks(r *report.AsciiDocReport) {
 
 	// Add reference link using version info
 	versionInfo := GetSatelliteVersion()
-	docsUrl := fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_satellite/%s.%s/html/administering_red_hat_satellite/chap-red_hat_satellite-administering_red_hat_satellite-tuning",
+	docsUrl := fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_satellite/%s.%s/html/tuning_performance_of_red_hat_satellite/index",
 		versionInfo.MajorVersion, versionInfo.MinorVersion)
 	report.AddReferenceLink(&check.Result, docsUrl)
 

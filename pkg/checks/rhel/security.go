@@ -55,7 +55,7 @@ func checkSELinux(r *report.AsciiDocReport) {
 
 		// Add reference link directly
 		rhelVersion := utils.GetRedHatVersion()
-		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/using_selinux/", rhelVersion))
+		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/using_selinux/", rhelVersion))
 		r.AddCheck(check)
 		return
 	}
@@ -117,7 +117,7 @@ func checkSELinux(r *report.AsciiDocReport) {
 
 		// Add reference link directly
 		rhelVersion := utils.GetRedHatVersion()
-		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/using_selinux/changing-selinux-states-and-modes_using-selinux", rhelVersion))
+		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/using_selinux/changing-selinux-states-and-modes_using-selinux", rhelVersion))
 	} else if isPermissive {
 		check.Result = report.NewResult(report.StatusWarning,
 			"SELinux is in permissive mode",
@@ -127,7 +127,7 @@ func checkSELinux(r *report.AsciiDocReport) {
 
 		// Add reference link directly
 		rhelVersion := utils.GetRedHatVersion()
-		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/using_selinux/changing-selinux-states-and-modes_using-selinux", rhelVersion))
+		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/using_selinux/changing-selinux-states-and-modes_using-selinux", rhelVersion))
 	} else if isEnforcing && !configEnforcing {
 		check.Result = report.NewResult(report.StatusWarning,
 			"SELinux is enforcing but not set in config file",
@@ -136,7 +136,7 @@ func checkSELinux(r *report.AsciiDocReport) {
 
 		// Add reference link directly
 		rhelVersion := utils.GetRedHatVersion()
-		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/using_selinux/changing-selinux-states-and-modes_using-selinux", rhelVersion))
+		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/using_selinux/changing-selinux-states-and-modes_using-selinux", rhelVersion))
 	} else if denialCount > 100 {
 		check.Result = report.NewResult(report.StatusWarning,
 			fmt.Sprintf("SELinux is enforcing but has %d AVC denials", denialCount),
@@ -146,7 +146,7 @@ func checkSELinux(r *report.AsciiDocReport) {
 
 		// Add reference link directly
 		rhelVersion := utils.GetRedHatVersion()
-		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/using_selinux/troubleshooting-problems-related-to-selinux_using-selinux", rhelVersion))
+		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/using_selinux/troubleshooting-problems-related-to-selinux_using-selinux", rhelVersion))
 	} else {
 		check.Result = report.NewResult(report.StatusOK,
 			"SELinux is properly configured and enforcing",
@@ -333,7 +333,7 @@ func checkAuditd(r *report.AsciiDocReport) {
 
 		// Add reference link directly
 		rhelVersion := utils.GetRedHatVersion()
-		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/security_hardening/configuring-auditd_security-hardening", rhelVersion))
+		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/security_hardening/configuring-auditd_security-hardening", rhelVersion))
 	} else {
 		check.Result = report.NewResult(report.StatusOK,
 			fmt.Sprintf("Audit daemon is active with %d rules configured", ruleCount),
@@ -514,7 +514,7 @@ func checkPasswordPolicy(r *report.AsciiDocReport) {
 
 		// Add reference link directly
 		rhelVersion := utils.GetRedHatVersion()
-		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/security_hardening/using-tools-and-services-to-enhance-security_security-hardening#configuring-password-security_using-tools-and-services-to-enhance-security", rhelVersion))
+		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/security_hardening/using-tools-and-services-to-enhance-security_security-hardening#configuring-password-security_using-tools-and-services-to-enhance-security", rhelVersion))
 	} else {
 		check.Result = report.NewResult(report.StatusOK,
 			"Password policy and sudo access controls are properly configured",
@@ -779,7 +779,7 @@ func checkFilePermissions(r *report.AsciiDocReport) {
 
 		// Add reference link directly
 		rhelVersion := utils.GetRedHatVersion()
-		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/security_hardening/assembly_securing-files-and-directories_security-hardening", rhelVersion))
+		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/security_hardening/assembly_securing-files-and-directories_security-hardening", rhelVersion))
 	} else {
 		check.Result = report.NewResult(report.StatusOK,
 			"File permissions on sensitive files appear to be correct",
@@ -1144,7 +1144,7 @@ func checkSSHHardening(r *report.AsciiDocReport) {
 
 		// Add reference link directly
 		rhelVersion := utils.GetRedHatVersion()
-		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/security_hardening/assembly_securing-the-openssh-service_security-hardening", rhelVersion))
+		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/security_hardening/assembly_securing-the-openssh-service_security-hardening", rhelVersion))
 	} else {
 		check.Result = report.NewResult(report.StatusOK,
 			"SSH server appears to be properly hardened",
@@ -1353,7 +1353,7 @@ func checkRootSecurity(r *report.AsciiDocReport) {
 
 		// Add reference link directly
 		rhelVersion := utils.GetRedHatVersion()
-		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/security_hardening/configuring-automated-password-security_security-hardening", rhelVersion))
+		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/security_hardening/configuring-automated-password-security_security-hardening", rhelVersion))
 	} else {
 		check.Result = report.NewResult(report.StatusOK,
 			"Root account security appears to be properly configured",
@@ -1585,7 +1585,7 @@ func checkShellHistory(r *report.AsciiDocReport) {
 
 		// Add reference link directly
 		rhelVersion := utils.GetRedHatVersion()
-		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/security_hardening/assembly_securing-the-system-against-intrusion_security-hardening", rhelVersion))
+		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/security_hardening/assembly_securing-the-system-against-intrusion_security-hardening", rhelVersion))
 	} else {
 		check.Result = report.NewResult(report.StatusOK,
 			"Shell history configuration appears to be properly configured",

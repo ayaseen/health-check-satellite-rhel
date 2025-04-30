@@ -235,10 +235,10 @@ func checkBackupProcedures(r *report.AsciiDocReport) {
 
 	// Add reference link using version info
 	versionInfo := GetSatelliteVersion()
-	docsUrl := fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_satellite/%s.%s/html/administering_red_hat_satellite/backing_up_satellite_server_and_capsule_server",
+	docsUrl := fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_satellite/%s.%s/html/administering_red_hat_satellite/backing-up-satellite-server-and-capsule_admin",
 		versionInfo.MajorVersion, versionInfo.MinorVersion)
 	report.AddReferenceLink(&check.Result, docsUrl)
-	report.AddReferenceLink(&check.Result, "https://access.redhat.com/solutions/3033621") // Satellite backup best practices
+	//report.AddReferenceLink(&check.Result, "https://access.redhat.com/solutions/3033621") // Satellite backup best practices
 
 	report.SetDetail(&check.Result, detail.String())
 	r.AddCheck(check)

@@ -50,7 +50,7 @@ func checkProvisioningTemplates(r *report.AsciiDocReport) {
 
 		// Add reference link using version info
 		versionInfo := GetSatelliteVersion()
-		docsUrl := fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_satellite/%s.%s/html/provisioning_hosts/configuring_provisioning_resources",
+		docsUrl := fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_satellite/%s.%s/html/provisioning_hosts/configuring_provisioning_resources_provisioning",
 			versionInfo.MajorVersion, versionInfo.MinorVersion)
 		report.AddReferenceLink(&check.Result, docsUrl)
 
@@ -169,7 +169,7 @@ func checkProvisioningTemplates(r *report.AsciiDocReport) {
 
 	// Add reference link using version info
 	versionInfo := GetSatelliteVersion()
-	docsUrl := fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_satellite/%s.%s/html/provisioning_hosts/configuring_provisioning_resources",
+	docsUrl := fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_satellite/%s.%s/html/provisioning_hosts/configuring_provisioning_resources_provisioning",
 		versionInfo.MajorVersion, versionInfo.MinorVersion)
 	report.AddReferenceLink(&check.Result, docsUrl)
 
@@ -204,7 +204,7 @@ func checkComputeResources(r *report.AsciiDocReport) {
 
 		// Add reference link using version info
 		versionInfo := GetSatelliteVersion()
-		docsUrl := fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_satellite/%s.%s/html/provisioning_hosts/configuring_compute_resources",
+		docsUrl := fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_satellite/%s.%s/html/provisioning_hosts/index",
 			versionInfo.MajorVersion, versionInfo.MinorVersion)
 		report.AddReferenceLink(&check.Result, docsUrl)
 
@@ -323,7 +323,7 @@ func checkComputeResources(r *report.AsciiDocReport) {
 
 	// Add reference link using version info
 	versionInfo := GetSatelliteVersion()
-	docsUrl := fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_satellite/%s.%s/html/provisioning_hosts/configuring_compute_resources",
+	docsUrl := fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_satellite/%s.%s/html/provisioning_hosts/index",
 		versionInfo.MajorVersion, versionInfo.MinorVersion)
 	report.AddReferenceLink(&check.Result, docsUrl)
 
@@ -476,7 +476,7 @@ func checkNetworkServices(r *report.AsciiDocReport) {
 
 	// Add reference link using version info
 	versionInfo := GetSatelliteVersion()
-	docsUrl := fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_satellite/%s.%s/html/provisioning_hosts/configuring_networking",
+	docsUrl := fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_satellite/%s.%s/html/provisioning_hosts/configuring_networking_provisioning",
 		versionInfo.MajorVersion, versionInfo.MinorVersion)
 	report.AddReferenceLink(&check.Result, docsUrl)
 

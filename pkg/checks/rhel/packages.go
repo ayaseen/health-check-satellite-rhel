@@ -95,8 +95,8 @@ func checkSecurityPatches(r *report.AsciiDocReport) {
 
 	// Get RHEL version for documentation reference
 	rhelVersion := utils.GetRedHatVersion()
-	securityDocURL := fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/security_hardening/scanning-the-system-for-security-compliance-and-vulnerabilities", rhelVersion)
-	packageDocURL := fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/managing_software_with_the_dnf_tool/updating-packages", rhelVersion)
+	securityDocURL := fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/#Security", rhelVersion)
+	packageDocURL := fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/configuring_basic_system_settings", rhelVersion)
 
 	var detail strings.Builder
 	detail.WriteString("Security Updates Available:\n")
@@ -211,8 +211,8 @@ func checkEnabledRepositories(r *report.AsciiDocReport) {
 
 	// Get RHEL version for documentation reference
 	rhDocVersion := utils.GetRedHatVersion()
-	repoDocURL := fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/managing_software_with_the_dnf_tool/getting-started-with-the-dnf-tool", rhDocVersion)
-	subsDocURL := fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_subscription_management/%s/html/managing_red_hat_subscriptions/index", rhDocVersion)
+	repoDocURL := fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/configuring_basic_system_settings", rhDocVersion)
+	subsDocURL := fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/configuring_basic_system_settings", rhDocVersion)
 
 	var detail strings.Builder
 	detail.WriteString("Enabled Repositories:\n")
@@ -356,7 +356,7 @@ func checkUnnecessaryPackages(r *report.AsciiDocReport) {
 
 	// Get RHEL version for documentation reference
 	rhelVersion := utils.GetRedHatVersion()
-	packageDocURL := fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/managing_software_with_the_dnf_tool/index", rhelVersion)
+	packageDocURL := fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/configuring_basic_system_settings", rhelVersion)
 
 	// Check issues
 	issues := []string{}
@@ -497,7 +497,7 @@ func checkKernelConsistency(r *report.AsciiDocReport) {
 
 	// Get RHEL version for documentation reference
 	rhelVersion := utils.GetRedHatVersion()
-	kernelDocURL := fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/managing_monitoring_and_updating_the_kernel/index", rhelVersion)
+	kernelDocURL := fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/managing_monitoring_and_updating_the_kernel/index", rhelVersion)
 
 	var detail strings.Builder
 	detail.WriteString("Current Running Kernel:\n")

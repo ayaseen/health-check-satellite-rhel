@@ -174,57 +174,6 @@ if [ "$TARGET_PLATFORM" == "linux" ]; then
   fi
 fi
 
-echo "Fetching latest OpenShift version..."
-LATEST_VERSION=$(curl -s https://mirror.openshift.com/pub/openshift-v4/clients/ocp/latest/release.txt | grep 'Version:' | awk '{print $2}')
-
-if [ -z "$LATEST_VERSION" ]; then
-    echo "Warning: Failed to fetch the latest OpenShift version, using fallback version"
-    LATEST_VERSION="4.17.0" # A reasonable fallback, should be updated periodically
-else
-    echo "Successfully retrieved latest OpenShift version: $LATEST_VERSION"
-fi
-
-# Verify that version was detected properly
-if ! [[ $LATEST_VERSION =~ ^[0-9]+\.[0-9]+\.[0-9]+ ]]; then
-    echo "Error: Invalid version format detected: $LATEST_VERSION"
-    echo "Using fallback version 4.17.0"
-    LATEST_VERSION="4.17.0"
-fi
-
-# Ensure the package directory exists
-mkdir -p pkg/version
-
-# Update the version.go file directly
-VERSION_FILE="pkg/version/version.go"
-
-# Check if the file exists and has the expected content
-if [ ! -f "$VERSION_FILE" ]; then
-    echo "Creating version.go file..."
-    echo 'package version
-
-var LatestOpenShiftVersion = "unknown"' > "$VERSION_FILE"
-fi
-
-# Handle sed based on target platform
-echo "Updating version.go with new version: $LATEST_VERSION"
-if [ "$TARGET_PLATFORM" == "darwin" ]; then
-    # macOS uses BSD sed which requires an extension with -i
-    sed -i '' "s|var LatestOpenShiftVersion = \".*\"|var LatestOpenShiftVersion = \"$LATEST_VERSION\"|" "$VERSION_FILE"
-elif [ "$TARGET_PLATFORM" == "linux" ]; then
-    # Linux version
-    sed -i "s|var LatestOpenShiftVersion = \".*\"|var LatestOpenShiftVersion = \"$LATEST_VERSION\"|" "$VERSION_FILE"
-else
-    echo "Unsupported platform: $TARGET_PLATFORM"
-    exit 1
-fi
-
-# Verify the file was updated correctly
-if grep -q "var LatestOpenShiftVersion = \"$LATEST_VERSION\"" "$VERSION_FILE"; then
-    echo "Successfully updated version.go"
-else
-    echo "Warning: Failed to update version.go, please check the file manually"
-    cat "$VERSION_FILE"
-fi
 
 # Set up platform-specific build settings
 BINARY_NAME="health-check-runner"

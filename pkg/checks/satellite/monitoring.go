@@ -223,7 +223,7 @@ func checkLoggingConfiguration(r *report.AsciiDocReport) {
 
 	// Add reference link using version info
 	versionInfo := GetSatelliteVersion()
-	docsUrl := fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_satellite/%s.%s/html/administering_red_hat_satellite/chap-red_hat_satellite-administering_red_hat_satellite-troubleshooting",
+	docsUrl := fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_satellite/%s.%s/html/administering_red_hat_satellite/logging_and_reporting_problems_admin",
 		versionInfo.MajorVersion, versionInfo.MinorVersion)
 	report.AddReferenceLink(&check.Result, docsUrl)
 
@@ -462,7 +462,7 @@ func checkCentralizedLogging(r *report.AsciiDocReport) {
 
 	// Add reference link using version info
 	versionInfo := GetSatelliteVersion()
-	docsUrl := fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_satellite/%s.%s/html/administering_red_hat_satellite/chap-red_hat_satellite-administering_red_hat_satellite-troubleshooting",
+	docsUrl := fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_satellite/%s.%s/html/administering_red_hat_satellite/logging_and_reporting_problems_admin",
 		versionInfo.MajorVersion, versionInfo.MinorVersion)
 	report.AddReferenceLink(&check.Result, docsUrl)
 	report.AddReferenceLink(&check.Result, "https://access.redhat.com/solutions/3006821")
@@ -630,7 +630,7 @@ func checkLogErrorPatterns(r *report.AsciiDocReport) {
 
 	// Add reference link using version info
 	versionInfo := GetSatelliteVersion()
-	docsUrl := fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_satellite/%s.%s/html/administering_red_hat_satellite/chap-red_hat_satellite-administering_red_hat_satellite-troubleshooting",
+	docsUrl := fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_satellite/%s.%s/html/administering_red_hat_satellite/logging_and_reporting_problems_admin",
 		versionInfo.MajorVersion, versionInfo.MinorVersion)
 	report.AddReferenceLink(&check.Result, docsUrl)
 
@@ -844,7 +844,7 @@ func checkMonitoringIntegration(r *report.AsciiDocReport) {
 
 	// Add reference link using version info
 	versionInfo := GetSatelliteVersion()
-	docsUrl := fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_satellite/%s.%s/html/administering_red_hat_satellite/monitoring_red_hat_satellite",
+	docsUrl := fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_satellite/%s.%s/html/administering_red_hat_satellite/monitoring_resources_admin",
 		versionInfo.MajorVersion, versionInfo.MinorVersion)
 	report.AddReferenceLink(&check.Result, docsUrl)
 
@@ -1081,7 +1081,7 @@ func checkAlertingConfiguration(r *report.AsciiDocReport) {
 
 	// Add reference link using version info
 	versionInfo := GetSatelliteVersion()
-	docsUrl := fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_satellite/%s.%s/html/administering_red_hat_satellite/monitoring_red_hat_satellite",
+	docsUrl := fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_satellite/%s.%s/html/administering_red_hat_satellite/monitoring_resources_admin",
 		versionInfo.MajorVersion, versionInfo.MinorVersion)
 	report.AddReferenceLink(&check.Result, docsUrl)
 

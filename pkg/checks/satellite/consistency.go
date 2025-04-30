@@ -46,7 +46,7 @@ func checkContentViewConsistency(r *report.AsciiDocReport) {
 
 		// Add reference link using version info
 		versionInfo := GetSatelliteVersion()
-		docsUrl := fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_satellite/%s.%s/html/managing_content/managing_content_views",
+		docsUrl := fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_satellite/%s.%s/html/managing_content/managing_content_views_content-management",
 			versionInfo.MajorVersion, versionInfo.MinorVersion)
 		report.AddReferenceLink(&check.Result, docsUrl)
 
@@ -123,7 +123,7 @@ func checkContentViewConsistency(r *report.AsciiDocReport) {
 
 	// Add reference link using version info
 	versionInfo := GetSatelliteVersion()
-	docsUrl := fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_satellite/%s.%s/html/managing_content/managing_content_views",
+	docsUrl := fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_satellite/%s.%s/html/managing_content/managing_content_views_content-management",
 		versionInfo.MajorVersion, versionInfo.MinorVersion)
 	report.AddReferenceLink(&check.Result, docsUrl)
 
@@ -223,7 +223,7 @@ func checkHostSubscriptionConsistency(r *report.AsciiDocReport) {
 
 	// Add reference link using version info
 	versionInfo := GetSatelliteVersion()
-	docsUrl := fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_satellite/%s.%s/html/managing_hosts/configuring_host_management",
+	docsUrl := fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_satellite/%s.%s/html/managing_hosts/index",
 		versionInfo.MajorVersion, versionInfo.MinorVersion)
 	report.AddReferenceLink(&check.Result, docsUrl)
 	report.AddReferenceLink(&check.Result, "https://access.redhat.com/documentation/en-us/subscription_central/")
@@ -330,7 +330,7 @@ func checkRemoteExecution(r *report.AsciiDocReport) {
 
 	// Add reference link using version info
 	versionInfo := GetSatelliteVersion()
-	docsUrl := fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_satellite/%s.%s/html/managing_hosts/configuring_and_setting_up_remote_jobs",
+	docsUrl := fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_satellite/%s.%s/html/managing_hosts/registering_hosts_to_server_managing-hosts#Enabling_Remote_Execution_on_the_Host_managing-hosts",
 		versionInfo.MajorVersion, versionInfo.MinorVersion)
 	report.AddReferenceLink(&check.Result, docsUrl)
 
@@ -443,7 +443,7 @@ func checkJobTemplates(r *report.AsciiDocReport) {
 
 	// Add reference link using version info
 	versionInfo := GetSatelliteVersion()
-	docsUrl := fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_satellite/%s.%s/html/managing_hosts/configuring_and_setting_up_remote_jobs",
+	docsUrl := fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_satellite/%s.%s/html/managing_hosts/registering_hosts_to_server_managing-hosts#Enabling_Remote_Execution_on_the_Host_managing-hosts",
 		versionInfo.MajorVersion, versionInfo.MinorVersion)
 	report.AddReferenceLink(&check.Result, docsUrl)
 

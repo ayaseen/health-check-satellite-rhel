@@ -259,7 +259,7 @@ func checkDependentServices(r *report.AsciiDocReport) {
 
 		// Add RHEL documentation reference as a direct link
 		rhelVersion := utils.GetRedHatVersion()
-		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/configuring_and_managing_networking/configuring-the-order-of-dns-servers_configuring-and-managing-networking", rhelVersion))
+		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/configuring_and_managing_networking/configuring-the-order-of-dns-servers_configuring-and-managing-networking", rhelVersion))
 	} else {
 		check.Result = report.NewResult(report.StatusOK,
 			fmt.Sprintf("All %d detected local services are reachable", testCount),
@@ -385,7 +385,7 @@ func checkDNSRecords(r *report.AsciiDocReport) {
 
 		// Add RHEL documentation reference as direct link
 		rhelVersion := utils.GetRedHatVersion()
-		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/configuring_and_managing_networking/using-networkmanager-with-network-scripts_configuring-and-managing-networking", rhelVersion))
+		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/configuring_and_managing_networking/using-networkmanager-with-network-scripts_configuring-and-managing-networking", rhelVersion))
 	} else {
 		check.Result = report.NewResult(report.StatusOK,
 			"DNS records and lookups are properly configured",
@@ -549,7 +549,7 @@ func checkNetworkLatency(r *report.AsciiDocReport) {
 
 		// Add RHEL documentation reference as direct link
 		rhelVersion := utils.GetRedHatVersion()
-		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/monitoring_and_managing_system_status_and_performance/managing-network-performance-with-ethtool_monitoring-and-managing-system-status-and-performance", rhelVersion))
+		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/monitoring_and_managing_system_status_and_performance/managing-network-performance-with-ethtool_monitoring-and-managing-system-status-and-performance", rhelVersion))
 	} else {
 		check.Result = report.NewResult(report.StatusOK,
 			"Network latency to key systems is within acceptable ranges",

@@ -99,7 +99,7 @@ func checkClusterSoftware(r *report.AsciiDocReport) {
 		report.AddRecommendation(&check.Result, "Enable services with 'systemctl enable pacemaker corosync pcsd'")
 
 		// Add reference link directly
-		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/configuring_and_managing_high_availability_clusters/assembly_configuring-controlling-cluster-services-configuring-and-managing-high-availability-clusters", rhelVersion))
+		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/configuring_and_managing_high_availability_clusters/assembly_configuring-controlling-cluster-services-configuring-and-managing-high-availability-clusters", rhelVersion))
 	} else if !clusterRunning {
 		check.Result = report.NewResult(report.StatusWarning,
 			"Cluster services running but cluster is not active",
@@ -108,7 +108,7 @@ func checkClusterSoftware(r *report.AsciiDocReport) {
 		report.AddRecommendation(&check.Result, "Start the cluster with 'pcs cluster start --all'")
 
 		// Add reference link directly
-		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/configuring_and_managing_high_availability_clusters/assembly_troubleshooting-problems-with-high-availability-clustershigh-availability-clusters", rhelVersion))
+		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/configuring_and_managing_high_availability_clusters/assembly_troubleshooting-problems-with-high-availability-clustershigh-availability-clusters", rhelVersion))
 	} else {
 		check.Result = report.NewResult(report.StatusOK,
 			"Cluster software is installed and running",
@@ -225,7 +225,7 @@ func checkClusterNameResolution(r *report.AsciiDocReport) {
 		report.AddRecommendation(&check.Result, "Consistent name resolution is critical for cluster stability")
 
 		// Add reference link directly
-		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/configuring_and_managing_high_availability_clusters/assembly_cluster-network-configuring-and-managing-high-availability-clusters", rhelVersion))
+		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/configuring_and_managing_high_availability_clusters/assembly_cluster-network-configuring-and-managing-high-availability-clusters", rhelVersion))
 	} else if !hostnameInCluster {
 		check.Result = report.NewResult(report.StatusWarning,
 			"System hostname doesn't match any cluster node names",
@@ -234,7 +234,7 @@ func checkClusterNameResolution(r *report.AsciiDocReport) {
 		report.AddRecommendation(&check.Result, "Node names should be consistent in all cluster configuration")
 
 		// Add reference link directly
-		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/configuring_and_managing_high_availability_clusters/assembly_cluster-network-configuring-and-managing-high-availability-clusters", rhelVersion))
+		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/configuring_and_managing_high_availability_clusters/assembly_cluster-network-configuring-and-managing-high-availability-clusters", rhelVersion))
 	} else {
 		check.Result = report.NewResult(report.StatusOK,
 			"All cluster node names resolve correctly",
@@ -333,7 +333,7 @@ func checkFencingAgents(r *report.AsciiDocReport) {
 		report.AddRecommendation(&check.Result, "STONITH is essential for cluster data integrity")
 
 		// Add reference link directly
-		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/configuring_and_managing_high_availability_clusters/assembly_configuring-fencing-configuring-and-managing-high-availability-clusters", rhelVersion))
+		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/configuring_and_managing_high_availability_clusters/assembly_configuring-fencing-configuring-and-managing-high-availability-clusters", rhelVersion))
 	} else if !hasStonith {
 		check.Result = report.NewResult(report.StatusWarning,
 			"STONITH is enabled but no fencing devices are configured",
@@ -342,7 +342,7 @@ func checkFencingAgents(r *report.AsciiDocReport) {
 		report.AddRecommendation(&check.Result, "Each node must have a fencing device configured")
 
 		// Add reference link directly
-		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/configuring_and_managing_high_availability_clusters/assembly_configuring-fencing-configuring-and-managing-high-availability-clusters", rhelVersion))
+		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/configuring_and_managing_high_availability_clusters/assembly_configuring-fencing-configuring-and-managing-high-availability-clusters", rhelVersion))
 	} else {
 		check.Result = report.NewResult(report.StatusOK,
 			"Fencing is properly configured",
@@ -472,7 +472,7 @@ func checkClusterConstraints(r *report.AsciiDocReport) {
 		}
 
 		// Add reference link directly
-		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/configuring_and_managing_high_availability_clusters/assembly_configuring-resource-constraints-configuring-and-managing-high-availability-clusters", rhelVersion))
+		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/configuring_and_managing_high_availability_clusters/assembly_configuring-resource-constraints-configuring-and-managing-high-availability-clusters", rhelVersion))
 	} else if !hasResources {
 		check.Result = report.NewResult(report.StatusInfo,
 			"No cluster resources configured to check constraints",
@@ -553,7 +553,7 @@ func checkClusterAutostart(r *report.AsciiDocReport) {
 		report.AddRecommendation(&check.Result, "Configure the cluster with 'pcs cluster setup'")
 
 		// Add reference link directly
-		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/configuring_and_managing_high_availability_clusters/assembly_creating-high-availability-cluster-configuring-and-managing-high-availability-clusters", rhelVersion))
+		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/configuring_and_managing_high_availability_clusters/assembly_creating-high-availability-cluster-configuring-and-managing-high-availability-clusters", rhelVersion))
 	} else if !allServicesEnabled {
 		check.Result = report.NewResult(report.StatusWarning,
 			"Cluster services are not enabled to start on boot",
@@ -562,7 +562,7 @@ func checkClusterAutostart(r *report.AsciiDocReport) {
 		report.AddRecommendation(&check.Result, "This is necessary for the cluster to start automatically after reboot")
 
 		// Add reference link directly
-		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/configuring_and_managing_high_availability_clusters/assembly_configuring-controlling-cluster-services-configuring-and-managing-high-availability-clusters", rhelVersion))
+		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/configuring_and_managing_high_availability_clusters/assembly_configuring-controlling-cluster-services-configuring-and-managing-high-availability-clusters", rhelVersion))
 	} else if hasAutoStartProperty && strings.Contains(clusterPropsOutput, "false") {
 		check.Result = report.NewResult(report.StatusWarning,
 			"Cluster has auto-start disabled in properties",
@@ -570,7 +570,7 @@ func checkClusterAutostart(r *report.AsciiDocReport) {
 		report.AddRecommendation(&check.Result, "Enable cluster auto-start: 'pcs property set start_on_boot=true'")
 
 		// Add reference link directly
-		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/configuring_and_managing_high_availability_clusters/assembly_configuring-cluster-properties-configuring-and-managing-high-availability-clusters", rhelVersion))
+		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/configuring_and_managing_high_availability_clusters/assembly_configuring-cluster-properties-configuring-and-managing-high-availability-clusters", rhelVersion))
 	} else {
 		check.Result = report.NewResult(report.StatusOK,
 			"Cluster is configured to auto-start on reboot",
@@ -667,7 +667,7 @@ func checkSplitBrainPrevention(r *report.AsciiDocReport) {
 		report.AddRecommendation(&check.Result, "Configure the cluster with 'pcs cluster setup'")
 
 		// Add reference link directly
-		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/configuring_and_managing_high_availability_clusters/assembly_creating-high-availability-cluster-configuring-and-managing-high-availability-clusters", rhelVersion))
+		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/configuring_and_managing_high_availability_clusters/assembly_creating-high-availability-cluster-configuring-and-managing-high-availability-clusters", rhelVersion))
 	} else if isTwoNodeCluster && !hasTwoNodeConfig {
 		check.Result = report.NewResult(report.StatusWarning,
 			"Two-node cluster without proper two_node configuration",
@@ -676,7 +676,7 @@ func checkSplitBrainPrevention(r *report.AsciiDocReport) {
 		report.AddRecommendation(&check.Result, "This is important for proper quorum handling in two-node clusters")
 
 		// Add reference link directly
-		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/configuring_and_managing_high_availability_clusters/assembly_configuring-quorum-configuring-and-managing-high-availability-clusters", rhelVersion))
+		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/configuring_and_managing_high_availability_clusters/assembly_configuring-quorum-configuring-and-managing-high-availability-clusters", rhelVersion))
 	} else if !hasQuorumConfig {
 		check.Result = report.NewResult(report.StatusWarning,
 			"No quorum configuration found",
@@ -684,7 +684,7 @@ func checkSplitBrainPrevention(r *report.AsciiDocReport) {
 		report.AddRecommendation(&check.Result, "Configure proper quorum settings in corosync.conf")
 
 		// Add reference link directly
-		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/configuring_and_managing_high_availability_clusters/assembly_configuring-quorum-configuring-and-managing-high-availability-clusters", rhelVersion))
+		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/configuring_and_managing_high_availability_clusters/assembly_configuring-quorum-configuring-and-managing-high-availability-clusters", rhelVersion))
 	} else if !stonithEnabled {
 		check.Result = report.NewResult(report.StatusWarning,
 			"STONITH is disabled, leaving the cluster vulnerable to split-brain",
@@ -693,7 +693,7 @@ func checkSplitBrainPrevention(r *report.AsciiDocReport) {
 		report.AddRecommendation(&check.Result, "STONITH is essential for cluster data integrity")
 
 		// Add reference link directly
-		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/configuring_and_managing_high_availability_clusters/assembly_configuring-fencing-configuring-and-managing-high-availability-clusters", rhelVersion))
+		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/configuring_and_managing_high_availability_clusters/assembly_configuring-fencing-configuring-and-managing-high-availability-clusters", rhelVersion))
 	} else if !fencingConfigured {
 		check.Result = report.NewResult(report.StatusWarning,
 			"STONITH is enabled but no fencing devices are configured",
@@ -702,7 +702,7 @@ func checkSplitBrainPrevention(r *report.AsciiDocReport) {
 		report.AddRecommendation(&check.Result, "Without fencing, split-brain cannot be automatically resolved")
 
 		// Add reference link directly
-		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/configuring_and_managing_high_availability_clusters/assembly_configuring-fencing-configuring-and-managing-high-availability-clusters", rhelVersion))
+		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/configuring_and_managing_high_availability_clusters/assembly_configuring-fencing-configuring-and-managing-high-availability-clusters", rhelVersion))
 	} else {
 		check.Result = report.NewResult(report.StatusOK,
 			"Split-brain prevention is properly configured",

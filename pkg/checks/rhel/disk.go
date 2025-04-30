@@ -169,7 +169,7 @@ func checkDiskUsage(r *report.AsciiDocReport) {
 
 		// Add RHEL documentation reference directly as a link
 		rhelVersion := utils.GetRedHatVersion()
-		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/managing_storage_devices/managing-file-systems_managing-storage-devices", rhelVersion))
+		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/#Storage", rhelVersion))
 	} else if len(highUsageMountpoints) > 0 || len(highInodeUsageMountpoints) > 0 {
 		allIssues := append(highUsageMountpoints, highInodeUsageMountpoints...)
 		check.Result = report.NewResult(report.StatusWarning,
@@ -188,7 +188,7 @@ func checkDiskUsage(r *report.AsciiDocReport) {
 
 		// Add RHEL documentation reference directly as a link
 		rhelVersion := utils.GetRedHatVersion()
-		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/managing_storage_devices/file-system-checks-managing-storage-devices", rhelVersion))
+		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/#Storage", rhelVersion))
 	} else {
 		check.Result = report.NewResult(report.StatusOK,
 			"All filesystems have acceptable disk usage levels",
@@ -423,7 +423,7 @@ func checkMountPoints(r *report.AsciiDocReport) {
 
 		// Add RHEL documentation reference directly as a link
 		rhelVersion := utils.GetRedHatVersion()
-		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/managing_storage_devices/mounting-file-systems_managing-storage-devices", rhelVersion))
+		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/#Storage", rhelVersion))
 	} else if noatimeOutput != "" && len(nonPersistentMounts) == 0 {
 		check.Result = report.NewResult(report.StatusWarning,
 			"Some mount points could be optimized with better options",
@@ -434,7 +434,7 @@ func checkMountPoints(r *report.AsciiDocReport) {
 
 		// Add RHEL documentation reference directly as a link
 		rhelVersion := utils.GetRedHatVersion()
-		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/managing_storage_devices/mounting-file-systems_managing-storage-devices#mount-options_mounting-file-systems", rhelVersion))
+		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/#Storage", rhelVersion))
 	} else {
 		check.Result = report.NewResult(report.StatusOK,
 			"All mount points are properly configured and persistent",
@@ -553,7 +553,7 @@ func checkStorageConfig(r *report.AsciiDocReport) {
 
 			// Add RHEL documentation reference directly as a link
 			rhelVersion := utils.GetRedHatVersion()
-			report.AddReferenceLink(&check.Result, fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/managing_storage_devices/managing-software-raid_managing-storage-devices", rhelVersion))
+			report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/#Storage", rhelVersion))
 		}
 
 		if hasMultipath && (strings.Contains(multipathOutput, "failed") || strings.Contains(multipathOutput, "faulty")) {
@@ -562,7 +562,7 @@ func checkStorageConfig(r *report.AsciiDocReport) {
 
 			// Add RHEL documentation reference directly as a link
 			rhelVersion := utils.GetRedHatVersion()
-			report.AddReferenceLink(&check.Result, fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/managing_storage_devices/troubleshooting-multipathing_managing-storage-devices", rhelVersion))
+			report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/#Storage", rhelVersion))
 		}
 	} else {
 		statusMsg := "Storage is properly configured"
@@ -803,7 +803,7 @@ func checkIOPerformance(r *report.AsciiDocReport) {
 
 		// Add RHEL documentation reference directly as a link
 		rhelVersion := utils.GetRedHatVersion()
-		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/monitoring_and_managing_system_status_and_performance/setting-the-disk-scheduler_monitoring-and-managing-system-status-and-performance", rhelVersion))
+		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/monitoring_and_managing_system_status_and_performance/index", rhelVersion))
 	} else {
 		check.Result = report.NewResult(report.StatusOK,
 			"I/O performance tuning parameters are appropriately configured",

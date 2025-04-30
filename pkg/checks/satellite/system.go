@@ -42,7 +42,7 @@ func checkSatelliteVersion(r *report.AsciiDocReport) {
 			report.ResultKeyRequired)
 		report.AddRecommendation(&check.Result, "Verify this system is a Red Hat Satellite server.")
 		report.AddRecommendation(&check.Result, "If this is intended to be a Satellite server, install Satellite using satellite-installer.")
-		report.AddReferenceLink(&check.Result, "https://access.redhat.com/documentation/en-us/red_hat_satellite/")
+		report.AddReferenceLink(&check.Result, "https://docs.redhat.com/en/documentation/red_hat_satellite/")
 		r.AddCheck(check)
 		return
 	}
@@ -63,7 +63,7 @@ func checkSatelliteVersion(r *report.AsciiDocReport) {
 				"Failed to determine Satellite version",
 				report.ResultKeyRequired)
 			report.AddRecommendation(&check.Result, "Verify that Red Hat Satellite is installed on this system.")
-			report.AddReferenceLink(&check.Result, "https://access.redhat.com/documentation/en-us/red_hat_satellite/")
+			report.AddReferenceLink(&check.Result, "https://docs.redhat.com/en/documentation/red_hat_satellite/")
 			r.AddCheck(check)
 			return
 		}
@@ -136,11 +136,7 @@ func checkSatelliteVersion(r *report.AsciiDocReport) {
 		fmt.Sscanf(minorVersion, "%d", &minorVersionNum)
 
 		// Documentation URL based on minor version
-		if minorVersionNum >= 13 {
-			lifecycleUrl = fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_satellite/%s.%s", satelliteMajorVersion, minorVersion)
-		} else {
-			lifecycleUrl = "https://access.redhat.com/documentation/en-us/red_hat_satellite/6.13"
-		}
+		lifecycleUrl = fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_satellite/%s.%s", satelliteMajorVersion, minorVersion)
 
 		// Satellite 6.16 (Full support until approx May 2025)
 		if minorVersionNum >= 16 {
@@ -179,12 +175,12 @@ func checkSatelliteVersion(r *report.AsciiDocReport) {
 			report.AddRecommendation(&check.Result, "Upgrade to Satellite 6.16 or newer immediately as your version is no longer supported.")
 		}
 	case "7":
-		lifecycleUrl = "https://access.redhat.com/documentation/en-us/red_hat_satellite/7.0"
+		lifecycleUrl = "https://docs.redhat.com/en/documentation/red_hat_satellite/7.0"
 		check.Result = report.NewResult(report.StatusOK,
 			fmt.Sprintf("Satellite %s is installed and supported", versionString),
 			report.ResultKeyNoChange)
 	default:
-		lifecycleUrl = "https://access.redhat.com/documentation/en-us/red_hat_satellite/"
+		lifecycleUrl = "https://docs.redhat.com/en/documentation/red_hat_satellite/"
 		check.Result = report.NewResult(report.StatusWarning,
 			fmt.Sprintf("Satellite version '%s' could not be verified", versionString),
 			report.ResultKeyRecommended)
@@ -228,7 +224,7 @@ func checkSatelliteServices(r *report.AsciiDocReport) {
 
 		// Add reference link using version info
 		versionInfo := GetSatelliteVersion()
-		docsUrl := fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_satellite/%s.%s/html/administering_red_hat_satellite/",
+		docsUrl := fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_satellite/%s.%s/html/administering_red_hat_satellite/",
 			versionInfo.MajorVersion, versionInfo.MinorVersion)
 		report.AddReferenceLink(&check.Result, docsUrl)
 
@@ -369,7 +365,7 @@ func checkSatelliteServices(r *report.AsciiDocReport) {
 
 	// Add reference link using version info
 	versionInfo := GetSatelliteVersion()
-	docsUrl := fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_satellite/%s.%s/html/administering_red_hat_satellite/managing_services",
+	docsUrl := fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_satellite/%s.%s/html/administering_red_hat_satellite/index",
 		versionInfo.MajorVersion, versionInfo.MinorVersion)
 	report.AddReferenceLink(&check.Result, docsUrl)
 
@@ -522,10 +518,9 @@ func checkSatelliteRegistration(r *report.AsciiDocReport) {
 
 	// Add reference link directly
 	versionInfo := GetSatelliteVersion()
-	docsUrl := fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_satellite/%s.%s/html/installing_satellite_server_from_a_connected_network/preparing_your_environment_for_installation",
+	docsUrl := fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_satellite/%s.%s/html/installing_satellite_server_from_a_connected_network/preparing_your_environment_for_installation",
 		versionInfo.MajorVersion, versionInfo.MinorVersion)
 	report.AddReferenceLink(&check.Result, docsUrl)
-	report.AddReferenceLink(&check.Result, "https://access.redhat.com/documentation/en-us/subscription_central/2024/html/using_red_hat_subscription_management/")
 
 	report.SetDetail(&check.Result, detail.String())
 	r.AddCheck(check)
@@ -561,7 +556,7 @@ func checkSatelliteRepositories(r *report.AsciiDocReport) {
 
 		// Add reference link
 		versionInfo := GetSatelliteVersion()
-		docsUrl := fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_satellite/%s.%s/html/installing_satellite_server_from_a_connected_network/preparing_your_environment_for_installation",
+		docsUrl := fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_satellite/%s.%s/html/installing_satellite_server_from_a_connected_network/preparing_your_environment_for_installation",
 			versionInfo.MajorVersion, versionInfo.MinorVersion)
 		report.AddReferenceLink(&check.Result, docsUrl)
 
@@ -675,7 +670,7 @@ func checkSatelliteRepositories(r *report.AsciiDocReport) {
 	}
 
 	// Add reference link
-	docsUrl := fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_satellite/%s.%s/html/installing_satellite_server_from_a_connected_network/preparing_your_environment_for_installation#enabling-repositories_satellite",
+	docsUrl := fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_satellite/%s.%s/html/installing_satellite_server_from_a_connected_network/preparing_your_environment_for_installation#enabling-repositories_satellite",
 		versionInfo.MajorVersion, versionInfo.MinorVersion)
 	report.AddReferenceLink(&check.Result, docsUrl)
 

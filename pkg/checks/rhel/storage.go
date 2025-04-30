@@ -133,7 +133,7 @@ func checkMultipathConfig(r *report.AsciiDocReport) {
 
 		// Add RHEL documentation reference directly
 		rhelVersion := utils.GetRedHatVersion()
-		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/managing_storage_devices/configuring-device-mapper-multipath_managing-storage-devices", rhelVersion))
+		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/managing_storage_devices/configuring-device-mapper-multipath_managing-storage-devices", rhelVersion))
 	} else if strings.Contains(multipathConfOutput, "No multipath configuration file found") {
 		check.Result = report.NewResult(report.StatusWarning,
 			"Multipath is running but no configuration file found",
@@ -143,7 +143,7 @@ func checkMultipathConfig(r *report.AsciiDocReport) {
 
 		// Add RHEL documentation reference directly
 		rhelVersion := utils.GetRedHatVersion()
-		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/managing_storage_devices/setting-up-multipathing_managing-storage-devices", rhelVersion, rhelVersion))
+		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/managing_storage_devices/setting-up-multipathing_managing-storage-devices", rhelVersion, rhelVersion))
 	} else if hasMultipathErrors {
 		check.Result = report.NewResult(report.StatusWarning,
 			"Multipath errors detected in logs",
@@ -153,7 +153,7 @@ func checkMultipathConfig(r *report.AsciiDocReport) {
 
 		// Add RHEL documentation reference directly
 		rhelVersion := utils.GetRedHatVersion()
-		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/managing_storage_devices/troubleshooting-multipathing_managing-storage-devices", rhelVersion))
+		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/managing_storage_devices/troubleshooting-multipathing_managing-storage-devices", rhelVersion))
 	} else if hasMultipathDevices {
 		check.Result = report.NewResult(report.StatusOK,
 			"Multipath is properly configured and active with devices",
@@ -259,7 +259,7 @@ func checkFilesystemTypes(r *report.AsciiDocReport) {
 
 		// Add RHEL documentation reference directly
 		rhelVersion := utils.GetRedHatVersion()
-		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/managing_storage_devices/managing-file-systems_managing-storage-devices", rhelVersion))
+		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/managing_storage_devices/managing-file-systems_managing-storage-devices", rhelVersion))
 	} else if len(fsTypes) == 0 {
 		check.Result = report.NewResult(report.StatusWarning,
 			"Could not determine filesystem types in use",
@@ -379,7 +379,7 @@ func checkFilesystemErrors(r *report.AsciiDocReport) {
 
 		// Add RHEL documentation reference directly
 		rhelVersion := utils.GetRedHatVersion()
-		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/managing_storage_devices/file-system-checks-managing-storage-devices", rhelVersion))
+		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/managing_storage_devices/file-system-checks-managing-storage-devices", rhelVersion))
 	} else {
 		check.Result = report.NewResult(report.StatusOK,
 			"No filesystem errors detected",
@@ -570,7 +570,7 @@ func checkPartitionAlignment(r *report.AsciiDocReport) {
 
 		// Add RHEL documentation reference directly
 		rhelVersion := utils.GetRedHatVersion()
-		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/managing_storage_devices/assembly_disk-partitions_managing-storage-devices", rhelVersion))
+		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/managing_storage_devices/assembly_disk-partitions_managing-storage-devices", rhelVersion))
 	} else if strings.Contains(partInfoOutput, "Could not get partition information") {
 		check.Result = report.NewResult(report.StatusWarning,
 			"Could not determine partition alignment",
@@ -605,7 +605,7 @@ func checkPartitionAlignment(r *report.AsciiDocReport) {
 
 		// Add RHEL documentation reference directly
 		rhelVersion := utils.GetRedHatVersion()
-		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/installation_guide/performing-a-standard-rhel-installation#recommended-partitioning-scheme_partitioning-guidance", rhelVersion))
+		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/installation_guide/performing-a-standard-rhel-installation#recommended-partitioning-scheme_partitioning-guidance", rhelVersion))
 	}
 
 	// Add LUKS encryption recommendation if not detected

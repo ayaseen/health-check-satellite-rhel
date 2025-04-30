@@ -144,7 +144,7 @@ func checkKernelVersion(r *report.AsciiDocReport) {
 
 	// Get RHEL version for documentation reference
 	rhelVersion := utils.GetRedHatVersion()
-	repoDocURL := fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/managing_software_with_the_dnf_tool/", rhelVersion)
+	repoDocURL := fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/configuring_basic_system_settings", rhelVersion)
 
 	var detail strings.Builder
 	detail.WriteString("Current Running Kernel:\n")
@@ -306,8 +306,9 @@ func checkFirmwareVersion(r *report.AsciiDocReport) {
 	detail.WriteString("\n----\n")
 
 	// Get documentation URLs based on RHEL version
-	virtDocURL := fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/configuring_and_managing_virtualization/", rhelVersion)
-	hwDocURL := fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/system_design_guide/viewing-hardware-information", rhelVersion)
+
+	virtDocURL := fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/#Virtualization", rhelVersion)
+	hwDocURL := fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/#Planning", rhelVersion)
 	vulnDocURL := "https://access.redhat.com/security/vulnerabilities/mds"
 
 	// Evaluate firmware version
@@ -406,7 +407,7 @@ func checkUnusedDevices(r *report.AsciiDocReport) {
 
 	// Get RHEL version for documentation
 	rhelVersion := utils.GetRedHatVersion()
-	kernelModuleDocURL := fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/managing_monitoring_and_updating_the_kernel/working-with-kernel-modules", rhelVersion)
+	kernelModuleDocURL := fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/managing_monitoring_and_updating_the_kernel/index", rhelVersion)
 
 	var detail strings.Builder
 	detail.WriteString("Device Status:\n")

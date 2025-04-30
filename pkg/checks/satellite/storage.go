@@ -174,7 +174,7 @@ func checkCriticalDirectories(r *report.AsciiDocReport) {
 
 	// Add reference link using version info
 	versionInfo := GetSatelliteVersion()
-	docsUrl := fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_satellite/%s.%s/html/planning_for_red_hat_satellite/storage_requirements",
+	docsUrl := fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_satellite/%s.%s/html/installing_satellite_server_in_a_connected_network_environment/index",
 		versionInfo.MajorVersion, versionInfo.MinorVersion)
 	report.AddReferenceLink(&check.Result, docsUrl)
 
@@ -211,7 +211,7 @@ func checkPulpStorage(r *report.AsciiDocReport) {
 
 		// Add reference link using version info
 		versionInfo := GetSatelliteVersion()
-		docsUrl := fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_satellite/%s.%s/html/managing_content/pulp_content_management",
+		docsUrl := fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_satellite/%s.%s/html/managing_content/index",
 			versionInfo.MajorVersion, versionInfo.MinorVersion)
 		report.AddReferenceLink(&check.Result, docsUrl)
 
@@ -292,7 +292,7 @@ func checkPulpStorage(r *report.AsciiDocReport) {
 
 	// Add reference link using version info
 	versionInfo := GetSatelliteVersion()
-	docsUrl := fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_satellite/%s.%s/html/managing_content/pulp_content_management",
+	docsUrl := fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_satellite/%s.%s/html/managing_content/index",
 		versionInfo.MajorVersion, versionInfo.MinorVersion)
 	report.AddReferenceLink(&check.Result, docsUrl)
 
@@ -333,7 +333,7 @@ func checkDatabaseStorage(r *report.AsciiDocReport) {
 
 		// Add reference link using version info
 		versionInfo := GetSatelliteVersion()
-		docsUrl := fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_satellite/%s.%s/html/planning_for_red_hat_satellite/storage_requirements",
+		docsUrl := fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_satellite/%s.%s/html/installing_satellite_server_in_a_connected_network_environment/index",
 			versionInfo.MajorVersion, versionInfo.MinorVersion)
 		report.AddReferenceLink(&check.Result, docsUrl)
 
@@ -458,10 +458,9 @@ func checkDatabaseStorage(r *report.AsciiDocReport) {
 
 	// Add reference link using version info
 	versionInfo := GetSatelliteVersion()
-	docsUrl := fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_satellite/%s.%s/html/planning_for_red_hat_satellite/storage_requirements",
+	docsUrl := fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_satellite/%s.%s/html/installing_satellite_server_in_a_connected_network_environment/index",
 		versionInfo.MajorVersion, versionInfo.MinorVersion)
 	report.AddReferenceLink(&check.Result, docsUrl)
-	report.AddReferenceLink(&check.Result, "https://access.redhat.com/solutions/4505561") // PostgreSQL tuning for Satellite
 
 	report.SetDetail(&check.Result, detail.String())
 	r.AddCheck(check)

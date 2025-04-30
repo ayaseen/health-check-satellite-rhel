@@ -183,7 +183,7 @@ func checkCentralizedLogging(r *report.AsciiDocReport) {
 
 	// Get RHEL version for documentation reference
 	rhelVersion := utils.GetRedHatVersion()
-	logDocURL := fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/logging_and_monitoring/", rhelVersion)
+	logDocURL := fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/monitoring_and_managing_system_status_and_performance/index", rhelVersion)
 
 	// Evaluate centralized logging
 	if !hasActiveLoggingService {
@@ -320,8 +320,8 @@ func checkAlertingRules(r *report.AsciiDocReport) {
 
 	// Get RHEL version for documentation reference
 	rhelVersion := utils.GetRedHatVersion()
-	monitoringDocURL := fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/logging_and_monitoring/", rhelVersion)
-	clusterDocURL := fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/configuring_and_managing_high_availability_clusters/", rhelVersion)
+	monitoringDocURL := fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/monitoring_and_managing_system_status_and_performance/index", rhelVersion)
+	clusterDocURL := fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/configuring_and_managing_high_availability_clusters/index", rhelVersion)
 
 	// Evaluate alerting rules
 	if !hasMonitoringSystems && !hasActiveMonitoringAgents {
@@ -454,8 +454,8 @@ func checkMonitoringAgents(r *report.AsciiDocReport) {
 
 	// Get RHEL version for documentation reference
 	rhelVersion := utils.GetRedHatVersion()
-	monitoringDocURL := fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/logging_and_monitoring/", rhelVersion)
-	firewallDocURL := fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/configuring_and_managing_networking/using-and-configuring-firewalld_configuring-and-managing-networking", rhelVersion)
+	monitoringDocURL := fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/monitoring_and_managing_system_status_and_performance/index", rhelVersion)
+	firewallDocURL := fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/configuring_and_managing_networking/index", rhelVersion)
 
 	// Evaluate monitoring agents
 	if !hasMonitoringAgents {

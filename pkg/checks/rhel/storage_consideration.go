@@ -260,7 +260,7 @@ func checkStoragePerformance(r *report.AsciiDocReport) {
 
 		// Add RHEL documentation reference directly
 		rhelVersionStr := utils.GetRedHatVersion()
-		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/monitoring_and_managing_system_status_and_performance/setting-the-disk-scheduler_monitoring-and-managing-system-status-and-performance", rhelVersionStr, rhelVersionStr))
+		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/#Storage", rhelVersionStr))
 	} else {
 		check.Result = report.NewResult(report.StatusOK,
 			"Storage performance settings appear to be appropriate",
@@ -375,7 +375,7 @@ func checkStorageReliability(r *report.AsciiDocReport) {
 
 		// Add RHEL documentation reference directly
 		rhelVersion := utils.GetRedHatVersion()
-		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/managing_storage_devices/managing-software-raid_managing-storage-devices", rhelVersion, rhelVersion))
+		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/#Storage", rhelVersion))
 	} else if raidDegraded {
 		check.Result = report.NewResult(report.StatusCritical,
 			"RAID array(s) in degraded state",
@@ -385,7 +385,7 @@ func checkStorageReliability(r *report.AsciiDocReport) {
 
 		// Add RHEL documentation reference directly
 		rhelVersion := utils.GetRedHatVersion()
-		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/managing_storage_devices/managing-software-raid_managing-storage-devices#recovering-a-degraded-raid-array_managing-software-raid", rhelVersion, rhelVersion))
+		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/#Storage", rhelVersion))
 	} else if !hasAnyRedundancy && !isVirtual {
 		check.Result = report.NewResult(report.StatusWarning,
 			"No storage redundancy detected",
@@ -395,7 +395,7 @@ func checkStorageReliability(r *report.AsciiDocReport) {
 
 		// Add RHEL documentation reference directly
 		rhelVersion := utils.GetRedHatVersion()
-		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/managing_storage_devices/managing-software-raid_managing-storage-devices", rhelVersion, rhelVersion))
+		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/#Storage", rhelVersion))
 	} else {
 		if isVirtual {
 			check.Result = report.NewResult(report.StatusInfo,
@@ -582,7 +582,7 @@ func checkStorageCapacity(r *report.AsciiDocReport) {
 
 		// Add RHEL documentation reference directly
 		rhelVersion := utils.GetRedHatVersion()
-		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/managing_storage_devices/managing-file-systems_managing-storage-devices", rhelVersion, rhelVersion))
+		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/#Storage", rhelVersion))
 	} else if len(highUsageFilesystems) > 0 || len(highInodeFilesystems) > 0 {
 		check.Result = report.NewResult(report.StatusWarning,
 			fmt.Sprintf("High storage usage detected on %d filesystem(s)",
@@ -602,7 +602,7 @@ func checkStorageCapacity(r *report.AsciiDocReport) {
 
 		// Add RHEL documentation reference directly
 		rhelVersion := utils.GetRedHatVersion()
-		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/managing_storage_devices/managing-file-systems_managing-storage-devices", rhelVersion, rhelVersion))
+		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/#Storage", rhelVersion))
 	} else {
 		check.Result = report.NewResult(report.StatusOK,
 			"Storage capacity appears to be adequate",

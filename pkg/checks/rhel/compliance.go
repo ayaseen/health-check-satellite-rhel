@@ -635,7 +635,7 @@ func checkRHELCISCompliance(r *report.AsciiDocReport) {
 	}
 
 	// Add CIS Benchmark documentation reference directly as a link
-	report.AddReferenceLink(&check.Result, fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/security_hardening/index", rhelVersion))
+	report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/security_hardening/index", rhelVersion))
 
 	report.SetDetail(&check.Result, detail.String())
 	r.AddCheck(check)

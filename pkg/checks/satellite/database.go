@@ -57,10 +57,9 @@ func checkPostgresStatus(r *report.AsciiDocReport) {
 
 		// Add reference link directly
 		versionInfo := GetSatelliteVersion()
-		docsUrl := fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_satellite/%s.%s/html/administering_red_hat_satellite/configuration_management_tools",
+		docsUrl := fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_satellite/%s.%s/html/administering_red_hat_satellite/migrating_from_internal_databases_to_external_databases_admin",
 			versionInfo.MajorVersion, versionInfo.MinorVersion)
 		report.AddReferenceLink(&check.Result, docsUrl)
-		report.AddReferenceLink(&check.Result, "https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/deploying_different_types_of_servers/using-postgresql_deploying-different-types-of-servers")
 
 		r.AddCheck(check)
 		return
@@ -116,10 +115,9 @@ func checkPostgresStatus(r *report.AsciiDocReport) {
 
 	// Add reference link directly
 	versionInfo := GetSatelliteVersion()
-	docsUrl := fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_satellite/%s.%s/html/administering_red_hat_satellite/configuration_management_tools",
+	docsUrl := fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_satellite/%s.%s/html/administering_red_hat_satellite/migrating_from_internal_databases_to_external_databases_admin",
 		versionInfo.MajorVersion, versionInfo.MinorVersion)
 	report.AddReferenceLink(&check.Result, docsUrl)
-	report.AddReferenceLink(&check.Result, "https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/deploying_different_types_of_servers/using-postgresql_deploying-different-types-of-servers")
 
 	report.SetDetail(&check.Result, detail.String())
 	r.AddCheck(check)
@@ -279,10 +277,9 @@ func checkDatabaseConfig(r *report.AsciiDocReport) {
 
 	// Add reference link directly
 	versionInfo := GetSatelliteVersion()
-	docsUrl := fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_satellite/%s.%s/html/administering_red_hat_satellite/configuration_management_tools",
+	docsUrl := fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_satellite/%s.%s/html/administering_red_hat_satellite/migrating_from_internal_databases_to_external_databases_admin",
 		versionInfo.MajorVersion, versionInfo.MinorVersion)
 	report.AddReferenceLink(&check.Result, docsUrl)
-	report.AddReferenceLink(&check.Result, "https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/configuring_and_using_database_servers/configuring-postgresql_configuring-and-using-database-servers")
 
 	report.SetDetail(&check.Result, detail.String())
 	r.AddCheck(check)
@@ -403,10 +400,9 @@ func checkDatabaseBloat(r *report.AsciiDocReport) {
 
 	// Add reference link directly
 	versionInfo := GetSatelliteVersion()
-	docsUrl := fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_satellite/%s.%s/html/administering_red_hat_satellite/configuration_management_tools",
+	docsUrl := fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_satellite/%s.%s/html/administering_red_hat_satellite/migrating_from_internal_databases_to_external_databases_admin",
 		versionInfo.MajorVersion, versionInfo.MinorVersion)
 	report.AddReferenceLink(&check.Result, docsUrl)
-	report.AddReferenceLink(&check.Result, "https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/configuring_and_using_database_servers/optimizing-postgresql-performance_configuring-and-using-database-servers")
 
 	report.SetDetail(&check.Result, detail.String())
 	r.AddCheck(check)
@@ -534,10 +530,9 @@ func checkDatabasePerformance(r *report.AsciiDocReport) {
 
 	// Add reference link directly
 	versionInfo := GetSatelliteVersion()
-	docsUrl := fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_satellite/%s.%s/html/administering_red_hat_satellite/configuration_management_tools",
+	docsUrl := fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_satellite/%s.%s/html/administering_red_hat_satellite/migrating_from_internal_databases_to_external_databases_admin",
 		versionInfo.MajorVersion, versionInfo.MinorVersion)
 	report.AddReferenceLink(&check.Result, docsUrl)
-	report.AddReferenceLink(&check.Result, "https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/configuring_and_using_database_servers/monitoring-postgresql-performance_configuring-and-using-database-servers")
 
 	report.SetDetail(&check.Result, detail.String())
 	r.AddCheck(check)

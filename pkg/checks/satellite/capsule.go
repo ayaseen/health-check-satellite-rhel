@@ -53,7 +53,7 @@ func checkCapsuleStatus(r *report.AsciiDocReport) {
 
 		// Add reference link using version info
 		versionInfo := GetSatelliteVersion()
-		docsUrl := fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_satellite/%s.%s/html/installing_capsule_server/",
+		docsUrl := fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_satellite/%s.%s/html/installing_capsule_server/",
 			versionInfo.MajorVersion, versionInfo.MinorVersion)
 		report.AddReferenceLink(&check.Result, docsUrl)
 
@@ -214,10 +214,9 @@ func checkCapsuleStatus(r *report.AsciiDocReport) {
 
 	// Add reference link using version info
 	versionInfo := GetSatelliteVersion()
-	docsUrl := fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_satellite/%s.%s/html/installing_capsule_server/",
+	docsUrl := fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_satellite/%s.%s/html/installing_capsule_server/",
 		versionInfo.MajorVersion, versionInfo.MinorVersion)
 	report.AddReferenceLink(&check.Result, docsUrl)
-	report.AddReferenceLink(&check.Result, "https://access.redhat.com/solutions/1542213") // Capsule troubleshooting
 
 	report.SetDetail(&check.Result, detail.String())
 	r.AddCheck(check)
@@ -466,10 +465,9 @@ func checkPulpSyncStatus(r *report.AsciiDocReport) {
 
 	// Add reference link using version info
 	versionInfo := GetSatelliteVersion()
-	docsUrl := fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_satellite/%s.%s/html/managing_content/managing_ansible_content",
+	docsUrl := fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_satellite/%s.%s/html/managing_content/managing_ansible_content_content-management",
 		versionInfo.MajorVersion, versionInfo.MinorVersion)
 	report.AddReferenceLink(&check.Result, docsUrl)
-	report.AddReferenceLink(&check.Result, "https://access.redhat.com/solutions/1619193") // Satellite content synchronization troubleshooting
 
 	report.SetDetail(&check.Result, detail.String())
 	r.AddCheck(check)
@@ -650,10 +648,9 @@ func checkCapsuleCerts(r *report.AsciiDocReport) {
 
 	// Add reference link using version info
 	versionInfo := GetSatelliteVersion()
-	docsUrl := fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_satellite/%s.%s/html/installing_capsule_server/configuring_capsule_server",
+	docsUrl := fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_satellite/%s.%s/html/installing_capsule_server/index",
 		versionInfo.MajorVersion, versionInfo.MinorVersion)
 	report.AddReferenceLink(&check.Result, docsUrl)
-	report.AddReferenceLink(&check.Result, "https://access.redhat.com/solutions/3047891") // Capsule certificate troubleshooting
 
 	report.SetDetail(&check.Result, detail.String())
 	r.AddCheck(check)
@@ -686,7 +683,7 @@ func checkCapsuleSyncStatus(r *report.AsciiDocReport) {
 
 		// Add reference link using version info
 		versionInfo := GetSatelliteVersion()
-		docsUrl := fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_satellite/%s.%s/html/installing_capsule_server/",
+		docsUrl := fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_satellite/%s.%s/html/installing_capsule_server/index",
 			versionInfo.MajorVersion, versionInfo.MinorVersion)
 		report.AddReferenceLink(&check.Result, docsUrl)
 
@@ -825,10 +822,9 @@ func checkCapsuleSyncStatus(r *report.AsciiDocReport) {
 
 	// Add reference link using version info
 	versionInfo := GetSatelliteVersion()
-	docsUrl := fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_satellite/%s.%s/html/managing_content/managing_content_with_capsule_servers_managing-content",
+	docsUrl := fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_satellite/%s.%s/html/managing_content/index",
 		versionInfo.MajorVersion, versionInfo.MinorVersion)
 	report.AddReferenceLink(&check.Result, docsUrl)
-	report.AddReferenceLink(&check.Result, "https://access.redhat.com/solutions/1260183") // Troubleshooting content synchronization
 
 	report.SetDetail(&check.Result, detail.String())
 	r.AddCheck(check)

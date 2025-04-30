@@ -61,7 +61,7 @@ func checkSystemPerformance(r *report.AsciiDocReport) {
 
 	// Get RHEL version for documentation reference
 	rhelVersion := utils.GetRedHatVersion()
-	perfDocURL := fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/monitoring_and_managing_system_status_and_performance/", rhelVersion)
+	perfDocURL := fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/monitoring_and_managing_system_status_and_performance/", rhelVersion)
 
 	var detail strings.Builder
 	detail.WriteString("System Uptime and Load:\n")
@@ -260,7 +260,7 @@ func checkPerformanceBottlenecks(r *report.AsciiDocReport) {
 
 	// Get RHEL version for documentation reference
 	rhelVersion := utils.GetRedHatVersion()
-	perfDocURL := fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/monitoring_and_managing_system_status_and_performance/", rhelVersion)
+	perfDocURL := fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/monitoring_and_managing_system_status_and_performance/", rhelVersion)
 
 	var detail strings.Builder
 	detail.WriteString("Top Memory Consuming Processes:\n")
@@ -605,7 +605,7 @@ func checkSystemCaches(r *report.AsciiDocReport) {
 
 	// Get RHEL version for documentation reference
 	rhelVersion := utils.GetRedHatVersion()
-	sysctlDocURL := fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/monitoring_and_managing_system_status_and_performance/setting-limits-for-systems-resources-for-application-performance", rhelVersion)
+	sysctlDocURL := fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/monitoring_and_managing_system_status_and_performance/setting-limits-for-systems-resources-for-application-performance", rhelVersion)
 
 	var detail strings.Builder
 	detail.WriteString("Memory Cache Information:\n")

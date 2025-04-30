@@ -83,7 +83,7 @@ func checkTimezone(r *report.AsciiDocReport) {
 
 		// Add Red Hat specific documentation reference directly
 		rhelVersion := utils.GetRedHatVersion()
-		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/configuring_basic_system_settings/using-systemd-tools-for-system-management#managing-system-time", rhelVersion))
+		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/configuring_basic_system_settings/index", rhelVersion))
 	} else {
 		check.Result = report.NewResult(report.StatusOK,
 			fmt.Sprintf("System timezone is set to %s", timezone),
@@ -96,7 +96,7 @@ func checkTimezone(r *report.AsciiDocReport) {
 
 		// Add Red Hat specific documentation reference directly
 		rhelVersion := utils.GetRedHatVersion()
-		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/configuring_basic_system_settings/using-systemd-tools-for-system-management#managing-system-time", rhelVersion))
+		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/configuring_basic_system_settings/index", rhelVersion))
 	}
 
 	report.SetDetail(&check.Result, detail.String())
@@ -182,7 +182,7 @@ func checkTimeSync(r *report.AsciiDocReport) {
 		report.AddRecommendation(&check.Result, "Enable NTP synchronization: 'timedatectl set-ntp true'.")
 
 		// Add reference link directly
-		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/configuring_basic_system_settings/using-chrony-to-configure-ntp", rhelVersion))
+		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/configuring_basic_system_settings/index", rhelVersion))
 	} else if !isSynced {
 		check.Result = report.NewResult(report.StatusWarning,
 			"Time synchronization is enabled but not synchronized",
@@ -192,7 +192,7 @@ func checkTimeSync(r *report.AsciiDocReport) {
 		report.AddRecommendation(&check.Result, "Check for network connectivity to time servers.")
 
 		// Add reference link directly
-		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/configuring_basic_system_settings/using-chrony-to-configure-ntp#troubleshooting-chrony", rhelVersion))
+		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/configuring_basic_system_settings/index", rhelVersion))
 	} else {
 		check.Result = report.NewResult(report.StatusOK,
 			fmt.Sprintf("Time synchronization is active and using %s", timeService),
@@ -257,7 +257,7 @@ func checkClockConsistency(r *report.AsciiDocReport) {
 		report.AddRecommendation(&check.Result, "This is especially important for dual-boot systems.")
 
 		// Add reference link directly
-		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/configuring_basic_system_settings/using-systemd-tools-for-system-management#managing-system-time", rhelVersion))
+		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/configuring_basic_system_settings/index", rhelVersion))
 	} else if timeDifference {
 		check.Result = report.NewResult(report.StatusWarning,
 			"System time and hardware clock time appear to be inconsistent",
@@ -265,7 +265,7 @@ func checkClockConsistency(r *report.AsciiDocReport) {
 		report.AddRecommendation(&check.Result, "Synchronize hardware clock with system time: 'hwclock --systohc'.")
 
 		// Add reference link directly
-		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/configuring_basic_system_settings/assembly_working-with-time-settings", rhelVersion))
+		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/configuring_basic_system_settings/index", rhelVersion))
 	} else {
 		check.Result = report.NewResult(report.StatusOK,
 			"System clock appears to be consistent",

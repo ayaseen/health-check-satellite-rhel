@@ -160,8 +160,7 @@ func checkCertificates(r *report.AsciiDocReport) {
 
 	// Add reference link using version info
 	versionInfo := GetSatelliteVersion()
-	docsUrl := fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_satellite/%s.%s/html/administering_red_hat_satellite/chap-red_hat_satellite-administering_red_hat_satellite-backing_up_satellite_server_and_capsule_server",
-		versionInfo.MajorVersion, versionInfo.MinorVersion)
+	docsUrl := fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_satellite/%s.%s/html/administering_red_hat_satellite/index", versionInfo.MajorVersion, versionInfo.MinorVersion)
 	report.AddReferenceLink(&check.Result, docsUrl)
 	report.AddReferenceLink(&check.Result, "https://access.redhat.com/solutions/1549043") // Satellite certificate management
 
@@ -288,12 +287,14 @@ func checkSELinux(r *report.AsciiDocReport) {
 			report.ResultKeyNoChange)
 	}
 
+	// Add reference link directly
+	rhelVersion := utils.GetRedHatVersion()
 	// Add reference link using version info
 	versionInfo := GetSatelliteVersion()
-	docsUrl := fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_satellite/%s.%s/html/installing_satellite_server_from_a_connected_network/preparing_your_environment_for_installation#configuring-the-firewall",
+	docsUrl := fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_satellite/%s.%s/html/installing_satellite_server_in_a_connected_network_environment/index",
 		versionInfo.MajorVersion, versionInfo.MinorVersion)
 	report.AddReferenceLink(&check.Result, docsUrl)
-	report.AddReferenceLink(&check.Result, "https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/using_selinux/")
+	report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/using_selinux/index", rhelVersion))
 
 	report.SetDetail(&check.Result, detail.String())
 	r.AddCheck(check)
@@ -476,13 +477,14 @@ func checkAuditConfiguration(r *report.AsciiDocReport) {
 			report.ResultKeyNoChange)
 	}
 
+	// Add reference link directly
+	rhelVersion := utils.GetRedHatVersion()
 	// Add reference link using version info
 	versionInfo := GetSatelliteVersion()
-	docsUrl := fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_satellite/%s.%s/html/administering_red_hat_satellite/chap-auditing",
+	docsUrl := fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_satellite/%s.%s/administering_red_hat_satellite/index",
 		versionInfo.MajorVersion, versionInfo.MinorVersion)
 	report.AddReferenceLink(&check.Result, docsUrl)
-	report.AddReferenceLink(&check.Result, "https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/configuring_authentication_and_authorization_in_rhel/") // RHEL authentication guide
-
+	report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/configuring_authentication_and_authorization_in_rhel/index", rhelVersion)) // RHEL authentication guide
 	report.SetDetail(&check.Result, detail.String())
 	r.AddCheck(check)
 }
@@ -874,10 +876,9 @@ func checkFirewallConfiguration(r *report.AsciiDocReport) {
 
 	// Add reference link using version info
 	versionInfo := GetSatelliteVersion()
-	docsUrl := fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_satellite/%s.%s/html/installing_satellite_server_from_a_connected_network/preparing_your_environment_for_installation#configuring-the-firewall",
+	docsUrl := fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_satellite/%s.%s/html/installing_satellite_server_in_a_connected_network_environment/index",
 		versionInfo.MajorVersion, versionInfo.MinorVersion)
 	report.AddReferenceLink(&check.Result, docsUrl)
-	report.AddReferenceLink(&check.Result, "https://access.redhat.com/solutions/1518263") // Satellite ports and firewall configuration guide
 
 	report.SetDetail(&check.Result, detail.String())
 	r.AddCheck(check)

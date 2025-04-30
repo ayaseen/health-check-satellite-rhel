@@ -92,7 +92,7 @@ func checkSystemLogs(r *report.AsciiDocReport) {
 
 	// Get RHEL version for documentation reference
 	rhelVersion := utils.GetRedHatVersion()
-	logsDocURL := fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/logging_and_monitoring/", rhelVersion)
+	logsDocURL := fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/monitoring_and_managing_system_status_and_performance/index", rhelVersion)
 
 	// Evaluate log health
 	if totalErrors > 50 {
@@ -204,7 +204,7 @@ func checkLogRotation(r *report.AsciiDocReport) {
 
 	// Get RHEL version for documentation reference
 	rhelVersion := utils.GetRedHatVersion()
-	logsDocURL := fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/logging_and_monitoring/", rhelVersion)
+	logsDocURL := fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/monitoring_and_managing_system_status_and_performance/index", rhelVersion)
 
 	// Evaluate log rotation
 	issues := []string{}
@@ -355,7 +355,7 @@ func checkLoggingSystem(r *report.AsciiDocReport) {
 
 	// Get RHEL version for documentation reference
 	rhelVersion := utils.GetRedHatVersion()
-	logsDocURL := fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/logging_and_monitoring/", rhelVersion)
+	logsDocURL := fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/monitoring_and_managing_system_status_and_performance/index", rhelVersion)
 
 	// Check if at least one logging system is active
 	if !rsyslogActive && !journaldActive {

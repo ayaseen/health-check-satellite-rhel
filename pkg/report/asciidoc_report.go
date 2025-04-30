@@ -385,9 +385,9 @@ func (r *AsciiDocReport) formatCheckDetail(check *Check) string {
 	} else {
 		// No specific reference found, use default
 		if strings.Contains(string(check.Category), "Satellite") {
-			sb.WriteString("* https://access.redhat.com/documentation/en-us/red_hat_satellite/\n\n")
+			sb.WriteString("* https://docs.redhat.com/en/documentation/red_hat_satellite/\n\n")
 		} else {
-			sb.WriteString("* https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/\n\n")
+			sb.WriteString("* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/\n\n")
 		}
 	}
 

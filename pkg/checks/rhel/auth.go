@@ -145,7 +145,7 @@ func checkCentralAuth(r *report.AsciiDocReport) {
 
 		// Add reference link directly
 		rhelVersion := utils.GetRedHatVersion()
-		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/configuring_authentication_and_authorization_in_rhel/index", rhelVersion))
+		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/configuring_authentication_and_authorization_in_rhel/index", rhelVersion))
 	} else if !sssdInstalled {
 		check.Result = report.NewResult(report.StatusWarning,
 			fmt.Sprintf("%s integration detected but SSSD is not installed", authType),
@@ -154,7 +154,7 @@ func checkCentralAuth(r *report.AsciiDocReport) {
 
 		// Add reference link directly
 		rhelVersion := utils.GetRedHatVersion()
-		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/configuring_authentication_and_authorization_in_rhel/understanding-the-sssd-configuration-file_configuring-authorization", rhelVersion))
+		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/configuring_authentication_and_authorization_in_rhel/index", rhelVersion))
 	} else if connectivityIssue {
 		check.Result = report.NewResult(report.StatusWarning,
 			fmt.Sprintf("Connectivity issue with %s server", authType),
@@ -164,7 +164,7 @@ func checkCentralAuth(r *report.AsciiDocReport) {
 
 		// Add reference link directly
 		rhelVersion := utils.GetRedHatVersion()
-		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/configuring_authentication_and_authorization_in_rhel/troubleshooting-authentication-and-authorization_configuring-authentication", rhelVersion))
+		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/configuring_authentication_and_authorization_in_rhel/index", rhelVersion))
 	} else if strings.TrimSpace(getentOutput) == "" {
 		check.Result = report.NewResult(report.StatusWarning,
 			fmt.Sprintf("%s integration configured but no central users detected", authType),
@@ -174,7 +174,7 @@ func checkCentralAuth(r *report.AsciiDocReport) {
 
 		// Add reference link directly
 		rhelVersion := utils.GetRedHatVersion()
-		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/configuring_authentication_and_authorization_in_rhel/assembly_testing-authentication-configurations_configuring-authentication", rhelVersion))
+		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/configuring_authentication_and_authorization_in_rhel/index", rhelVersion))
 	} else {
 		check.Result = report.NewResult(report.StatusOK,
 			fmt.Sprintf("%s integration is properly configured and working", authType),
@@ -206,7 +206,7 @@ func checkSSSD(r *report.AsciiDocReport) {
 
 		// Add reference link directly
 		rhelVersion := utils.GetRedHatVersion()
-		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/configuring_authentication_and_authorization_in_rhel/understanding-sssd-and-its-benefits_configuring-authentication", rhelVersion))
+		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/configuring_authentication_and_authorization_in_rhel/index", rhelVersion))
 		r.AddCheck(check)
 		return
 	}
@@ -325,7 +325,7 @@ func checkSSSD(r *report.AsciiDocReport) {
 
 		// Add reference link directly
 		rhelVersion := utils.GetRedHatVersion()
-		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/configuring_authentication_and_authorization_in_rhel/configuring-sssd_configuring-authentication", rhelVersion))
+		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/configuring_authentication_and_authorization_in_rhel/index", rhelVersion))
 	} else {
 		check.Result = report.NewResult(report.StatusOK,
 			"SSSD is properly configured with caching and failover settings",
@@ -512,7 +512,7 @@ func checkSudoAndPAM(r *report.AsciiDocReport) {
 		}
 
 		// Add reference link directly
-		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/planning_identity_management/index", rhelVersion))
+		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/planning_identity_management/index", rhelVersion))
 	} else if len(issues) > 0 {
 		check.Result = report.NewResult(report.StatusWarning,
 			fmt.Sprintf("Found %d issues with sudo and PAM configuration", len(issues)),
@@ -539,7 +539,7 @@ func checkSudoAndPAM(r *report.AsciiDocReport) {
 		}
 
 		// Add reference link directly
-		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/configuring_basic_system_settings/managing-users-and-groups_configuring-basic-system-settings#managing-sudo-access_managing-users-and-groups", rhelVersion))
+		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/configuring_basic_system_settings", rhelVersion))
 	} else {
 		check.Result = report.NewResult(report.StatusOK,
 			"Sudo rules and PAM configuration are consistent and properly set up",
@@ -669,7 +669,7 @@ func checkKerberos(r *report.AsciiDocReport) {
 
 			// Add reference link directly
 			rhelVersion := utils.GetRedHatVersion()
-			report.AddReferenceLink(&check.Result, fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/configuring_authentication_and_authorization_in_rhel/configuring-a-kerberos-server_configuring-authentication", rhelVersion))
+			report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/configuring_and_managing_identity_management/index", rhelVersion))
 		} else {
 			check.Result = report.NewResult(report.StatusOK,
 				"Kerberos is properly configured",

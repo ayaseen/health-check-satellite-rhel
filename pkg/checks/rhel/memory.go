@@ -113,14 +113,14 @@ func checkPhysicalMemory(r *report.AsciiDocReport) {
 			fmt.Sprintf("System has low physical memory: %.2f GB", totalMemoryGB),
 			report.ResultKeyRecommended)
 		report.AddRecommendation(&check.Result, "Consider increasing RAM to at least 4 GB for optimal performance.")
-		report.AddRecommendation(&check.Result, fmt.Sprintf("For RHEL %s memory recommendations, refer to: https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/considerations_in_adopting_rhel_%s/hardware-enablement_considerations-in-adopting-rhel-%s#memory_requirements_considerations-in-adopting-rhel-%s", rhelVersion, rhelVersion, rhelVersion, rhelVersion, rhelVersion))
+		report.AddRecommendation(&check.Result, fmt.Sprintf("For RHEL %s memory recommendations, refer to: https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/monitoring_and_managing_system_status_and_performance/index", rhelVersion))
 	} else if memoryUsagePercent > 90 {
 		check.Result = report.NewResult(report.StatusWarning,
 			fmt.Sprintf("High memory usage: %d%%", memoryUsagePercent),
 			report.ResultKeyRecommended)
 		report.AddRecommendation(&check.Result, "Investigate processes consuming memory with 'top' or 'ps'.")
 		report.AddRecommendation(&check.Result, "Consider adding more RAM if this is a consistent pattern.")
-		report.AddRecommendation(&check.Result, fmt.Sprintf("For RHEL %s memory management, refer to: https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/managing_monitoring_and_updating_the_kernel/assembly_monitoring-and-managing-system-status-and-performance_managing-monitoring-and-updating-the-kernel#monitoring-main-memory-in-performance-co-pilot_assembly_monitoring-and-managing-system-status-and-performance", rhelVersion, rhelVersion))
+		report.AddRecommendation(&check.Result, fmt.Sprintf("For RHEL %s memory management, refer to: https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/monitoring_and_managing_system_status_and_performance/index", rhelVersion))
 	} else {
 		check.Result = report.NewResult(report.StatusOK,
 			fmt.Sprintf("System has %.2f GB of physical memory with %d%% usage", totalMemoryGB, memoryUsagePercent),
@@ -256,13 +256,13 @@ func checkSwapConfiguration(r *report.AsciiDocReport) {
 			report.ResultKeyRecommended)
 		report.AddRecommendation(&check.Result, fmt.Sprintf("Configure swap space of approximately %.1f GB", recommendedSwapGB))
 		report.AddRecommendation(&check.Result, "Use 'swapoff -a' then 'mkswap /dev/device' and 'swapon -a' to configure swap.")
-		report.AddRecommendation(&check.Result, fmt.Sprintf("For RHEL %s swap space recommendations, refer to: https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/managing_storage_devices/managing-swap-space_managing-storage-devices", rhelVersion, rhelVersion))
+		report.AddRecommendation(&check.Result, fmt.Sprintf("For RHEL %s swap space recommendations, refer to: https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/#Storage", rhelVersion))
 	} else if totalSwapGB < (recommendedSwapGB * 0.5) {
 		check.Result = report.NewResult(report.StatusWarning,
 			fmt.Sprintf("Swap space (%.2f GB) may be undersized compared to recommended value (%.2f GB)", totalSwapGB, recommendedSwapGB),
 			report.ResultKeyRecommended)
 		report.AddRecommendation(&check.Result, fmt.Sprintf("Consider increasing swap space to approximately %.1f GB", recommendedSwapGB))
-		report.AddRecommendation(&check.Result, fmt.Sprintf("For RHEL %s swap space configuration, refer to: https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/managing_storage_devices/managing-swap-space_managing-storage-devices", rhelVersion, rhelVersion))
+		report.AddRecommendation(&check.Result, fmt.Sprintf("For RHEL %s swap space configuration, refer to: https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/#Storage", rhelVersion))
 	} else {
 		check.Result = report.NewResult(report.StatusOK,
 			fmt.Sprintf("Swap space is configured correctly (%.2f GB)", totalSwapGB),
@@ -391,7 +391,7 @@ func checkVMTuningParameters(r *report.AsciiDocReport) {
 		}
 
 		// Add reference link directly instead of as a recommendation
-		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/monitoring_and_managing_system_status_and_performance/getting-started-with-tuned_monitoring-and-managing-system-status-and-performance", rhelVersion))
+		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/monitoring_and_managing_system_status_and_performance/index", rhelVersion))
 	} else {
 		check.Result = report.NewResult(report.StatusOK,
 			"VM tuning parameters are properly configured",

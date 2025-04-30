@@ -117,7 +117,7 @@ func checkBackupSystems(r *report.AsciiDocReport) {
 		report.AddRecommendation(&check.Result, "Set up regular backup schedules using cron")
 
 		// Add reference link directly
-		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/system_design_guide/backup-and-recovery", rhelVersion))
+		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/system_design_guide/backup-and-recovery", rhelVersion))
 	} else if (noBackupTools && noCronJobs) || (noBackupDirs && noBackupMounts && noSnapshots) {
 		check.Result = report.NewResult(report.StatusWarning,
 			"Backup system may be incomplete",
@@ -134,7 +134,7 @@ func checkBackupSystems(r *report.AsciiDocReport) {
 		}
 
 		// Add reference link directly
-		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/logical_volume_manager_administration/lvm_snapshots", rhelVersion))
+		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/logical_volume_manager_administration/lvm_snapshots", rhelVersion))
 	} else {
 		check.Result = report.NewResult(report.StatusOK,
 			"Backup system appears to be configured",
@@ -258,7 +258,7 @@ func checkRecoveryProcess(r *report.AsciiDocReport) {
 		report.AddRecommendation(&check.Result, "Schedule regular recovery testing")
 
 		// Add reference link directly
-		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/system_design_guide/backup-and-recovery", rhelVersion))
+		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/system_design_guide/backup-and-recovery", rhelVersion))
 	} else if noRestoreLogs || !hasRecentRestoreTest {
 		check.Result = report.NewResult(report.StatusWarning,
 			"No evidence of recent recovery testing found",
@@ -267,7 +267,7 @@ func checkRecoveryProcess(r *report.AsciiDocReport) {
 		report.AddRecommendation(&check.Result, "Keep logs of recovery tests for verification")
 
 		// Add reference link directly
-		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/system_design_guide/backup-and-recovery", rhelVersion))
+		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/system_design_guide/backup-and-recovery", rhelVersion))
 	} else {
 		check.Result = report.NewResult(report.StatusOK,
 			"Recovery process appears to be documented and tested",
@@ -375,7 +375,7 @@ func checkApplicationBackups(r *report.AsciiDocReport) {
 		report.AddRecommendation(&check.Result, "Ensure system-level backups are in place")
 
 		// Add reference link directly
-		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/system_design_guide/backup-and-recovery", rhelVersion))
+		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/system_design_guide/backup-and-recovery", rhelVersion))
 	} else if !hasAppSpecificBackup {
 		check.Result = report.NewResult(report.StatusWarning,
 			"Applications requiring specialized backups detected but no app-specific backups found",
@@ -384,11 +384,11 @@ func checkApplicationBackups(r *report.AsciiDocReport) {
 		// Make app-specific recommendations
 		if strings.Contains(applicationsOutput, "mysql") || strings.Contains(applicationsOutput, "mariadb") {
 			report.AddRecommendation(&check.Result, "Configure MySQL/MariaDB backups using mysqldump or other tools")
-			report.AddReferenceLink(&check.Result, fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/deploying_mariadb_on_rhel/backing-up-and-restoring-mariadb", rhelVersion))
+			report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/deploying_mariadb_on_rhel/backing-up-and-restoring-mariadb", rhelVersion))
 		}
 		if strings.Contains(applicationsOutput, "postgresql") {
 			report.AddRecommendation(&check.Result, "Configure PostgreSQL backups using pg_dump or other tools")
-			report.AddReferenceLink(&check.Result, fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/configuring_and_using_database_servers/assembly_configuring-postgreSQL-backup-and-restore_configuring-and-using-database-servers", rhelVersion))
+			report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/configuring_and_using_database_servers/assembly_configuring-postgreSQL-backup-and-restore_configuring-and-using-database-servers", rhelVersion))
 		}
 		if strings.Contains(applicationsOutput, "mongodb") {
 			report.AddRecommendation(&check.Result, "Configure MongoDB backups using mongodump or other tools")

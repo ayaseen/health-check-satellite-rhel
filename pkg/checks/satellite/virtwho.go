@@ -200,10 +200,9 @@ func checkVirtWhoConfiguration(r *report.AsciiDocReport) {
 
 	// Add reference link using version info
 	versionInfo := GetSatelliteVersion()
-	docsUrl := fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_satellite/%s.%s/html/managing_hosts/configuring_virtual_machine_subscriptions",
+	docsUrl := fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_satellite/%s.%s/#Server%20Administration",
 		versionInfo.MajorVersion, versionInfo.MinorVersion)
 	report.AddReferenceLink(&check.Result, docsUrl)
-	report.AddReferenceLink(&check.Result, "https://access.redhat.com/documentation/en-us/red_hat_virt-who/")
 
 	report.SetDetail(&check.Result, detail.String())
 	r.AddCheck(check)
@@ -350,10 +349,9 @@ func checkVirtWhoService(r *report.AsciiDocReport) {
 
 	// Add reference link using version info
 	versionInfo := GetSatelliteVersion()
-	docsUrl := fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_satellite/%s.%s/html/managing_hosts/configuring_virtual_machine_subscriptions",
+	docsUrl := fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_satellite/%s.%s/#Server%20Administration",
 		versionInfo.MajorVersion, versionInfo.MinorVersion)
 	report.AddReferenceLink(&check.Result, docsUrl)
-	report.AddReferenceLink(&check.Result, "https://access.redhat.com/solutions/1607993") // Virt-who troubleshooting
 
 	report.SetDetail(&check.Result, detail.String())
 	r.AddCheck(check)
@@ -465,10 +463,9 @@ func checkVMSubscriptionStatus(r *report.AsciiDocReport) {
 
 	// Add reference link using version info
 	versionInfo := GetSatelliteVersion()
-	docsUrl := fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_satellite/%s.%s/html/managing_hosts/configuring_virtual_machine_subscriptions",
+	docsUrl := fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_satellite/%s.%s/#Server%20Administration",
 		versionInfo.MajorVersion, versionInfo.MinorVersion)
 	report.AddReferenceLink(&check.Result, docsUrl)
-	report.AddReferenceLink(&check.Result, "https://access.redhat.com/documentation/en-us/subscription_central/2021/html/getting_started_with_simple_content_access")
 
 	report.SetDetail(&check.Result, detail.String())
 	r.AddCheck(check)

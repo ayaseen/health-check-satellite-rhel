@@ -179,7 +179,7 @@ func checkNetworkConfig(r *report.AsciiDocReport) {
 
 		// Add Red Hat documentation reference
 		rhelVersion := utils.GetRedHatVersion()
-		docURL := fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/configuring_and_managing_networking/", rhelVersion)
+		docURL := fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/configuring_and_managing_networking/", rhelVersion)
 		report.AddReferenceLink(&check.Result, docURL)
 	} else {
 		check.Result = report.NewResult(report.StatusOK,
@@ -203,7 +203,7 @@ func checkBondingTeaming(r *report.AsciiDocReport) {
 	rhelVersion := utils.GetRedHatVersion()
 
 	// Use same URL format for both RHEL 8 and 9
-	docURL := fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/configuring_and_managing_networking/", rhelVersion)
+	docURL := fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/configuring_and_managing_networking/", rhelVersion)
 
 	// Check for bonding modules
 	bondingModulesCmd := "lsmod | grep bonding"
@@ -487,7 +487,7 @@ func checkHostnameResolution(r *report.AsciiDocReport) {
 
 		// Red Hat version-specific hostname configuration docs
 		rhelVersion := utils.GetRedHatVersion()
-		docURL := fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/configuring_and_managing_networking/", rhelVersion)
+		docURL := fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/configuring_and_managing_networking/", rhelVersion)
 		report.AddReferenceLink(&check.Result, docURL)
 		report.AddRecommendation(&check.Result, "Use 'hostnamectl' command to set your system hostname permanently")
 	} else {
@@ -512,7 +512,7 @@ func checkMTUConfig(r *report.AsciiDocReport) {
 	rhelVersion := utils.GetRedHatVersion()
 
 	// Build documentation URL for MTU configuration
-	docURL := fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/configuring_and_managing_networking/", rhelVersion)
+	docURL := fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/configuring_and_managing_networking/", rhelVersion)
 
 	// Get interface MTU values
 	mtuCmd := "ip link show | grep -E 'mtu|state'"
@@ -684,7 +684,7 @@ func checkFirewallRules(r *report.AsciiDocReport) {
 	rhelVersion := utils.GetRedHatVersion()
 
 	// Build documentation URL for firewall configuration
-	docURL := fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/configuring_and_managing_networking/", rhelVersion)
+	docURL := fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/configuring_and_managing_networking/", rhelVersion)
 
 	// Get firewalld status
 	firewalldCmd := "systemctl is-active firewalld"
@@ -811,7 +811,7 @@ func checkTCPIPStackHardening(r *report.AsciiDocReport) {
 	rhelVersion := utils.GetRedHatVersion()
 
 	// Build documentation URL
-	docURL := fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/security_hardening/", rhelVersion)
+	docURL := fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/security_hardening/", rhelVersion)
 
 	// Define critical sysctl settings to check
 	criticalSettings := map[string]string{

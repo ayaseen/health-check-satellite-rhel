@@ -140,7 +140,7 @@ func checkCPUInfo(r *report.AsciiDocReport) {
 		}
 
 		// Add reference link directly
-		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/monitoring_and_managing_system_status_and_performance/monitoring-cpu-usage-using-performance-co-pilot_monitoring-and-managing-system-status-and-performance", rhelVersion))
+		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/monitoring_and_managing_system_status_and_performance/monitoring-cpu-usage-using-performance-co-pilot_monitoring-and-managing-system-status-and-performance", rhelVersion))
 	} else {
 		check.Result = report.NewResult(report.StatusOK,
 			fmt.Sprintf("System has %d CPU cores (%s, %s) with normal utilization",
@@ -249,7 +249,7 @@ func checkTunedProfile(r *report.AsciiDocReport) {
 		report.AddRecommendation(&check.Result, "Enable and start tuned: 'systemctl enable --now tuned'")
 
 		// Add reference link directly
-		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/monitoring_and_managing_system_status_and_performance/getting-started-with-tuned_monitoring-and-managing-system-status-and-performance", rhelVersion))
+		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/monitoring_and_managing_system_status_and_performance/getting-started-with-tuned_monitoring-and-managing-system-status-and-performance", rhelVersion))
 	} else if activeProfile == "None" || activeProfile == "" {
 		check.Result = report.NewResult(report.StatusWarning,
 			"No tuned profile is active",
@@ -257,7 +257,7 @@ func checkTunedProfile(r *report.AsciiDocReport) {
 		report.AddRecommendation(&check.Result, fmt.Sprintf("Activate recommended profile: 'tuned-adm profile %s'", recommendedProfile))
 
 		// Add reference link directly
-		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/monitoring_and_managing_system_status_and_performance/tuned-profiles-distributed-with-rhel_monitoring-and-managing-system-status-and-performance", rhelVersion))
+		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/monitoring_and_managing_system_status_and_performance/tuned-profiles-distributed-with-rhel_monitoring-and-managing-system-status-and-performance", rhelVersion))
 	} else if activeProfile != recommendedProfile {
 		check.Result = report.NewResult(report.StatusWarning,
 			fmt.Sprintf("Current tuned profile (%s) may not be optimal", activeProfile),
@@ -266,7 +266,7 @@ func checkTunedProfile(r *report.AsciiDocReport) {
 		report.AddRecommendation(&check.Result, "Review workload requirements before changing profiles")
 
 		// Add reference link directly
-		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/monitoring_and_managing_system_status_and_performance/tuned-profiles-distributed-with-rhel_monitoring-and-managing-system-status-and-performance", rhelVersion))
+		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/monitoring_and_managing_system_status_and_performance/tuned-profiles-distributed-with-rhel_monitoring-and-managing-system-status-and-performance", rhelVersion))
 	} else {
 		check.Result = report.NewResult(report.StatusOK,
 			fmt.Sprintf("Appropriate tuned profile (%s) is active", activeProfile),
@@ -413,7 +413,7 @@ func checkCPUBottlenecks(r *report.AsciiDocReport) {
 		}
 
 		// Add reference link directly
-		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/monitoring_and_managing_system_status_and_performance/monitoring-cpu-usage-using-performance-co-pilot_monitoring-and-managing-system-status-and-performance", rhelVersion))
+		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/monitoring_and_managing_system_status_and_performance/monitoring-cpu-usage-using-performance-co-pilot_monitoring-and-managing-system-status-and-performance", rhelVersion))
 	} else {
 		check.Result = report.NewResult(report.StatusOK,
 			"No CPU bottlenecks detected",

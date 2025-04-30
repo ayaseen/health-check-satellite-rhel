@@ -48,7 +48,7 @@ func checkSystemHostname(r *report.AsciiDocReport) {
 
 		// Add reference link directly
 		rhelVersion := utils.GetRedHatVersion()
-		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/configuring_and_managing_networking/getting-started-with-rhel-networking_configuring-and-managing-networking", rhelVersion))
+		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/configuring_and_managing_networking/getting-started-with-rhel-networking_configuring-and-managing-networking", rhelVersion))
 		r.AddCheck(check)
 		return
 	}
@@ -86,7 +86,7 @@ func checkSystemHostname(r *report.AsciiDocReport) {
 
 		// Add reference link directly
 		rhelVersion := utils.GetRedHatVersion()
-		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/configuring_and_managing_networking/using-and-configuring-the-resolver_configuring-and-managing-networking", rhelVersion))
+		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/configuring_and_managing_networking/using-and-configuring-the-resolver_configuring-and-managing-networking", rhelVersion))
 	} else {
 		// Hostname resolves - good!
 		lookup, _ := utils.RunCommand("getent", "hosts", fqdn)
@@ -122,7 +122,7 @@ func checkRHELVersion(r *report.AsciiDocReport) {
 		report.AddRecommendation(&check.Result, "Check if this is a Red Hat Enterprise Linux system.")
 
 		// Add reference link directly
-		report.AddReferenceLink(&check.Result, "https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/")
+		report.AddReferenceLink(&check.Result, "https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/")
 		r.AddCheck(check)
 		return
 	}
@@ -173,7 +173,7 @@ func checkRHELVersion(r *report.AsciiDocReport) {
 		report.AddRecommendation(&check.Result, "Consider upgrading to a supported RHEL version (8 or 9).")
 
 		// Add reference link directly
-		report.AddReferenceLink(&check.Result, "https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/upgrading_from_rhel_7_to_rhel_8/")
+		report.AddReferenceLink(&check.Result, "https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/8/html/upgrading_from_rhel_7_to_rhel_8/")
 	default:
 		check.Result = report.NewResult(report.StatusWarning,
 			fmt.Sprintf("RHEL version could not be verified: %s", versionString),
@@ -207,7 +207,7 @@ func checkSystemUptime(r *report.AsciiDocReport) {
 
 		// Add reference link directly
 		rhelVersion := utils.GetRedHatVersion()
-		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/managing_monitoring_and_updating_the_kernel/setting-up-kernel-crash-dump-mechanism_managing-monitoring-and-updating-the-kernel", rhelVersion))
+		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/managing_monitoring_and_updating_the_kernel/setting-up-kernel-crash-dump-mechanism_managing-monitoring-and-updating-the-kernel", rhelVersion))
 		r.AddCheck(check)
 		return
 	}
@@ -258,7 +258,7 @@ func checkSystemUptime(r *report.AsciiDocReport) {
 
 		// Add reference link directly
 		rhelVersion := utils.GetRedHatVersion()
-		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/configuring_basic_system_settings/managing-system-updates_configuring-basic-system-settings", rhelVersion))
+		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/configuring_basic_system_settings/index", rhelVersion))
 	} else if uptimeDays < 1 {
 		check.Result = report.NewResult(report.StatusWarning,
 			"System was recently rebooted (less than 1 day ago)",
@@ -267,7 +267,7 @@ func checkSystemUptime(r *report.AsciiDocReport) {
 
 		// Add reference link directly
 		rhelVersion := utils.GetRedHatVersion()
-		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/logging_and_monitoring/index", rhelVersion))
+		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/configuring_basic_system_settings/index", rhelVersion))
 	} else {
 		check.Result = report.NewResult(report.StatusOK,
 			fmt.Sprintf("System uptime is %d days", uptimeDays),
@@ -296,7 +296,7 @@ func checkSystemRegistration(r *report.AsciiDocReport) {
 
 		// Add reference link directly
 		rhelVersion := utils.GetRedHatVersion()
-		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/configuring_and_managing_logical_volumes/assembly_registering-your-system-by-using-subscription-manager_configuring-and-managing-logical-volumes", rhelVersion))
+		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/configuring_basic_system_settings/assembly_registering-the-system-and-managing-subscriptions_configuring-basic-system-settings", rhelVersion))
 		r.AddCheck(check)
 		return
 	}
@@ -347,7 +347,7 @@ func checkSystemRegistration(r *report.AsciiDocReport) {
 
 			// Add reference link directly
 			rhelVersion := utils.GetRedHatVersion()
-			report.AddReferenceLink(&check.Result, fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/configuring_basic_system_settings/managing-system-registration-and-certificates_configuring-basic-system-settings", rhelVersion))
+			report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/configuring_basic_system_settings/assembly_registering-the-system-and-managing-subscriptions_configuring-basic-system-settings", rhelVersion))
 		} else if usingSCA {
 			check.Result = report.NewResult(report.StatusOK,
 				"System is properly registered with Red Hat using Simple Content Access mode",
@@ -366,7 +366,7 @@ func checkSystemRegistration(r *report.AsciiDocReport) {
 
 		// Add reference link directly
 		rhelVersion := utils.GetRedHatVersion()
-		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/configuring_basic_system_settings/managing-system-registration-and-certificates_configuring-basic-system-settings", rhelVersion))
+		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/configuring_basic_system_settings/assembly_registering-the-system-and-managing-subscriptions_configuring-basic-system-settings", rhelVersion))
 	}
 
 	report.SetDetail(&check.Result, detail.String())
@@ -405,7 +405,7 @@ func checkRepositories(r *report.AsciiDocReport) {
 
 		// Add reference link directly
 		rhelVersion := utils.GetRedHatVersion()
-		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/configuring_basic_system_settings/managing-software-packages_configuring-basic-system-settings", rhelVersion))
+		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/configuring_basic_system_settings/assembly_registering-the-system-and-managing-subscriptions_configuring-basic-system-settings", rhelVersion))
 		report.SetDetail(&check.Result, detail.String())
 		r.AddCheck(check)
 		return
@@ -461,7 +461,7 @@ func checkRepositories(r *report.AsciiDocReport) {
 		}
 
 		// Add reference link directly
-		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/%s/html/configuring_basic_system_settings/managing-software-packages_configuring-basic-system-settings", rhelMajorVersion))
+		report.AddReferenceLink(&check.Result, fmt.Sprintf("https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/%s/html/configuring_basic_system_settings/assembly_registering-the-system-and-managing-subscriptions_configuring-basic-system-settings", rhelMajorVersion))
 	} else if len(requiredRepos) > 0 {
 		check.Result = report.NewResult(report.StatusOK,
 			"All required repositories are enabled",
@@ -473,7 +473,7 @@ func checkRepositories(r *report.AsciiDocReport) {
 		report.AddRecommendation(&check.Result, "Ensure appropriate repositories are enabled for your RHEL version.")
 
 		// Add reference link directly
-		report.AddReferenceLink(&check.Result, "https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/")
+		report.AddReferenceLink(&check.Result, "https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/")
 	}
 
 	report.SetDetail(&check.Result, detail.String())
