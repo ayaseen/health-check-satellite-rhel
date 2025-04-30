@@ -156,6 +156,106 @@ The checks are designed to detect common issues, misconfigurations, and performa
 - **Password Protection**: Optionally compress reports with password protection
 - **Flexible Configuration**: Select specific check categories to run
 
+***
+
+# Key Questions for RHEL & Satellite Health Check
+
+## Essential Context Questions
+
+### System Role & Criticality
+
+* What is this system's primary role and how critical is it to your business operations?
+* Is this system part of a high-availability setup or cluster?
+
+
+### Recent History
+
+* Have there been any significant changes or issues with this system in the past 30 days?
+* Are you currently experiencing any specific problems that prompted this health check?
+
+
+
+## RHEL Systems
+
+### Performance
+
+* Have you observed any resource bottlenecks (CPU, memory, I/O) or performance degradation?
+* What monitoring solution do you currently use for this system?
+
+
+### Storage & Backup
+
+* Are you using any specialized storage technologies, and what is your backup strategy?
+* Have you experienced any storage-related issues (space constraints, performance, etc.)?
+
+
+### Security & Authentication
+
+* How do you manage user authentication and what security compliance requirements apply?
+* Have you customized any default security settings or hardening policies?
+
+
+### Maintenance
+
+* What is your patch management strategy and maintenance window for this system?
+* How do you handle configuration management across your environment?
+
+
+
+## Satellite Servers
+
+### Content Management
+
+* What is your content view strategy and promotion workflow?
+* Are there specific content synchronization issues you've encountered?
+
+
+### Scale & Performance
+
+* How many hosts are managed by this Satellite and what peak loads do you experience?
+* Have you performed any custom tuning for your Satellite deployment?
+
+
+### Integration & Automation
+
+* How do you integrate Satellite with other tools in your environment?
+* What automation workflows have you implemented?
+
+
+### Maintenance Strategy
+
+* What is your upgrade strategy and backup procedure for Satellite?
+* How do you manage Satellite maintenance without disrupting operations?
+
+
+### Capsule Architecture
+
+* How many capsule servers do you have and how are they distributed?
+* Have you experienced any issues with capsule server performance or synchronization?
+
+
+
+## Post-Assessment Follow-up
+
+### Critical Findings
+
+* Were you aware of these critical issues, and what constraints might prevent immediate remediation?
+* What business impact have these issues caused?
+
+
+### Improvement Prioritization
+
+* Which areas of this health assessment would you like to prioritize for remediation?
+* What timeline constraints affect your ability to implement these recommendations?
+
+
+### Future Planning
+
+* Are there any planned changes to this system's workload or role?
+* What future requirements do you anticipate that might affect our recommendations?
+
+
+
 ## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
