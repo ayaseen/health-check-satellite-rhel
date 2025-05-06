@@ -124,7 +124,7 @@ The tool generates comprehensive reports in AsciiDoc format. Reports include:
 - Specific observations and recommendations
 - Reference links to Red Hat documentation
 
-Reports are saved in the `reports` directory by default with the naming convention:
+Reports are saved in the `reports` directory by default with the naming convention. The main report file is protected with a password ("7e5eed48001f9a407bbb87b29c32871b") for security:
 ```
 <hostname>-<type>-health-check-<timestamp>.adoc
 ```
