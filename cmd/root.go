@@ -473,6 +473,13 @@ func runMultiHostChecks(cmd *cobra.Command, args []string) error {
 
 // runRemoteHostCheckWithPath runs health check and returns both report and filepath
 func runRemoteHostCheckWithPath(host config.HostEntry, outputDir string, defaults config.DefaultConfig) (*report.AsciiDocReport, string, error) {
+
+	// Debug output
+	//fmt.Printf("\nConnecting to host: %s\n", host.Hostname)
+	//fmt.Printf("  User: %s\n", host.User)
+	//fmt.Printf("  Password configured: %v\n", host.Password != "")
+	//fmt.Printf("  SSH Key: %s\n", host.SSHKeyFile)
+
 	// Create SSH configuration
 	sshConfig := &utils.SSHConfig{
 		Host:     host.Hostname,

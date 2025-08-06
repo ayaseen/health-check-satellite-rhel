@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"strings"
 	"sync"
 	"time"
 
@@ -232,6 +233,14 @@ func runMultiHostCommand(cmd *cobra.Command, args []string) error {
 
 // executeHostCheck executes health check on a single host
 func executeHostCheck(host config.HostEntry, outputDir string, defaults config.DefaultConfig, reportLevel string) (*report.AsciiDocReport, error) {
+
+	// Debug output
+	//fmt.Printf("\nExecuting check for host: %s\n", host.Hostname)
+	//fmt.Printf("  User: %s\n", host.User)
+	//fmt.Printf("  Password: %s\n", maskPassword(host.Password))
+	//fmt.Printf("  Port: %s\n", host.Port)
+	//fmt.Printf("  Become: %v\n", host.Become)
+
 	// Create SSH configuration
 	sshConfig := &utils.SSHConfig{
 		Host:     host.Hostname,
@@ -314,6 +323,17 @@ func executeHostCheck(host config.HostEntry, outputDir string, defaults config.D
 	}
 
 	return reportGenerator, nil
+}
+
+// Helper function to mask password for display
+func maskPassword(password string) string {
+	if password == "" {
+		return "[NOT SET]"
+	}
+	if len(password) <= 4 {
+		return "****"
+	}
+	return password[:2] + strings.Repeat("*", len(password)-4) + password[len(password)-2:]
 }
 
 // executeRHELChecks runs RHEL checks for multi-host mode

@@ -14,20 +14,20 @@ import (
 
 // IsRHEL checks if the system is running RHEL
 func IsRHEL() bool {
-	// Check for the presence of /etc/redhat-release
-	if _, err := os.Stat("/etc/redhat-release"); err == nil {
-		// Read the file to confirm it's RHEL (not CentOS, Fedora, etc.)
-		content, err := os.ReadFile("/etc/redhat-release")
-		if err == nil {
-			contentStr := strings.ToLower(string(content))
-			return strings.Contains(contentStr, "red hat")
+	// Use the executor to check remotely
+	executor := GetExecutor()
+	if executor != nil {
+		// Check for /etc/redhat-release file
+		output, err := executor.RunCommand("cat", "/etc/redhat-release")
+		if err == nil && strings.Contains(strings.ToLower(output), "red hat") {
+			return true
 		}
-	}
 
-	// Secondary check via rpm
-	cmd := exec.Command("rpm", "-q", "redhat-release")
-	if err := cmd.Run(); err == nil {
-		return true
+		// Secondary check via rpm
+		output, err = executor.RunCommand("rpm", "-q", "redhat-release")
+		if err == nil && !strings.Contains(output, "not installed") {
+			return true
+		}
 	}
 
 	return false
@@ -35,27 +35,30 @@ func IsRHEL() bool {
 
 // IsSatellite checks if the system is running Red Hat Satellite
 func IsSatellite() bool {
-	// Check for satellite-installer
-	_, err := exec.LookPath("satellite-installer")
-	if err == nil {
-		return true
-	}
-
-	// Check for key Satellite packages
-	satellitePackages := []string{"satellite", "katello", "foreman"}
-	for _, pkg := range satellitePackages {
-		cmd := exec.Command("rpm", "-q", pkg)
-		if err := cmd.Run(); err == nil {
+	executor := GetExecutor()
+	if executor != nil {
+		// Check for satellite-installer
+		output, err := executor.RunCommand("which", "satellite-installer")
+		if err == nil && output != "" {
 			return true
 		}
-	}
 
-	// Check for key Satellite services
-	satelliteServices := []string{"foreman", "postgresql", "pulp"}
-	for _, svc := range satelliteServices {
-		cmd := exec.Command("systemctl", "status", svc)
-		if err := cmd.Run(); err == nil {
-			return true
+		// Check for key Satellite packages
+		satellitePackages := []string{"satellite", "katello", "foreman"}
+		for _, pkg := range satellitePackages {
+			output, err = executor.RunCommand("rpm", "-q", pkg)
+			if err == nil && !strings.Contains(output, "not installed") {
+				return true
+			}
+		}
+
+		// Check for key Satellite services
+		satelliteServices := []string{"foreman", "foreman-proxy"}
+		for _, svc := range satelliteServices {
+			output, err = executor.RunCommand("systemctl", "is-active", svc)
+			if err == nil && strings.TrimSpace(output) == "active" {
+				return true
+			}
 		}
 	}
 
@@ -64,6 +67,16 @@ func IsSatellite() bool {
 
 // RunningAsRoot checks if the tool is running with root/sudo privileges
 func RunningAsRoot() bool {
+	executor := GetExecutor()
+	if executor != nil && !executor.IsLocal() {
+		// For remote systems, check if we can run privileged commands
+		output, err := executor.RunCommand("id", "-u")
+		if err == nil {
+			return strings.TrimSpace(output) == "0"
+		}
+	}
+
+	// Local check
 	return os.Geteuid() == 0
 }
 
@@ -71,51 +84,39 @@ func RunningAsRoot() bool {
 // This now uses the executor interface to support both local and remote execution
 func RunCommand(name string, args ...string) (string, error) {
 	executor := GetExecutor()
-	if executor != nil && !executor.IsLocal() {
-		// Use the remote executor
+	if executor != nil {
 		return executor.RunCommand(name, args...)
 	}
 
-	// Local execution
+	// Fallback to local execution if no executor
 	cmd := exec.Command(name, args...)
 	output, err := cmd.CombinedOutput()
 	if err != nil {
-		return string(output), fmt.Errorf("command '%s %s' failed: %v", name, strings.Join(args, " "), err)
+		return string(output), err
 	}
 	return string(output), nil
 }
 
 // RunCommandWithTimeout executes a command with a timeout
-// This now uses the executor interface to support both local and remote execution
 func RunCommandWithTimeout(name string, timeout int, args ...string) (string, error) {
 	executor := GetExecutor()
-	if executor != nil && !executor.IsLocal() {
-		// Use the remote executor
+	if executor != nil {
 		return executor.RunCommandWithTimeout(name, timeout, args...)
 	}
 
-	// Local execution with timeout
-	timeoutArg := fmt.Sprintf("timeout %d %s %s", timeout, name, strings.Join(args, " "))
-
-	cmd := exec.Command("bash", "-c", timeoutArg)
+	// Fallback to local execution
+	cmd := exec.Command("timeout", fmt.Sprintf("%d", timeout), name)
+	cmd.Args = append(cmd.Args, args...)
 	output, err := cmd.CombinedOutput()
 	if err != nil {
-		if strings.Contains(string(output), "timed out") || strings.Contains(err.Error(), "exit status 124") {
-			return string(output), fmt.Errorf("command timed out after %d seconds", timeout)
-		}
-		return string(output), fmt.Errorf("command '%s' failed: %v", timeoutArg, err)
+		return string(output), err
 	}
 	return string(output), nil
 }
 
 // CompressWithPassword compresses a file with password protection
 func CompressWithPassword(sourcePath string, password string) (string, error) {
-	// Check if source exists
-	if _, err := os.Stat(sourcePath); err != nil {
-		return "", fmt.Errorf("source file does not exist: %v", err)
-	}
-
-	// Create output filename
+	// Generate output filename
 	outputPath := sourcePath + ".zip"
 
 	// Create a new zip file
@@ -171,24 +172,35 @@ func CompressWithPassword(sourcePath string, password string) (string, error) {
 
 // GetRedHatVersion returns the major version of RHEL (e.g., "7", "8", "9")
 func GetRedHatVersion() string {
-	content, err := os.ReadFile("/etc/redhat-release")
-	if err != nil {
-		return "8" // Default to RHEL 8
-	}
+	// Use the executor to get version remotely
+	executor := GetExecutor()
+	if executor != nil {
+		output, err := executor.RunCommand("cat", "/etc/redhat-release")
+		if err == nil {
+			// Parse version from content
+			// Example: "Red Hat Enterprise Linux release 8.9 (Ootpa)"
+			contentStr := string(output)
+			parts := strings.Fields(contentStr)
 
-	// Parse version from content
-	// Example: "Red Hat Enterprise Linux release 8.9 (Ootpa)"
-	contentStr := string(content)
-	parts := strings.Fields(contentStr)
-
-	for i, part := range parts {
-		if part == "release" && i+1 < len(parts) {
-			version := parts[i+1]
-			// Extract major version
-			if dotIndex := strings.Index(version, "."); dotIndex > 0 {
-				return version[:dotIndex]
+			for i, part := range parts {
+				if part == "release" && i+1 < len(parts) {
+					version := parts[i+1]
+					// Extract major version
+					if dotIndex := strings.Index(version, "."); dotIndex > 0 {
+						return version[:dotIndex]
+					}
+					return version
+				}
 			}
-			return version
+		}
+
+		// Try alternative method
+		output, err = executor.RunCommand("rpm", "-E", "%{rhel}")
+		if err == nil {
+			version := strings.TrimSpace(output)
+			if version != "" && version != "%{rhel}" {
+				return version
+			}
 		}
 	}
 

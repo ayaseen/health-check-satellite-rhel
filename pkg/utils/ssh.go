@@ -49,7 +49,6 @@ func NewSSHConnection(config *SSHConfig) (*SSHConnection, error) {
 func (s *SSHConnection) Connect() error {
 	var authMethods []ssh.AuthMethod
 
-	// Determine authentication method
 	// Add password authentication if password is provided
 	if s.Config.Password != "" {
 		authMethods = append(authMethods, ssh.Password(s.Config.Password))
@@ -61,7 +60,7 @@ func (s *SSHConnection) Connect() error {
 		if err == nil {
 			authMethods = append(authMethods, keyAuth)
 		}
-		// Don't return error here, we might have password auth
+		// Don't fail here, we might have password auth
 	} else if s.Config.Password == "" {
 		// Only if no password AND no explicit key file, try default locations
 		defaultKeys := []string{
@@ -123,9 +122,18 @@ func (s *SSHConnection) Connect() error {
 
 // getKeyAuth returns SSH key authentication method
 func (s *SSHConnection) getKeyAuth() (ssh.AuthMethod, error) {
-	key, err := ioutil.ReadFile(s.Config.KeyFile)
+	// Expand path if it contains ~
+	keyPath := s.Config.KeyFile
+	if strings.HasPrefix(keyPath, "~/") {
+		home, err := os.UserHomeDir()
+		if err == nil {
+			keyPath = filepath.Join(home, keyPath[2:])
+		}
+	}
+
+	key, err := ioutil.ReadFile(keyPath)
 	if err != nil {
-		return nil, fmt.Errorf("unable to read private key: %v", err)
+		return nil, fmt.Errorf("unable to read private key %s: %v", keyPath, err)
 	}
 
 	// Try parsing with no passphrase first
@@ -171,10 +179,14 @@ func (s *SSHConnection) RunCommand(name string, args ...string) (string, error) 
 
 	// Run the command
 	if err := session.Run(cmd); err != nil {
-		// Include stderr in error message for debugging
+		// Include stderr in error message for debugging only if it's meaningful
 		stderrStr := strings.TrimSpace(stderr.String())
-		if stderrStr != "" && !strings.Contains(stderrStr, "password") {
+		if stderrStr != "" && !strings.Contains(stderrStr, "password") && !strings.Contains(stderrStr, "sudo") {
 			return stdout.String(), fmt.Errorf("command failed: %v (stderr: %s)", err, stderrStr)
+		}
+		// Return stdout even on error, as some commands exit non-zero but produce useful output
+		if stdout.Len() > 0 {
+			return stdout.String(), nil
 		}
 		return stdout.String(), fmt.Errorf("command failed: %v", err)
 	}
@@ -237,7 +249,9 @@ func (s *SSHConnection) runCommandWithSudoPassword(cmd string) (string, error) {
 		lines := strings.Split(output, "\n")
 		var cleanLines []string
 		for _, line := range lines {
-			if !strings.Contains(line, "[sudo] password") && !strings.Contains(line, "Password:") {
+			if !strings.Contains(line, "[sudo] password") &&
+				!strings.Contains(line, "Password:") &&
+				line != "" {
 				cleanLines = append(cleanLines, line)
 			}
 		}
@@ -254,7 +268,9 @@ func (s *SSHConnection) runCommandWithSudoPassword(cmd string) (string, error) {
 	lines := strings.Split(output, "\n")
 	var cleanLines []string
 	for _, line := range lines {
-		if !strings.Contains(line, "[sudo] password") && !strings.Contains(line, "Password:") {
+		if !strings.Contains(line, "[sudo] password") &&
+			!strings.Contains(line, "Password:") &&
+			line != "" {
 			cleanLines = append(cleanLines, line)
 		}
 	}
@@ -262,10 +278,12 @@ func (s *SSHConnection) runCommandWithSudoPassword(cmd string) (string, error) {
 	return strings.Join(cleanLines, "\n"), nil
 }
 
-// runCommandWithoutPty runs command without pseudo terminal
+// runCommandWithoutPty runs command without pseudo terminal using echo pipe method
 func (s *SSHConnection) runCommandWithoutPty(cmd string) (string, error) {
 	// Use echo to pipe password to sudo -S
-	sudoCmd := fmt.Sprintf("echo '%s' | %s", s.Config.BecomePass, cmd)
+	// Escape single quotes in password
+	escapedPass := strings.ReplaceAll(s.Config.BecomePass, "'", "'\\''")
+	sudoCmd := fmt.Sprintf("echo '%s' | %s", escapedPass, cmd)
 
 	session, err := s.Client.NewSession()
 	if err != nil {
@@ -333,6 +351,10 @@ func (s *SSHConnection) RunCommandWithTimeout(name string, timeout int, args ...
 		stderrStr := strings.TrimSpace(stderr.String())
 		if stderrStr != "" && !strings.Contains(stderrStr, "password") {
 			return stdout.String(), fmt.Errorf("command failed: %v (stderr: %s)", err, stderrStr)
+		}
+		// Return stdout even on error
+		if stdout.Len() > 0 {
+			return stdout.String(), nil
 		}
 		return stdout.String(), fmt.Errorf("command failed: %v", err)
 	}
@@ -413,7 +435,15 @@ func (s *SSHConnection) Close() error {
 
 // TestConnection tests if the SSH connection is working
 func (s *SSHConnection) TestConnection() error {
+	// For testing, temporarily disable privilege escalation
+	oldBecome := s.Config.Become
+	s.Config.Become = false
+
 	output, err := s.RunCommand("echo", "test")
+
+	// Restore privilege escalation setting
+	s.Config.Become = oldBecome
+
 	if err != nil {
 		return err
 	}
