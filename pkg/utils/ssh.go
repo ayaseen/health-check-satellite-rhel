@@ -4,13 +4,14 @@ package utils
 
 import (
 	"bytes"
+	"context"
 	"fmt"
-	"io"
 	"io/ioutil"
 	"net"
 	"os"
 	"path/filepath"
 	"strings"
+	"sync"
 	"time"
 
 	"golang.org/x/crypto/ssh"
@@ -34,8 +35,10 @@ type SSHConfig struct {
 
 // SSHConnection represents an SSH connection to a remote host
 type SSHConnection struct {
-	Config *SSHConfig
-	Client *ssh.Client
+	Config    *SSHConfig
+	Client    *ssh.Client
+	mu        sync.Mutex
+	connected bool
 }
 
 // NewSSHConnection creates a new SSH connection
@@ -45,8 +48,22 @@ func NewSSHConnection(config *SSHConfig) (*SSHConnection, error) {
 	}, nil
 }
 
-// Connect establishes the SSH connection
+// Connect establishes the SSH connection with retry logic
 func (s *SSHConnection) Connect() error {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+
+	if s.connected && s.Client != nil {
+		// Test if connection is still alive
+		if err := s.testConnectionLocked(); err == nil {
+			return nil
+		}
+		// Connection is dead, close and reconnect
+		s.Client.Close()
+		s.Client = nil
+		s.connected = false
+	}
+
 	var authMethods []ssh.AuthMethod
 
 	// Add password authentication if password is provided
@@ -56,24 +73,21 @@ func (s *SSHConnection) Connect() error {
 
 	// ALSO try SSH key authentication (not else if!)
 	if s.Config.KeyFile != "" {
-		keyAuth, err := s.getKeyAuth()
-		if err == nil {
+		if keyAuth, err := s.getKeyAuth(); err == nil {
 			authMethods = append(authMethods, keyAuth)
 		}
-		// Don't fail here, we might have password auth
-	} else if s.Config.Password == "" {
-		// Only if no password AND no explicit key file, try default locations
+	} else {
+		// Try default SSH key locations
+		homeDir, _ := os.UserHomeDir()
 		defaultKeys := []string{
-			filepath.Join(os.Getenv("HOME"), ".ssh", "id_rsa"),
-			filepath.Join(os.Getenv("HOME"), ".ssh", "id_ed25519"),
-			filepath.Join(os.Getenv("HOME"), ".ssh", "id_ecdsa"),
+			filepath.Join(homeDir, ".ssh", "id_rsa"),
+			filepath.Join(homeDir, ".ssh", "id_ed25519"),
+			filepath.Join(homeDir, ".ssh", "id_ecdsa"),
 		}
 
 		for _, keyPath := range defaultKeys {
-			if fileExists(keyPath) {
-				s.Config.KeyFile = keyPath
-				keyAuth, err := s.getKeyAuth()
-				if err == nil {
+			if _, err := os.Stat(keyPath); err == nil {
+				if keyAuth, err := s.getKeyAuthFromFile(keyPath); err == nil {
 					authMethods = append(authMethods, keyAuth)
 					break
 				}
@@ -81,66 +95,93 @@ func (s *SSHConnection) Connect() error {
 		}
 	}
 
-	// Check if we have at least one auth method
 	if len(authMethods) == 0 {
-		return fmt.Errorf("no authentication method available - please provide either SSH key or password")
+		return fmt.Errorf("no authentication methods available")
 	}
 
-	// SSH client configuration
+	// Configure SSH client
 	sshConfig := &ssh.ClientConfig{
 		User:            s.Config.User,
 		Auth:            authMethods,
-		HostKeyCallback: ssh.InsecureIgnoreHostKey(), // TODO: In production, verify host key
+		HostKeyCallback: ssh.InsecureIgnoreHostKey(), // In production, verify host key
 		Timeout:         s.Config.Timeout,
-		// Explicitly set to avoid any interactive prompts
-		HostKeyAlgorithms: []string{
-			ssh.KeyAlgoRSA,
-			ssh.KeyAlgoED25519,
-			ssh.KeyAlgoECDSA256,
-			ssh.KeyAlgoECDSA384,
-			ssh.KeyAlgoECDSA521,
-		},
 	}
 
-	// Close existing connection if any
-	if s.Client != nil {
-		s.Client.Close()
-		s.Client = nil
+	// Parse port
+	port := s.Config.Port
+	if port == "" {
+		port = "22"
 	}
 
-	// Connect
-	address := net.JoinHostPort(s.Config.Host, s.Config.Port)
+	// Connect with retry logic
+	address := fmt.Sprintf("%s:%s", s.Config.Host, port)
 
-	client, err := ssh.Dial("tcp", address, sshConfig)
-	if err != nil {
-		return fmt.Errorf("failed to connect to %s: %v", address, err)
+	var lastErr error
+	for attempt := 0; attempt < 3; attempt++ {
+		if attempt > 0 {
+			time.Sleep(time.Second * 2) // Wait before retry
+		}
+
+		// Create a context with timeout for the connection attempt
+		ctx, cancel := context.WithTimeout(context.Background(), s.Config.Timeout)
+		defer cancel()
+
+		// Dial with context
+		dialer := &net.Dialer{}
+		conn, err := dialer.DialContext(ctx, "tcp", address)
+		if err != nil {
+			lastErr = fmt.Errorf("failed to dial %s: %v", address, err)
+			continue
+		}
+
+		// Perform SSH handshake
+		sshConn, chans, reqs, err := ssh.NewClientConn(conn, address, sshConfig)
+		if err != nil {
+			conn.Close()
+			lastErr = fmt.Errorf("SSH handshake failed: %v", err)
+			continue
+		}
+
+		s.Client = ssh.NewClient(sshConn, chans, reqs)
+		s.connected = true
+
+		// Test the connection
+		if err := s.testConnectionLocked(); err != nil {
+			s.Client.Close()
+			s.Client = nil
+			s.connected = false
+			lastErr = fmt.Errorf("connection test failed: %v", err)
+			continue
+		}
+
+		return nil
 	}
 
-	s.Client = client
-	return nil
+	return fmt.Errorf("failed to connect after 3 attempts: %v", lastErr)
 }
 
-// getKeyAuth returns SSH key authentication method
+// getKeyAuth loads SSH key authentication from the configured key file
 func (s *SSHConnection) getKeyAuth() (ssh.AuthMethod, error) {
-	// Expand path if it contains ~
-	keyPath := s.Config.KeyFile
+	return s.getKeyAuthFromFile(s.Config.KeyFile)
+}
+
+// getKeyAuthFromFile loads SSH key authentication from a specific file
+func (s *SSHConnection) getKeyAuthFromFile(keyPath string) (ssh.AuthMethod, error) {
+	// Expand tilde in path
 	if strings.HasPrefix(keyPath, "~/") {
-		home, err := os.UserHomeDir()
-		if err == nil {
-			keyPath = filepath.Join(home, keyPath[2:])
-		}
+		homeDir, _ := os.UserHomeDir()
+		keyPath = filepath.Join(homeDir, keyPath[2:])
 	}
 
 	key, err := ioutil.ReadFile(keyPath)
 	if err != nil {
-		return nil, fmt.Errorf("unable to read private key %s: %v", keyPath, err)
+		return nil, fmt.Errorf("unable to read private key: %v", err)
 	}
 
-	// Try parsing with no passphrase first
+	// Parse the private key
 	signer, err := ssh.ParsePrivateKey(key)
 	if err != nil {
-		// If it fails, it might need a passphrase
-		// For now, we'll just return the error
+		// Try with empty passphrase
 		// In production, you'd want to handle passphrase-protected keys
 		return nil, fmt.Errorf("unable to parse private key (it may be passphrase-protected): %v", err)
 	}
@@ -148,218 +189,122 @@ func (s *SSHConnection) getKeyAuth() (ssh.AuthMethod, error) {
 	return ssh.PublicKeys(signer), nil
 }
 
-// RunCommand executes a command on the remote host
+// RunCommand executes a command on the remote host with proper timeout
 func (s *SSHConnection) RunCommand(name string, args ...string) (string, error) {
-	if s.Client == nil {
-		// Try to reconnect if client is nil
+	// Use a default timeout of 30 seconds for all commands
+	return s.RunCommandWithContext(context.Background(), name, 30, args...)
+}
+
+// RunCommandWithTimeout executes a command with a specific timeout
+func (s *SSHConnection) RunCommandWithTimeout(name string, timeout int, args ...string) (string, error) {
+	ctx, cancel := context.WithTimeout(context.Background(), time.Duration(timeout)*time.Second)
+	defer cancel()
+	return s.RunCommandWithContext(ctx, name, timeout, args...)
+}
+
+// RunCommandWithContext executes a command with context for cancellation
+func (s *SSHConnection) RunCommandWithContext(ctx context.Context, name string, timeoutSecs int, args ...string) (string, error) {
+	s.mu.Lock()
+	if !s.connected || s.Client == nil {
+		s.mu.Unlock()
+		// Try to reconnect
 		if err := s.Connect(); err != nil {
 			return "", fmt.Errorf("SSH client not connected and reconnection failed: %v", err)
 		}
+		s.mu.Lock()
 	}
+	client := s.Client
+	s.mu.Unlock()
 
 	// Build the command
 	cmd := s.buildCommand(name, args...)
 
-	// Special handling for sudo with password
-	if s.Config.Become && s.Config.BecomeMethod == "sudo" && s.Config.BecomePass != "" {
-		return s.runCommandWithSudoPassword(cmd)
+	// Add timeout wrapper to the command itself
+	if timeoutSecs > 0 {
+		cmd = fmt.Sprintf("timeout %d %s", timeoutSecs, cmd)
 	}
 
-	// Regular command execution
-	session, err := s.Client.NewSession()
+	// Handle sudo with password using a more reliable method
+	if s.Config.Become && s.Config.BecomeMethod == "sudo" && s.Config.BecomePass != "" {
+		// Use printf to avoid echo issues and pipe to sudo
+		escapedPass := strings.ReplaceAll(s.Config.BecomePass, "'", "'\\''")
+		cmd = fmt.Sprintf("printf '%%s\\n' '%s' | %s", escapedPass, cmd)
+	}
+
+	// Create session with timeout
+	session, err := client.NewSession()
 	if err != nil {
 		return "", fmt.Errorf("failed to create session: %v", err)
 	}
 	defer session.Close()
 
-	// Capture output
+	// Set up output buffers
 	var stdout, stderr bytes.Buffer
 	session.Stdout = &stdout
 	session.Stderr = &stderr
-
-	// Run the command
-	if err := session.Run(cmd); err != nil {
-		// Include stderr in error message for debugging only if it's meaningful
-		stderrStr := strings.TrimSpace(stderr.String())
-		if stderrStr != "" && !strings.Contains(stderrStr, "password") && !strings.Contains(stderrStr, "sudo") {
-			return stdout.String(), fmt.Errorf("command failed: %v (stderr: %s)", err, stderrStr)
-		}
-		// Return stdout even on error, as some commands exit non-zero but produce useful output
-		if stdout.Len() > 0 {
-			return stdout.String(), nil
-		}
-		return stdout.String(), fmt.Errorf("command failed: %v", err)
-	}
-
-	return stdout.String(), nil
-}
-
-// runCommandWithSudoPassword handles sudo commands that require a password
-func (s *SSHConnection) runCommandWithSudoPassword(cmd string) (string, error) {
-	session, err := s.Client.NewSession()
-	if err != nil {
-		return "", fmt.Errorf("failed to create session: %v", err)
-	}
-	defer session.Close()
-
-	// Set up pseudo terminal for sudo
-	modes := ssh.TerminalModes{
-		ssh.ECHO:          0,     // disable echoing
-		ssh.TTY_OP_ISPEED: 14400, // input speed = 14.4kbaud
-		ssh.TTY_OP_OSPEED: 14400, // output speed = 14.4kbaud
-	}
-
-	if err := session.RequestPty("xterm", 80, 40, modes); err != nil {
-		// If PTY fails, try without it (some commands don't need it)
-		return s.runCommandWithoutPty(cmd)
-	}
-
-	// Set up pipes
-	stdin, err := session.StdinPipe()
-	if err != nil {
-		return "", fmt.Errorf("failed to create stdin pipe: %v", err)
-	}
-
-	stdout, err := session.StdoutPipe()
-	if err != nil {
-		return "", fmt.Errorf("failed to create stdout pipe: %v", err)
-	}
 
 	// Start the command
 	if err := session.Start(cmd); err != nil {
 		return "", fmt.Errorf("failed to start command: %v", err)
 	}
 
-	// Send password when prompted
+	// Wait for command completion or context cancellation
+	done := make(chan error, 1)
 	go func() {
-		time.Sleep(100 * time.Millisecond) // Small delay to ensure sudo prompt appears
-		io.WriteString(stdin, s.Config.BecomePass+"\n")
-		stdin.Close()
+		done <- session.Wait()
 	}()
 
-	// Read output
-	var outputBuf bytes.Buffer
-	io.Copy(&outputBuf, stdout)
+	select {
+	case <-ctx.Done():
+		// Context cancelled or timed out
+		session.Signal(ssh.SIGTERM)
+		time.Sleep(100 * time.Millisecond)
+		session.Signal(ssh.SIGKILL)
+		session.Close()
+		return stdout.String(), fmt.Errorf("command timed out after %d seconds", timeoutSecs)
 
-	// Wait for command to complete
-	if err := session.Wait(); err != nil {
-		// Check if output contains useful data despite error
-		output := outputBuf.String()
-		// Remove sudo password prompt from output
-		lines := strings.Split(output, "\n")
-		var cleanLines []string
-		for _, line := range lines {
-			if !strings.Contains(line, "[sudo] password") &&
-				!strings.Contains(line, "Password:") &&
-				line != "" {
-				cleanLines = append(cleanLines, line)
+	case err := <-done:
+		if err != nil {
+			// Check if we got output despite error
+			output := stdout.String()
+			if output != "" {
+				// Clean sudo prompts from output
+				output = s.cleanSudoPrompts(output)
+				return output, nil
 			}
-		}
-		cleanOutput := strings.Join(cleanLines, "\n")
 
-		if cleanOutput != "" {
-			return cleanOutput, nil // Return output even if there was an error code
+			// Check stderr for meaningful errors
+			stderrStr := strings.TrimSpace(stderr.String())
+			if stderrStr != "" && !strings.Contains(stderrStr, "password") && !strings.Contains(stderrStr, "sudo") {
+				return output, fmt.Errorf("command failed: %v (stderr: %s)", err, stderrStr)
+			}
+
+			// Check if it was a timeout
+			if strings.Contains(err.Error(), "124") {
+				return output, fmt.Errorf("command timed out after %d seconds", timeoutSecs)
+			}
+
+			return output, fmt.Errorf("command failed: %v", err)
 		}
-		return "", fmt.Errorf("command failed: %v", err)
+
+		// Success - clean and return output
+		output := stdout.String()
+		return s.cleanSudoPrompts(output), nil
 	}
+}
 
-	// Clean the output from sudo prompts
-	output := outputBuf.String()
+// cleanSudoPrompts removes sudo password prompts from output
+func (s *SSHConnection) cleanSudoPrompts(output string) string {
 	lines := strings.Split(output, "\n")
 	var cleanLines []string
 	for _, line := range lines {
 		if !strings.Contains(line, "[sudo] password") &&
 			!strings.Contains(line, "Password:") &&
-			line != "" {
+			!strings.Contains(line, "password for") {
 			cleanLines = append(cleanLines, line)
 		}
 	}
-
-	return strings.Join(cleanLines, "\n"), nil
-}
-
-// runCommandWithoutPty runs command without pseudo terminal using echo pipe method
-func (s *SSHConnection) runCommandWithoutPty(cmd string) (string, error) {
-	// Use echo to pipe password to sudo -S
-	// Escape single quotes in password
-	escapedPass := strings.ReplaceAll(s.Config.BecomePass, "'", "'\\''")
-	sudoCmd := fmt.Sprintf("echo '%s' | %s", escapedPass, cmd)
-
-	session, err := s.Client.NewSession()
-	if err != nil {
-		return "", fmt.Errorf("failed to create session: %v", err)
-	}
-	defer session.Close()
-
-	// Capture output
-	var stdout, stderr bytes.Buffer
-	session.Stdout = &stdout
-	session.Stderr = &stderr
-
-	// Run the command
-	if err := session.Run(sudoCmd); err != nil {
-		// Check if we got output despite error
-		if stdout.Len() > 0 {
-			return stdout.String(), nil
-		}
-		stderrStr := strings.TrimSpace(stderr.String())
-		if stderrStr != "" && !strings.Contains(stderrStr, "password") {
-			return stdout.String(), fmt.Errorf("command failed: %v (stderr: %s)", err, stderrStr)
-		}
-		return stdout.String(), fmt.Errorf("command failed: %v", err)
-	}
-
-	return stdout.String(), nil
-}
-
-// RunCommandWithTimeout executes a command with a timeout
-func (s *SSHConnection) RunCommandWithTimeout(name string, timeout int, args ...string) (string, error) {
-	if s.Client == nil {
-		// Try to reconnect if client is nil
-		if err := s.Connect(); err != nil {
-			return "", fmt.Errorf("SSH client not connected and reconnection failed: %v", err)
-		}
-	}
-
-	// Build the command with timeout wrapper
-	baseCmd := s.buildCommand(name, args...)
-	cmd := fmt.Sprintf("timeout %d %s", timeout, baseCmd)
-
-	// Special handling for sudo with password
-	if s.Config.Become && s.Config.BecomeMethod == "sudo" && s.Config.BecomePass != "" {
-		return s.runCommandWithSudoPassword(cmd)
-	}
-
-	session, err := s.Client.NewSession()
-	if err != nil {
-		return "", fmt.Errorf("failed to create session: %v", err)
-	}
-	defer session.Close()
-
-	// Capture output
-	var stdout, stderr bytes.Buffer
-	session.Stdout = &stdout
-	session.Stderr = &stderr
-
-	// Run the command
-	if err := session.Run(cmd); err != nil {
-		// Check if it was a timeout
-		if strings.Contains(stderr.String(), "timeout") || strings.Contains(err.Error(), "124") {
-			return stdout.String(), fmt.Errorf("command timed out after %d seconds", timeout)
-		}
-		// Include stderr in error message for debugging
-		stderrStr := strings.TrimSpace(stderr.String())
-		if stderrStr != "" && !strings.Contains(stderrStr, "password") {
-			return stdout.String(), fmt.Errorf("command failed: %v (stderr: %s)", err, stderrStr)
-		}
-		// Return stdout even on error
-		if stdout.Len() > 0 {
-			return stdout.String(), nil
-		}
-		return stdout.String(), fmt.Errorf("command failed: %v", err)
-	}
-
-	return stdout.String(), nil
+	return strings.Join(cleanLines, "\n")
 }
 
 // buildCommand builds the command string with privilege escalation if needed
@@ -393,7 +338,7 @@ func (s *SSHConnection) buildCommand(name string, args ...string) string {
 
 			// Add -S flag if password is provided (read from stdin)
 			if s.Config.BecomePass != "" {
-				sudoCmd += " -S -p ''" // -S for stdin, -p '' for no prompt
+				sudoCmd += " -S" // -S for stdin
 			} else {
 				// Add -n flag if no password (non-interactive)
 				sudoCmd += " -n"
@@ -427,29 +372,48 @@ func (s *SSHConnection) buildCommand(name string, args ...string) string {
 
 // Close closes the SSH connection
 func (s *SSHConnection) Close() error {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+
 	if s.Client != nil {
-		return s.Client.Close()
+		err := s.Client.Close()
+		s.Client = nil
+		s.connected = false
+		return err
 	}
 	return nil
 }
 
 // TestConnection tests if the SSH connection is working
 func (s *SSHConnection) TestConnection() error {
-	// For testing, temporarily disable privilege escalation
-	oldBecome := s.Config.Become
-	s.Config.Become = false
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	return s.testConnectionLocked()
+}
 
-	output, err := s.RunCommand("echo", "test")
-
-	// Restore privilege escalation setting
-	s.Config.Become = oldBecome
-
-	if err != nil {
-		return err
+// testConnectionLocked tests connection without locking (must be called with lock held)
+func (s *SSHConnection) testConnectionLocked() error {
+	if s.Client == nil {
+		return fmt.Errorf("client is nil")
 	}
-	if !strings.Contains(output, "test") {
+
+	// Create a session to test the connection
+	session, err := s.Client.NewSession()
+	if err != nil {
+		return fmt.Errorf("failed to create test session: %v", err)
+	}
+	defer session.Close()
+
+	// Run a simple echo command
+	output, err := session.Output("echo test")
+	if err != nil {
+		return fmt.Errorf("test command failed: %v", err)
+	}
+
+	if !strings.Contains(string(output), "test") {
 		return fmt.Errorf("unexpected output from test command")
 	}
+
 	return nil
 }
 

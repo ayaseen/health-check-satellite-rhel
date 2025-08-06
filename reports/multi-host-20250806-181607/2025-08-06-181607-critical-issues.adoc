@@ -1,7 +1,0 @@
-= Critical Issues Report
-Generated: 2025-08-06 18:16:07
-Total Critical Issues: 0 across 0 hosts
-
-== No Critical Issues Found
-
-All systems are operating within acceptable parameters.

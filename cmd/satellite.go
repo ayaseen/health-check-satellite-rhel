@@ -46,7 +46,9 @@ func runSatelliteChecks(cmd *cobra.Command, args []string) error {
 
 	// Check if we're running remotely
 	isRemote := !executor.IsLocal()
-	if isRemote {
+
+	// ONLY print this message if NOT in multi-host mode
+	if isRemote && !multiHostMode {
 		fmt.Println("Running checks on remote system...")
 	}
 
@@ -205,19 +207,16 @@ func runSatelliteChecks(cmd *cobra.Command, args []string) error {
 	return nil
 }
 
-// getContentCheckFunc returns a function that runs content checks with the right parameters
+// getContentCheckFunc returns the appropriate content check function
 func getContentCheckFunc(skipContentSync bool, organization string) func(*report.AsciiDocReport) {
-	if skipContentSync {
-		// Return an empty function as we're skipping content sync
-		return func(r *report.AsciiDocReport) {}
-	}
-
 	return func(r *report.AsciiDocReport) {
-		satellite.RunContentChecks(r, organization)
+		if !skipContentSync {
+			satellite.RunContentChecks(r, organization)
+		}
 	}
 }
 
-// getSubscriptionCheckFunc returns a function that runs subscription checks with the right parameters
+// getSubscriptionCheckFunc returns the subscription check function with organization
 func getSubscriptionCheckFunc(organization string) func(*report.AsciiDocReport) {
 	return func(r *report.AsciiDocReport) {
 		satellite.RunSubscriptionChecks(r, organization)

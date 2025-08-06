@@ -1,0 +1,8320 @@
+= RHEL Health Check Report
+
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:important-caption: :heavy_exclamation_mark:
+:caution-caption: :fire:
+:warning-caption: :warning:
+endif::[]
+
+= Key
+
+[cols="1,3", options=header]
+|===
+|Value
+|Description
+
+|
+{set:cellbgcolor:#FF0000}
+Changes Required
+|
+{set:cellbgcolor!}
+Indicates Changes Required for system stability, subscription compliance, or other reason.
+
+|
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+|
+{set:cellbgcolor!}
+Indicates Changes Recommended to align with recommended practices, but not urgently required
+
+|
+{set:cellbgcolor:#A6B9BF}
+N/A
+|
+{set:cellbgcolor!}
+No advise given on line item. For line items which are data-only to provide context.
+
+|
+{set:cellbgcolor:#80E5FF}
+Advisory
+|
+{set:cellbgcolor!}
+No change required or recommended, but additional information provided.
+
+|
+{set:cellbgcolor:#00FF00}
+No Change
+|
+{set:cellbgcolor!}
+No change required. In alignment with recommended practices.
+
+|
+{set:cellbgcolor:#FFFFFF}
+To Be Evaluated
+|
+{set:cellbgcolor!}
+Not yet evaluated. Will appear only in draft copies.
+|===
+
+= Summary
+
+[cols="1,2,2,3", options=header]
+|===
+|*Category*
+|*Item Evaluated*
+|*Observed Result*
+|*Recommendation*
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/time-timezone.item
+
+// Category
+|
+{set:cellbgcolor!}
+System Information
+
+// Item Evaluated
+a|
+<<System Timezone>>
+
+| System timezone is set to Asia/Riyadh 
+
+| 
+{set:cellbgcolor:#80E5FF}
+Advisory
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/system-hostname.item
+
+// Category
+|
+{set:cellbgcolor!}
+System Information
+
+// Item Evaluated
+a|
+<<System Hostname>>
+
+| Hostname 'rhel1.example.com' resolves correctly 
+
+| 
+{set:cellbgcolor:#00FF00}
+No Change
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/rhel-version.item
+
+// Category
+|
+{set:cellbgcolor!}
+System Information
+
+// Item Evaluated
+a|
+<<RHEL Version>>
+
+| RHEL 9 is installed and supported 
+
+| 
+{set:cellbgcolor:#00FF00}
+No Change
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/time-sync.item
+
+// Category
+|
+{set:cellbgcolor!}
+System Information
+
+// Item Evaluated
+a|
+<<Time Synchronization>>
+
+| Time synchronization is active and using chrony 
+
+| 
+{set:cellbgcolor:#00FF00}
+No Change
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/system-uptime.item
+
+// Category
+|
+{set:cellbgcolor!}
+System Information
+
+// Item Evaluated
+a|
+<<System Uptime>>
+
+| System was recently rebooted (less than 1 day ago) 
+
+| 
+{set:cellbgcolor:#80E5FF}
+Advisory
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/clock-consistency.item
+
+// Category
+|
+{set:cellbgcolor!}
+System Information
+
+// Item Evaluated
+a|
+<<Clock Consistency>>
+
+| System clock appears to be consistent 
+
+| 
+{set:cellbgcolor:#00FF00}
+No Change
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/system-registration.item
+
+// Category
+|
+{set:cellbgcolor!}
+System Information
+
+// Item Evaluated
+a|
+<<System Registration>>
+
+| System is not registered with Red Hat Subscription Management 
+
+| 
+{set:cellbgcolor:#FF0000}
+Changes Required
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/enabled-repos.item
+
+// Category
+|
+{set:cellbgcolor!}
+System Information
+
+// Item Evaluated
+a|
+<<Enabled Repositories>>
+
+| Missing 2 required repositories 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/memory-physical.item
+
+// Category
+|
+{set:cellbgcolor!}
+Performance
+
+// Item Evaluated
+a|
+<<Physical Memory>>
+
+| System has 7.50 GB of physical memory with 7% usage 
+
+| 
+{set:cellbgcolor:#00FF00}
+No Change
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/memory-swap.item
+
+// Category
+|
+{set:cellbgcolor!}
+Performance
+
+// Item Evaluated
+a|
+<<Swap Configuration>>
+
+| Swap space is configured correctly (6.00 GB) 
+
+| 
+{set:cellbgcolor:#00FF00}
+No Change
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/memory-vm-tuning.item
+
+// Category
+|
+{set:cellbgcolor!}
+Performance
+
+// Item Evaluated
+a|
+<<VM Tuning Parameters>>
+
+| Found 1 VM tuning parameter issues 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/disk-io-performance.item
+
+// Category
+|
+{set:cellbgcolor!}
+Performance
+
+// Item Evaluated
+a|
+<<I/O Performance>>
+
+| Found 1 I/O performance tuning issues 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/cluster-software.item
+
+// Category
+|
+{set:cellbgcolor!}
+Performance
+
+// Item Evaluated
+a|
+<<Cluster Software>>
+
+| No cluster software detected 
+
+| 
+{set:cellbgcolor:#A6B9BF}
+Not Applicable
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/cluster-names.item
+
+// Category
+|
+{set:cellbgcolor!}
+Performance
+
+// Item Evaluated
+a|
+<<Cluster Name Resolution>>
+
+| No cluster configuration found 
+
+| 
+{set:cellbgcolor:#A6B9BF}
+Not Applicable
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/cluster-fencing.item
+
+// Category
+|
+{set:cellbgcolor!}
+Performance
+
+// Item Evaluated
+a|
+<<Fencing Agents>>
+
+| No cluster software detected 
+
+| 
+{set:cellbgcolor:#A6B9BF}
+Not Applicable
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/cluster-constraints.item
+
+// Category
+|
+{set:cellbgcolor!}
+Performance
+
+// Item Evaluated
+a|
+<<Cluster Constraints>>
+
+| No cluster software detected 
+
+| 
+{set:cellbgcolor:#A6B9BF}
+Not Applicable
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/cluster-autostart.item
+
+// Category
+|
+{set:cellbgcolor!}
+Performance
+
+// Item Evaluated
+a|
+<<Cluster Autostart>>
+
+| No cluster software detected 
+
+| 
+{set:cellbgcolor:#A6B9BF}
+Not Applicable
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/cluster-split-brain.item
+
+// Category
+|
+{set:cellbgcolor!}
+Performance
+
+// Item Evaluated
+a|
+<<Split-Brain Prevention>>
+
+| No cluster software detected 
+
+| 
+{set:cellbgcolor:#A6B9BF}
+Not Applicable
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/cpu-info.item
+
+// Category
+|
+{set:cellbgcolor!}
+Performance
+
+// Item Evaluated
+a|
+<<CPU Information>>
+
+| System has 2 CPU cores (AMD Ryzen Threadripper PRO 7965WX 24-Cores, Unknown) with normal utilization 
+
+| 
+{set:cellbgcolor:#00FF00}
+No Change
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/system-performance.item
+
+// Category
+|
+{set:cellbgcolor!}
+Performance
+
+// Item Evaluated
+a|
+<<System Performance>>
+
+| System performance metrics are within acceptable ranges 
+
+| 
+{set:cellbgcolor:#00FF00}
+No Change
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/tuned-profile.item
+
+// Category
+|
+{set:cellbgcolor!}
+Performance
+
+// Item Evaluated
+a|
+<<Tuned Profile>>
+
+| No tuned profile is active 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/cpu-bottlenecks.item
+
+// Category
+|
+{set:cellbgcolor!}
+Performance
+
+// Item Evaluated
+a|
+<<CPU Bottlenecks>>
+
+| No CPU bottlenecks detected 
+
+| 
+{set:cellbgcolor:#00FF00}
+No Change
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/performance-bottlenecks.item
+
+// Category
+|
+{set:cellbgcolor!}
+Performance
+
+// Item Evaluated
+a|
+<<Performance Bottlenecks>>
+
+| No significant performance bottlenecks detected 
+
+| 
+{set:cellbgcolor:#00FF00}
+No Change
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/system-caches.item
+
+// Category
+|
+{set:cellbgcolor!}
+Performance
+
+// Item Evaluated
+a|
+<<System Caches>>
+
+| System cache settings are properly configured 
+
+| 
+{set:cellbgcolor:#00FF00}
+No Change
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/disk-usage.item
+
+// Category
+|
+{set:cellbgcolor!}
+Storage
+
+// Item Evaluated
+a|
+<<Disk Usage>>
+
+| All filesystems have acceptable disk usage levels 
+
+| 
+{set:cellbgcolor:#00FF00}
+No Change
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/disk-mount-points.item
+
+// Category
+|
+{set:cellbgcolor!}
+Storage
+
+// Item Evaluated
+a|
+<<Mount Points>>
+
+| Some mount points could be optimized with better options 
+
+| 
+{set:cellbgcolor:#80E5FF}
+Advisory
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/storage-config.item
+
+// Category
+|
+{set:cellbgcolor!}
+Storage
+
+// Item Evaluated
+a|
+<<Storage Configuration>>
+
+| Storage is properly configured with LVM 
+
+| 
+{set:cellbgcolor:#00FF00}
+No Change
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/storage-multipath.item
+
+// Category
+|
+{set:cellbgcolor!}
+Storage
+
+// Item Evaluated
+a|
+<<Multipath Configuration>>
+
+| Multipath is not installed 
+
+| 
+{set:cellbgcolor:#A6B9BF}
+Not Applicable
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/storage-filesystem-types.item
+
+// Category
+|
+{set:cellbgcolor!}
+Storage
+
+// Item Evaluated
+a|
+<<Filesystem Types>>
+
+| Using recommended filesystem types: xfs (8) 
+
+| 
+{set:cellbgcolor:#00FF00}
+No Change
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/storage-considerations-performance.item
+
+// Category
+|
+{set:cellbgcolor!}
+Storage
+
+// Item Evaluated
+a|
+<<Storage Performance>>
+
+| Storage performance settings appear to be appropriate 
+
+| 
+{set:cellbgcolor:#00FF00}
+No Change
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/storage-filesystem-errors.item
+
+// Category
+|
+{set:cellbgcolor!}
+Storage
+
+// Item Evaluated
+a|
+<<Filesystem Errors>>
+
+| Filesystem errors detected 
+
+| 
+{set:cellbgcolor:#FF0000}
+Changes Required
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/storage-considerations-reliability.item
+
+// Category
+|
+{set:cellbgcolor!}
+Storage
+
+// Item Evaluated
+a|
+<<Storage Reliability>>
+
+| Virtual machine - storage redundancy managed by hypervisor 
+
+| 
+{set:cellbgcolor:#00FF00}
+No Change
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/storage-considerations-capacity.item
+
+// Category
+|
+{set:cellbgcolor!}
+Storage
+
+// Item Evaluated
+a|
+<<Storage Capacity>>
+
+| Storage capacity appears to be adequate 
+
+| 
+{set:cellbgcolor:#00FF00}
+No Change
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/storage-partition-alignment.item
+
+// Category
+|
+{set:cellbgcolor!}
+Storage
+
+// Item Evaluated
+a|
+<<Partition Alignment>>
+
+| All partitions appear to be properly aligned 
+
+| 
+{set:cellbgcolor:#00FF00}
+No Change
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/auth-central.item
+
+// Category
+|
+{set:cellbgcolor!}
+Security
+
+// Item Evaluated
+a|
+<<Central Authentication>>
+
+| No central authentication configuration detected 
+
+| 
+{set:cellbgcolor:#FF0000}
+Changes Required
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/auth-sssd.item
+
+// Category
+|
+{set:cellbgcolor!}
+Security
+
+// Item Evaluated
+a|
+<<SSSD Configuration>>
+
+| SSSD is not installed 
+
+| 
+{set:cellbgcolor:#80E5FF}
+Advisory
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/security-selinux.item
+
+// Category
+|
+{set:cellbgcolor!}
+Security
+
+// Item Evaluated
+a|
+<<SELinux Status>>
+
+| SELinux is properly configured and enforcing 
+
+| 
+{set:cellbgcolor:#00FF00}
+No Change
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/auth-sudo-pam.item
+
+// Category
+|
+{set:cellbgcolor!}
+Security
+
+// Item Evaluated
+a|
+<<Sudo and PAM>>
+
+| Local users with root or sudo privileges detected 
+
+| 
+{set:cellbgcolor:#FF0000}
+Changes Required
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/auth-kerberos.item
+
+// Category
+|
+{set:cellbgcolor!}
+Security
+
+// Item Evaluated
+a|
+<<Kerberos Configuration>>
+
+| Kerberos is not configured on this system 
+
+| 
+{set:cellbgcolor:#A6B9BF}
+Not Applicable
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/security-auditd.item
+
+// Category
+|
+{set:cellbgcolor!}
+Security
+
+// Item Evaluated
+a|
+<<Audit Configuration>>
+
+| Found 2 issues with audit configuration 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/security-password-policy.item
+
+// Category
+|
+{set:cellbgcolor!}
+Security
+
+// Item Evaluated
+a|
+<<Password Policy>>
+
+| Found 2 password policy issues 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/security-file-permissions.item
+
+// Category
+|
+{set:cellbgcolor!}
+Security
+
+// Item Evaluated
+a|
+<<File Permissions>>
+
+| Found 4 file permission issues 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/compliance-rhel-cis.item
+
+// Category
+|
+{set:cellbgcolor!}
+Security
+
+// Item Evaluated
+a|
+<<RHEL CIS Compliance>>
+
+| System is moderately compliant with RHEL CIS standards (71%) 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/kernel-version.item
+
+// Category
+|
+{set:cellbgcolor!}
+Security
+
+// Item Evaluated
+a|
+<<Kernel Version>>
+
+| Repository metadata is 20306 days old - unable to reliably determine if latest kernel is installed 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/kernel-firmware.item
+
+// Category
+|
+{set:cellbgcolor!}
+Security
+
+// Item Evaluated
+a|
+<<BIOS/UEFI Firmware>>
+
+| This is a virtual machine - firmware is managed by the hypervisor 
+
+| 
+{set:cellbgcolor:#80E5FF}
+Advisory
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/security-ssh-hardening.item
+
+// Category
+|
+{set:cellbgcolor!}
+Security
+
+// Item Evaluated
+a|
+<<SSH Hardening>>
+
+| Found 16 SSH hardening issues 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/security-root-account.item
+
+// Category
+|
+{set:cellbgcolor!}
+Security
+
+// Item Evaluated
+a|
+<<Root Account Security>>
+
+| Found 3 root account security issues 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/kernel-unused-devices.item
+
+// Category
+|
+{set:cellbgcolor!}
+Security
+
+// Item Evaluated
+a|
+<<Unused Devices>>
+
+| This is a virtual machine - device management is handled by the hypervisor 
+
+| 
+{set:cellbgcolor:#A6B9BF}
+Not Applicable
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/security-shell-history.item
+
+// Category
+|
+{set:cellbgcolor!}
+Security
+
+// Item Evaluated
+a|
+<<Shell History Configuration>>
+
+| Found 4 shell history configuration issues 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/backup-systems.item
+
+// Category
+|
+{set:cellbgcolor!}
+Services
+
+// Item Evaluated
+a|
+<<Backup Systems>>
+
+| No backup system detected 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/backup-recovery.item
+
+// Category
+|
+{set:cellbgcolor!}
+Services
+
+// Item Evaluated
+a|
+<<Recovery Process>>
+
+| No evidence of recent recovery testing found 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/backup-application.item
+
+// Category
+|
+{set:cellbgcolor!}
+Services
+
+// Item Evaluated
+a|
+<<Application Backups>>
+
+| No applications requiring specialized backups detected 
+
+| 
+{set:cellbgcolor:#80E5FF}
+Advisory
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/services-unnecessary.item
+
+// Category
+|
+{set:cellbgcolor!}
+Services
+
+// Item Evaluated
+a|
+<<Unnecessary Services>>
+
+| No unnecessary services were identified 
+
+| 
+{set:cellbgcolor:#00FF00}
+No Change
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/services-required.item
+
+// Category
+|
+{set:cellbgcolor!}
+Services
+
+// Item Evaluated
+a|
+<<Required Services>>
+
+| All required services are active and enabled 
+
+| 
+{set:cellbgcolor:#00FF00}
+No Change
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/boot-target.item
+
+// Category
+|
+{set:cellbgcolor!}
+Services
+
+// Item Evaluated
+a|
+<<Boot Target>>
+
+| Default boot target is multi-user.target (text mode), following RHEL best practices 
+
+| 
+{set:cellbgcolor:#00FF00}
+No Change
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/logs-system-errors.item
+
+// Category
+|
+{set:cellbgcolor!}
+Services
+
+// Item Evaluated
+a|
+<<System Logs Check>>
+
+| Found 29 errors in system logs 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/boot-errors.item
+
+// Category
+|
+{set:cellbgcolor!}
+Services
+
+// Item Evaluated
+a|
+<<Boot Errors>>
+
+| Found 1994 boot errors and 0 failed units 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/monitoring-logs.item
+
+// Category
+|
+{set:cellbgcolor!}
+Services
+
+// Item Evaluated
+a|
+<<Centralized Logging>>
+
+| Logging services running but centralized logging not configured 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/logs-rotation.item
+
+// Category
+|
+{set:cellbgcolor!}
+Services
+
+// Item Evaluated
+a|
+<<Log Rotation>>
+
+| Found 2 log rotation issues 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/monitoring-alerts.item
+
+// Category
+|
+{set:cellbgcolor!}
+Services
+
+// Item Evaluated
+a|
+<<Alerting Rules>>
+
+| No monitoring system or agents detected 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/logs-system.item
+
+// Category
+|
+{set:cellbgcolor!}
+Services
+
+// Item Evaluated
+a|
+<<Logging System>>
+
+| Found 1 local logging system issues 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/monitoring-agents.item
+
+// Category
+|
+{set:cellbgcolor!}
+Services
+
+// Item Evaluated
+a|
+<<Monitoring Agents>>
+
+| No monitoring agents detected 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/network-config.item
+
+// Category
+|
+{set:cellbgcolor!}
+Networking
+
+// Item Evaluated
+a|
+<<Network Configuration>>
+
+| Network configuration appears to be correct 
+
+| 
+{set:cellbgcolor:#00FF00}
+No Change
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/network-bonding.item
+
+// Category
+|
+{set:cellbgcolor!}
+Networking
+
+// Item Evaluated
+a|
+<<Network Bonding/Teaming>>
+
+| Network bonding is not applicable with only one network interface 
+
+| 
+{set:cellbgcolor:#A6B9BF}
+Not Applicable
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/connectivity-services.item
+
+// Category
+|
+{set:cellbgcolor!}
+Networking
+
+// Item Evaluated
+a|
+<<Dependent Services>>
+
+| No dependent services detected to test connectivity 
+
+| 
+{set:cellbgcolor:#80E5FF}
+Advisory
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/hostname-resolution.item
+
+// Category
+|
+{set:cellbgcolor!}
+Networking
+
+// Item Evaluated
+a|
+<<Hostname Resolution>>
+
+| Hostname resolution is working correctly 
+
+| 
+{set:cellbgcolor:#00FF00}
+No Change
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/connectivity-dns.item
+
+// Category
+|
+{set:cellbgcolor!}
+Networking
+
+// Item Evaluated
+a|
+<<DNS Records>>
+
+| Found 1 DNS resolution issues 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/network-mtu.item
+
+// Category
+|
+{set:cellbgcolor!}
+Networking
+
+// Item Evaluated
+a|
+<<MTU Configuration>>
+
+| Standard MTU (1500) is used on all interfaces 
+
+| 
+{set:cellbgcolor:#00FF00}
+No Change
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/connectivity-latency.item
+
+// Category
+|
+{set:cellbgcolor!}
+Networking
+
+// Item Evaluated
+a|
+<<Network Latency>>
+
+| Network latency to key systems is within acceptable ranges 
+
+| 
+{set:cellbgcolor:#00FF00}
+No Change
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/ha-multicast.item
+
+// Category
+|
+{set:cellbgcolor!}
+Networking
+
+// Item Evaluated
+a|
+<<Multicast Configuration>>
+
+| System is not a cluster member 
+
+| 
+{set:cellbgcolor:#A6B9BF}
+Not Applicable
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/ha-fencing-network.item
+
+// Category
+|
+{set:cellbgcolor!}
+Networking
+
+// Item Evaluated
+a|
+<<Fencing Network>>
+
+| System is not a cluster member 
+
+| 
+{set:cellbgcolor:#A6B9BF}
+Not Applicable
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/firewall-rules.item
+
+// Category
+|
+{set:cellbgcolor!}
+Networking
+
+// Item Evaluated
+a|
+<<Firewall Rules>>
+
+| Firewall is active with appropriate rules 
+
+| 
+{set:cellbgcolor:#00FF00}
+No Change
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/network-tcp-ip-hardening.item
+
+// Category
+|
+{set:cellbgcolor!}
+Networking
+
+// Item Evaluated
+a|
+<<TCP/IP Stack Hardening>>
+
+| TCP/IP stack security settings are properly configured 
+
+| 
+{set:cellbgcolor:#00FF00}
+No Change
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/packages-kernel.item
+
+// Category
+|
+{set:cellbgcolor!}
+Updates
+
+// Item Evaluated
+a|
+<<Kernel Consistency>>
+
+| Found 1 kernel consistency issues 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/packages-security.item
+
+// Category
+|
+{set:cellbgcolor!}
+Updates
+
+// Item Evaluated
+a|
+<<Security Patches>>
+
+| System appears to have all security patches applied 
+
+| 
+{set:cellbgcolor:#00FF00}
+No Change
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/packages-repositories.item
+
+// Category
+|
+{set:cellbgcolor!}
+Updates
+
+// Item Evaluated
+a|
+<<Enabled Repositories>>
+
+| Missing 2 required repositories 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/packages-unnecessary.item
+
+// Category
+|
+{set:cellbgcolor!}
+Updates
+
+// Item Evaluated
+a|
+<<Unnecessary Packages>>
+
+| No unnecessary or outdated packages detected 
+
+| 
+{set:cellbgcolor:#00FF00}
+No Change
+
+// ------------------------ITEM END
+
+|===
+
+<<<
+
+{set:cellbgcolor!}
+
+# System Information
+
+[cols="1,2,2,3", options=header]
+|===
+|*Category*
+|*Item Evaluated*
+|*Observed Result*
+|*Recommendation*
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/time-timezone.item
+
+// Category
+|
+{set:cellbgcolor!}
+System Information
+
+// Item Evaluated
+a|
+<<System Timezone>>
+
+| System timezone is set to Asia/Riyadh 
+
+| 
+{set:cellbgcolor:#80E5FF}
+Advisory
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/system-hostname.item
+
+// Category
+|
+{set:cellbgcolor!}
+System Information
+
+// Item Evaluated
+a|
+<<System Hostname>>
+
+| Hostname 'rhel1.example.com' resolves correctly 
+
+| 
+{set:cellbgcolor:#00FF00}
+No Change
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/rhel-version.item
+
+// Category
+|
+{set:cellbgcolor!}
+System Information
+
+// Item Evaluated
+a|
+<<RHEL Version>>
+
+| RHEL 9 is installed and supported 
+
+| 
+{set:cellbgcolor:#00FF00}
+No Change
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/time-sync.item
+
+// Category
+|
+{set:cellbgcolor!}
+System Information
+
+// Item Evaluated
+a|
+<<Time Synchronization>>
+
+| Time synchronization is active and using chrony 
+
+| 
+{set:cellbgcolor:#00FF00}
+No Change
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/system-uptime.item
+
+// Category
+|
+{set:cellbgcolor!}
+System Information
+
+// Item Evaluated
+a|
+<<System Uptime>>
+
+| System was recently rebooted (less than 1 day ago) 
+
+| 
+{set:cellbgcolor:#80E5FF}
+Advisory
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/clock-consistency.item
+
+// Category
+|
+{set:cellbgcolor!}
+System Information
+
+// Item Evaluated
+a|
+<<Clock Consistency>>
+
+| System clock appears to be consistent 
+
+| 
+{set:cellbgcolor:#00FF00}
+No Change
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/system-registration.item
+
+// Category
+|
+{set:cellbgcolor!}
+System Information
+
+// Item Evaluated
+a|
+<<System Registration>>
+
+| System is not registered with Red Hat Subscription Management 
+
+| 
+{set:cellbgcolor:#FF0000}
+Changes Required
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/enabled-repos.item
+
+// Category
+|
+{set:cellbgcolor!}
+System Information
+
+// Item Evaluated
+a|
+<<Enabled Repositories>>
+
+| Missing 2 required repositories 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+|===
+
+== System Timezone
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#80E5FF}
+Advisory
+|===
+
+Timezone Information:
+[source, bash]
+----
+               Local time: Wed 2025-08-06 19:24:45 +03
+           Universal time: Wed 2025-08-06 16:24:45 UTC
+                 RTC time: Wed 2025-08-06 16:24:46
+                Time zone: Asia/Riyadh (+03, +0300)
+System clock synchronized: yes
+              NTP service: active
+          RTC in local TZ: no
+
+----
+
+
+Locale Information:
+[source, bash]
+----
+System Locale: LANG=en_US.UTF-8
+    VC Keymap: us
+   X11 Layout: us
+
+----
+
+**Observation**
+
+System timezone is set to Asia/Riyadh
+
+**Recommendation**
+
+Verify that the timezone matches the physical location or operational requirements of the server.
+
+To change timezone if needed: 'timedatectl set-timezone <timezone>'
+
+Common timezones: Asia/Riyadh (Saudi Arabia), Europe/London (UK), America/New_York (US Eastern)
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/configuring_basic_system_settings/index
+
+== System Hostname
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#00FF00}
+No Change
+|===
+
+Hostname Information:
+[source, bash]
+----
+Hostname: rhel1.example.com
+FQDN: rhel1.example.com
+----
+
+DNS Lookup Result:
+[source, bash]
+----
+fe80::5054:ff:fe47:dd31 rhel1.example.com
+
+----
+
+**Observation**
+
+Hostname 'rhel1.example.com' resolves correctly
+
+**Recommendation**
+
+None
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/
+
+== RHEL Version
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#00FF00}
+No Change
+|===
+
+RHEL Version Information:
+[source, bash]
+----
+RHEL Version: Red Hat Enterprise Linux release 9.6 (Plow)
+Kernel Version: 5.14.0-570.12.1.el9_6.x86_64
+
+----
+
+OS Release Information:
+[source, bash]
+----
+NAME="Red Hat Enterprise Linux"
+VERSION="9.6 (Plow)"
+ID="rhel"
+ID_LIKE="fedora"
+VERSION_ID="9.6"
+PLATFORM_ID="platform:el9"
+PRETTY_NAME="Red Hat Enterprise Linux 9.6 (Plow)"
+ANSI_COLOR="0;31"
+LOGO="fedora-logo-icon"
+CPE_NAME="cpe:/o:redhat:enterprise_linux:9::baseos"
+HOME_URL="https://www.redhat.com/"
+DOCUMENTATION_URL="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/9"
+BUG_REPORT_URL="https://issues.redhat.com/"
+
+REDHAT_BUGZILLA_PRODUCT="Red Hat Enterprise Linux 9"
+REDHAT_BUGZILLA_PRODUCT_VERSION=9.6
+REDHAT_SUPPORT_PRODUCT="Red Hat Enterprise Linux"
+REDHAT_SUPPORT_PRODUCT_VERSION="9.6"
+
+----
+
+**Observation**
+
+RHEL 9 is installed and supported
+
+**Recommendation**
+
+None
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/
+
+== Time Synchronization
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#00FF00}
+No Change
+|===
+
+Time Synchronization Status:
+
+[source, bash]
+----
+Chrony service: active
+
+Chrony Sources:
+MS Name/IP address         Stratum Poll Reach LastRx Last sample               
+===============================================================================
+^* 212.138.170.134               1  10    25   809   +335us[+2712us] +/-   21ms
+
+Chrony Tracking:
+Reference ID    : D48AAA86 (212.138.170.134)
+Stratum         : 2
+Ref time (UTC)  : Wed Aug 06 16:11:30 2025
+System time     : 0.000000359 seconds slow of NTP time
+Last offset     : +0.002377293 seconds
+RMS offset      : 0.003894401 seconds
+Frequency       : 20.912 ppm slow
+Residual freq   : +0.005 ppm
+Skew            : 0.240 ppm
+Root delay      : 0.038198985 seconds
+Root dispersion : 0.003436434 seconds
+Update interval : 2060.9 seconds
+Leap status     : Normal
+
+----
+
+Timedate Control:
+[source, bash]
+----
+               Local time: Wed 2025-08-06 19:25:00 +03
+           Universal time: Wed 2025-08-06 16:25:00 UTC
+                 RTC time: Wed 2025-08-06 16:25:01
+                Time zone: Asia/Riyadh (+03, +0300)
+System clock synchronized: yes
+              NTP service: active
+          RTC in local TZ: no
+
+----
+
+**Observation**
+
+Time synchronization is active and using chrony
+
+**Recommendation**
+
+None
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/
+
+== System Uptime
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#80E5FF}
+Advisory
+|===
+
+System Uptime Information:
+[source, bash]
+----
+Current Uptime: 19:25:03 up 10:06,  0 users,  load average: 0.22, 0.10, 0.03
+System Start Time: 2025-08-06 09:18:41
+----
+
+Last Reboot Events:
+[source, bash]
+----
+reboot   system boot  5.14.0-570.12.1. Wed Aug  6 09:18   still running
+reboot   system boot  5.14.0-570.12.1. Wed Aug  6 09:14   still running
+
+
+----
+
+**Observation**
+
+System was recently rebooted (less than 1 day ago)
+
+**Recommendation**
+
+Check system logs to verify if the recent reboot was planned or unexpected.
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/configuring_basic_system_settings/index
+
+== Clock Consistency
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#00FF00}
+No Change
+|===
+
+Clock Information:
+[source, bash]
+----
+System Time: 2025-08-06 19:25:03
+Hardware Clock Time: 2025-08-06 19:25:04.680208+03:00
+RTC in local time: false
+
+----
+
+**Observation**
+
+System clock appears to be consistent
+
+**Recommendation**
+
+None
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/
+
+== System Registration
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#FF0000}
+Changes Required
+|===
+
+Identity Information:
+[source, bash]
+----
+Error: System is not registered
+command failed: Process exited with status 1----
+
+**Observation**
+
+System is not registered with Red Hat Subscription Management
+
+**Recommendation**
+
+Register the system using 'subscription-manager register'.
+
+Attach a subscription using 'subscription-manager attach'.
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/configuring_basic_system_settings/assembly_registering-the-system-and-managing-subscriptions_configuring-basic-system-settings
+
+== Enabled Repositories
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+|===
+
+Enabled Repositories:
+[source, bash]
+----
+This system has no repositories available through subscriptions.
+----
+
+RHEL Version:
+[source, bash]
+----
+Red Hat Enterprise Linux release 9.6 (Plow)
+----
+
+**Observation**
+
+Missing 2 required repositories
+
+**Recommendation**
+
+Enable the 'rhel-9-for-x86_64-baseos-rpms' repository using 'subscription-manager repos --enable=rhel-9-for-x86_64-baseos-rpms'.
+
+Enable the 'rhel-9-for-x86_64-appstream-rpms' repository using 'subscription-manager repos --enable=rhel-9-for-x86_64-appstream-rpms'.
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/configuring_basic_system_settings/assembly_registering-the-system-and-managing-subscriptions_configuring-basic-system-settings
+
+<<<
+
+{set:cellbgcolor!}
+
+# Performance
+
+[cols="1,2,2,3", options=header]
+|===
+|*Category*
+|*Item Evaluated*
+|*Observed Result*
+|*Recommendation*
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/memory-physical.item
+
+// Category
+|
+{set:cellbgcolor!}
+Performance
+
+// Item Evaluated
+a|
+<<Physical Memory>>
+
+| System has 7.50 GB of physical memory with 7% usage 
+
+| 
+{set:cellbgcolor:#00FF00}
+No Change
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/memory-swap.item
+
+// Category
+|
+{set:cellbgcolor!}
+Performance
+
+// Item Evaluated
+a|
+<<Swap Configuration>>
+
+| Swap space is configured correctly (6.00 GB) 
+
+| 
+{set:cellbgcolor:#00FF00}
+No Change
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/memory-vm-tuning.item
+
+// Category
+|
+{set:cellbgcolor!}
+Performance
+
+// Item Evaluated
+a|
+<<VM Tuning Parameters>>
+
+| Found 1 VM tuning parameter issues 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/disk-io-performance.item
+
+// Category
+|
+{set:cellbgcolor!}
+Performance
+
+// Item Evaluated
+a|
+<<I/O Performance>>
+
+| Found 1 I/O performance tuning issues 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/cluster-software.item
+
+// Category
+|
+{set:cellbgcolor!}
+Performance
+
+// Item Evaluated
+a|
+<<Cluster Software>>
+
+| No cluster software detected 
+
+| 
+{set:cellbgcolor:#A6B9BF}
+Not Applicable
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/cluster-names.item
+
+// Category
+|
+{set:cellbgcolor!}
+Performance
+
+// Item Evaluated
+a|
+<<Cluster Name Resolution>>
+
+| No cluster configuration found 
+
+| 
+{set:cellbgcolor:#A6B9BF}
+Not Applicable
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/cluster-fencing.item
+
+// Category
+|
+{set:cellbgcolor!}
+Performance
+
+// Item Evaluated
+a|
+<<Fencing Agents>>
+
+| No cluster software detected 
+
+| 
+{set:cellbgcolor:#A6B9BF}
+Not Applicable
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/cluster-constraints.item
+
+// Category
+|
+{set:cellbgcolor!}
+Performance
+
+// Item Evaluated
+a|
+<<Cluster Constraints>>
+
+| No cluster software detected 
+
+| 
+{set:cellbgcolor:#A6B9BF}
+Not Applicable
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/cluster-autostart.item
+
+// Category
+|
+{set:cellbgcolor!}
+Performance
+
+// Item Evaluated
+a|
+<<Cluster Autostart>>
+
+| No cluster software detected 
+
+| 
+{set:cellbgcolor:#A6B9BF}
+Not Applicable
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/cluster-split-brain.item
+
+// Category
+|
+{set:cellbgcolor!}
+Performance
+
+// Item Evaluated
+a|
+<<Split-Brain Prevention>>
+
+| No cluster software detected 
+
+| 
+{set:cellbgcolor:#A6B9BF}
+Not Applicable
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/cpu-info.item
+
+// Category
+|
+{set:cellbgcolor!}
+Performance
+
+// Item Evaluated
+a|
+<<CPU Information>>
+
+| System has 2 CPU cores (AMD Ryzen Threadripper PRO 7965WX 24-Cores, Unknown) with normal utilization 
+
+| 
+{set:cellbgcolor:#00FF00}
+No Change
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/system-performance.item
+
+// Category
+|
+{set:cellbgcolor!}
+Performance
+
+// Item Evaluated
+a|
+<<System Performance>>
+
+| System performance metrics are within acceptable ranges 
+
+| 
+{set:cellbgcolor:#00FF00}
+No Change
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/tuned-profile.item
+
+// Category
+|
+{set:cellbgcolor!}
+Performance
+
+// Item Evaluated
+a|
+<<Tuned Profile>>
+
+| No tuned profile is active 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/cpu-bottlenecks.item
+
+// Category
+|
+{set:cellbgcolor!}
+Performance
+
+// Item Evaluated
+a|
+<<CPU Bottlenecks>>
+
+| No CPU bottlenecks detected 
+
+| 
+{set:cellbgcolor:#00FF00}
+No Change
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/performance-bottlenecks.item
+
+// Category
+|
+{set:cellbgcolor!}
+Performance
+
+// Item Evaluated
+a|
+<<Performance Bottlenecks>>
+
+| No significant performance bottlenecks detected 
+
+| 
+{set:cellbgcolor:#00FF00}
+No Change
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/system-caches.item
+
+// Category
+|
+{set:cellbgcolor!}
+Performance
+
+// Item Evaluated
+a|
+<<System Caches>>
+
+| System cache settings are properly configured 
+
+| 
+{set:cellbgcolor:#00FF00}
+No Change
+
+// ------------------------ITEM END
+|===
+
+== Physical Memory
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#00FF00}
+No Change
+|===
+
+Memory Information:
+[source, bash]
+----
+               total        used        free      shared  buff/cache   available
+Mem:           7.5Gi       503Mi       6.9Gi       0.0Ki       321Mi       7.0Gi
+Swap:          6.0Gi          0B       6.0Gi
+
+----
+
+
+Detailed Memory Information:
+[source, bash]
+----
+MemTotal:        7864012 kB
+MemFree:         7281136 kB
+MemAvailable:    7348056 kB
+Buffers:            4140 kB
+Cached:           251600 kB
+SwapCached:            0 kB
+Active:           186768 kB
+Inactive:         141880 kB
+Active(anon):      73668 kB
+Inactive(anon):        0 kB
+Active(file):     113100 kB
+Inactive(file):   141880 kB
+Unevictable:           0 kB
+Mlocked:               0 kB
+SwapTotal:       6291452 kB
+SwapFree:        6291452 kB
+Zswap:                 0 kB
+Zswapped:              0 kB
+Dirty:              2636 kB
+Writeback:             0 kB
+AnonPages:         72244 kB
+Mapped:            53768 kB
+Shmem:               760 kB
+KReclaimable:      73752 kB
+Slab:             124884 kB
+SReclaimable:      73752 kB
+SUnreclaim:        51132 kB
+KernelStack:        3408 kB
+PageTables:         1764 kB
+SecPageTables:         0 kB
+NFS_Unstable:          0 kB
+Bounce:                0 kB
+WritebackTmp:          0 kB
+CommitLimit:    10223456 kB
+Committed_AS:     238468 kB
+VmallocTotal:   13743895347199 kB
+VmallocUsed:       22768 kB
+VmallocChunk:          0 kB
+Percpu:              880 kB
+HardwareCorrupted:     0 kB
+AnonHugePages:     18432 kB
+ShmemHugePages:        0 kB
+ShmemPmdMapped:        0 kB
+FileHugePages:         0 kB
+FilePmdMapped:         0 kB
+CmaTotal:              0 kB
+CmaFree:               0 kB
+Unaccepted:            0 kB
+HugePages_Total:       0
+HugePages_Free:        0
+HugePages_Rsvd:        0
+HugePages_Surp:        0
+Hugepagesize:       2048 kB
+Hugetlb:               0 kB
+DirectMap4k:      122736 kB
+DirectMap2M:     5120000 kB
+DirectMap1G:     5242880 kB
+
+----
+
+
+Memory Usage Over Time:
+[source, bash]
+----
+procs -----------memory---------- ---swap-- -----io---- -system-- ------cpu-----
+ r  b   swpd   free   buff  cache   si   so    bi    bo   in   cs us sy id wa st
+ 0  0      0 7281872   4140 325376    0    0     4     2   21   38  0  0 100  0  0
+ 0  0      0 7281872   4140 325376    0    0     0    28  140  251  0  0 100  0  0
+ 0  0      0 7281872   4140 325376    0    0     0     1  132  251  0  0 100  0  0
+
+----
+
+**Observation**
+
+System has 7.50 GB of physical memory with 7% usage
+
+**Recommendation**
+
+None
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/
+
+== Swap Configuration
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#00FF00}
+No Change
+|===
+
+Swap Information:
+[source, bash]
+----
+               total        used        free      shared  buff/cache   available
+Mem:           7.5Gi       502Mi       6.9Gi       0.0Ki       321Mi       7.0Gi
+Swap:          6.0Gi          0B       6.0Gi
+
+----
+
+
+Swap Details:
+[source, bash]
+----
+NAME      TYPE      SIZE USED PRIO
+/dev/dm-1 partition   6G   0B   -2
+
+----
+
+
+Swap Usage Over Time:
+[source, bash]
+----
+procs -----------memory---------- ---swap-- -----io---- -system-- ------cpu-----
+ r  b   swpd   free   buff  cache   si   so    bi    bo   in   cs us sy id wa st
+ 0  0      0 7282328   4140 325584    0    0     4     2   21   38  0  0 100  0  0
+ 0  0      0 7282328   4140 325584    0    0     0     0  114  215  0  0 100  0  0
+ 0  0      0 7282328   4140 325584    0    0     0     0   86  187  0  0 100  0  0
+
+----
+
+**Observation**
+
+Swap space is configured correctly (6.00 GB)
+
+**Recommendation**
+
+None
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/
+
+== VM Tuning Parameters
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+|===
+
+VM Tuning Parameters:
+[source, bash]
+----
+VM Swappiness: 60
+Dirty Ratio: 20
+Dirty Background Ratio: 10
+VFS Cache Pressure: 100
+Transparent Hugepages: [always] madvise never
+
+----
+
+Sysctl Configuration:
+[source, bash]
+----
+vm.swappiness = 60
+
+----
+
+**Observation**
+
+Found 1 VM tuning parameter issues
+
+**Recommendation**
+
+Transparent hugepages are set to 'always' which can cause issues with some applications
+
+Consider setting transparent_hugepage to 'madvise' or 'never' for most applications
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/monitoring_and_managing_system_status_and_performance/index
+
+== I/O Performance
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+|===
+
+Block Device Information:
+[source, bash]
+----
+NAME                    SIZE TYPE MOUNTPOINT
+sr0                    11.9G rom  
+vda                      60G disk 
+├─vda1                    1G part /boot
+└─vda2                   59G part 
+  ├─rhel-root          30.6G lvm  /
+  ├─rhel-swap             6G lvm  [SWAP]
+  ├─rhel-var_tmp        1.9G lvm  /var/tmp
+  ├─rhel-tmp            1.9G lvm  /tmp
+  ├─rhel-var_log        4.7G lvm  /var/log
+  ├─rhel-var_log_audit  4.7G lvm  /var/log/audit
+  ├─rhel-var            4.3G lvm  /var
+  └─rhel-home             5G lvm  /home
+
+----
+
+I/O Scheduler Settings:
+/dev/vda scheduler: [none] mq-deadline kyber bfq, readahead: 128 KB
+
+
+I/O Statistics:
+[source, bash]
+----
+
+----
+
+**Observation**
+
+Found 1 I/O performance tuning issues
+
+**Recommendation**
+
+/dev/vda is an HDD with low readahead value (128 KB)
+
+For RHEL 8+:
+
+  - For virtual guests: use 'mq-deadline' scheduler (primary recommendation)
+
+    With a multi-queue capable HBA driver, 'none' is also suitable
+
+  - For NVMe devices: use 'none' scheduler (Red Hat specifically recommends not changing this)
+
+  - For high-performance SSDs: use 'none' or alternatively 'kyber'
+
+  - For traditional HDDs: use 'mq-deadline' or 'bfq'
+
+To set scheduler: echo scheduler_name > /sys/block/device/queue/scheduler
+
+To make changes persistent, add the appropriate udev rules
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/monitoring_and_managing_system_status_and_performance/index
+
+== Cluster Software
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#A6B9BF}
+Not Applicable
+|===
+
+**Observation**
+
+No cluster software detected
+
+**Recommendation**
+
+None
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/
+
+== Cluster Name Resolution
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#A6B9BF}
+Not Applicable
+|===
+
+**Observation**
+
+No cluster configuration found
+
+**Recommendation**
+
+None
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/
+
+== Fencing Agents
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#A6B9BF}
+Not Applicable
+|===
+
+**Observation**
+
+No cluster software detected
+
+**Recommendation**
+
+None
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/
+
+== Cluster Constraints
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#A6B9BF}
+Not Applicable
+|===
+
+**Observation**
+
+No cluster software detected
+
+**Recommendation**
+
+None
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/
+
+== Cluster Autostart
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#A6B9BF}
+Not Applicable
+|===
+
+**Observation**
+
+No cluster software detected
+
+**Recommendation**
+
+None
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/
+
+== Split-Brain Prevention
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#A6B9BF}
+Not Applicable
+|===
+
+**Observation**
+
+No cluster software detected
+
+**Recommendation**
+
+None
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/
+
+== CPU Information
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#00FF00}
+No Change
+|===
+
+CPU Information:
+[source, bash]
+----
+Architecture:                         x86_64
+CPU op-mode(s):                       32-bit, 64-bit
+Address sizes:                        52 bits physical, 57 bits virtual
+Byte Order:                           Little Endian
+CPU(s):                               2
+On-line CPU(s) list:                  0,1
+Vendor ID:                            AuthenticAMD
+BIOS Vendor ID:                       QEMU
+Model name:                           AMD Ryzen Threadripper PRO 7965WX 24-Cores
+BIOS Model name:                      pc-q35-10.0
+CPU family:                           25
+Model:                                24
+Thread(s) per core:                   1
+Core(s) per socket:                   1
+Socket(s):                            2
+Stepping:                             1
+BogoMIPS:                             8387.39
+Flags:                                fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm rep_good nopl cpuid extd_apicid tsc_known_freq pni pclmulqdq ssse3 fma cx16 pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand hypervisor lahf_lm cmp_legacy svm cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw perfctr_core ssbd perfmon_v2 ibrs ibpb stibp ibrs_enhanced vmmcall fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid avx512f avx512dq rdseed adx smap avx512ifma clflushopt clwb avx512cd sha_ni avx512bw avx512vl xsaveopt xsavec xgetbv1 xsaves avx512_bf16 clzero xsaveerptr wbnoinvd arat npt lbrv nrip_save tsc_scale vmcb_clean flushbyasid pausefilter pfthreshold vgif vnmi avx512vbmi umip pku ospke avx512_vbmi2 gfni vaes vpclmulqdq avx512_vnni avx512_bitalg avx512_vpopcntdq la57 rdpid overflow_recov succor fsrm flush_l1d
+Virtualization:                       AMD-V
+Hypervisor vendor:                    KVM
+Virtualization type:                  full
+L1d cache:                            128 KiB (2 instances)
+L1i cache:                            128 KiB (2 instances)
+L2 cache:                             1 MiB (2 instances)
+L3 cache:                             32 MiB (2 instances)
+NUMA node(s):                         1
+NUMA node0 CPU(s):                    0,1
+Vulnerability Gather data sampling:   Not affected
+Vulnerability Itlb multihit:          Not affected
+Vulnerability L1tf:                   Not affected
+Vulnerability Mds:                    Not affected
+Vulnerability Meltdown:               Not affected
+Vulnerability Mmio stale data:        Not affected
+Vulnerability Reg file data sampling: Not affected
+Vulnerability Retbleed:               Not affected
+Vulnerability Spec rstack overflow:   Mitigation; Safe RET
+Vulnerability Spec store bypass:      Mitigation; Speculative Store Bypass disabled via prctl
+Vulnerability Spectre v1:             Mitigation; usercopy/swapgs barriers and __user pointer sanitization
+Vulnerability Spectre v2:             Mitigation; Enhanced / Automatic IBRS; IBPB conditional; STIBP disabled; RSB filling; PBRSB-eIBRS Not affected; BHI Not affected
+Vulnerability Srbds:                  Not affected
+Vulnerability Tsx async abort:        Not affected
+
+----
+
+
+CPU Count: 2
+
+CPU Utilization:
+[source, bash]
+----
+%Cpu(s):  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st
+
+----
+
+
+Load Average: 0.25 0.11 0.04 1/212 54984
+
+**Observation**
+
+System has 2 CPU cores (AMD Ryzen Threadripper PRO 7965WX 24-Cores, Unknown) with normal utilization
+
+**Recommendation**
+
+None
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/
+
+== System Performance
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#00FF00}
+No Change
+|===
+
+System Uptime and Load:
+[source, bash]
+----
+ 19:25:16 up 10:06,  0 users,  load average: 0.27, 0.11, 0.04
+
+----
+
+
+VMStat Output:
+[source, bash]
+----
+procs -----------memory---------- ---swap-- -----io---- -system-- ------cpu-----
+ r  b   swpd   free   buff  cache   si   so    bi    bo   in   cs us sy id wa st
+ 0  0      0 7249332   4140 326556    0    0     4     2   22   39  0  0 100  0  0
+ 0  0      0 7249836   4140 326560    0    0     0     0  155  289  0  0 100  0  0
+ 0  0      0 7250844   4140 326560    0    0     0    24  147  254  0  0 100  0  0
+
+----
+
+
+Memory Usage:
+[source, bash]
+----
+               total        used        free      shared  buff/cache   available
+Mem:           7.5Gi       528Mi       6.9Gi       0.0Ki       322Mi       7.0Gi
+Swap:          6.0Gi          0B       6.0Gi
+
+----
+
+
+Disk I/O Statistics:
+[source, bash]
+----
+
+----
+
+
+Network Statistics:
+[source, bash]
+----
+
+----
+
+**Observation**
+
+System performance metrics are within acceptable ranges
+
+**Recommendation**
+
+None
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/
+
+== Tuned Profile
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+|===
+
+Active Tuned Profile: None
+
+Available Profiles:
+[source, bash]
+----
+
+----
+
+System Type: kvm
+Server Role: true
+
+**Observation**
+
+No tuned profile is active
+
+**Recommendation**
+
+Activate recommended profile: 'tuned-adm profile virtual-guest'
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/monitoring_and_managing_system_status_and_performance/tuned-profiles-distributed-with-rhel_monitoring-and-managing-system-status-and-performance
+
+== CPU Bottlenecks
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#00FF00}
+No Change
+|===
+
+Top CPU Consuming Processes:
+[source, bash]
+----
+    PID    PPID CMD                         %CPU %MEM
+  50285   50281 sshd: ayaseen@notty          0.3  0.0
+      1       0 /usr/lib/systemd/systemd --  0.0  0.2
+      2       0 [kthreadd]                   0.0  0.0
+      3       2 [pool_workqueue_]            0.0  0.0
+      4       2 [kworker/R-rcu_g]            0.0  0.0
+      5       2 [kworker/R-sync_]            0.0  0.0
+      6       2 [kworker/R-slub_]            0.0  0.0
+      7       2 [kworker/R-netns]            0.0  0.0
+      9       2 [kworker/0:0H-events_highpr  0.0  0.0
+     10       2 [kworker/u8:0-events_unboun  0.0  0.0
+
+----
+
+
+CPU Statistics:
+[source, bash]
+----
+
+----
+
+
+Interrupt Information:
+[source, bash]
+----
+           CPU0       CPU1       
+  1:          0          9   IO-APIC   1-edge      i8042
+  8:          4          0   IO-APIC   8-edge      rtc0
+  9:          0          0   IO-APIC   9-fasteoi   acpi
+ 12:         15          0   IO-APIC  12-edge      i8042
+ 16:          0          0   IO-APIC  16-fasteoi   i801_smbus
+ 24:          0          0  PCI-MSIX-0000:00:02.0   0-edge      PCIe PME, aerdrv
+ 25:          0          0  PCI-MSIX-0000:00:02.1   0-edge      PCIe PME, aerdrv
+ 26:          0          0  PCI-MSIX-0000:00:02.2   0-edge      PCIe PME, aerdrv
+ 27:          0          0  PCI-MSIX-0000:00:02.3   0-edge      PCIe PME, aerdrv
+ 28:          0          0  PCI-MSIX-0000:00:02.4   0-edge      PCIe PME, aerdrv
+ 29:          0          0  PCI-MSIX-0000:00:02.5   0-edge      PCIe PME, aerdrv
+ 30:          0          0  PCI-MSIX-0000:00:02.6   0-edge      PCIe PME, aerdrv
+ 31:          0          0  PCI-MSIX-0000:00:02.7   0-edge      PCIe PME, aerdrv
+ 32:          0          0  PCI-MSIX-0000:00:03.0   0-edge      PCIe PME, aerdrv
+ 33:          0          0  PCI-MSIX-0000:00:03.1   0-edge      PCIe PME, aerdrv
+ 34:          0          0  PCI-MSIX-0000:00:03.2   0-edge      PCIe PME, aerdrv
+ 35:          0          0  PCI-MSIX-0000:00:03.3   0-edge      PCIe PME, aerdrv
+ 36:          0          0  PCI-MSIX-0000:00:03.4   0-edge      PCIe PME, aerdrv
+ 37:          0          0  PCI-MSIX-0000:00:03.5   0-edge      PCIe PME, aerdrv
+
+----
+
+**Observation**
+
+No CPU bottlenecks detected
+
+**Recommendation**
+
+None
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/
+
+== Performance Bottlenecks
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#00FF00}
+No Change
+|===
+
+Top Memory Consuming Processes:
+[source, bash]
+----
+    PID    PPID CMD                         %MEM
+    822       1 /usr/bin/python3 -s /usr/sb  0.5
+    624       1 /usr/lib/systemd/systemd-jo  0.2
+    832       1 /usr/sbin/NetworkManager --  0.2
+    925       1 /usr/sbin/rsyslogd -n        0.2
+      1       0 /usr/lib/systemd/systemd --  0.2
+  40356       1 /usr/lib/systemd/systemd --  0.1
+    637       1 /usr/lib/systemd/systemd-ud  0.1
+  50281     865 sshd: ayaseen [priv]         0.1
+    825       1 /usr/lib/systemd/systemd-lo  0.1
+    865       1 sshd: /usr/sbin/sshd -D [li  0.1
+
+----
+
+Top CPU Consuming Processes:
+[source, bash]
+----
+    PID CMD                         %CPU
+  50285 sshd: ayaseen@notty          0.3
+      1 /usr/lib/systemd/systemd --  0.0
+      2 [kthreadd]                   0.0
+      3 [pool_workqueue_]            0.0
+      4 [kworker/R-rcu_g]            0.0
+      5 [kworker/R-sync_]            0.0
+      6 [kworker/R-slub_]            0.0
+      7 [kworker/R-netns]            0.0
+      9 [kworker/0:0H-events_highpr  0.0
+     10 [kworker/u8:0-events_unboun  0.0
+
+----
+
+Largest Directories:
+[source, bash]
+----
+1.3G	/usr
+688M	/usr/lib
+539M	/usr/lib/firmware
+323M	/usr/share
+156M	/usr/lib64
+131M	/var
+109M	/usr/share/locale
+96M	/usr/lib/modules
+71M	/var/lib
+66M	/usr/share/openscap
+66M	/usr/bin
+61M	/var/log
+48M	/usr/lib64/python3.9
+47M	/usr/sbin
+44M	/var/lib/rpm
+41M	/var/log/journal
+25M	/usr/share/xml
+19M	/usr/share/doc
+19M	/usr/lib/python3.9
+18M	/var/lib/selinux
+
+----
+
+Swap Usage (MB):
+[source, bash]
+----
+0
+
+----
+
+Zombie Processes Count:
+[source, bash]
+----
+0
+
+----
+
+Process Count vs Ulimit:
+[source, bash]
+----
+207 30540
+
+----
+
+Open File Descriptors Count vs Limit:
+[source, bash]
+----
+0 1024
+
+----
+
+{set:cellbgcolor!}
+Performance Metrics Summary:
+
+|===
+|Metric|Value|Status
+
+|Memory Process Usage|Normal|OK
+|CPU Process Usage|Normal|OK
+|Swap Usage|0 MB|OK
+|Zombie Processes|0|OK
+|Systemd Services|All operational|OK
+|Process Count|207 / 30540 (0.7%)|OK
+|File Descriptors|0 / 1024 (0.0%)|OK
+|===
+
+**Observation**
+
+No significant performance bottlenecks detected
+
+**Recommendation**
+
+None
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/
+
+== System Caches
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#00FF00}
+No Change
+|===
+
+Memory Cache Information:
+[source, bash]
+----
+Cached:           253424 kB
+SwapCached:            0 kB
+
+----
+
+
+Cache-related Kernel Parameters:
+[source, bash]
+----
+vm.dirty_background_bytes = 0
+vm.dirty_background_ratio = 10
+vm.dirty_bytes = 0
+vm.dirty_expire_centisecs = 3000
+vm.dirty_ratio = 20
+vm.dirty_writeback_centisecs = 500
+vm.dirtytime_expire_seconds = 43200
+vm.swappiness = 60
+vm.vfs_cache_pressure = 100
+
+----
+
+
+Dirty Pages Status:
+[source, bash]
+----
+nr_dirty 284
+nr_writeback 0
+nr_writeback_temp 0
+nr_dirty_threshold 369065
+nr_dirty_background_threshold 184307
+
+----
+
+
+Kernel Slab Cache Details:
+[source, bash]
+----
+ Active / Total Objects (% used)    : 591575 / 595026 (99.4%)
+ Active / Total Slabs (% used)      : 15421 / 15421 (100.0%)
+ Active / Total Caches (% used)     : 160 / 262 (61.1%)
+ Active / Total Size (% used)       : 111072.11K / 112316.05K (98.9%)
+ Minimum / Average / Maximum Object : 0.01K / 0.19K / 8.81K
+
+  OBJS ACTIVE  USE OBJ SIZE  SLABS OBJ/SLAB CACHE SIZE NAME                   
+ 35160  35160 100%    1.06K   2344       15     37504K xfs_inode              
+ 25308  25303  99%    0.66K   2109       12     16872K inode_cache            
+ 70581  70479  99%    0.19K   3361       21     13444K dentry                 
+ 65352  65208  99%    0.07K   1167       56      4668K lsm_inode_cache        
+ 27360  27360 100%    0.12K    855       32      3420K kernfs_node_cache      
+ 51776  51552  99%    0.06K    809       64      3236K kmalloc-64             
+   744    739  99%    4.00K     93        8      2976K kmalloc-4k             
+ 44288  44288 100%    0.06K    692       64      2768K ebitmap_node           
+  3476   3476 100%    0.73K    158       22      2528K proc_inode_cache       
+   228    219  96%    8.81K     76        3      2432K task_struct            
+ 91120  91120 100%    0.02K    536      170      2144K avtab_node             
+  3486   3486 100%    0.57K    249       14      1992K radix_tree_node        
+  1504   1301  86%    1.00K     94       16      1504K kmalloc-1k             
+
+----
+
+Dirty Pages Information:
+[source, bash]
+----
+Current dirty pages: 284
+Current dirty pages: 369065
+Current dirty pages: 184307
+
+----
+
+**Observation**
+
+System cache settings are properly configured
+
+**Recommendation**
+
+None
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/
+
+<<<
+
+{set:cellbgcolor!}
+
+# Storage
+
+[cols="1,2,2,3", options=header]
+|===
+|*Category*
+|*Item Evaluated*
+|*Observed Result*
+|*Recommendation*
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/disk-usage.item
+
+// Category
+|
+{set:cellbgcolor!}
+Storage
+
+// Item Evaluated
+a|
+<<Disk Usage>>
+
+| All filesystems have acceptable disk usage levels 
+
+| 
+{set:cellbgcolor:#00FF00}
+No Change
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/disk-mount-points.item
+
+// Category
+|
+{set:cellbgcolor!}
+Storage
+
+// Item Evaluated
+a|
+<<Mount Points>>
+
+| Some mount points could be optimized with better options 
+
+| 
+{set:cellbgcolor:#80E5FF}
+Advisory
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/storage-config.item
+
+// Category
+|
+{set:cellbgcolor!}
+Storage
+
+// Item Evaluated
+a|
+<<Storage Configuration>>
+
+| Storage is properly configured with LVM 
+
+| 
+{set:cellbgcolor:#00FF00}
+No Change
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/storage-multipath.item
+
+// Category
+|
+{set:cellbgcolor!}
+Storage
+
+// Item Evaluated
+a|
+<<Multipath Configuration>>
+
+| Multipath is not installed 
+
+| 
+{set:cellbgcolor:#A6B9BF}
+Not Applicable
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/storage-filesystem-types.item
+
+// Category
+|
+{set:cellbgcolor!}
+Storage
+
+// Item Evaluated
+a|
+<<Filesystem Types>>
+
+| Using recommended filesystem types: xfs (8) 
+
+| 
+{set:cellbgcolor:#00FF00}
+No Change
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/storage-considerations-performance.item
+
+// Category
+|
+{set:cellbgcolor!}
+Storage
+
+// Item Evaluated
+a|
+<<Storage Performance>>
+
+| Storage performance settings appear to be appropriate 
+
+| 
+{set:cellbgcolor:#00FF00}
+No Change
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/storage-filesystem-errors.item
+
+// Category
+|
+{set:cellbgcolor!}
+Storage
+
+// Item Evaluated
+a|
+<<Filesystem Errors>>
+
+| Filesystem errors detected 
+
+| 
+{set:cellbgcolor:#FF0000}
+Changes Required
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/storage-considerations-reliability.item
+
+// Category
+|
+{set:cellbgcolor!}
+Storage
+
+// Item Evaluated
+a|
+<<Storage Reliability>>
+
+| Virtual machine - storage redundancy managed by hypervisor 
+
+| 
+{set:cellbgcolor:#00FF00}
+No Change
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/storage-considerations-capacity.item
+
+// Category
+|
+{set:cellbgcolor!}
+Storage
+
+// Item Evaluated
+a|
+<<Storage Capacity>>
+
+| Storage capacity appears to be adequate 
+
+| 
+{set:cellbgcolor:#00FF00}
+No Change
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/storage-partition-alignment.item
+
+// Category
+|
+{set:cellbgcolor!}
+Storage
+
+// Item Evaluated
+a|
+<<Partition Alignment>>
+
+| All partitions appear to be properly aligned 
+
+| 
+{set:cellbgcolor:#00FF00}
+No Change
+
+// ------------------------ITEM END
+|===
+
+== Disk Usage
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#00FF00}
+No Change
+|===
+
+Filesystem Disk Usage:
+[source, bash]
+----
+Filesystem  Size  Used  Avail  Use%  Mounted  on
+devtmpfs  4.0M    0    4.0M    0%    /dev
+tmpfs  3.8G    0    3.8G    0%    /dev/shm
+tmpfs  1.5G    748K    1.5G    1%    /run
+/dev/mapper/rhel-root  31G    1.6G    29G    6%    /
+/dev/mapper/rhel-home  5.0G    68M    4.9G    2%    /home
+/dev/vda1  960M    242M    719M    26%    /boot
+/dev/mapper/rhel-tmp  1.9G    46M    1.8G    3%    /tmp
+/dev/mapper/rhel-var  4.3G    133M    4.2G    4%    /var
+/dev/mapper/rhel-var_log  4.6G    108M    4.5G    3%    /var/log
+/dev/mapper/rhel-var_tmp  1.9G    46M    1.8G    3%    /var/tmp
+/dev/mapper/rhel-var_log_audit  4.6G    73M    4.6G    2%    /var/log/audit
+tmpfs  768M    0    768M    0%    /run/user/1000
+
+----
+
+Filesystem Inode Usage:
+[source, bash]
+----
+Filesystem  Inodes  IUsed  IFree  IUse%  Mounted  on
+devtmpfs  977303    433    976870    1%    /dev
+tmpfs  983001    1    983000    1%    /dev/shm
+tmpfs  819200    697    818503    1%    /run
+/dev/mapper/rhel-root  16050176    32899    16017277    1%    /
+/dev/mapper/rhel-home  2621440    15    2621425    1%    /home
+/dev/vda1  524288    360    523928    1%    /boot
+/dev/mapper/rhel-tmp  976896    23    976873    1%    /tmp
+/dev/mapper/rhel-var  2273280    2105    2271175    1%    /var
+/dev/mapper/rhel-var_log  2443264    52    2443212    1%    /var/log
+/dev/mapper/rhel-var_tmp  976896    25    976871    1%    /var/tmp
+/dev/mapper/rhel-var_log_audit  2443264    4    2443260    1%    /var/log/audit
+tmpfs  196600    14    196586    1%    /run/user/1000
+
+----
+
+Largest Files (>100MB):
+[source, bash]
+----
+No files larger than 100MB found or command timed out.
+
+----
+
+**Observation**
+
+All filesystems have acceptable disk usage levels
+
+**Recommendation**
+
+None
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/
+
+== Mount Points
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#80E5FF}
+Advisory
+|===
+
+Current Mount Information:
+[source, bash]
+----
+proc on /proc type proc (rw,nosuid,nodev,noexec,relatime)
+sysfs on /sys type sysfs (rw,nosuid,nodev,noexec,relatime,seclabel)
+devtmpfs on /dev type devtmpfs (rw,nosuid,seclabel,size=4096k,nr_inodes=977303,mode=755,inode64)
+securityfs on /sys/kernel/security type securityfs (rw,nosuid,nodev,noexec,relatime)
+tmpfs on /dev/shm type tmpfs (rw,nosuid,nodev,noexec,relatime,seclabel,inode64)
+devpts on /dev/pts type devpts (rw,nosuid,noexec,relatime,seclabel,gid=5,mode=620,ptmxmode=000)
+tmpfs on /run type tmpfs (rw,nosuid,nodev,seclabel,size=1572804k,nr_inodes=819200,mode=755,inode64)
+cgroup2 on /sys/fs/cgroup type cgroup2 (rw,nosuid,nodev,noexec,relatime,seclabel,nsdelegate,memory_recursiveprot)
+pstore on /sys/fs/pstore type pstore (rw,nosuid,nodev,noexec,relatime,seclabel)
+bpf on /sys/fs/bpf type bpf (rw,nosuid,nodev,noexec,relatime,mode=700)
+/dev/mapper/rhel-root on / type xfs (rw,relatime,seclabel,attr2,inode64,logbufs=8,logbsize=32k,noquota)
+selinuxfs on /sys/fs/selinux type selinuxfs (rw,nosuid,noexec,relatime)
+systemd-1 on /proc/sys/fs/binfmt_misc type autofs (rw,relatime,fd=29,pgrp=1,timeout=0,minproto=5,maxproto=5,direct,pipe_ino=20309)
+hugetlbfs on /dev/hugepages type hugetlbfs (rw,relatime,seclabel,pagesize=2M)
+mqueue on /dev/mqueue type mqueue (rw,nosuid,nodev,noexec,relatime,seclabel)
+debugfs on /sys/kernel/debug type debugfs (rw,nosuid,nodev,noexec,relatime,seclabel)
+tracefs on /sys/kernel/tracing type tracefs (rw,nosuid,nodev,noexec,relatime,seclabel)
+none on /run/credentials/systemd-sysctl.service type ramfs (ro,nosuid,nodev,noexec,relatime,seclabel,mode=700)
+configfs on /sys/kernel/config type configfs (rw,nosuid,nodev,noexec,relatime)
+none on /run/credentials/systemd-tmpfiles-setup-dev.service type ramfs (ro,nosuid,nodev,noexec,relatime,seclabel,mode=700)
+fusectl on /sys/fs/fuse/connections type fusectl (rw,nosuid,nodev,noexec,relatime)
+/dev/mapper/rhel-home on /home type xfs (rw,nosuid,nodev,relatime,seclabel,attr2,inode64,logbufs=8,logbsize=32k,noquota)
+/dev/vda1 on /boot type xfs (rw,relatime,seclabel,attr2,inode64,logbufs=8,logbsize=32k,noquota)
+/dev/mapper/rhel-tmp on /tmp type xfs (rw,nosuid,nodev,noexec,relatime,seclabel,attr2,inode64,logbufs=8,logbsize=32k,noquota)
+/dev/mapper/rhel-var on /var type xfs (rw,nosuid,nodev,relatime,seclabel,attr2,inode64,logbufs=8,logbsize=32k,noquota)
+/dev/mapper/rhel-var_log on /var/log type xfs (rw,nosuid,nodev,noexec,relatime,seclabel,attr2,inode64,logbufs=8,logbsize=32k,noquota)
+/dev/mapper/rhel-var_tmp on /var/tmp type xfs (rw,nosuid,nodev,noexec,relatime,seclabel,attr2,inode64,logbufs=8,logbsize=32k,noquota)
+/dev/mapper/rhel-var_log_audit on /var/log/audit type xfs (rw,nosuid,nodev,noexec,relatime,seclabel,attr2,inode64,logbufs=8,logbsize=32k,noquota)
+none on /run/credentials/systemd-tmpfiles-setup.service type ramfs (ro,nosuid,nodev,noexec,relatime,seclabel,mode=700)
+binfmt_misc on /proc/sys/fs/binfmt_misc type binfmt_misc (rw,nosuid,nodev,noexec,relatime)
+tmpfs on /run/user/1000 type tmpfs (rw,nosuid,nodev,relatime,seclabel,size=786400k,nr_inodes=196600,mode=700,uid=1000,gid=1000,inode64)
+
+----
+
+Mount Points in fstab:
+[source, bash]
+----
+
+/dev/mapper/rhel-root   /                       xfs     defaults        0 0
+UUID=8add4ebd-d928-4cd5-a194-5434f93d3a87 /boot                   xfs     defaults        0 0
+/dev/mapper/rhel-home   /home                   xfs     defaults,nodev,nosuid 0 0
+/dev/mapper/rhel-tmp    /tmp                    xfs     defaults,nodev,noexec,nosuid 0 0
+/dev/mapper/rhel-var    /var                    xfs     defaults,nodev,nosuid 0 0
+/dev/mapper/rhel-var_log /var/log                xfs     defaults,nodev,noexec,nosuid 0 0
+/dev/mapper/rhel-var_log_audit /var/log/audit          xfs     defaults,nodev,noexec,nosuid 0 0
+/dev/mapper/rhel-var_tmp /var/tmp                xfs     defaults,nodev,noexec,nosuid 0 0
+/dev/mapper/rhel-swap   none                    swap    defaults        0 0
+tmpfs /dev/shm tmpfs defaults,relatime,inode64,nodev,noexec,nosuid 0 0
+
+----
+
+
+Mount Points Without noatime Option:
+[source, bash]
+----
+/dev/mapper/rhel-root on / type xfs (rw,relatime,seclabel,attr2,inode64,logbufs=8,logbsize=32k,noquota)
+/dev/mapper/rhel-home on /home type xfs (rw,nosuid,nodev,relatime,seclabel,attr2,inode64,logbufs=8,logbsize=32k,noquota)
+/dev/vda1 on /boot type xfs (rw,relatime,seclabel,attr2,inode64,logbufs=8,logbsize=32k,noquota)
+/dev/mapper/rhel-tmp on /tmp type xfs (rw,nosuid,nodev,noexec,relatime,seclabel,attr2,inode64,logbufs=8,logbsize=32k,noquota)
+/dev/mapper/rhel-var on /var type xfs (rw,nosuid,nodev,relatime,seclabel,attr2,inode64,logbufs=8,logbsize=32k,noquota)
+/dev/mapper/rhel-var_log on /var/log type xfs (rw,nosuid,nodev,noexec,relatime,seclabel,attr2,inode64,logbufs=8,logbsize=32k,noquota)
+/dev/mapper/rhel-var_tmp on /var/tmp type xfs (rw,nosuid,nodev,noexec,relatime,seclabel,attr2,inode64,logbufs=8,logbsize=32k,noquota)
+/dev/mapper/rhel-var_log_audit on /var/log/audit type xfs (rw,nosuid,nodev,noexec,relatime,seclabel,attr2,inode64,logbufs=8,logbsize=32k,noquota)
+
+----
+
+**Observation**
+
+Some mount points could be optimized with better options
+
+**Recommendation**
+
+Consider adding 'noatime' mount option to improve performance
+
+Edit /etc/fstab and add 'noatime' to the options field (4th column)
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/#Storage
+
+== Storage Configuration
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#00FF00}
+No Change
+|===
+
+LVM Configuration:
+
+
+Logical Volumes:
+
+
+[source, bash]
+----
+  LV            VG   Attr       LSize  Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert
+  home          rhel -wi-ao----  5.00g                                                    
+  root          rhel -wi-ao---- 30.61g                                                    
+  swap          rhel -wi-ao----  6.00g                                                    
+  tmp           rhel -wi-ao----  1.86g                                                    
+  var           rhel -wi-ao---- <4.34g                                                    
+  var_log       rhel -wi-ao----  4.66g                                                    
+  var_log_audit rhel -wi-ao----  4.66g                                                    
+  var_tmp       rhel -wi-ao----  1.86g                                                    
+
+----
+
+Volume Groups:
+
+
+[source, bash]
+----
+  VG   #PV #LV #SN Attr   VSize   VFree
+  rhel   1   8   0 wz--n- <59.00g    0 
+
+----
+
+Physical Volumes:
+
+
+[source, bash]
+----
+  PV         VG   Fmt  Attr PSize   PFree
+  /dev/vda2  rhel lvm2 a--  <59.00g    0 
+
+----
+
+
+RAID Configuration:
+
+[source, bash]
+----
+
+No software RAID configured
+
+----
+
+Multipath Configuration:
+
+[source, bash]
+----
+
+Multipath not configured or not installed
+
+----
+
+**Observation**
+
+Storage is properly configured with LVM
+
+**Recommendation**
+
+None
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/
+
+== Multipath Configuration
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#A6B9BF}
+Not Applicable
+|===
+
+**Observation**
+
+Multipath is not installed
+
+**Recommendation**
+
+This check is not applicable as device-mapper-multipath is not installed
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/
+
+== Filesystem Types
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#00FF00}
+No Change
+|===
+
+Filesystems in Use:
+[source, bash]
+----
+Filesystem                     Type     1K-blocks    Used Available Use% Mounted on
+/dev/mapper/rhel-root          xfs       32034816 1642684  30392132   6% /
+/dev/mapper/rhel-home          xfs        5177344   69272   5108072   2% /home
+/dev/vda1                      xfs         983040  246940    736100  26% /boot
+/dev/mapper/rhel-tmp           xfs        1888256   46308   1841948   3% /tmp
+/dev/mapper/rhel-var           xfs        4481024  135436   4345588   4% /var
+/dev/mapper/rhel-var_log       xfs        4820992  119188   4701804   3% /var/log
+/dev/mapper/rhel-var_tmp       xfs        1888256   46336   1841920   3% /var/tmp
+/dev/mapper/rhel-var_log_audit xfs        4820992   76776   4744216   2% /var/log/audit
+
+----
+
+Mounted Filesystems:
+[source, bash]
+----
+securityfs on /sys/kernel/security type securityfs (rw,nosuid,nodev,noexec,relatime)
+pstore on /sys/fs/pstore type pstore (rw,nosuid,nodev,noexec,relatime,seclabel)
+bpf on /sys/fs/bpf type bpf (rw,nosuid,nodev,noexec,relatime,mode=700)
+/dev/mapper/rhel-root on / type xfs (rw,relatime,seclabel,attr2,inode64,logbufs=8,logbsize=32k,noquota)
+selinuxfs on /sys/fs/selinux type selinuxfs (rw,nosuid,noexec,relatime)
+hugetlbfs on /dev/hugepages type hugetlbfs (rw,relatime,seclabel,pagesize=2M)
+mqueue on /dev/mqueue type mqueue (rw,nosuid,nodev,noexec,relatime,seclabel)
+debugfs on /sys/kernel/debug type debugfs (rw,nosuid,nodev,noexec,relatime,seclabel)
+tracefs on /sys/kernel/tracing type tracefs (rw,nosuid,nodev,noexec,relatime,seclabel)
+none on /run/credentials/systemd-sysctl.service type ramfs (ro,nosuid,nodev,noexec,relatime,seclabel,mode=700)
+configfs on /sys/kernel/config type configfs (rw,nosuid,nodev,noexec,relatime)
+none on /run/credentials/systemd-tmpfiles-setup-dev.service type ramfs (ro,nosuid,nodev,noexec,relatime,seclabel,mode=700)
+fusectl on /sys/fs/fuse/connections type fusectl (rw,nosuid,nodev,noexec,relatime)
+/dev/mapper/rhel-home on /home type xfs (rw,nosuid,nodev,relatime,seclabel,attr2,inode64,logbufs=8,logbsize=32k,noquota)
+/dev/vda1 on /boot type xfs (rw,relatime,seclabel,attr2,inode64,logbufs=8,logbsize=32k,noquota)
+/dev/mapper/rhel-tmp on /tmp type xfs (rw,nosuid,nodev,noexec,relatime,seclabel,attr2,inode64,logbufs=8,logbsize=32k,noquota)
+/dev/mapper/rhel-var on /var type xfs (rw,nosuid,nodev,relatime,seclabel,attr2,inode64,logbufs=8,logbsize=32k,noquota)
+/dev/mapper/rhel-var_log on /var/log type xfs (rw,nosuid,nodev,noexec,relatime,seclabel,attr2,inode64,logbufs=8,logbsize=32k,noquota)
+/dev/mapper/rhel-var_tmp on /var/tmp type xfs (rw,nosuid,nodev,noexec,relatime,seclabel,attr2,inode64,logbufs=8,logbsize=32k,noquota)
+/dev/mapper/rhel-var_log_audit on /var/log/audit type xfs (rw,nosuid,nodev,noexec,relatime,seclabel,attr2,inode64,logbufs=8,logbsize=32k,noquota)
+none on /run/credentials/systemd-tmpfiles-setup.service type ramfs (ro,nosuid,nodev,noexec,relatime,seclabel,mode=700)
+
+----
+
+Kernel-Supported Filesystems:
+[source, bash]
+----
+	xfs
+	fuseblk
+
+----
+
+Filesystem Configuration in /etc/fstab:
+[source, bash]
+----
+
+/dev/mapper/rhel-root   /                       xfs     defaults        0 0
+UUID=8add4ebd-d928-4cd5-a194-5434f93d3a87 /boot                   xfs     defaults        0 0
+/dev/mapper/rhel-home   /home                   xfs     defaults,nodev,nosuid 0 0
+/dev/mapper/rhel-tmp    /tmp                    xfs     defaults,nodev,noexec,nosuid 0 0
+/dev/mapper/rhel-var    /var                    xfs     defaults,nodev,nosuid 0 0
+/dev/mapper/rhel-var_log /var/log                xfs     defaults,nodev,noexec,nosuid 0 0
+/dev/mapper/rhel-var_log_audit /var/log/audit          xfs     defaults,nodev,noexec,nosuid 0 0
+/dev/mapper/rhel-var_tmp /var/tmp                xfs     defaults,nodev,noexec,nosuid 0 0
+/dev/mapper/rhel-swap   none                    swap    defaults        0 0
+tmpfs /dev/shm tmpfs defaults,relatime,inode64,nodev,noexec,nosuid 0 0
+
+----
+
+**Observation**
+
+Using recommended filesystem types: xfs (8)
+
+**Recommendation**
+
+None
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/
+
+== Storage Performance
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#00FF00}
+No Change
+|===
+
+I/O Scheduler Settings:
+[source, bash]
+----
+Disk /dev/vda: [none] mq-deadline kyber bfq 
+
+----
+
+Disk Readahead Settings:
+[source, bash]
+----
+Disk /dev/vda readahead: 128
+
+----
+
+Disk Types:
+[source, bash]
+----
+Disk /dev/vda type: HDD
+
+----
+
+Disk NUMA Assignments:
+[source, bash]
+----
+Disk /dev/vda NUMA node: N/A
+
+----
+
+I/O Statistics:
+[source, bash]
+----
+
+----
+
+**Observation**
+
+Storage performance settings appear to be appropriate
+
+**Recommendation**
+
+None
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/
+
+== Filesystem Errors
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#FF0000}
+Changes Required
+|===
+
+No filesystem errors found in kernel log
+
+No filesystem errors found in journal
+
+Filesystem Check Configuration in fstab:
+[source, bash]
+----
+No explicit fsck configuration found
+
+----
+
+Filesystems Mounted Read-Only (possible error state):
+[source, bash]
+----
+none on /run/credentials/systemd-sysctl.service type ramfs (ro,nosuid,nodev,noexec,relatime,seclabel,mode=700)
+none on /run/credentials/systemd-tmpfiles-setup-dev.service type ramfs (ro,nosuid,nodev,noexec,relatime,seclabel,mode=700)
+none on /run/credentials/systemd-tmpfiles-setup.service type ramfs (ro,nosuid,nodev,noexec,relatime,seclabel,mode=700)
+
+----
+
+Root Filesystem Space Usage:
+[source, bash]
+----
+Filesystem             Size  Used Avail Use% Mounted on
+/dev/mapper/rhel-root   31G  1.6G   29G   6% /
+
+----
+
+**Observation**
+
+Filesystem errors detected
+
+**Recommendation**
+
+Filesystem remounted read-only due to errors - recovery needed
+
+Run filesystem check on affected filesystems
+
+Check for disk hardware issues with 'smartctl -a /dev/sdX'
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/managing_storage_devices/file-system-checks-managing-storage-devices
+
+== Storage Reliability
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#00FF00}
+No Change
+|===
+
+Software RAID Status:
+[source, bash]
+----
+Personalities : 
+unused devices: <none>
+
+----
+
+Hardware RAID Controller:
+[source, bash]
+----
+No hardware RAID controller detected
+
+----
+
+LVM Configuration:
+[source, bash]
+----
+  LV            VG   Attr       LSize  Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert
+  home          rhel -wi-ao----  5.00g                                                    
+  root          rhel -wi-ao---- 30.61g                                                    
+  swap          rhel -wi-ao----  6.00g                                                    
+  tmp           rhel -wi-ao----  1.86g                                                    
+  var           rhel -wi-ao---- <4.34g                                                    
+  var_log       rhel -wi-ao----  4.66g                                                    
+  var_log_audit rhel -wi-ao----  4.66g                                                    
+  var_tmp       rhel -wi-ao----  1.86g                                                    
+
+----
+
+Multipath Configuration:
+[source, bash]
+----
+No multipath devices detected
+
+----
+
+Disk Health Status:
+[source, bash]
+----
+Virtual machine - SMART data not applicable
+----
+
+**Observation**
+
+Virtual machine - storage redundancy managed by hypervisor
+
+**Recommendation**
+
+None
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/
+
+== Storage Capacity
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#00FF00}
+No Change
+|===
+
+Filesystem Disk Usage:
+[source, bash]
+----
+Filesystem                     Type      Size  Used Avail Use% Mounted on
+devtmpfs                       devtmpfs  4.0M     0  4.0M   0% /dev
+tmpfs                          tmpfs     3.8G     0  3.8G   0% /dev/shm
+tmpfs                          tmpfs     1.5G  768K  1.5G   1% /run
+/dev/mapper/rhel-root          xfs        31G  1.6G   29G   6% /
+/dev/mapper/rhel-home          xfs       5.0G   68M  4.9G   2% /home
+/dev/vda1                      xfs       960M  242M  719M  26% /boot
+/dev/mapper/rhel-tmp           xfs       1.9G   46M  1.8G   3% /tmp
+/dev/mapper/rhel-var           xfs       4.3G  133M  4.2G   4% /var
+/dev/mapper/rhel-var_log       xfs       4.6G  117M  4.5G   3% /var/log
+/dev/mapper/rhel-var_tmp       xfs       1.9G   46M  1.8G   3% /var/tmp
+/dev/mapper/rhel-var_log_audit xfs       4.6G   75M  4.6G   2% /var/log/audit
+tmpfs                          tmpfs     768M     0  768M   0% /run/user/1000
+
+----
+
+Filesystem Inode Usage:
+[source, bash]
+----
+Filesystem                     Type       Inodes IUsed    IFree IUse% Mounted on
+/dev/mapper/rhel-root          xfs      16050176 32899 16017277    1% /
+/dev/mapper/rhel-home          xfs       2621440    15  2621425    1% /home
+/dev/vda1                      xfs        524288   360   523928    1% /boot
+/dev/mapper/rhel-tmp           xfs        976896    19   976877    1% /tmp
+/dev/mapper/rhel-var           xfs       2273280  2105  2271175    1% /var
+/dev/mapper/rhel-var_log       xfs       2443264    52  2443212    1% /var/log
+/dev/mapper/rhel-var_tmp       xfs        976896    21   976875    1% /var/tmp
+/dev/mapper/rhel-var_log_audit xfs       2443264     4  2443260    1% /var/log/audit
+
+----
+
+Disk Usage Trend:
+[source, bash]
+----
+Wed Aug  6 07:26:14 PM +03 2025
+Filesystem                      Size  Used Avail Use% Mounted on
+/dev/mapper/rhel-root            31G  1.6G   29G   6% /
+/dev/mapper/rhel-home           5.0G   68M  4.9G   2% /home
+/dev/vda1                       960M  242M  719M  26% /boot
+/dev/mapper/rhel-tmp            1.9G   46M  1.8G   3% /tmp
+/dev/mapper/rhel-var            4.3G  133M  4.2G   4% /var
+/dev/mapper/rhel-var_log        4.6G  117M  4.5G   3% /var/log
+/dev/mapper/rhel-var_tmp        1.9G   46M  1.8G   3% /var/tmp
+/dev/mapper/rhel-var_log_audit  4.6G   75M  4.6G   2% /var/log/audit
+Wed Aug  6 07:26:15 PM +03 2025
+Filesystem                      Size  Used Avail Use% Mounted on
+/dev/mapper/rhel-root            31G  1.6G   29G   6% /
+/dev/mapper/rhel-home           5.0G   68M  4.9G   2% /home
+/dev/vda1                       960M  242M  719M  26% /boot
+/dev/mapper/rhel-tmp            1.9G   46M  1.8G   3% /tmp
+/dev/mapper/rhel-var            4.3G  133M  4.2G   4% /var
+/dev/mapper/rhel-var_log        4.6G  117M  4.5G   3% /var/log
+/dev/mapper/rhel-var_tmp        1.9G   46M  1.8G   3% /var/tmp
+/dev/mapper/rhel-var_log_audit  4.6G   75M  4.6G   2% /var/log/audit
+Wed Aug  6 07:26:16 PM +03 2025
+Filesystem                      Size  Used Avail Use% Mounted on
+/dev/mapper/rhel-root            31G  1.6G   29G   6% /
+/dev/mapper/rhel-home           5.0G   68M  4.9G   2% /home
+/dev/vda1                       960M  242M  719M  26% /boot
+/dev/mapper/rhel-tmp            1.9G   46M  1.8G   3% /tmp
+/dev/mapper/rhel-var            4.3G  133M  4.2G   4% /var
+/dev/mapper/rhel-var_log        4.6G  117M  4.5G   3% /var/log
+/dev/mapper/rhel-var_tmp        1.9G   46M  1.8G   3% /var/tmp
+/dev/mapper/rhel-var_log_audit  4.6G   75M  4.6G   2% /var/log/audit
+
+----
+
+**Observation**
+
+Storage capacity appears to be adequate
+
+**Recommendation**
+
+None
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/
+
+== Partition Alignment
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#00FF00}
+No Change
+|===
+
+Partition Information:
+[source, bash]
+----
+                                                                          Model: QEMU QEMU DVD-ROM (scsi)
+Disk /dev/sr0: 12.8GB
+Sector size (logical/physical): 2048B/2048B
+Partition Table: msdos
+Disk Flags: 
+
+Number  Start   End     Size    Type     File system  Flags
+ 2      9511kB  38.7MB  29.2MB  primary               esp
+
+
+Model: Virtio Block Device (virtblk)
+Disk /dev/vda: 64.4GB
+Sector size (logical/physical): 512B/512B
+Partition Table: msdos
+Disk Flags: 
+
+Number  Start   End     Size    Type     File system  Flags
+ 1      1049kB  1075MB  1074MB  primary  xfs          boot
+ 2      1075MB  64.4GB  63.3GB  primary               lvm
+
+
+
+----
+
+Partition Alignment Details:
+[source, bash]
+----
+
+Disk: /dev/vda
+/dev/vda1  *       2048   2099199   2097152   1G 83 Linux
+/dev/vda2       2099200 125829119 123729920  59G 8e Linux LVM
+
+----
+
+Disk Parameters (optimal_io_size physical_block_size alignment_offset):
+[source, bash]
+----
+
+Disk: /dev/vda
+0 512 0 
+
+----
+
+Disk Types:
+[source, bash]
+----
+Disk /dev/vda: HDD
+
+----
+
+Mount Points:
+[source, bash]
+----
+/proc
+/sys
+/dev
+/sys/kernel/security
+/dev/shm
+/dev/pts
+/run
+/sys/fs/cgroup
+/sys/fs/pstore
+/sys/fs/bpf
+/
+/sys/fs/selinux
+/proc/sys/fs/binfmt_misc
+/dev/hugepages
+/dev/mqueue
+/sys/kernel/debug
+/sys/kernel/tracing
+/run/credentials/systemd-sysctl.service
+/sys/kernel/config
+/run/credentials/systemd-tmpfiles-setup-dev.service
+/sys/fs/fuse/connections
+/home
+/boot
+/tmp
+/var
+/var/log
+/var/tmp
+/var/log/audit
+/run/credentials/systemd-tmpfiles-setup.service
+/proc/sys/fs/binfmt_misc
+/run/user/1000
+
+----
+
+LUKS Encryption Status:
+[source, bash]
+----
+No LUKS encrypted devices detected
+
+----
+
+System Type:
+[source, bash]
+----
+Virtual Machine: kvm
+
+
+----
+
+**Observation**
+
+All partitions appear to be properly aligned
+
+**Recommendation**
+
+Consider implementing LUKS encryption for security-sensitive data
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/
+
+<<<
+
+{set:cellbgcolor!}
+
+# Security
+
+[cols="1,2,2,3", options=header]
+|===
+|*Category*
+|*Item Evaluated*
+|*Observed Result*
+|*Recommendation*
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/auth-central.item
+
+// Category
+|
+{set:cellbgcolor!}
+Security
+
+// Item Evaluated
+a|
+<<Central Authentication>>
+
+| No central authentication configuration detected 
+
+| 
+{set:cellbgcolor:#FF0000}
+Changes Required
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/auth-sssd.item
+
+// Category
+|
+{set:cellbgcolor!}
+Security
+
+// Item Evaluated
+a|
+<<SSSD Configuration>>
+
+| SSSD is not installed 
+
+| 
+{set:cellbgcolor:#80E5FF}
+Advisory
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/security-selinux.item
+
+// Category
+|
+{set:cellbgcolor!}
+Security
+
+// Item Evaluated
+a|
+<<SELinux Status>>
+
+| SELinux is properly configured and enforcing 
+
+| 
+{set:cellbgcolor:#00FF00}
+No Change
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/auth-sudo-pam.item
+
+// Category
+|
+{set:cellbgcolor!}
+Security
+
+// Item Evaluated
+a|
+<<Sudo and PAM>>
+
+| Local users with root or sudo privileges detected 
+
+| 
+{set:cellbgcolor:#FF0000}
+Changes Required
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/auth-kerberos.item
+
+// Category
+|
+{set:cellbgcolor!}
+Security
+
+// Item Evaluated
+a|
+<<Kerberos Configuration>>
+
+| Kerberos is not configured on this system 
+
+| 
+{set:cellbgcolor:#A6B9BF}
+Not Applicable
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/security-auditd.item
+
+// Category
+|
+{set:cellbgcolor!}
+Security
+
+// Item Evaluated
+a|
+<<Audit Configuration>>
+
+| Found 2 issues with audit configuration 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/security-password-policy.item
+
+// Category
+|
+{set:cellbgcolor!}
+Security
+
+// Item Evaluated
+a|
+<<Password Policy>>
+
+| Found 2 password policy issues 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/security-file-permissions.item
+
+// Category
+|
+{set:cellbgcolor!}
+Security
+
+// Item Evaluated
+a|
+<<File Permissions>>
+
+| Found 4 file permission issues 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/compliance-rhel-cis.item
+
+// Category
+|
+{set:cellbgcolor!}
+Security
+
+// Item Evaluated
+a|
+<<RHEL CIS Compliance>>
+
+| System is moderately compliant with RHEL CIS standards (71%) 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/kernel-version.item
+
+// Category
+|
+{set:cellbgcolor!}
+Security
+
+// Item Evaluated
+a|
+<<Kernel Version>>
+
+| Repository metadata is 20306 days old - unable to reliably determine if latest kernel is installed 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/kernel-firmware.item
+
+// Category
+|
+{set:cellbgcolor!}
+Security
+
+// Item Evaluated
+a|
+<<BIOS/UEFI Firmware>>
+
+| This is a virtual machine - firmware is managed by the hypervisor 
+
+| 
+{set:cellbgcolor:#80E5FF}
+Advisory
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/security-ssh-hardening.item
+
+// Category
+|
+{set:cellbgcolor!}
+Security
+
+// Item Evaluated
+a|
+<<SSH Hardening>>
+
+| Found 16 SSH hardening issues 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/security-root-account.item
+
+// Category
+|
+{set:cellbgcolor!}
+Security
+
+// Item Evaluated
+a|
+<<Root Account Security>>
+
+| Found 3 root account security issues 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/kernel-unused-devices.item
+
+// Category
+|
+{set:cellbgcolor!}
+Security
+
+// Item Evaluated
+a|
+<<Unused Devices>>
+
+| This is a virtual machine - device management is handled by the hypervisor 
+
+| 
+{set:cellbgcolor:#A6B9BF}
+Not Applicable
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/security-shell-history.item
+
+// Category
+|
+{set:cellbgcolor!}
+Security
+
+// Item Evaluated
+a|
+<<Shell History Configuration>>
+
+| Found 4 shell history configuration issues 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+|===
+
+== Central Authentication
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#FF0000}
+Changes Required
+|===
+
+SSSD Installation:
+[source, bash]
+----
+package sssd is not installed
+SSSD not installed
+
+----
+
+Realm Membership:
+[source, bash]
+----
+Realm command not available
+
+----
+
+Authentication Configuration:
+[source, bash]
+----
+Profile ID: custom/hardening
+Enabled features:
+- with-faillock
+- with-pwhistory
+- without-nullok
+
+----
+
+Kerberos Configuration Excerpt:
+[source, bash]
+----
+includedir /etc/krb5.conf.d/
+[logging]
+    default = FILE:/var/log/krb5libs.log
+    kdc = FILE:/var/log/krb5kdc.log
+    admin_server = FILE:/var/log/kadmind.log
+[libdefaults]
+    dns_lookup_realm = false
+    ticket_lifetime = 24h
+    renew_lifetime = 7d
+    forwardable = true
+    rdns = false
+    pkinit_anchors = FILE:/etc/pki/tls/certs/ca-bundle.crt
+    spake_preauth_groups = edwards25519
+    dns_canonicalize_hostname = fallback
+    qualify_shortname = ""
+    default_ccache_name = KEYRING:persistent:%{uid}
+[realms]
+[domain_realm]
+
+----
+
+LDAP Configuration Excerpt:
+[source, bash]
+----
+SASL_NOCANON	on
+
+----
+
+Non-Local Users (first 5):
+[source, bash]
+----
+No non-local users detected
+
+----
+
+**Observation**
+
+No central authentication configuration detected
+
+**Recommendation**
+
+Consider implementing central authentication for easier user management
+
+Options include FreeIPA, Active Directory, or LDAP
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/configuring_authentication_and_authorization_in_rhel/index
+
+== SSSD Configuration
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#80E5FF}
+Advisory
+|===
+
+**Observation**
+
+SSSD is not installed
+
+**Recommendation**
+
+Consider installing SSSD for improved authentication capabilities
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/configuring_authentication_and_authorization_in_rhel/index
+
+== SELinux Status
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#00FF00}
+No Change
+|===
+
+SELinux Status:
+[source, bash]
+----
+SELinux status:                 enabled
+SELinuxfs mount:                /sys/fs/selinux
+SELinux root directory:         /etc/selinux
+Loaded policy name:             targeted
+Current mode:                   enforcing
+Mode from config file:          enforcing
+Policy MLS status:              enabled
+Policy deny_unknown status:     allowed
+Memory protection checking:     actual (secure)
+Max kernel policy version:      33
+
+----
+
+SELinux Mode:
+[source, bash]
+----
+Enforcing
+----
+
+SELinux Configuration:
+[source, bash]
+----
+# SELINUX= can take one of these three values:
+# NOTE: Up to RHEL 8 release included, SELINUX=disabled would also
+SELINUX=enforcing
+
+----
+
+AVC Denials Count:
+[source, bash]
+----
+0
+----
+
+**Observation**
+
+SELinux is properly configured and enforcing
+
+**Recommendation**
+
+None
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/
+
+== Sudo and PAM
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#FF0000}
+Changes Required
+|===
+
+Sudo Rules:
+[source, bash]
+----
+Defaults   !visiblepw
+Defaults    always_set_home
+Defaults    match_group_by_gid
+Defaults    always_query_group_plugin
+Defaults    env_reset
+Defaults    env_keep =  "COLORS DISPLAY HOSTNAME HISTSIZE KDEDIR LS_COLORS"
+Defaults    env_keep += "MAIL PS1 PS2 QTDIR USERNAME LANG LC_ADDRESS LC_CTYPE"
+Defaults    env_keep += "LC_COLLATE LC_IDENTIFICATION LC_MEASUREMENT LC_MESSAGES"
+Defaults    env_keep += "LC_MONETARY LC_NAME LC_NUMERIC LC_PAPER LC_TELEPHONE"
+Defaults    env_keep += "LC_TIME LC_ALL LANGUAGE LINGUAS _XKB_CHARSET XAUTHORITY"
+Defaults    secure_path = /sbin:/bin:/usr/sbin:/usr/bin
+root	ALL=(ALL) 	ALL
+%wheel	ALL=(ALL)	ALL
+Defaults use_pty
+Defaults logfile=/var/log/sudo.log
+Defaults timestamp_timeout=5
+
+----
+
+LDAP Sudo Configuration:
+[source, bash]
+----
+No LDAP sudoers configuration
+
+----
+
+PAM System Auth Configuration:
+[source, bash]
+----
+
+auth        required                                     pam_env.so
+auth        required                                     pam_faildelay.so delay=2000000
+auth        required                                     pam_faillock.so preauth silent
+auth        [default=1 ignore=ignore success=ok]         pam_usertype.so isregular
+auth        [default=1 ignore=ignore success=ok]         pam_localuser.so
+auth        sufficient                                   pam_unix.so
+auth        [default=1 ignore=ignore success=ok]         pam_usertype.so isregular
+auth        sufficient                                   pam_sss.so forward_pass
+auth        required                                     pam_faillock.so authfail
+auth        required                                     pam_deny.so
+
+account     required                                     pam_faillock.so
+account     required                                     pam_unix.so
+account     sufficient                                   pam_localuser.so
+account     sufficient                                   pam_usertype.so issystem
+account     [default=bad success=ok user_unknown=ignore] pam_sss.so
+account     required                                     pam_permit.so
+
+password    requisite                                    pam_pwquality.so local_users_only
+password    [default=1 ignore=ignore success=ok]         pam_localuser.so
+password    requisite                                    pam_pwhistory.so use_authtok
+password    sufficient                                   pam_unix.so sha512 shadow  use_authtok
+password    [success=1 default=ignore]                   pam_localuser.so
+password    sufficient                                   pam_sss.so use_authtok
+password    required                                     pam_deny.so
+
+session     optional                                     pam_keyinit.so revoke
+session     required                                     pam_limits.so
+-session    optional                                     pam_systemd.so
+session     [success=1 default=ignore]                   pam_succeed_if.so service in crond quiet use_uid
+session     required                                     pam_unix.so
+session     optional                                     pam_sss.so
+
+----
+
+PAM Password Auth Configuration:
+[source, bash]
+----
+
+auth        required                                     pam_env.so
+auth        required                                     pam_faildelay.so delay=2000000
+auth        required                                     pam_faillock.so preauth silent
+auth        [default=1 ignore=ignore success=ok]         pam_usertype.so isregular
+auth        [default=1 ignore=ignore success=ok]         pam_localuser.so
+auth        sufficient                                   pam_unix.so
+auth        [default=1 ignore=ignore success=ok]         pam_usertype.so isregular
+auth        sufficient                                   pam_sss.so forward_pass
+auth        required                                     pam_faillock.so authfail
+auth        required                                     pam_deny.so
+
+account     required                                     pam_faillock.so
+account     required                                     pam_unix.so
+account     sufficient                                   pam_localuser.so
+account     sufficient                                   pam_usertype.so issystem
+account     [default=bad success=ok user_unknown=ignore] pam_sss.so
+account     required                                     pam_permit.so
+
+password    requisite                                    pam_pwquality.so local_users_only
+password    [default=1 ignore=ignore success=ok]         pam_localuser.so
+password    requisite                                    pam_pwhistory.so use_authtok
+password    sufficient                                   pam_unix.so sha512 shadow  use_authtok
+password    [success=1 default=ignore]                   pam_localuser.so
+password    sufficient                                   pam_sss.so use_authtok
+password    required                                     pam_deny.so
+
+session     optional                                     pam_keyinit.so revoke
+session     required                                     pam_limits.so
+-session    optional                                     pam_systemd.so
+session     [success=1 default=ignore]                   pam_succeed_if.so service in crond quiet use_uid
+session     required                                     pam_unix.so
+session     optional                                     pam_sss.so
+
+----
+
+Sudo Logging:
+[source, bash]
+----
+-rw-------. 1 root root 1102900 Aug  6 19:25 /var/log/secure
+-rw-------. 1 root root  242731 Aug  6 19:25 /var/log/sudo.log
+
+----
+
+Users with Sudo Privileges:
+[source, bash]
+----
+No additional sudo users found
+
+----
+
+Non-root Users in Sudo/Wheel Groups:
+[source, bash]
+----
+ayaseen
+
+----
+
+Users with UID 0 (root privileges):
+[source, bash]
+----
+None
+
+----
+
+**Observation**
+
+Local users with root or sudo privileges detected
+
+**Recommendation**
+
+Consider implementing Red Hat IdM (Identity Management) for centralized and granular control of user privileges
+
+Review and remove unnecessary sudo privileges from local users
+
+Implement a proper privilege escalation workflow through a centralized system
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/planning_identity_management/index
+
+== Kerberos Configuration
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#A6B9BF}
+Not Applicable
+|===
+
+Kerberos Installation:
+[source, bash]
+----
+package krb5-workstation is not installed
+Kerberos not installed
+
+----
+
+**Observation**
+
+Kerberos is not configured on this system
+
+**Recommendation**
+
+This check is not applicable as Kerberos is not being used
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/
+
+== Audit Configuration
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+|===
+
+Auditd Service Active: true
+
+Audit Configuration:
+[source, bash]
+----
+max_log_file = 8
+num_logs = 5
+max_log_file_action = ROTATE
+space_left = 75
+space_left_action = SYSLOG
+action_mail_acct = root
+admin_space_left = 50
+admin_space_left_action = SUSPEND
+disk_full_action = SUSPEND
+disk_error_action = SUSPEND
+overflow_action = SYSLOG
+
+----
+
+Audit Rules:
+[source, bash]
+----
+No rules
+
+----
+
+Audit Log File:
+[source, bash]
+----
+-rw-------. 1 root root 6.0M Aug  6 19:25 /var/log/audit/audit.log
+
+----
+
+TTY Auditing Configuration:
+[source, bash]
+----
+None
+
+----
+
+**Observation**
+
+Found 2 issues with audit configuration
+
+**Recommendation**
+
+Few audit rules defined (0 rules)
+
+TTY auditing not configured for root user
+
+Configure audit rules in /etc/audit/rules.d/
+
+Follow security guidelines for critical events to audit
+
+Enable TTY auditing for root in /etc/pam.d/system-auth and password-auth: 'session required pam_tty_audit.so enable=root'
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/configuring-auditd_security-hardening
+
+== Password Policy
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+|===
+
+Password Quality Configuration:
+[source, bash]
+----
+# Configuration for systemwide password quality limits
+# Defaults:
+#
+# Number of characters in the new password that must not be present in the
+# old password.
+# difok = 1
+#
+# Minimum acceptable size for the new password (plus one if
+# credits are not disabled which is the default). (See pam_cracklib manual.)
+# Cannot be set to lower value than 6.
+# minlen = 8
+#
+# The maximum credit for having digits in the new password. If less than 0
+# it is the minimum number of digits in the new password.
+# dcredit = 0
+#
+# The maximum credit for having uppercase characters in the new password.
+# If less than 0 it is the minimum number of uppercase characters in the new
+# password.
+# ucredit = 0
+#
+# The maximum credit for having lowercase characters in the new password.
+# If less than 0 it is the minimum number of lowercase characters in the new
+# password.
+# lcredit = 0
+#
+# The maximum credit for having other characters in the new password.
+# If less than 0 it is the minimum number of other characters in the new
+# password.
+# ocredit = 0
+#
+# The minimum number of required classes of characters for the new
+# password (digits, uppercase, lowercase, others).
+# minclass = 0
+#
+# The maximum number of allowed consecutive same characters in the new password.
+# The check is disabled if the value is 0.
+# maxrepeat = 0
+#
+# The maximum number of allowed consecutive characters of the same class in the
+# new password.
+# The check is disabled if the value is 0.
+# maxclassrepeat = 0
+#
+# Whether to check for the words from the passwd entry GECOS string of the user.
+# The check is enabled if the value is not 0.
+# gecoscheck = 0
+#
+# Whether to check for the words from the cracklib dictionary.
+# The check is enabled if the value is not 0.
+# dictcheck = 1
+#
+# Whether to check if it contains the user name in some form.
+# The check is enabled if the value is not 0.
+# usercheck = 1
+#
+# Length of substrings from the username to check for in the password
+# The check is enabled if the value is greater than 0 and usercheck is enabled.
+# usersubstr = 0
+#
+# Whether the check is enforced by the PAM module and possibly other
+# applications.
+# The new password is rejected if it fails the check and the value is not 0.
+# enforcing = 1
+#
+# Path to the cracklib dictionaries. Default is to use the cracklib default.
+# dictpath =
+#
+# Prompt user at most N times before returning with error. The default is 1.
+# retry = 3
+#
+# Enforces pwquality checks on the root user password.
+# Enabled if the option is present.
+# enforce_for_root
+#
+# Skip testing the password quality for users that are not present in the
+# /etc/passwd file.
+# Enabled if the option is present.
+# local_users_only
+# Per CCE-88413-0: Set dictcheck = 1 in /etc/security/pwquality.conf
+dictcheck = 1
+# Per CCE-83564-5: Set difok = 2 in /etc/security/pwquality.conf
+difok = 2
+enforce_for_root
+# Per CCE-83567-8: Set maxrepeat = 3 in /etc/security/pwquality.conf
+maxrepeat = 3
+# Per CCE-83563-7: Set minclass = 4 in /etc/security/pwquality.conf
+minclass = 4
+# Per CCE-83579-3: Set minlen = 14 in /etc/security/pwquality.conf
+minlen = 14
+
+----
+
+Password Aging Policy:
+[source, bash]
+----
+#	PASS_MAX_DAYS	Maximum number of days a password may be used.
+#	PASS_MIN_DAYS	Minimum number of days allowed between password changes.
+#	PASS_MIN_LEN	Minimum acceptable password length.
+#	PASS_WARN_AGE	Number of days warning given before a password expires.
+PASS_MAX_DAYS 365
+PASS_MIN_DAYS	0
+PASS_WARN_AGE	7
+# Currently PASS_MIN_LEN is not supported
+
+----
+
+Account Lockout Policy:
+[source, bash]
+----
+auth        required                                     pam_faillock.so preauth silent
+auth        required                                     pam_faillock.so authfail
+account     required                                     pam_faillock.so
+
+----
+
+Sudo Access Rules:
+[source, bash]
+----
+Defaults   !visiblepw
+Defaults    always_set_home
+Defaults    match_group_by_gid
+Defaults    always_query_group_plugin
+Defaults    env_reset
+Defaults    env_keep =  "COLORS DISPLAY HOSTNAME HISTSIZE KDEDIR LS_COLORS"
+Defaults    env_keep += "MAIL PS1 PS2 QTDIR USERNAME LANG LC_ADDRESS LC_CTYPE"
+Defaults    env_keep += "LC_COLLATE LC_IDENTIFICATION LC_MEASUREMENT LC_MESSAGES"
+Defaults    env_keep += "LC_MONETARY LC_NAME LC_NUMERIC LC_PAPER LC_TELEPHONE"
+Defaults    env_keep += "LC_TIME LC_ALL LANGUAGE LINGUAS _XKB_CHARSET XAUTHORITY"
+Defaults    secure_path = /sbin:/bin:/usr/sbin:/usr/bin
+root	ALL=(ALL) 	ALL
+%wheel	ALL=(ALL)	ALL
+Defaults use_pty
+Defaults logfile=/var/log/sudo.log
+Defaults timestamp_timeout=5
+
+----
+
+Sudo Logging Configuration:
+[source, bash]
+----
+/etc/sudoers:Defaults logfile=/var/log/sudo.log
+Sudo logging not configured
+
+----
+
+Password Hashing Algorithm:
+[source, bash]
+----
+password    sufficient                                   pam_unix.so sha512 shadow  use_authtok
+
+----
+
+**Observation**
+
+Found 2 password policy issues
+
+**Recommendation**
+
+Password maximum age (365 days) exceeds 90 days
+
+Sudo command logging not configured
+
+Add 'Defaults logfile=/var/log/sudo.log' to /etc/sudoers
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/using-tools-and-services-to-enhance-security_security-hardening#configuring-password-security_using-tools-and-services-to-enhance-security
+
+== File Permissions
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+|===
+
+File Permissions for Sensitive Files:
+[source, bash]
+----
+-rw-------. 1 root root    490 Aug  6 09:12 /etc/crontab
+-rw-r--r--. 1 root root    528 Aug  6 09:12 /etc/group
+----------. 1 root root    415 Aug  6 09:12 /etc/gshadow
+-rw-r--r--. 1 root root   1035 Aug  6 09:11 /etc/passwd
+----------. 1 root root    761 Aug  6 09:15 /etc/shadow
+-rw-------. 1 root root   4243 Aug  6 09:12 /etc/ssh/sshd_config
+-r--r-----. 1 root root   4409 Aug  6 09:12 /etc/sudoers
+-rw-rw----. 1 root utmp   1920 Aug  6 18:18 /var/log/btmp
+-rw-rw-r--. 1 root utmp 292292 Aug  6 18:39 /var/log/lastlog
+-rw-rw-r--. 1 root utmp 401664 Aug  6 18:58 /var/log/wtmp
+
+----
+
+No world-writable files found in key directories.
+
+World-Readable Log Files Found:
+[source, bash]
+----
+      134    396 -rw-rw-r--   1 root     utmp       401664 Aug  6 18:58 /var/log/wtmp
+      136     12 -rw-rw-r--   1 root     utmp       292292 Aug  6 18:39 /var/log/lastlog
+  8519810      4 -rw-r--r--   1 root     root         1271 Aug  6 15:36 /var/log/rhsm/rhsmcertd.log
+  8519811      4 -rw-r--r--   1 root     root          618 Aug  6 15:36 /var/log/rhsm/rhsm.log
+      157     32 -rw-r--r--   1 root     root        28841 Aug  6 09:12 /var/log/anaconda/lorax-packages.log
+      161     52 -rw-r--r--   1 root     root        53044 Aug  6 19:25 /var/log/dnf.log
+      162      8 -rw-r--r--   1 root     root         7888 Aug  6 19:25 /var/log/dnf.librepo.log
+      163      4 -rw-r--r--   1 root     root         1972 Aug  6 19:25 /var/log/dnf.rpm.log
+
+----
+
+Cron Directory Permissions:
+[source, bash]
+----
+drwx------. 2 root root 21 Aug  6 09:10 /etc/cron.d
+
+----
+
+Immutable Critical Files:
+[source, bash]
+----
+No immutable flags found
+
+----
+
+SELinux Contexts for Critical Files:
+[source, bash]
+----
+system_u:object_r:passwd_file_t:s0 /etc/passwd
+     system_u:object_r:shadow_t:s0 /etc/shadow
+        system_u:object_r:etc_t:s0 /etc/ssh/sshd_config
+
+----
+
+Audit Rules for Critical Files:
+[source, bash]
+----
+No audit rules found for critical files
+
+----
+
+SCAP Security Tools Installation:
+[source, bash]
+----
+scap-security-guide-0.1.76-1.el9.noarch
+openscap-scanner-1.3.11-1.el9.x86_64
+
+----
+
+Unapproved SUID/SGID Binaries Found (whitelist approach):
+[source, bash]
+----
+/usr/bin/write
+/usr/sbin/grub2-set-bootflag
+/usr/sbin/pam_timestamp_check
+
+----
+
+**Observation**
+
+Found 4 file permission issues
+
+**Recommendation**
+
+World-readable log files found in /var/log
+
+Critical configuration files are not set as immutable
+
+No audit rules configured for critical files
+
+Unapproved SUID/SGID binaries found (not in whitelist)
+
+Remove world-readable permissions from log files: 'chmod o-r /var/log/*'
+
+Consider setting critical files as immutable: 'chattr +i /etc/passwd /etc/shadow'
+
+Configure audit rules for critical files: 'echo "-w /etc/passwd -p wa -k identity" >> /etc/audit/rules.d/audit.rules'
+
+Review and remove SUID/SGID from unapproved binaries: 'chmod -s <file>'
+
+Maintain a whitelist of allowed SUID/SGID binaries per Red Hat recommendations
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/assembly_securing-files-and-directories_security-hardening
+
+== RHEL CIS Compliance
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+|===
+
+RHEL CIS Compliance and Best Practices Report
+
+Overall Score: 71/100 (71%)
+
+{set:cellbgcolor!}
+Category Scores:
+[cols="2,1,1,1", options="header"]
+|===
+|Category|Score|Max Score|Percentage
+|Partitioning|10|10|100%
+|Filesystem Configuration|10|10|100%
+|Authentication|2|10|20%
+|Network Security|2|10|20%
+|Services|8|10|80%
+|SELinux & MAC|10|10|100%
+|System Updates|7|10|70%
+|Logging & Auditing|6|10|60%
+|Time Synchronization|10|10|100%
+|Additional Security|6|10|60%
+|===
+
+
+== Detailed Findings:
+
+=== Partitioning (10/10)
+* ✓ /home is on a separate partition
+* ✓ /tmp is on a separate partition
+* ✓ /var is on a separate partition
+* ✓ /var/log is on a separate partition
+* ✓ /var/tmp is on a separate partition
+
+=== Filesystem Configuration (10/10)
+* ✓ /tmp has nodev option
+* ✓ /tmp has nosuid option
+* ✓ /tmp has noexec option
+* ✓ /var/tmp has nodev option
+* ✓ /var/tmp has nosuid option
+* ✓ /var/tmp has noexec option
+* ✓ /home has nodev option
+
+=== Authentication (2/10)
+* ✗ SSSD is not installed
+* ✗ System is not joined to Red Hat IDM or Active Directory
+* ✓ PAM has password quality requirements
+
+Recommendations:
+* Install SSSD: 'yum install sssd'
+* Join system to Red Hat IDM or Active Directory
+
+=== Network Security (2/10)
+* ✓ Firewall (firewalld) is active
+* ✗ Firewall using default 'public' zone
+* ✗ SSH root login is not explicitly disabled
+* ✗ SSH password authentication is not disabled
+
+Recommendations:
+* Consider using a custom firewall zone
+* Disable SSH root login: 'PermitRootLogin no'
+* Disable SSH password auth: 'PasswordAuthentication no'
+
+=== Services (8/10)
+* ✓ 11/11 unnecessary services are disabled or not installed
+* ⚠ Moderate number of enabled services: 27
+
+Recommendations:
+* Review enabled services and disable unnecessary ones
+
+=== SELinux & MAC (10/10)
+* ✓ SELinux is in enforcing mode
+* ✓ SELinux policy is set to targeted
+
+=== System Updates (7/10)
+* ✓ No security updates pending
+* ✗ Automatic updates are not configured
+
+Recommendations:
+* Install automatic updates: 'yum install yum-cron' or 'yum install dnf-automatic'
+
+=== Logging & Auditing (6/10)
+* ✓ rsyslog service is active
+* ✓ auditd service is active
+* ⚠ Only 1 audit rules configured
+* ✓ Log rotation is configured
+
+Recommendations:
+* Configure more audit rules
+
+=== Time Synchronization (10/10)
+* ✓ chronyd service is active
+* ✓ System clock is synchronized
+* ✓ Timezone configured: Time zone: Asia/Riyadh (+03, +0300)
+
+=== Additional Security (6/10)
+* ✓ AIDE (file integrity) is installed
+* ✗ Password minimum length not set
+* ✓ Account lockout after failed logins is configured
+* ✓ GRUB boot password is configured
+* ⚠ USB storage is not disabled by policy
+
+Recommendations:
+* Set password minimum length in /etc/login.defs
+* Consider disabling USB storage if not needed
+
+**Observation**
+
+System is moderately compliant with RHEL CIS standards (71%)
+
+**Recommendation**
+
+Install SSSD: 'yum install sssd'
+
+Join system to Red Hat IDM or Active Directory
+
+Consider using a custom firewall zone
+
+Disable SSH root login: 'PermitRootLogin no'
+
+Disable SSH password auth: 'PasswordAuthentication no'
+
+... and 5 more recommendations (see details)
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/index
+
+== Kernel Version
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+|===
+
+Current Running Kernel:
+[source, bash]
+----
+5.14.0-570.12.1.el9_6.x86_64
+----
+
+Latest Available Kernel:
+[source, bash]
+----
+Unable to query latest
+----
+
+Repository Metadata Status:
+[source, bash]
+----
+Could not determine repository metadata age
+
+----
+
+Kernel Version Status Summary:
+[source, text]
+----
+Running kernel: 5.14.0-570.12.1.el9_6.x86_64
+Latest available kernel: Unable to query latest
+Formatted for comparison: Unable to query latest
+Repository metadata age: 20306 days
+Running latest kernel: false
+
+----
+
+**Observation**
+
+Repository metadata is 20306 days old - unable to reliably determine if latest kernel is installed
+
+**Recommendation**
+
+Refresh repository metadata with 'subscription-manager refresh'
+
+For disconnected environments, sync content from Satellite server
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/configuring_basic_system_settingsindex
+
+== BIOS/UEFI Firmware
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#80E5FF}
+Advisory
+|===
+
+System Information:
+[source, bash]
+----
+System Manufacturer: QEMU
+System Model: Standard PC (Q35 + ICH9, 2009)
+Firmware Vendor: SeaBIOS
+Firmware Version: Arch Linux 1.17.0-1-1
+Firmware Date: 04/01/2014
+System Type: kvm
+
+
+----
+
+Firmware Information:
+[source, bash]
+----
+# dmidecode 3.6
+Getting SMBIOS data from sysfs.
+SMBIOS 2.8 present.
+
+Handle 0x0000, DMI type 0, 24 bytes
+BIOS Information
+	Vendor: SeaBIOS
+	Version: Arch Linux 1.17.0-1-1
+	Release Date: 04/01/2014
+	Address: 0xE8000
+	Runtime Size: 96 kB
+	ROM Size: 64 kB
+	Characteristics:
+		BIOS characteristics not supported
+		Targeted content distribution is supported
+	BIOS Revision: 0.0
+
+
+----
+
+System Information:
+[source, bash]
+----
+# dmidecode 3.6
+Getting SMBIOS data from sysfs.
+SMBIOS 2.8 present.
+
+Handle 0x0100, DMI type 1, 27 bytes
+System Information
+	Manufacturer: QEMU
+	Product Name: Standard PC (Q35 + ICH9, 2009)
+	Version: pc-q35-10.0
+	Serial Number: Not Specified
+	UUID: 7c77c234-b97a-4835-9d77-e630951047f5
+	Wake-up Type: Power Switch
+	SKU Number: Not Specified
+	Family: Not Specified
+
+Handle 0x2000, DMI type 32, 11 bytes
+System Boot Information
+	Status: No errors detected
+
+
+----
+
+Intel MDS Vulnerability Status:
+[source, bash]
+----
+Not affected
+
+----
+
+**Observation**
+
+This is a virtual machine - firmware is managed by the hypervisor
+
+**Recommendation**
+
+Ensure the hypervisor host's firmware is up to date
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/#Virtualization
+
+== SSH Hardening
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+|===
+
+SSH Configuration File Content:
+[source, bash]
+----
+KexAlgorithms -diffie-hellman-group1-sha1,diffie-hellman-group14-sha1,diffie-hellman-group-exchange-sha1
+#	$OpenBSD: sshd_config,v 1.104 2021/07/02 05:11:21 dtucker Exp $
+
+# This is the sshd server system-wide configuration file.  See
+# sshd_config(5) for more information.
+
+# This sshd was compiled with PATH=/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin
+
+# The strategy used for options in the default sshd_config shipped with
+# OpenSSH is to specify options with their default value where
+# possible, but leave them commented.  Uncommented options override the
+# default value.
+
+# To modify the system-wide sshd configuration, create a  *.conf  file under
+#  /etc/ssh/sshd_config.d/  which will be automatically included below
+Include /etc/ssh/sshd_config.d/*.conf
+
+# If you want to change the port on a SELinux system, you have to tell
+# SELinux about this change.
+# semanage port -a -t ssh_port_t -p tcp #PORTNUMBER
+... (output truncated) ...
+
+----
+
+SSH Server Configuration Highlights:
+[source, bash]
+----
+Protocol: Protocol setting not found
+
+Root Login: PermitRootLogin setting not found
+
+Empty Passwords: PermitEmptyPasswords setting not found
+
+X11 Forwarding: X11Forwarding setting not found
+
+Max Auth Tries: MaxAuthTries setting not found
+
+Password Authentication: PasswordAuthentication setting not found
+
+Challenge Response Auth: ChallengeResponseAuthentication setting not found
+
+Login Grace Time: LoginGraceTime setting not found
+
+Client Alive Interval: ClientAliveInterval setting not found
+
+Client Alive Count Max: ClientAliveCountMax setting not found
+
+Hostbased Authentication: HostbasedAuthentication setting not found
+
+TCP Forwarding: AllowTcpForwarding setting not found
+
+Banner: Banner setting not found or commented out
+
+Allow Users/Groups: AllowUsers/AllowGroups settings not found
+
+UseDNS: UseDNS setting not found
+
+Ciphers: Ciphers setting not found
+
+MACs: MACs -hmac-md5,hmac-md5-96,hmac-ripemd160,hmac-sha1-96,umac-64@openssh.com,hmac-md5-etm@openssh.com,hmac-md5-96-etm@openssh.com,hmac-ripemd160-etm@openssh.com,hmac-sha1-96-etm@openssh.com,umac-64-etm@openssh.com
+
+Key Exchange Algorithms: KexAlgorithms -diffie-hellman-group1-sha1,diffie-hellman-group14-sha1,diffie-hellman-group-exchange-sha1
+
+
+----
+
+SSH Configuration File Permissions:
+[source, bash]
+----
+sshd_config: 600 root:root
+
+
+----
+
+SSH Host Key File Permissions:
+[source, bash]
+----
+/etc/ssh/ssh_host_ecdsa_key 640 root:ssh_keys
+/etc/ssh/ssh_host_rsa_key 640 root:ssh_keys
+/etc/ssh/ssh_host_ed25519_key 640 root:ssh_keys
+
+
+----
+
+PAM SSH Configuration:
+[source, bash]
+----
+#%PAM-1.0
+auth       substack     password-auth
+auth       include      postlogin
+account    required     pam_sepermit.so
+account    required     pam_nologin.so
+account    include      password-auth
+password   include      password-auth
+# pam_selinux.so close should be the first session rule
+session    required     pam_selinux.so close
+session    required     pam_loginuid.so
+# pam_selinux.so open should only be followed by sessions to be executed in the user context
+session    required     pam_selinux.so open env_params
+session    required     pam_namespace.so
+session    optional     pam_keyinit.so force revoke
+session    optional     pam_motd.so
+session    include      password-auth
+session    include      postlogin
+
+----
+
+**Observation**
+
+Found 16 SSH hardening issues
+
+**Recommendation**
+
+SSH MaxAuthTries is set to 6 (recommended max: 4)
+
+LoginGraceTime is 120 seconds (recommended: 60s or less)
+
+ClientAliveInterval is 0 (recommended: 300s or less, but not 0)
+
+No SSH banner configured
+
+No AllowUsers or AllowGroups restrictions configured
+
+No explicit Ciphers configured (using default list)
+
+Weak MACs found in configuration
+
+Weak key exchange algorithms found in configuration
+
+SSH host key /etc/ssh/ssh_host_ecdsa_key has incorrect permissions: 640 (should be 600)
+
+SSH host key /etc/ssh/ssh_host_ecdsa_key has incorrect ownership: root:ssh_keys (should be root:root)
+
+SSH host key /etc/ssh/ssh_host_rsa_key has incorrect permissions: 640 (should be 600)
+
+SSH host key /etc/ssh/ssh_host_rsa_key has incorrect ownership: root:ssh_keys (should be root:root)
+
+SSH host key /etc/ssh/ssh_host_ed25519_key has incorrect permissions: 640 (should be 600)
+
+SSH host key /etc/ssh/ssh_host_ed25519_key has incorrect ownership: root:ssh_keys (should be root:root)
+
+PAM faillock not configured for SSH (account lockout protection missing)
+
+PAM password quality not configured for SSH (password complexity checks missing)
+
+Edit /etc/ssh/sshd_config and set recommended values:
+
+- Protocol 2
+
+- PermitRootLogin no
+
+- PermitEmptyPasswords no
+
+- X11Forwarding no
+
+- MaxAuthTries 4
+
+- PasswordAuthentication no (if key-based auth is set up)
+
+- ChallengeResponseAuthentication no
+
+- LoginGraceTime 60
+
+- ClientAliveInterval 300
+
+- ClientAliveCountMax 3
+
+- HostbasedAuthentication no
+
+- AllowTcpForwarding no
+
+- Banner /etc/issue.net
+
+- UseDNS no
+
+Configure AllowUsers or AllowGroups to restrict SSH access
+
+Ensure SSH configuration files have appropriate permissions (chmod 600 /etc/ssh/sshd_config)
+
+Restart SSH after changes: 'systemctl restart sshd'
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/assembly_securing-the-openssh-service_security-hardening
+
+== Root Account Security
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+|===
+
+Root Account Security Analysis:
+
+Root Login Shell:
+[source, bash]
+----
+/bin/bash
+
+----
+
+Securetty Configuration (terminals allowed for root login):
+[source, bash]
+----
+None
+
+----
+
+Wheel Group Configuration in Sudoers:
+[source, bash]
+----
+None
+
+----
+
+Root Idle Timeout Configuration:
+[source, bash]
+----
+/etc/profile.d/tmout.sh:typeset -xr TMOUT=900
+
+----
+
+GRUB Password Protection:
+[source, bash]
+----
+GRUB password configured
+
+----
+
+Members of Wheel Group:
+[source, bash]
+----
+ayaseen
+
+----
+
+TTY Auditing for SU Command:
+[source, bash]
+----
+None
+
+----
+
+**Observation**
+
+Found 3 root account security issues
+
+**Recommendation**
+
+Root account has a valid login shell
+
+Wheel group not properly configured in sudoers
+
+TTY auditing not configured for su command
+
+Change the root shell to /sbin/nologin in /etc/passwd to prevent direct logins
+
+Configure wheel group in /etc/sudoers: '%wheel ALL=(ALL) ALL'
+
+Enable TTY auditing for su in /etc/pam.d/su: 'session required pam_tty_audit.so enable=root'
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/configuring-automated-password-security_security-hardening
+
+== Unused Devices
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#A6B9BF}
+Not Applicable
+|===
+
+Device Status:
+[source, bash]
+----
+- webcam: Not loaded
+- smartcard: Not loaded
+- fingerprint: Not loaded
+- bluetooth: Not loaded
+- firewire: Not loaded
+- thunderbolt: Not loaded
+- wireless: Not loaded
+- sound: Not loaded
+
+----
+
+Kernel Module Blacklisting:
+[source, bash]
+----
+
+# Disable per security requirements
+install cramfs /bin/false
+blacklist cramfs
+
+# Disable per security requirements
+install freevxfs /bin/false
+blacklist freevxfs
+
+# Disable per security requirements
+install hfs /bin/false
+blacklist hfs
+
+# Disable per security requirements
+install hfsplus /bin/false
+blacklist hfsplus
+
+# Disable per security requirements
+install jffs2 /bin/false
+blacklist jffs2
+
+# Disable per security requirements
+install usb-storage /bin/false
+blacklist usb-storage
+
+----
+
+Kernel Boot Parameters for Blacklisting:
+[source, bash]
+----
+No module blacklisting in kernel parameters
+
+----
+
+PCI Devices and Drivers:
+[source, bash]
+----
+00:00.0 Host bridge: Intel Corporation 82G33/G31/P35/P31 Express DRAM Controller
+	Subsystem: Red Hat, Inc. QEMU Virtual Machine
+00:01.0 VGA compatible controller: Device 1234:1111 (rev 02)
+	Subsystem: Red Hat, Inc. Device 1100
+	Kernel driver in use: bochs-drm
+	Kernel modules: bochs
+00:02.0 PCI bridge: Red Hat, Inc. QEMU PCIe Root port
+	Kernel driver in use: pcieport
+00:02.1 PCI bridge: Red Hat, Inc. QEMU PCIe Root port
+	Kernel driver in use: pcieport
+00:02.2 PCI bridge: Red Hat, Inc. QEMU PCIe Root port
+	Kernel driver in use: pcieport
+00:02.3 PCI bridge: Red Hat, Inc. QEMU PCIe Root port
+	Kernel driver in use: pcieport
+00:02.4 PCI bridge: Red Hat, Inc. QEMU PCIe Root port
+	Kernel driver in use: pcieport
+00:02.5 PCI bridge: Red Hat, Inc. QEMU PCIe Root port
+	Kernel driver in use: pcieport
+00:02.6 PCI bridge: Red Hat, Inc. QEMU PCIe Root port
+	Kernel driver in use: pcieport
+... (output truncated)
+
+----
+
+**Observation**
+
+This is a virtual machine - device management is handled by the hypervisor
+
+**Recommendation**
+
+None
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/
+
+== Shell History Configuration
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+|===
+
+Shell History Configuration Analysis:
+
+Global Bash History Settings:
+[source, bash]
+----
+/etc/bashrc:    if [ -z "$PROMPT_COMMAND" ]; then
+/etc/bashrc:            PROMPT_COMMAND=/etc/sysconfig/bash-prompt-xterm
+/etc/bashrc:            PROMPT_COMMAND='printf "\033]0;%s@%s:%s\007" "${USER}" "${HOSTNAME%%.*}" "${PWD/#$HOME/\~}"'
+/etc/bashrc:            PROMPT_COMMAND=/etc/sysconfig/bash-prompt-screen
+/etc/bashrc:            PROMPT_COMMAND='printf "\033k%s@%s:%s\033\\" "${USER}" "${HOSTNAME%%.*}" "${PWD/#$HOME/\~}"'
+/etc/bashrc:        [ -e /etc/sysconfig/bash-prompt-default ] && PROMPT_COMMAND=/etc/sysconfig/bash-prompt-default
+/etc/bashrc:    shopt -s histappend
+/etc/profile:HISTSIZE=1000
+/etc/profile:export PATH USER LOGNAME MAIL HOSTNAME HISTSIZE HISTCONTROL
+
+----
+
+Root Bash History File Attributes:
+[source, bash]
+----
+None
+
+----
+
+History Size Settings:
+[source, bash]
+----
+/etc/profile:export PATH USER LOGNAME MAIL HOSTNAME HISTSIZE HISTCONTROL
+/etc/profile:HISTSIZE=1000
+
+----
+
+History Timestamp Configuration:
+[source, bash]
+----
+None
+
+----
+
+History Append Configuration:
+[source, bash]
+----
+/etc/bashrc:    shopt -s histappend
+
+----
+
+PROMPT_COMMAND History Configuration:
+[source, bash]
+----
+None
+
+----
+
+Command Logging to Syslog:
+[source, bash]
+----
+None
+
+----
+
+**Observation**
+
+Found 4 shell history configuration issues
+
+**Recommendation**
+
+HISTFILESIZE is not set or too small (should be at least 10000)
+
+History timestamp format not configured
+
+PROMPT_COMMAND not configured for immediate history preservation
+
+Root's bash_history file is not set as append-only
+
+Set appropriate history sizes in /etc/profile.d/history.sh:
+
+export HISTSIZE=10000
+
+export HISTFILESIZE=20000
+
+Add timestamp to history in /etc/profile.d/history.sh:
+
+export HISTTIMEFORMAT="%F %T "
+
+Configure PROMPT_COMMAND for immediate history in /etc/profile.d/history.sh:
+
+export PROMPT_COMMAND="history -a; history -n; $PROMPT_COMMAND"
+
+Make root's history append-only: 'chattr +a /root/.bash_history'
+
+(Optional) Log commands to syslog by adding to /etc/profile.d/logging.sh:
+
+export PROMPT_COMMAND='history -a; history -n; logger -p local1.notice "$(whoami)[$$]: $(history 1)"'
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/security_hardening/assembly_securing-the-system-against-intrusion_security-hardening
+
+<<<
+
+{set:cellbgcolor!}
+
+# Services
+
+[cols="1,2,2,3", options=header]
+|===
+|*Category*
+|*Item Evaluated*
+|*Observed Result*
+|*Recommendation*
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/backup-systems.item
+
+// Category
+|
+{set:cellbgcolor!}
+Services
+
+// Item Evaluated
+a|
+<<Backup Systems>>
+
+| No backup system detected 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/backup-recovery.item
+
+// Category
+|
+{set:cellbgcolor!}
+Services
+
+// Item Evaluated
+a|
+<<Recovery Process>>
+
+| No evidence of recent recovery testing found 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/backup-application.item
+
+// Category
+|
+{set:cellbgcolor!}
+Services
+
+// Item Evaluated
+a|
+<<Application Backups>>
+
+| No applications requiring specialized backups detected 
+
+| 
+{set:cellbgcolor:#80E5FF}
+Advisory
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/services-unnecessary.item
+
+// Category
+|
+{set:cellbgcolor!}
+Services
+
+// Item Evaluated
+a|
+<<Unnecessary Services>>
+
+| No unnecessary services were identified 
+
+| 
+{set:cellbgcolor:#00FF00}
+No Change
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/services-required.item
+
+// Category
+|
+{set:cellbgcolor!}
+Services
+
+// Item Evaluated
+a|
+<<Required Services>>
+
+| All required services are active and enabled 
+
+| 
+{set:cellbgcolor:#00FF00}
+No Change
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/boot-target.item
+
+// Category
+|
+{set:cellbgcolor!}
+Services
+
+// Item Evaluated
+a|
+<<Boot Target>>
+
+| Default boot target is multi-user.target (text mode), following RHEL best practices 
+
+| 
+{set:cellbgcolor:#00FF00}
+No Change
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/logs-system-errors.item
+
+// Category
+|
+{set:cellbgcolor!}
+Services
+
+// Item Evaluated
+a|
+<<System Logs Check>>
+
+| Found 29 errors in system logs 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/boot-errors.item
+
+// Category
+|
+{set:cellbgcolor!}
+Services
+
+// Item Evaluated
+a|
+<<Boot Errors>>
+
+| Found 1994 boot errors and 0 failed units 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/monitoring-logs.item
+
+// Category
+|
+{set:cellbgcolor!}
+Services
+
+// Item Evaluated
+a|
+<<Centralized Logging>>
+
+| Logging services running but centralized logging not configured 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/logs-rotation.item
+
+// Category
+|
+{set:cellbgcolor!}
+Services
+
+// Item Evaluated
+a|
+<<Log Rotation>>
+
+| Found 2 log rotation issues 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/monitoring-alerts.item
+
+// Category
+|
+{set:cellbgcolor!}
+Services
+
+// Item Evaluated
+a|
+<<Alerting Rules>>
+
+| No monitoring system or agents detected 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/logs-system.item
+
+// Category
+|
+{set:cellbgcolor!}
+Services
+
+// Item Evaluated
+a|
+<<Logging System>>
+
+| Found 1 local logging system issues 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/monitoring-agents.item
+
+// Category
+|
+{set:cellbgcolor!}
+Services
+
+// Item Evaluated
+a|
+<<Monitoring Agents>>
+
+| No monitoring agents detected 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+|===
+
+== Backup Systems
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+|===
+
+Backup Tools Installed:
+[source, bash]
+----
+No common backup tools detected
+
+----
+
+Backup Cron Jobs:
+[source, bash]
+----
+No backup cron jobs found
+
+----
+
+Backup Directories:
+[source, bash]
+----
+No common backup directories found
+
+----
+
+Backup Mounts:
+[source, bash]
+----
+No backup mounts found
+
+----
+
+LVM Snapshots:
+[source, bash]
+----
+No LVM snapshots found
+
+----
+
+**Observation**
+
+No backup system detected
+
+**Recommendation**
+
+Implement a backup strategy for this system
+
+Consider tools like rsync, borgbackup, or enterprise backup solutions
+
+Set up regular backup schedules using cron
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/system_design_guide/backup-and-recovery
+
+== Recovery Process
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+|===
+
+Recovery Documentation:
+[source, bash]
+----
+
+----
+
+Recovery Scripts:
+[source, bash]
+----
+/etc/bash_completion.d/authselect-completion.sh
+/etc/dhcp/dhclient.d/chrony.sh
+
+----
+
+Restore/Recovery Logs:
+[source, bash]
+----
+
+----
+
+**Observation**
+
+No evidence of recent recovery testing found
+
+**Recommendation**
+
+Perform and document regular recovery testing
+
+Keep logs of recovery tests for verification
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/system_design_guide/backup-and-recovery
+
+== Application Backups
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#80E5FF}
+Advisory
+|===
+
+Detected Applications:
+[source, bash]
+----
+No common applications that require specialized backups detected
+
+----
+
+Database Backup Configurations:
+[source, bash]
+----
+
+----
+
+Recent Database Dumps (last 30 days):
+[source, bash]
+----
+/dev
+/proc
+/sys
+
+----
+
+Application Backup Tools:
+[source, bash]
+----
+No database backup tools found
+
+----
+
+**Observation**
+
+No applications requiring specialized backups detected
+
+**Recommendation**
+
+Ensure system-level backups are in place
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/system_design_guide/backup-and-recovery
+
+== Unnecessary Services
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#00FF00}
+No Change
+|===
+
+List of Potentially Unnecessary Services:
+[source, bash]
+----
+
+----
+
+Listening Services and Ports:
+[source, bash]
+----
+Netid State  Recv-Q Send-Q Local Address:Port Peer Address:PortProcess                          
+udp   UNCONN 0      0          127.0.0.1:323       0.0.0.0:*    users:(("chronyd",pid=830,fd=5))
+udp   UNCONN 0      0              [::1]:323          [::]:*    users:(("chronyd",pid=830,fd=6))
+tcp   LISTEN 0      128          0.0.0.0:22        0.0.0.0:*    users:(("sshd",pid=865,fd=3))   
+tcp   LISTEN 0      128             [::]:22           [::]:*    users:(("sshd",pid=865,fd=4))   
+
+----
+
+**Observation**
+
+No unnecessary services were identified
+
+**Recommendation**
+
+None
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/
+
+== Required Services
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#00FF00}
+No Change
+|===
+
+Status of Required Services:
+[source, bash]
+----
+sshd: Status=active, Boot=enabled
+chronyd: Status=active, Boot=enabled
+auditd: Status=active, Boot=enabled
+rsyslog: Status=active, Boot=enabled
+crond: Status=active, Boot=enabled
+firewalld: Status=active, Boot=enabled
+
+----
+
+All Active Services:
+[source, bash]
+----
+  UNIT                               LOAD   ACTIVE SUB     DESCRIPTION
+  auditd.service                     loaded active running Security Auditing Service
+  chronyd.service                    loaded active running NTP client/server
+  crond.service                      loaded active running Command Scheduler
+  dbus-broker.service                loaded active running D-Bus System Message Bus
+  dracut-shutdown.service            loaded active exited  Restore /run/initramfs on shutdown
+  firewalld.service                  loaded active running firewalld - dynamic firewall daemon
+  getty@tty1.service                 loaded active running Getty on tty1
+  irqbalance.service                 loaded active running irqbalance daemon
+  kdump.service                      loaded active exited  Crash recovery kernel arming
+  kmod-static-nodes.service          loaded active exited  Create List of Static Device Nodes
+  lvm2-monitor.service               loaded active exited  Monitoring of LVM2 mirrors, snapshots etc. using dmeventd or progress polling
+  NetworkManager-wait-online.service loaded active exited  Network Manager Wait Online
+  NetworkManager.service             loaded active running Network Manager
+  nis-domainname.service             loaded active exited  Read and set NIS domainname from /etc/sysconfig/network
+  qemu-guest-agent.service           loaded active running QEMU Guest Agent
+  rhsmcertd.service                  loaded active running Enable periodic update of entitlement certificates.
+  rsyslog.service                    loaded active running System Logging Service
+  sshd.service                       loaded active running OpenSSH server daemon
+  systemd-boot-update.service        loaded active exited  Automatic Boot Loader Update
+  systemd-journal-flush.service      loaded active exited  Flush Journal to Persistent Storage
+  systemd-journald.service           loaded active running Journal Service
+  systemd-logind.service             loaded active running User Login Management
+  systemd-network-generator.service  loaded active exited  Generate network units from Kernel command line
+  systemd-random-seed.service        loaded active exited  Load/Save OS Random Seed
+  systemd-remount-fs.service         loaded active exited  Remount Root and Kernel File Systems
+  systemd-sysctl.service             loaded active exited  Apply Kernel Variables
+  systemd-tmpfiles-setup-dev.service loaded active exited  Create Static Device Nodes in /dev
+  systemd-tmpfiles-setup.service     loaded active exited  Create Volatile Files and Directories
+  systemd-udev-trigger.service       loaded active exited  Coldplug All udev Devices
+  systemd-udevd.service              loaded active running Rule-based Manager for Device Events and Files
+  systemd-update-utmp.service        loaded active exited  Record System Boot/Shutdown in UTMP
+  systemd-user-sessions.service      loaded active exited  Permit User Sessions
+  user-runtime-dir@1000.service      loaded active exited  User Runtime Directory /run/user/1000
+  user@1000.service                  loaded active running User Manager for UID 1000
+
+LOAD   = Reflects whether the unit definition was properly loaded.
+ACTIVE = The high-level unit activation state, i.e. generalization of SUB.
+SUB    = The low-level unit activation state, values depend on unit type.
+34 loaded units listed.
+
+----
+
+**Observation**
+
+All required services are active and enabled
+
+**Recommendation**
+
+None
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/
+
+== Boot Target
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#00FF00}
+No Change
+|===
+
+Boot Target Information:
+[source, bash]
+----
+Default Boot Target: multi-user.target
+GUI Packages Installed: false (found 0 packages)
+Server Role Detected: true (found 1 server packages)
+
+----
+
+Available Targets:
+[source, bash]
+----
+/lib/systemd/system/time-sync.target
+/lib/systemd/system/timers.target
+/lib/systemd/system/basic.target
+/lib/systemd/system/blockdev@.target
+/lib/systemd/system/bluetooth.target
+/lib/systemd/system/boot-complete.target
+/lib/systemd/system/ctrl-alt-del.target
+/lib/systemd/system/default.target
+/lib/systemd/system/time-set.target
+/lib/systemd/system/emergency.target
+/lib/systemd/system/exit.target
+/lib/systemd/system/factory-reset.target
+/lib/systemd/system/final.target
+/lib/systemd/system/first-boot-complete.target
+/lib/systemd/system/getty-pre.target
+/lib/systemd/system/getty.target
+/lib/systemd/system/graphical.target
+/lib/systemd/system/halt.target
+/lib/systemd/system/kexec.target
+/lib/systemd/system/network-pre.target
+/lib/systemd/system/runlevel5.target
+/lib/systemd/system/local-fs-pre.target
+/lib/systemd/system/local-fs.target
+/lib/systemd/system/multi-user.target
+/lib/systemd/system/network-online.target
+/lib/systemd/system/network.target
+/lib/systemd/system/runlevel6.target
+/lib/systemd/system/nss-lookup.target
+/lib/systemd/system/nss-user-lookup.target
+/lib/systemd/system/paths.target
+/lib/systemd/system/poweroff.target
+/lib/systemd/system/printer.target
+/lib/systemd/system/reboot.target
+/lib/systemd/system/remote-fs-pre.target
+/lib/systemd/system/remote-fs.target
+/lib/systemd/system/rescue.target
+/lib/systemd/system/rpcbind.target
+/lib/systemd/system/runlevel0.target
+/lib/systemd/system/runlevel1.target
+/lib/systemd/system/runlevel4.target
+/lib/systemd/system/runlevel2.target
+/lib/systemd/system/runlevel3.target
+/lib/systemd/system/sigpwr.target
+/lib/systemd/system/shutdown.target
+/lib/systemd/system/slices.target
+/lib/systemd/system/smartcard.target
+/lib/systemd/system/sockets.target
+/lib/systemd/system/sound.target
+/lib/systemd/system/swap.target
+/lib/systemd/system/sysinit.target
+/lib/systemd/system/umount.target
+/lib/systemd/system/system-update-pre.target
+/lib/systemd/system/system-update.target
+/lib/systemd/system/usb-gadget.target
+/lib/systemd/system/cryptsetup-pre.target
+/lib/systemd/system/hibernate.target
+/lib/systemd/system/initrd-root-fs.target
+/lib/systemd/system/initrd-switch-root.target
+/lib/systemd/system/initrd-usr-fs.target
+/lib/systemd/system/integritysetup-pre.target
+/lib/systemd/system/integritysetup.target
+/lib/systemd/system/remote-veritysetup.target
+/lib/systemd/system/suspend-then-hibernate.target
+/lib/systemd/system/veritysetup.target
+/lib/systemd/system/cryptsetup.target
+/lib/systemd/system/hybrid-sleep.target
+/lib/systemd/system/initrd-fs.target
+/lib/systemd/system/initrd-root-device.target
+/lib/systemd/system/initrd.target
+/lib/systemd/system/remote-cryptsetup.target
+/lib/systemd/system/sleep.target
+/lib/systemd/system/suspend.target
+/lib/systemd/system/selinux-autorelabel.target
+/lib/systemd/system/veritysetup-pre.target
+/lib/systemd/system/sshd-keygen.target
+/etc/systemd/system/ctrl-alt-del.target
+/etc/systemd/system/default.target
+
+----
+
+**Observation**
+
+Default boot target is multi-user.target (text mode), following RHEL best practices
+
+**Recommendation**
+
+None
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/
+
+== System Logs Check
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+|===
+
+Recent Journal Errors (Priority 0-3):
+[source, bash]
+----
+Aug 06 09:14:18 rhel1.example.com kernel: Warning: Unmaintained driver is detected: ip_set
+-- Boot e68e9314631f4d3a95fa3cc6ece400b7 --
+Aug 06 09:18:46 rhel1.example.com kernel: Warning: Unmaintained driver is detected: ip_set
+Aug 06 09:18:46 rhel1.example.com rsyslogd[925]: imjournal: fscanf on state file `/var/lib/rsyslog/imjournal.state' failed  [v8.2412.0-1.el9 try https://www.rsyslog.com/e/2027 ]
+Aug 06 09:18:46 rhel1.example.com rsyslogd[925]: imjournal: ignoring invalid state file /var/lib/rsyslog/imjournal.state [v8.2412.0-1.el9]
+Aug 06 09:58:45 rhel1.example.com sshd[1583]: error: no more sessions
+Aug 06 09:58:45 rhel1.example.com sshd[1583]: error: no more sessions
+Aug 06 09:58:45 rhel1.example.com sshd[1583]: error: no more sessions
+Aug 06 09:58:45 rhel1.example.com sshd[1583]: error: no more sessions
+Aug 06 10:33:45 rhel1.example.com sshd[5310]: error: no more sessions
+Aug 06 10:33:51 rhel1.example.com userhelper[6947]: pam_unix(subscription-manager:auth): conversation failed
+Aug 06 10:33:52 rhel1.example.com userhelper[6947]: pam_unix(subscription-manager:auth): conversation failed
+Aug 06 10:33:54 rhel1.example.com userhelper[6947]: pam_unix(subscription-manager:auth): conversation failed
+Aug 06 10:33:56 rhel1.example.com userhelper[6966]: pam_unix(subscription-manager:auth): conversation failed
+Aug 06 10:33:58 rhel1.example.com userhelper[6966]: pam_unix(subscription-manager:auth): conversation failed
+
+----
+
+Kernel Log Errors:
+[source, bash]
+----
+[    0.108236] ACPI: _OSC evaluation for CPUs failed, trying _PDC
+[    0.109120] PCI: Using host bridge windows from ACPI; if necessary, use "pci=nocrs" and report a bug
+[    1.998492] SGI XFS with ACLs, security attributes, scrub, quota, no debug enabled
+[    2.374389] systemd[1]: Mounting Kernel Debug File System...
+[    2.411861] systemd[1]: Mounted Kernel Debug File System.
+[    5.070803] Warning: Unmaintained driver is detected: ip_set
+
+----
+
+Authentication Failures:
+[source, bash]
+----
+/var/log/secure:Aug  6 09:22:12 rhel1 sshd[1399]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=192.168.1.16  user=ayaseen
+/var/log/secure:Aug  6 09:33:28 rhel1 sshd[1516]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=192.168.1.16  user=ayaseen
+/var/log/secure:Aug  6 09:34:15 rhel1 sshd[1524]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=192.168.1.16  user=ayaseen
+/var/log/secure:Aug  6 18:16:08 rhel1 sshd[13014]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=192.168.1.16  user=root
+/var/log/secure:Aug  6 18:18:19 rhel1 sshd[13021]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=192.168.1.16  user=root
+/var/log/secure:Aug  6 18:36:51 rhel1 sudo[19736]: ayaseen : TTY=pts/7 ; PWD=/home/ayaseen ; USER=root ; COMMAND=/bin/bash -c 'grep -i \'authentication failure\' /var/log/secure /var/log/auth.log 2>/dev/null | tail -10'
+/var/log/secure:Aug  6 19:13:41 rhel1 sudo[27967]: ayaseen : PWD=/home/ayaseen ; USER=root ; COMMAND=/bin/bash -c 'grep -i \'authentication failure\' /var/log/secure /var/log/auth.log 2>/dev/null | tail -10'
+/var/log/secure:Aug  6 19:24:03 rhel1 sudo[44332]: ayaseen : PWD=/home/ayaseen ; USER=root ; COMMAND=/bin/bash -c 'grep -i \'authentication failure\' /var/log/secure /var/log/auth.log 2>/dev/null | tail -10'
+
+----
+
+**Observation**
+
+Found 29 errors in system logs
+
+**Recommendation**
+
+Review system logs for potential issues
+
+Review journal logs with 'journalctl -p 0..3'
+
+Review kernel messages with 'dmesg | grep -i error'
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/monitoring_and_managing_system_status_and_performance/indexviewing-problems-with-journalctl_logging-and-monitoring
+
+== Boot Errors
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+|===
+
+Boot Error Messages:
+[source, bash]
+----
+Aug 06 09:18:46 rhel1.example.com kernel: Warning: Unmaintained driver is detected: ip_set
+Aug 06 09:18:46 rhel1.example.com rsyslogd[925]: imjournal: fscanf on state file `/var/lib/rsyslog/imjournal.state' failed  [v8.2412.0-1.el9 try https://www.rsyslog.com/e/2027 ]
+Aug 06 09:18:46 rhel1.example.com rsyslogd[925]: imjournal: ignoring invalid state file /var/lib/rsyslog/imjournal.state [v8.2412.0-1.el9]
+Aug 06 09:58:45 rhel1.example.com sshd[1583]: error: no more sessions
+Aug 06 09:58:45 rhel1.example.com sshd[1583]: error: no more sessions
+Aug 06 09:58:45 rhel1.example.com sshd[1583]: error: no more sessions
+Aug 06 09:58:45 rhel1.example.com sshd[1583]: error: no more sessions
+Aug 06 10:33:45 rhel1.example.com sshd[5310]: error: no more sessions
+Aug 06 10:33:51 rhel1.example.com userhelper[6947]: pam_unix(subscription-manager:auth): conversation failed
+Aug 06 10:33:52 rhel1.example.com userhelper[6947]: pam_unix(subscription-manager:auth): conversation failed
+Aug 06 10:33:54 rhel1.example.com userhelper[6947]: pam_unix(subscription-manager:auth): conversation failed
+Aug 06 10:33:56 rhel1.example.com userhelper[6966]: pam_unix(subscription-manager:auth): conversation failed
+Aug 06 10:33:58 rhel1.example.com userhelper[6966]: pam_unix(subscription-manager:auth): conversation failed
+Aug 06 10:34:00 rhel1.example.com userhelper[6966]: pam_unix(subscription-manager:auth): conversation failed
+Aug 06 10:34:01 rhel1.example.com userhelper[6985]: pam_unix(subscription-manager:auth): conversation failed
+Aug 06 10:34:03 rhel1.example.com userhelper[6985]: pam_unix(subscription-manager:auth): conversation failed
+Aug 06 10:34:05 rhel1.example.com userhelper[6985]: pam_unix(subscription-manager:auth): conversation failed
+Aug 06 10:34:07 rhel1.example.com userhelper[7004]: pam_unix(subscription-manager:auth): conversation failed
+Aug 06 10:34:09 rhel1.example.com userhelper[7004]: pam_unix(subscription-manager:auth): conversation failed
+Aug 06 10:34:11 rhel1.example.com userhelper[7004]: pam_unix(subscription-manager:auth): conversation failed
+... (output truncated, showing first 20 lines out of 1994)
+
+----
+
+Failed Units:
+[source, bash]
+----
+  UNIT LOAD ACTIVE SUB DESCRIPTION
+0 loaded units listed.
+
+----
+
+Kernel Error Messages:
+[source, bash]
+----
+[    0.108236] ACPI: _OSC evaluation for CPUs failed, trying _PDC
+
+----
+
+**Observation**
+
+Found 1994 boot errors and 0 failed units
+
+**Recommendation**
+
+Review boot errors with 'journalctl -p 0..3 -b'
+
+Check failed services with 'systemctl --failed'
+
+Investigate and resolve service failures
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/configuring_basic_system_settings/assembly_troubleshooting-problems-using-log-files_configuring-basic-system-settings
+
+== Centralized Logging
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+|===
+
+Rsyslog Remote Logging Configuration:
+No remote logging configured in rsyslog
+
+
+Journald Forwarding Configuration:
+No journald forwarding configured
+
+
+Logging Agents Installed:
+No specialized logging agents detected
+
+
+Logging Services Status:
+[source, bash]
+----
+     Active: active (running) since Wed 2025-08-06 09:18:46 +03; 10h ago
+
+----
+
+Logging Network Connections:
+No logging-related network connections detected
+
+**Observation**
+
+Logging services running but centralized logging not configured
+
+**Recommendation**
+
+Configure remote log forwarding in rsyslog or another agent
+
+Example rsyslog config: '*.* @logserver:514'
+
+Centralized logging is essential for effective monitoring
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/monitoring_and_managing_system_status_and_performance/indexconfiguring-and-managing-logging_logging-and-monitoring
+
+== Log Rotation
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+|===
+
+Logrotate Configuration:
+[source, bash]
+----
+# see "man logrotate" for details
+
+# global options do not affect preceding include directives
+
+# rotate log files weekly
+weekly
+
+# keep 4 weeks worth of backlogs
+rotate 4
+
+# create new (empty) log files after rotating old ones
+create
+
+# use date as a suffix of the rotated file
+dateext
+
+# uncomment this if you want your log files compressed
+#compress
+
+# packages drop log rotation information into this directory
+include /etc/logrotate.d
+
+# system-specific logs may be also be configured here.
+
+----
+
+Logrotate.d Directory Contents:
+[source, bash]
+----
+total 44
+-rw-r--r--. 1 root root 155 Jan 17  2025 aide
+-rw-r--r--. 1 root root 130 Oct 14  2019 btmp
+-rw-r--r--. 1 root root 160 Oct  8  2024 chrony
+-rw-r--r--. 1 root root  88 Sep  9  2022 dnf
+-rw-r--r--. 1 root root  93 Nov  7  2024 firewalld
+-rw-r--r--. 1 root root 105 Aug 19  2024 insights-client
+-rw-r--r--. 1 root root 162 Apr  4 17:49 kvm_stat
+-rw-r--r--. 1 root root 226 Dec 17  2024 rsyslog
+-rw-r--r--. 1 root root 289 Feb 12 18:38 sssd
+-rw-r--r--. 1 root root  88 Feb 11 19:35 subscription-manager
+-rw-r--r--. 1 root root 145 Oct 14  2019 wtmp
+
+----
+
+No log files larger than 100MB found
+
+Logrotate Configuration Errors:
+[source, bash]
+----
+WARNING: logrotate in debug mode does nothing except printing debug messages!  Consider using verbose mode (-v) instead if this is not what you want.
+error: error opening state file /var/lib/logrotate/logrotate.status: No such file or directory
+
+----
+
+**Observation**
+
+Found 2 log rotation issues
+
+**Recommendation**
+
+Errors found in logrotate configuration
+
+Log compression not enabled (consider enabling for better space utilization)
+
+Review logrotate configuration in /etc/logrotate.conf and /etc/logrotate.d/
+
+Test logrotate configuration with 'logrotate -d /etc/logrotate.conf'
+
+Enable compression by uncommenting the 'compress' line in /etc/logrotate.conf
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/monitoring_and_managing_system_status_and_performance/indexassembly_managing-logs_logging-and-monitoring
+
+== Alerting Rules
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+|===
+
+[source, text]
+----
+Monitoring Systems Installed:
+No common monitoring systems detected
+
+
+Alerting Configurations:
+No alerting configurations found
+
+
+Monitoring Agents Status:
+No active monitoring agents detected
+
+
+Alert Manager Connections:
+No alert manager connections detected
+----
+
+**Observation**
+
+No monitoring system or agents detected
+
+**Recommendation**
+
+Install and configure a monitoring system (e.g., Nagios, Zabbix, Prometheus)
+
+Deploy monitoring agents on all systems
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/monitoring_and_managing_system_status_and_performance/index
+
+== Logging System
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+|===
+
+Rsyslog Service Active: true
+
+Journald Service Active: true
+
+
+Rsyslog Configuration:
+[source, bash]
+----
+
+
+
+global(workDirectory="/var/lib/rsyslog")
+
+module(load="builtin:omfile" Template="RSYSLOG_TraditionalFileFormat")
+
+
+module(load="imuxsock" 	  # provides support for local system logging (e.g. via logger command)
+       SysSock.Use="off") # Turn off message reception via local log socket; 
+			  # local messages are retrieved through imjournal now.
+module(load="imjournal" 	    # provides access to the systemd journal
+       UsePid="system" # PID nummber is retrieved as the ID of the process the journal entry originates from
+       FileCreateMode="0644" # Set the access permissions for the state file
+       StateFile="imjournal.state") # File to store the position in the journal
+
+include(file="/etc/rsyslog.d/*.conf" mode="optional")
+
+
+
+
+
+*.info;mail.none;authpriv.none;cron.none                /var/log/messages
+
+authpriv.*                                              /var/log/secure
+
+mail.*                                                  -/var/log/maillog
+
+
+cron.*                                                  /var/log/cron
+
+*.emerg                                                 :omusrmsg:*
+
+uucp,news.crit                                          /var/log/spooler
+
+local7.*                                                /var/log/boot.log
+
+
+
+----
+
+Journald Configuration:
+[source, bash]
+----
+
+[Journal]
+Storage=persistent
+Compress=yes
+Audit=
+
+----
+
+Journal Disk Usage:
+[source, bash]
+----
+Archived and active journals take up 40.0M in the file system.
+
+----
+
+Configured Log Destinations:
+[source, bash]
+----
+/etc/rsyslog.conf:*.info;mail.none;authpriv.none;cron.none                /var/log/messages
+/etc/rsyslog.conf:authpriv.*                                              /var/log/secure
+/etc/rsyslog.conf:mail.*                                                  -/var/log/maillog
+/etc/rsyslog.conf:cron.*                                                  /var/log/cron
+/etc/rsyslog.conf:uucp,news.crit                                          /var/log/spooler
+/etc/rsyslog.conf:local7.*                                                /var/log/boot.log
+
+----
+
+Configured Syslog Facilities:
+[source, bash]
+----
+/etc/rsyslog.conf:*.info;mail.none;authpriv.none;cron.none                /var/log/messages
+
+----
+
+Remote Logging Configuration:
+[source, bash]
+----
+No remote logging configuration detected
+
+----
+
+**Observation**
+
+Found 1 local logging system issues
+
+**Recommendation**
+
+Journal size limit not configured (SystemMaxUse) and no remote logging configured
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/monitoring_and_managing_system_status_and_performance/indexassembly_working-with-systemd-journal_logging-and-monitoring
+
+== Monitoring Agents
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+|===
+
+Monitoring Agents Installed:
+No monitoring agents detected
+
+
+Monitoring Agent Services:
+No monitoring agent services found
+
+
+Monitoring Ports Open:
+No monitoring ports detected
+
+
+Monitoring Agent Configurations:
+[source, bash]
+----
+
+----
+
+Firewall Rules for Monitoring:
+No monitoring firewall rules detected
+
+**Observation**
+
+No monitoring agents detected
+
+**Recommendation**
+
+Install a monitoring agent (e.g., Zabbix Agent, Node Exporter, NRPE)
+
+Configure the agent to connect to your monitoring server
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/monitoring_and_managing_system_status_and_performance/indexmonitoring-performance-using-performance-co-pilot_logging-and-monitoring
+
+<<<
+
+{set:cellbgcolor!}
+
+# Networking
+
+[cols="1,2,2,3", options=header]
+|===
+|*Category*
+|*Item Evaluated*
+|*Observed Result*
+|*Recommendation*
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/network-config.item
+
+// Category
+|
+{set:cellbgcolor!}
+Networking
+
+// Item Evaluated
+a|
+<<Network Configuration>>
+
+| Network configuration appears to be correct 
+
+| 
+{set:cellbgcolor:#00FF00}
+No Change
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/network-bonding.item
+
+// Category
+|
+{set:cellbgcolor!}
+Networking
+
+// Item Evaluated
+a|
+<<Network Bonding/Teaming>>
+
+| Network bonding is not applicable with only one network interface 
+
+| 
+{set:cellbgcolor:#A6B9BF}
+Not Applicable
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/connectivity-services.item
+
+// Category
+|
+{set:cellbgcolor!}
+Networking
+
+// Item Evaluated
+a|
+<<Dependent Services>>
+
+| No dependent services detected to test connectivity 
+
+| 
+{set:cellbgcolor:#80E5FF}
+Advisory
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/hostname-resolution.item
+
+// Category
+|
+{set:cellbgcolor!}
+Networking
+
+// Item Evaluated
+a|
+<<Hostname Resolution>>
+
+| Hostname resolution is working correctly 
+
+| 
+{set:cellbgcolor:#00FF00}
+No Change
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/connectivity-dns.item
+
+// Category
+|
+{set:cellbgcolor!}
+Networking
+
+// Item Evaluated
+a|
+<<DNS Records>>
+
+| Found 1 DNS resolution issues 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/network-mtu.item
+
+// Category
+|
+{set:cellbgcolor!}
+Networking
+
+// Item Evaluated
+a|
+<<MTU Configuration>>
+
+| Standard MTU (1500) is used on all interfaces 
+
+| 
+{set:cellbgcolor:#00FF00}
+No Change
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/connectivity-latency.item
+
+// Category
+|
+{set:cellbgcolor!}
+Networking
+
+// Item Evaluated
+a|
+<<Network Latency>>
+
+| Network latency to key systems is within acceptable ranges 
+
+| 
+{set:cellbgcolor:#00FF00}
+No Change
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/ha-multicast.item
+
+// Category
+|
+{set:cellbgcolor!}
+Networking
+
+// Item Evaluated
+a|
+<<Multicast Configuration>>
+
+| System is not a cluster member 
+
+| 
+{set:cellbgcolor:#A6B9BF}
+Not Applicable
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/ha-fencing-network.item
+
+// Category
+|
+{set:cellbgcolor!}
+Networking
+
+// Item Evaluated
+a|
+<<Fencing Network>>
+
+| System is not a cluster member 
+
+| 
+{set:cellbgcolor:#A6B9BF}
+Not Applicable
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/firewall-rules.item
+
+// Category
+|
+{set:cellbgcolor!}
+Networking
+
+// Item Evaluated
+a|
+<<Firewall Rules>>
+
+| Firewall is active with appropriate rules 
+
+| 
+{set:cellbgcolor:#00FF00}
+No Change
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/network-tcp-ip-hardening.item
+
+// Category
+|
+{set:cellbgcolor!}
+Networking
+
+// Item Evaluated
+a|
+<<TCP/IP Stack Hardening>>
+
+| TCP/IP stack security settings are properly configured 
+
+| 
+{set:cellbgcolor:#00FF00}
+No Change
+
+// ------------------------ITEM END
+|===
+
+== Network Configuration
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#00FF00}
+No Change
+|===
+
+IP Configuration:
+[source, bash]
+----
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+2: enp1s0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether 52:54:00:47:dd:31 brd ff:ff:ff:ff:ff:ff
+    inet 192.168.1.100/24 brd 192.168.1.255 scope global noprefixroute enp1s0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::5054:ff:fe47:dd31/64 scope link noprefixroute 
+       valid_lft forever preferred_lft forever
+
+----
+
+
+Routing Information:
+[source, bash]
+----
+default via 192.168.1.1 dev enp1s0 proto static metric 100 
+192.168.1.0/24 dev enp1s0 proto kernel scope link src 192.168.1.100 metric 100 
+
+----
+
+
+DNS Configuration:
+[source, bash]
+----
+# Generated by NetworkManager
+search example.com
+nameserver 8.8.8.8
+
+----
+
+
+NetworkManager Status:
+[source, bash]
+----
+DEVICE  TYPE      STATE                   CONNECTION 
+enp1s0  ethernet  connected               enp1s0     
+lo      loopback  connected (externally)  lo         
+
+----
+
+**Observation**
+
+Network configuration appears to be correct
+
+**Recommendation**
+
+None
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/
+
+== Network Bonding/Teaming
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#A6B9BF}
+Not Applicable
+|===
+
+Detected RHEL Version: 9
+
+Bonding Module Status: Not loaded
+
+Bonding Interfaces:
+[source, bash]
+----
+No bonding interfaces found
+
+----
+
+
+Network Interface Information:
+[source, bash]
+----
+Total Network Interfaces: 1
+Available Interfaces:
+enp1s0
+
+----
+
+**Observation**
+
+Network bonding is not applicable with only one network interface
+
+**Recommendation**
+
+Bonding/teaming requires at least two network interfaces
+
+Add additional network interfaces to enable bonding/teaming
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/
+
+== Dependent Services
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#80E5FF}
+Advisory
+|===
+
+Local Services:
+[source, bash]
+----
+No common service ports detected
+
+----
+
+Database Configurations Found:
+[source, bash]
+----
+/etc/aide.conf
+/etc/aliases
+/etc/authselect/custom/hardening/README
+/etc/authselect/user-nsswitch.conf
+/etc/authselect/nsswitch.conf
+
+----
+
+Connectivity Tests:
+[source, bash]
+----
+
+----
+
+**Observation**
+
+No dependent services detected to test connectivity
+
+**Recommendation**
+
+If this system connects to dependent services, they should be tested manually
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/
+
+== Hostname Resolution
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#00FF00}
+No Change
+|===
+
+Hostname Information:
+[source, bash]
+----
+Hostname: rhel1.example.com
+FQDN: rhel1.example.com
+
+----
+
+Hostname Resolution Lookup:
+[source, bash]
+----
+fe80::5054:ff:fe47:dd31 rhel1.example.com
+
+----
+
+FQDN Resolution Lookup:
+[source, bash]
+----
+fe80::5054:ff:fe47:dd31 rhel1.example.com
+
+----
+
+/etc/hosts File:
+[source, bash]
+----
+127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
+::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
+
+----
+
+/etc/resolv.conf File:
+[source, bash]
+----
+# Generated by NetworkManager
+search example.com
+nameserver 8.8.8.8
+
+----
+
+**Observation**
+
+Hostname resolution is working correctly
+
+**Recommendation**
+
+None
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/
+
+== DNS Records
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+|===
+
+Hostname Information:
+[source, bash]
+----
+Hostname: rhel1.example.com
+IP Addresses: 192.168.1.100
+
+----
+
+Forward DNS Lookup:
+[source, bash]
+----
+fe80::5054:ff:fe47:dd31 rhel1.example.com
+
+----
+
+Reverse DNS Lookups:
+[source, bash]
+----
+IP 192.168.1.100: Successful
+192.168.1.100   rhel1.example.com
+
+
+----
+
+DNS Configuration:
+[source, bash]
+----
+search example.com
+nameserver 8.8.8.8
+
+----
+
+**Observation**
+
+Found 1 DNS resolution issues
+
+**Recommendation**
+
+Only 1 nameserver(s) configured
+
+Configure at least two nameservers in /etc/resolv.conf for redundancy
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/configuring_and_managing_networking/using-networkmanager-with-network-scripts_configuring-and-managing-networking
+
+== MTU Configuration
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#00FF00}
+No Change
+|===
+
+Interface MTU Values:
+[source, bash]
+----
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN mode DEFAULT group default qlen 1000
+2: enp1s0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP mode DEFAULT group default qlen 1000
+
+----
+
+
+Network Configuration Files:
+[source, bash]
+----
+No ifcfg files found
+
+----
+
+
+Firewall Multicast Rules:
+[source, bash]
+----
+No multicast firewall rules found
+
+----
+
+**Observation**
+
+Standard MTU (1500) is used on all interfaces
+
+**Recommendation**
+
+None
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/
+
+== Network Latency
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#00FF00}
+No Change
+|===
+
+Network Latency Tests:
+[source, bash]
+----
+Default Gateway (192.168.1.1): Average latency: 2.050 ms
+  Ping Output:
+  PING 192.168.1.1 (192.168.1.1) 56(84) bytes of data.
+  64 bytes from 192.168.1.1: icmp_seq=1 ttl=64 time=2.19 ms
+  64 bytes from 192.168.1.1: icmp_seq=2 ttl=64 time=1.95 ms
+  64 bytes from 192.168.1.1: icmp_seq=3 ttl=64 time=2.01 ms
+  --- 192.168.1.1 ping statistics ---
+  3 packets transmitted, 3 received, 0% packet loss, time 2002ms
+  rtt min/avg/max/mdev = 1.949/2.050/2.192/0.103 ms
+
+Google DNS (8.8.8.8): Average latency: 25.431 ms
+  Ping Output:
+  PING 8.8.8.8 (8.8.8.8) 56(84) bytes of data.
+  64 bytes from 8.8.8.8: icmp_seq=1 ttl=111 time=25.2 ms
+  64 bytes from 8.8.8.8: icmp_seq=2 ttl=111 time=25.7 ms
+  64 bytes from 8.8.8.8: icmp_seq=3 ttl=111 time=25.4 ms
+  --- 8.8.8.8 ping statistics ---
+  3 packets transmitted, 3 received, 0% packet loss, time 2003ms
+  rtt min/avg/max/mdev = 25.217/25.431/25.652/0.177 ms
+
+Cloudflare DNS (1.1.1.1): Average latency: 8.069 ms
+  Ping Output:
+  PING 1.1.1.1 (1.1.1.1) 56(84) bytes of data.
+  64 bytes from 1.1.1.1: icmp_seq=1 ttl=54 time=7.13 ms
+  64 bytes from 1.1.1.1: icmp_seq=2 ttl=54 time=7.34 ms
+  64 bytes from 1.1.1.1: icmp_seq=3 ttl=54 time=9.74 ms
+  --- 1.1.1.1 ping statistics ---
+  3 packets transmitted, 3 received, 0% packet loss, time 2003ms
+  rtt min/avg/max/mdev = 7.128/8.069/9.742/1.186 ms
+
+Red Hat (access.redhat.com): Average latency: 61.211 ms
+  Ping Output:
+  PING e259367.dsca.akamaiedge.net (2.20.109.123) 56(84) bytes of data.
+  64 bytes from a2-20-109-123.deploy.static.akamaitechnologies.com (2.20.109.123): icmp_seq=1 ttl=51 time=60.2 ms
+  64 bytes from a2-20-109-123.deploy.static.akamaitechnologies.com (2.20.109.123): icmp_seq=2 ttl=51 time=61.2 ms
+  64 bytes from a2-20-109-123.deploy.static.akamaitechnologies.com (2.20.109.123): icmp_seq=3 ttl=51 time=62.2 ms
+  --- e259367.dsca.akamaiedge.net ping statistics ---
+  3 packets transmitted, 3 received, 0% packet loss, time 2003ms
+  rtt min/avg/max/mdev = 60.196/61.211/62.204/0.819 ms
+
+
+----
+
+Network Path to access.redhat.com:
+[source, bash]
+----
+ 1?: [LOCALHOST]                      pmtu 1500
+ 1:  192.168.1.1                                           2.170ms 
+ 1:  192.168.1.1                                           2.189ms 
+ 2:  192.168.1.1                                           2.058ms pmtu 1492
+ 2:  100.64.99.254                                         6.337ms 
+ 3:  10.0.60.1                                             6.515ms 
+ 4:  2.20.109.123                                         61.732ms reached
+     Resume: pmtu 1492 hops 4 back 13 
+
+----
+
+**Observation**
+
+Network latency to key systems is within acceptable ranges
+
+**Recommendation**
+
+None
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/
+
+== Multicast Configuration
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#A6B9BF}
+Not Applicable
+|===
+
+**Observation**
+
+System is not a cluster member
+
+**Recommendation**
+
+This check is only applicable for cluster nodes
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/
+
+== Fencing Network
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#A6B9BF}
+Not Applicable
+|===
+
+**Observation**
+
+System is not a cluster member
+
+**Recommendation**
+
+This check is only applicable for cluster nodes
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/
+
+== Firewall Rules
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#00FF00}
+No Change
+|===
+
+FirewallD Active: true
+IPTables Service Active: false
+
+FirewallD Configuration:
+[source, bash]
+----
+public (active)
+  target: default
+  icmp-block-inversion: no
+  interfaces: enp1s0
+  sources: 
+  services: cockpit dhcpv6-client ssh
+  ports: 
+  protocols: 
+  forward: yes
+  masquerade: no
+  forward-ports: 
+  source-ports: 
+  icmp-blocks: 
+  rich rules: 
+
+----
+
+IPTables Rules:
+[source, bash]
+----
+Chain INPUT (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain FORWARD (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination         
+
+Chain OUTPUT (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination         
+
+----
+
+Open Ports:
+[source, bash]
+----
+tcp   LISTEN 0      128          0.0.0.0:22        0.0.0.0:*   
+tcp   LISTEN 0      128             [::]:22           [::]:*   
+
+----
+
+Multicast Firewall Rules:
+[source, bash]
+----
+No multicast firewall rules found
+
+----
+
+**Observation**
+
+Firewall is active with appropriate rules
+
+**Recommendation**
+
+None
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/
+
+== TCP/IP Stack Hardening
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#00FF00}
+No Change
+|===
+
+TCP/IP Stack Security Settings:
+[source, bash]
+----
+net.ipv4.conf.all.accept_redirects = 0
+net.ipv4.conf.all.accept_source_route = 0
+net.ipv4.conf.all.rp_filter = 1
+net.ipv4.conf.all.secure_redirects = 0
+net.ipv4.conf.default.accept_redirects = 0
+net.ipv4.conf.default.accept_source_route = 0
+net.ipv4.conf.default.rp_filter = 1
+net.ipv4.conf.default.secure_redirects = 0
+net.ipv4.icmp_echo_ignore_broadcasts = 1
+net.ipv4.ip_forward = 0
+net.ipv4.ip_forward_update_priority = 1
+net.ipv4.ip_forward_use_pmtu = 0
+net.ipv4.tcp_syncookies = 1
+
+----
+
+Persistent TCP/IP Settings:
+[source, bash]
+----
+/etc/sysctl.conf:# Per CCE-84011-6: Set net.ipv4.conf.all.accept_redirects = 0 in /etc/sysctl.conf
+/etc/sysctl.conf:net.ipv4.conf.all.accept_redirects = 0
+/etc/sysctl.conf:# Per CCE-84001-7: Set net.ipv4.conf.all.accept_source_route = 0 in /etc/sysctl.conf
+/etc/sysctl.conf:net.ipv4.conf.all.accept_source_route = 0
+/etc/sysctl.conf:# Per CCE-84008-2: Set net.ipv4.conf.all.rp_filter = 1 in /etc/sysctl.conf
+/etc/sysctl.conf:net.ipv4.conf.all.rp_filter = 1
+/etc/sysctl.conf:# Per CCE-84016-5: Set net.ipv4.conf.all.secure_redirects = 0 in /etc/sysctl.conf
+/etc/sysctl.conf:net.ipv4.conf.all.secure_redirects = 0
+/etc/sysctl.conf:# Per CCE-84003-3: Set net.ipv4.conf.default.accept_redirects = 0 in /etc/sysctl.conf
+/etc/sysctl.conf:net.ipv4.conf.default.accept_redirects = 0
+/etc/sysctl.conf:# Per CCE-84009-0: Set net.ipv4.conf.default.rp_filter = 1 in /etc/sysctl.conf
+/etc/sysctl.conf:net.ipv4.conf.default.rp_filter = 1
+/etc/sysctl.conf:# Per CCE-84019-9: Set net.ipv4.conf.default.secure_redirects = 0 in /etc/sysctl.conf
+/etc/sysctl.conf:net.ipv4.conf.default.secure_redirects = 0
+/etc/sysctl.conf:# Per CCE-84004-1: Set net.ipv4.icmp_echo_ignore_broadcasts = 1 in /etc/sysctl.conf
+/etc/sysctl.conf:net.ipv4.icmp_echo_ignore_broadcasts = 1
+/etc/sysctl.conf:# Per CCE-84006-6: Set net.ipv4.tcp_syncookies = 1 in /etc/sysctl.conf
+/etc/sysctl.conf:net.ipv4.tcp_syncookies = 1
+/etc/sysctl.conf:# Per CCE-83998-5: Set net.ipv4.ip_forward = 0 in /etc/sysctl.conf
+/etc/sysctl.conf:net.ipv4.ip_forward = 0
+/etc/sysctl.d/99-sysctl.conf:# Per CCE-84011-6: Set net.ipv4.conf.all.accept_redirects = 0 in /etc/sysctl.conf
+/etc/sysctl.d/99-sysctl.conf:net.ipv4.conf.all.accept_redirects = 0
+/etc/sysctl.d/99-sysctl.conf:# Per CCE-84001-7: Set net.ipv4.conf.all.accept_source_route = 0 in /etc/sysctl.conf
+/etc/sysctl.d/99-sysctl.conf:net.ipv4.conf.all.accept_source_route = 0
+/etc/sysctl.d/99-sysctl.conf:# Per CCE-84008-2: Set net.ipv4.conf.all.rp_filter = 1 in /etc/sysctl.conf
+/etc/sysctl.d/99-sysctl.conf:net.ipv4.conf.all.rp_filter = 1
+/etc/sysctl.d/99-sysctl.conf:# Per CCE-84016-5: Set net.ipv4.conf.all.secure_redirects = 0 in /etc/sysctl.conf
+/etc/sysctl.d/99-sysctl.conf:net.ipv4.conf.all.secure_redirects = 0
+/etc/sysctl.d/99-sysctl.conf:# Per CCE-84003-3: Set net.ipv4.conf.default.accept_redirects = 0 in /etc/sysctl.conf
+/etc/sysctl.d/99-sysctl.conf:net.ipv4.conf.default.accept_redirects = 0
+/etc/sysctl.d/99-sysctl.conf:# Per CCE-84009-0: Set net.ipv4.conf.default.rp_filter = 1 in /etc/sysctl.conf
+/etc/sysctl.d/99-sysctl.conf:net.ipv4.conf.default.rp_filter = 1
+/etc/sysctl.d/99-sysctl.conf:# Per CCE-84019-9: Set net.ipv4.conf.default.secure_redirects = 0 in /etc/sysctl.conf
+/etc/sysctl.d/99-sysctl.conf:net.ipv4.conf.default.secure_redirects = 0
+/etc/sysctl.d/99-sysctl.conf:# Per CCE-84004-1: Set net.ipv4.icmp_echo_ignore_broadcasts = 1 in /etc/sysctl.conf
+/etc/sysctl.d/99-sysctl.conf:net.ipv4.icmp_echo_ignore_broadcasts = 1
+/etc/sysctl.d/99-sysctl.conf:# Per CCE-84006-6: Set net.ipv4.tcp_syncookies = 1 in /etc/sysctl.conf
+/etc/sysctl.d/99-sysctl.conf:net.ipv4.tcp_syncookies = 1
+/etc/sysctl.d/99-sysctl.conf:# Per CCE-83998-5: Set net.ipv4.ip_forward = 0 in /etc/sysctl.conf
+/etc/sysctl.d/99-sysctl.conf:net.ipv4.ip_forward = 0
+
+----
+
+IPv6 Status:
+[source, bash]
+----
+net.ipv6.conf.all.disable_ipv6 = 0
+
+----
+
+{set:cellbgcolor!}
+TCP/IP Security Setting Summary:
+|===
+|Parameter|Current Value|Expected Value|Status
+
+|net.ipv4.tcp_syncookies|1|1|OK
+|net.ipv4.conf.all.rp_filter|1|1|OK
+|net.ipv4.conf.default.rp_filter|1|1|OK
+|net.ipv4.conf.default.accept_redirects|0|0|OK
+|net.ipv4.conf.all.secure_redirects|0|0|OK
+|net.ipv4.conf.default.secure_redirects|0|0|OK
+|net.ipv4.conf.all.accept_source_route|0|0|OK
+|net.ipv4.conf.default.accept_source_route|0|0|OK
+|net.ipv4.icmp_echo_ignore_broadcasts|1|1|OK
+|net.ipv4.conf.all.accept_redirects|0|0|OK
+|net.ipv4.ip_forward|0|0|OK
+|===
+
+**Observation**
+
+TCP/IP stack security settings are properly configured
+
+**Recommendation**
+
+None
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/
+
+<<<
+
+{set:cellbgcolor!}
+
+# Updates
+
+[cols="1,2,2,3", options=header]
+|===
+|*Category*
+|*Item Evaluated*
+|*Observed Result*
+|*Recommendation*
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/packages-kernel.item
+
+// Category
+|
+{set:cellbgcolor!}
+Updates
+
+// Item Evaluated
+a|
+<<Kernel Consistency>>
+
+| Found 1 kernel consistency issues 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/packages-security.item
+
+// Category
+|
+{set:cellbgcolor!}
+Updates
+
+// Item Evaluated
+a|
+<<Security Patches>>
+
+| System appears to have all security patches applied 
+
+| 
+{set:cellbgcolor:#00FF00}
+No Change
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/packages-repositories.item
+
+// Category
+|
+{set:cellbgcolor!}
+Updates
+
+// Item Evaluated
+a|
+<<Enabled Repositories>>
+
+| Missing 2 required repositories 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/packages-unnecessary.item
+
+// Category
+|
+{set:cellbgcolor!}
+Updates
+
+// Item Evaluated
+a|
+<<Unnecessary Packages>>
+
+| No unnecessary or outdated packages detected 
+
+| 
+{set:cellbgcolor:#00FF00}
+No Change
+
+// ------------------------ITEM END
+|===
+
+== Kernel Consistency
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+|===
+
+Current Running Kernel:
+[source, bash]
+----
+5.14.0-570.12.1.el9_6.x86_64
+----
+
+Installed Kernel Packages:
+[source, bash]
+----
+kernel-5.14.0-570.12.1.el9_6.x86_64
+
+----
+
+Latest Available Kernel:
+[source, bash]
+----
+Unable to query latest
+----
+
+Repository Metadata Status:
+[source, bash]
+----
+Could not determine repository metadata age
+
+----
+
+Loaded Kernel Modules (Top 10):
+[source, bash]
+----
+Module                  Size  Used by
+tls                   159744  0
+binfmt_misc            28672  1
+nft_fib_inet           12288  1
+nft_fib_ipv4           12288  1 nft_fib_inet
+nft_fib_ipv6           12288  1 nft_fib_inet
+nft_fib                12288  3 nft_fib_ipv6,nft_fib_ipv4,nft_fib_inet
+nft_reject_inet        12288  6
+nf_reject_ipv4         16384  1 nft_reject_inet
+nf_reject_ipv6         24576  1 nft_reject_inet
+
+----
+
+Kernel Version Status Summary:
+[source, text]
+----
+Running kernel: 5.14.0-570.12.1.el9_6.x86_64
+Latest available kernel: Unable to query latest
+Formatted for comparison: Unable to query latest
+Repository metadata age: 20306 days
+Running latest kernel: false
+
+----
+
+**Observation**
+
+Found 1 kernel consistency issues
+
+**Recommendation**
+
+Repository metadata is 20306 days old - unable to reliably determine if latest kernel is installed
+
+Refresh repository metadata with 'subscription-manager refresh'
+
+For disconnected environments, sync content from Satellite server
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/managing_monitoring_and_updating_the_kernel/index
+
+== Security Patches
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#00FF00}
+No Change
+|===
+
+Security Updates Available:
+[source, bash]
+----
+Updating Subscription Management repositories.
+Unable to read consumer identity
+
+This system is not registered with an entitlement server. You can use "rhc" or "subscription-manager" to register.
+
+
+----
+
+Update Information Summary:
+[source, bash]
+----
+Updating Subscription Management repositories.
+Unable to read consumer identity
+
+This system is not registered with an entitlement server. You can use "rhc" or "subscription-manager" to register.
+
+
+----
+
+Last Updated Packages:
+[source, bash]
+----
+vim-minimal-8.2.2637-21.el9.x86_64            Wed 06 Aug 2025 09:10:29 AM +03
+sg3_utils-1.47-10.el9.x86_64                  Wed 06 Aug 2025 09:10:29 AM +03
+rootfiles-8.1-34.el9.noarch                   Wed 06 Aug 2025 09:10:29 AM +03
+qemu-guest-agent-9.1.0-15.el9.x86_64          Wed 06 Aug 2025 09:10:29 AM +03
+prefixdevname-0.1.0-8.el9.x86_64              Wed 06 Aug 2025 09:10:29 AM +03
+
+----
+
+Yum Update History:
+[source, bash]
+----
+Updating Subscription Management repositories.
+Unable to read consumer identity
+
+This system is not registered with an entitlement server. You can use "rhc" or "subscription-manager" to register.
+
+
+----
+
+**Observation**
+
+System appears to have all security patches applied
+
+**Recommendation**
+
+None
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/
+
+== Enabled Repositories
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+|===
+
+Enabled Repositories:
+[source, bash]
+----
+Loaded plugins: builddep, changelog, config-manager, copr, debug, debuginfo-install, download, generate_completion_cache, groups-manager, needs-restarting, playground, product-id, repoclosure, repodiff, repograph, repomanage, reposync, subscription-manager, system-upgrade, uploadprofile
+Updating Subscription Management repositories.
+Unable to read consumer identity
+
+This system is not registered with an entitlement server. You can use "rhc" or "subscription-manager" to register.
+
+YUM version: 4.14.0
+cachedir: /var/cache/dnf
+
+----
+
+Repository Configuration Files:
+[source, bash]
+----
+total 4
+-rw-r--r--. 1 root root 358 Aug  6 09:30 redhat.repo
+
+----
+
+RHEL Version:
+[source, bash]
+----
+Red Hat Enterprise Linux release 9.6 (Plow)
+----
+
+**Observation**
+
+Missing 2 required repositories
+
+**Recommendation**
+
+Enable repository 'rhel-9-for-x86_64-baseos-rpms'
+
+Enable repository 'rhel-9-for-x86_64-appstream-rpms'
+
+Use 'subscription-manager repos --enable=REPO_ID' to enable repositories
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/configuring_basic_system_settings
+
+== Unnecessary Packages
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#00FF00}
+No Change
+|===
+
+Obsolete Packages:
+[source, bash]
+----
+Updating Subscription Management repositories.
+Unable to read consumer identity
+
+This system is not registered with an entitlement server. You can use "rhc" or "subscription-manager" to register.
+
+No obsolete packages
+
+----
+
+Duplicate Packages:
+[source, bash]
+----
+No duplicate packages found
+
+----
+
+Installed Kernel Packages:
+[source, bash]
+----
+kernel-5.14.0-570.12.1.el9_6.x86_64
+
+----
+
+Current Running Kernel:
+[source, bash]
+----
+5.14.0-570.12.1.el9_6.x86_64
+----
+
+**Observation**
+
+No unnecessary or outdated packages detected
+
+**Recommendation**
+
+None
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/
+
+<<<
+
+{set:cellbgcolor!}
+
+// Reset bgcolor for future tables
+[grid=none,frame=none]
+|===
+|{set:cellbgcolor!}
+|===
+

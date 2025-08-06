@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"strings"
 	"sync"
+	"time"
 )
 
 // CommandExecutor interface defines methods for executing commands
@@ -14,6 +15,7 @@ type CommandExecutor interface {
 	RunCommandWithTimeout(name string, timeout int, args ...string) (string, error)
 	GetHostname() string
 	IsLocal() bool
+	Close() error
 }
 
 // LocalExecutor executes commands locally
@@ -29,6 +31,7 @@ type LocalExecutor struct {
 type RemoteExecutor struct {
 	hostname   string
 	connection *SSHConnection
+	mu         sync.Mutex
 }
 
 // executorInstance holds the current executor instance
@@ -73,20 +76,33 @@ func NewRemoteExecutor(config *SSHConfig) (*RemoteExecutor, error) {
 		return nil, err
 	}
 
-	if err := conn.Connect(); err != nil {
-		return nil, err
+	// Connect with retry logic
+	maxRetries := 3
+	var lastErr error
+
+	for i := 0; i < maxRetries; i++ {
+		if i > 0 {
+			time.Sleep(time.Second * 2) // Wait before retry
+		}
+
+		if err := conn.Connect(); err != nil {
+			lastErr = err
+			continue
+		}
+
+		// Connection successful, get hostname
+		hostname, err := conn.RunCommandWithTimeout("hostname", 5, "-f")
+		if err != nil {
+			hostname = config.Host
+		}
+
+		return &RemoteExecutor{
+			hostname:   strings.TrimSpace(hostname),
+			connection: conn,
+		}, nil
 	}
 
-	// Get remote hostname
-	hostname, err := conn.RunCommand("hostname", "-f")
-	if err != nil {
-		hostname = config.Host
-	}
-
-	return &RemoteExecutor{
-		hostname:   strings.TrimSpace(hostname),
-		connection: conn,
-	}, nil
+	return nil, fmt.Errorf("failed to establish SSH connection after %d attempts: %v", maxRetries, lastErr)
 }
 
 // RunCommand executes a command locally
@@ -188,20 +204,32 @@ func (e *LocalExecutor) IsLocal() bool {
 	return true
 }
 
+// Close does nothing for local executor
+func (e *LocalExecutor) Close() error {
+	return nil
+}
+
 // RunCommand executes a command remotely
 func (e *RemoteExecutor) RunCommand(name string, args ...string) (string, error) {
+	e.mu.Lock()
+	defer e.mu.Unlock()
+
 	// Ensure connection is still alive
-	if e.connection == nil || e.connection.Client == nil {
+	if e.connection == nil {
 		return "", fmt.Errorf("remote connection is not established")
 	}
 
-	return e.connection.RunCommand(name, args...)
+	// Use a default timeout of 30 seconds for all commands
+	return e.connection.RunCommandWithTimeout(name, 30, args...)
 }
 
 // RunCommandWithTimeout executes a command remotely with timeout
 func (e *RemoteExecutor) RunCommandWithTimeout(name string, timeout int, args ...string) (string, error) {
+	e.mu.Lock()
+	defer e.mu.Unlock()
+
 	// Ensure connection is still alive
-	if e.connection == nil || e.connection.Client == nil {
+	if e.connection == nil {
 		return "", fmt.Errorf("remote connection is not established")
 	}
 
@@ -220,6 +248,9 @@ func (e *RemoteExecutor) IsLocal() bool {
 
 // Close closes the remote connection
 func (e *RemoteExecutor) Close() error {
+	e.mu.Lock()
+	defer e.mu.Unlock()
+
 	if e.connection != nil {
 		return e.connection.Close()
 	}
@@ -230,6 +261,12 @@ func (e *RemoteExecutor) Close() error {
 func SetExecutor(executor CommandExecutor) {
 	executorMux.Lock()
 	defer executorMux.Unlock()
+
+	// Close previous executor if it's a remote executor
+	if executorInstance != nil && !executorInstance.IsLocal() {
+		executorInstance.Close()
+	}
+
 	executorInstance = executor
 }
 

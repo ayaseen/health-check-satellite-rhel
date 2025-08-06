@@ -40,7 +40,9 @@ func runRhelChecks(cmd *cobra.Command, args []string) error {
 
 	// Check if we're running remotely
 	isRemote := !executor.IsLocal()
-	if isRemote {
+
+	// ONLY print this message if NOT in multi-host mode
+	if isRemote && !multiHostMode {
 		fmt.Println("Running checks on remote system...")
 	}
 

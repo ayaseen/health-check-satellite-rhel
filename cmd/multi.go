@@ -87,19 +87,24 @@ func runMultiHostCommand(cmd *cobra.Command, args []string) error {
 	// Initialize summary report
 	summaryReport := report.NewSummaryReport(baseOutputDir)
 
-	// Create progress bar
+	// Create a SINGLE progress bar with cleaner settings
 	bar := progressbar.NewOptions(len(allHosts),
+		progressbar.OptionSetWriter(os.Stderr),
 		progressbar.OptionEnableColorCodes(true),
 		progressbar.OptionShowCount(),
-		progressbar.OptionSetWidth(50),
-		progressbar.OptionSetDescription("[cyan]Processing hosts[reset]"),
+		progressbar.OptionSetWidth(40),
+		progressbar.OptionSetDescription("[cyan]Processing[reset]"),
 		progressbar.OptionSetTheme(progressbar.Theme{
-			Saucer:        "[green]=[reset]",
-			SaucerHead:    "[green]>[reset]",
-			SaucerPadding: " ",
+			Saucer:        "[green]█[reset]",
+			SaucerHead:    "[green]█[reset]",
+			SaucerPadding: "░",
 			BarStart:      "[",
 			BarEnd:        "]",
 		}),
+		progressbar.OptionShowIts(),
+		progressbar.OptionSetItsString("hosts"),
+		progressbar.OptionThrottle(100*time.Millisecond),
+		progressbar.OptionClearOnFinish(),
 	)
 
 	// Track execution status
@@ -112,12 +117,24 @@ func runMultiHostCommand(cmd *cobra.Command, args []string) error {
 	}
 
 	results := make(chan hostResult, len(allHosts))
+	statusUpdates := make(chan string, 100)
+
+	// Goroutine to update progress bar description
+	go func() {
+		for status := range statusUpdates {
+			bar.Describe(status)
+		}
+	}()
 
 	// Process hosts
 	var wg sync.WaitGroup
 	sem := make(chan struct{}, hostsConfig.Defaults.ParallelConnections)
 
 	startTime := time.Now()
+
+	// Track currently processing hosts
+	processingHosts := make(map[string]bool)
+	var processingMutex sync.Mutex
 
 	for _, host := range allHosts {
 		wg.Add(1)
@@ -126,6 +143,18 @@ func runMultiHostCommand(cmd *cobra.Command, args []string) error {
 			sem <- struct{}{}
 			defer func() { <-sem }()
 
+			// Update status
+			processingMutex.Lock()
+			processingHosts[hostEntry.Hostname] = true
+			currentHosts := []string{}
+			for h := range processingHosts {
+				currentHosts = append(currentHosts, h)
+			}
+			if len(currentHosts) > 0 {
+				statusUpdates <- fmt.Sprintf("[cyan]%s[reset]", strings.Join(currentHosts, ", "))
+			}
+			processingMutex.Unlock()
+
 			hostStart := time.Now()
 			result := hostResult{
 				hostname: hostEntry.Hostname,
@@ -133,9 +162,6 @@ func runMultiHostCommand(cmd *cobra.Command, args []string) error {
 			}
 
 			if !summaryOnly {
-				// Update progress bar description
-				bar.Describe(fmt.Sprintf("[cyan]Checking[reset] %s", hostEntry.Hostname))
-
 				// Run health check on this host
 				hostReport, err := executeHostCheck(hostEntry, hostsOutputDir, hostsConfig.Defaults, reportLevel)
 				if err != nil {
@@ -144,39 +170,53 @@ func runMultiHostCommand(cmd *cobra.Command, args []string) error {
 					result.report = hostReport
 				}
 			} else {
-				// In summary-only mode, we would need to fetch minimal data
-				// For now, we'll skip individual reports
+				// Summary-only mode - just test connectivity
+				err := testHostConnectivity(hostEntry, hostsConfig.Defaults)
+				if err != nil {
+					result.err = err
+				}
 			}
 
 			result.duration = time.Since(hostStart)
-			results <- result
+
+			// Remove from processing
+			processingMutex.Lock()
+			delete(processingHosts, hostEntry.Hostname)
+			processingMutex.Unlock()
+
+			// Update progress
 			bar.Add(1)
+
+			// Send result
+			results <- result
 		}(host)
 	}
 
-	// Close results channel when all goroutines complete
+	// Wait for all goroutines to complete
 	go func() {
 		wg.Wait()
 		close(results)
+		close(statusUpdates)
 	}()
 
 	// Collect results
-	var successHosts []hostResult
-	var failedHosts []hostResult
+	var successHosts []config.HostEntry
+	var failedHosts []config.HostEntry
 
 	for result := range results {
 		if result.err != nil {
-			failedHosts = append(failedHosts, result)
-		} else if result.report != nil {
-			successHosts = append(successHosts, result)
-			summaryReport.AddHostReport(result.hostname, result.report)
+			failedHosts = append(failedHosts, config.HostEntry{Hostname: result.hostname, Type: result.hostType})
+		} else {
+			successHosts = append(successHosts, config.HostEntry{Hostname: result.hostname, Type: result.hostType})
+			if result.report != nil {
+				summaryReport.AddHostReport(result.hostname, result.report)
+			}
 		}
 	}
 
-	// Clear progress bar
-	bar.Clear()
-
-	totalDuration := time.Since(startTime)
+	// Clear the progress bar
+	bar.Finish()
+	fmt.Printf("\n")
 
 	// Print results summary
 	fmt.Printf("\n")
@@ -189,7 +229,7 @@ func runMultiHostCommand(cmd *cobra.Command, args []string) error {
 	if len(successHosts) > 0 {
 		fmt.Printf("✓ Successful (%d):\n", len(successHosts))
 		for _, host := range successHosts {
-			fmt.Printf("  • %-30s [%s] (%s)\n", host.hostname, host.hostType, host.duration)
+			fmt.Printf("  • %s\n", host.Hostname)
 		}
 		fmt.Printf("\n")
 	}
@@ -198,18 +238,22 @@ func runMultiHostCommand(cmd *cobra.Command, args []string) error {
 	if len(failedHosts) > 0 {
 		fmt.Printf("✗ Failed (%d):\n", len(failedHosts))
 		for _, host := range failedHosts {
-			fmt.Printf("  • %-30s %v\n", host.hostname, host.err)
+			fmt.Printf("  • %s\n", host.Hostname)
 		}
 		fmt.Printf("\n")
 	}
 
 	// Generate summary reports
-	fmt.Printf("Generating summary reports...\n")
-	if err := summaryReport.GenerateAllReports(); err != nil {
-		return fmt.Errorf("failed to generate summary reports: %v", err)
+	if len(successHosts) > 0 {
+		fmt.Printf("Generating summary reports...\n")
+		if err := summaryReport.GenerateAllReports(); err != nil {
+			fmt.Printf("Warning: Failed to generate summary reports: %v\n", err)
+		}
 	}
 
-	// Final summary
+	// Display final summary
+	totalDuration := time.Since(startTime).Round(time.Second)
+
 	fmt.Printf("\n")
 	fmt.Printf("╔══════════════════════════════════════════════════╗\n")
 	fmt.Printf("║              Execution Complete                  ║\n")
@@ -233,14 +277,6 @@ func runMultiHostCommand(cmd *cobra.Command, args []string) error {
 
 // executeHostCheck executes health check on a single host
 func executeHostCheck(host config.HostEntry, outputDir string, defaults config.DefaultConfig, reportLevel string) (*report.AsciiDocReport, error) {
-
-	// Debug output
-	//fmt.Printf("\nExecuting check for host: %s\n", host.Hostname)
-	//fmt.Printf("  User: %s\n", host.User)
-	//fmt.Printf("  Password: %s\n", maskPassword(host.Password))
-	//fmt.Printf("  Port: %s\n", host.Port)
-	//fmt.Printf("  Become: %v\n", host.Become)
-
 	// Create SSH configuration
 	sshConfig := &utils.SSHConfig{
 		Host:     host.Hostname,
@@ -318,11 +354,50 @@ func executeHostCheck(host config.HostEntry, outputDir string, defaults config.D
 
 	// Save check results to JSON
 	if err := report.SaveCheckResults(outputFile, reportGenerator); err != nil {
-		// Log warning but don't fail
-		fmt.Printf("Warning: failed to save check results for %s: %v\n", host.Hostname, err)
+		// Log warning but don't fail - suppress in multi-host mode
+		if !multiHostMode {
+			fmt.Printf("Warning: failed to save check results for %s: %v\n", host.Hostname, err)
+		}
 	}
 
 	return reportGenerator, nil
+}
+
+// testHostConnectivity tests basic connectivity to a host
+func testHostConnectivity(host config.HostEntry, defaults config.DefaultConfig) error {
+	// Create SSH configuration
+	sshConfig := &utils.SSHConfig{
+		Host:         host.Hostname,
+		Port:         host.Port,
+		User:         host.User,
+		Password:     host.Password,
+		KeyFile:      host.SSHKeyFile,
+		Timeout:      time.Duration(defaults.SSHTimeout) * time.Second,
+		Become:       host.Become,
+		BecomeMethod: host.BecomeMethod,
+		BecomeUser:   host.BecomeUser,
+		BecomePass:   host.BecomePass,
+		BecomeFlags:  host.BecomeFlags,
+	}
+
+	// Create remote executor
+	remoteExec, err := utils.NewRemoteExecutor(sshConfig)
+	if err != nil {
+		return fmt.Errorf("failed to connect: %v", err)
+	}
+	defer remoteExec.Close()
+
+	// Test connection
+	output, err := remoteExec.RunCommandWithTimeout("echo", 5, "connection_test")
+	if err != nil {
+		return fmt.Errorf("connection test failed: %v", err)
+	}
+
+	if !strings.Contains(output, "connection_test") {
+		return fmt.Errorf("unexpected response from connection test")
+	}
+
+	return nil
 }
 
 // Helper function to mask password for display
@@ -338,9 +413,6 @@ func maskPassword(password string) string {
 
 // executeRHELChecks runs RHEL checks for multi-host mode
 func executeRHELChecks(reportGenerator *report.AsciiDocReport, reportLevel string) error {
-	// This is a simplified version that reuses the existing check logic
-	// In a real implementation, you might want to adjust based on reportLevel
-
 	// Create a mock command
 	cmd := newRhelCmd()
 
@@ -351,9 +423,6 @@ func executeRHELChecks(reportGenerator *report.AsciiDocReport, reportLevel strin
 
 // executeSatelliteChecks runs Satellite checks for multi-host mode
 func executeSatelliteChecks(reportGenerator *report.AsciiDocReport, reportLevel string) error {
-	// This is a simplified version that reuses the existing check logic
-	// In a real implementation, you might want to adjust based on reportLevel
-
 	// Create a mock command
 	cmd := newSatelliteCmd()
 
