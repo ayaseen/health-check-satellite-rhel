@@ -240,6 +240,12 @@ func executeHostCheck(host config.HostEntry, outputDir string, defaults config.D
 		Password: host.Password,
 		KeyFile:  host.SSHKeyFile,
 		Timeout:  time.Duration(defaults.SSHTimeout) * time.Second,
+		// Add privilege escalation settings
+		Become:       host.Become,
+		BecomeMethod: host.BecomeMethod,
+		BecomeUser:   host.BecomeUser,
+		BecomePass:   host.BecomePass,
+		BecomeFlags:  host.BecomeFlags,
 	}
 
 	// Create remote executor

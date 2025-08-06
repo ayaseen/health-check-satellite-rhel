@@ -150,40 +150,140 @@ func (s *SSHConnection) RunCommand(name string, args ...string) (string, error) 
 	// Build the command
 	cmd := s.buildCommand(name, args...)
 
+	// Special handling for sudo with password
+	if s.Config.Become && s.Config.BecomeMethod == "sudo" && s.Config.BecomePass != "" {
+		return s.runCommandWithSudoPassword(cmd)
+	}
+
+	// Regular command execution
 	session, err := s.Client.NewSession()
 	if err != nil {
 		return "", fmt.Errorf("failed to create session: %v", err)
 	}
 	defer session.Close()
 
-	// Set up pipes for stdin (for sudo password if needed)
+	// Capture output
+	var stdout, stderr bytes.Buffer
+	session.Stdout = &stdout
+	session.Stderr = &stderr
+
+	// Run the command
+	if err := session.Run(cmd); err != nil {
+		// Include stderr in error message for debugging
+		stderrStr := strings.TrimSpace(stderr.String())
+		if stderrStr != "" && !strings.Contains(stderrStr, "password") {
+			return stdout.String(), fmt.Errorf("command failed: %v (stderr: %s)", err, stderrStr)
+		}
+		return stdout.String(), fmt.Errorf("command failed: %v", err)
+	}
+
+	return stdout.String(), nil
+}
+
+// runCommandWithSudoPassword handles sudo commands that require a password
+func (s *SSHConnection) runCommandWithSudoPassword(cmd string) (string, error) {
+	session, err := s.Client.NewSession()
+	if err != nil {
+		return "", fmt.Errorf("failed to create session: %v", err)
+	}
+	defer session.Close()
+
+	// Set up pseudo terminal for sudo
+	modes := ssh.TerminalModes{
+		ssh.ECHO:          0,     // disable echoing
+		ssh.TTY_OP_ISPEED: 14400, // input speed = 14.4kbaud
+		ssh.TTY_OP_OSPEED: 14400, // output speed = 14.4kbaud
+	}
+
+	if err := session.RequestPty("xterm", 80, 40, modes); err != nil {
+		// If PTY fails, try without it (some commands don't need it)
+		return s.runCommandWithoutPty(cmd)
+	}
+
+	// Set up pipes
 	stdin, err := session.StdinPipe()
 	if err != nil {
 		return "", fmt.Errorf("failed to create stdin pipe: %v", err)
 	}
 
-	// Capture output
-	var stdout, stderr bytes.Buffer
-	session.Stdout = &stdout
-	session.Stderr = &stderr
+	stdout, err := session.StdoutPipe()
+	if err != nil {
+		return "", fmt.Errorf("failed to create stdout pipe: %v", err)
+	}
 
 	// Start the command
 	if err := session.Start(cmd); err != nil {
 		return "", fmt.Errorf("failed to start command: %v", err)
 	}
 
-	// If using sudo with password, send it via stdin
-	if s.Config.Become && s.Config.BecomeMethod == "sudo" && s.Config.BecomePass != "" {
-		// Send password followed by newline
+	// Send password when prompted
+	go func() {
+		time.Sleep(100 * time.Millisecond) // Small delay to ensure sudo prompt appears
 		io.WriteString(stdin, s.Config.BecomePass+"\n")
-	}
-	stdin.Close()
+		stdin.Close()
+	}()
+
+	// Read output
+	var outputBuf bytes.Buffer
+	io.Copy(&outputBuf, stdout)
 
 	// Wait for command to complete
 	if err := session.Wait(); err != nil {
-		// Include stderr in error message for debugging
+		// Check if output contains useful data despite error
+		output := outputBuf.String()
+		// Remove sudo password prompt from output
+		lines := strings.Split(output, "\n")
+		var cleanLines []string
+		for _, line := range lines {
+			if !strings.Contains(line, "[sudo] password") && !strings.Contains(line, "Password:") {
+				cleanLines = append(cleanLines, line)
+			}
+		}
+		cleanOutput := strings.Join(cleanLines, "\n")
+
+		if cleanOutput != "" {
+			return cleanOutput, nil // Return output even if there was an error code
+		}
+		return "", fmt.Errorf("command failed: %v", err)
+	}
+
+	// Clean the output from sudo prompts
+	output := outputBuf.String()
+	lines := strings.Split(output, "\n")
+	var cleanLines []string
+	for _, line := range lines {
+		if !strings.Contains(line, "[sudo] password") && !strings.Contains(line, "Password:") {
+			cleanLines = append(cleanLines, line)
+		}
+	}
+
+	return strings.Join(cleanLines, "\n"), nil
+}
+
+// runCommandWithoutPty runs command without pseudo terminal
+func (s *SSHConnection) runCommandWithoutPty(cmd string) (string, error) {
+	// Use echo to pipe password to sudo -S
+	sudoCmd := fmt.Sprintf("echo '%s' | %s", s.Config.BecomePass, cmd)
+
+	session, err := s.Client.NewSession()
+	if err != nil {
+		return "", fmt.Errorf("failed to create session: %v", err)
+	}
+	defer session.Close()
+
+	// Capture output
+	var stdout, stderr bytes.Buffer
+	session.Stdout = &stdout
+	session.Stderr = &stderr
+
+	// Run the command
+	if err := session.Run(sudoCmd); err != nil {
+		// Check if we got output despite error
+		if stdout.Len() > 0 {
+			return stdout.String(), nil
+		}
 		stderrStr := strings.TrimSpace(stderr.String())
-		if stderrStr != "" {
+		if stderrStr != "" && !strings.Contains(stderrStr, "password") {
 			return stdout.String(), fmt.Errorf("command failed: %v (stderr: %s)", err, stderrStr)
 		}
 		return stdout.String(), fmt.Errorf("command failed: %v", err)
@@ -205,43 +305,31 @@ func (s *SSHConnection) RunCommandWithTimeout(name string, timeout int, args ...
 	baseCmd := s.buildCommand(name, args...)
 	cmd := fmt.Sprintf("timeout %d %s", timeout, baseCmd)
 
+	// Special handling for sudo with password
+	if s.Config.Become && s.Config.BecomeMethod == "sudo" && s.Config.BecomePass != "" {
+		return s.runCommandWithSudoPassword(cmd)
+	}
+
 	session, err := s.Client.NewSession()
 	if err != nil {
 		return "", fmt.Errorf("failed to create session: %v", err)
 	}
 	defer session.Close()
 
-	// Set up pipes for stdin (for sudo password if needed)
-	stdin, err := session.StdinPipe()
-	if err != nil {
-		return "", fmt.Errorf("failed to create stdin pipe: %v", err)
-	}
-
 	// Capture output
 	var stdout, stderr bytes.Buffer
 	session.Stdout = &stdout
 	session.Stderr = &stderr
 
-	// Start the command
-	if err := session.Start(cmd); err != nil {
-		return "", fmt.Errorf("failed to start command: %v", err)
-	}
-
-	// If using sudo with password, send it via stdin
-	if s.Config.Become && s.Config.BecomeMethod == "sudo" && s.Config.BecomePass != "" {
-		io.WriteString(stdin, s.Config.BecomePass+"\n")
-	}
-	stdin.Close()
-
-	// Wait for command to complete
-	if err := session.Wait(); err != nil {
+	// Run the command
+	if err := session.Run(cmd); err != nil {
 		// Check if it was a timeout
 		if strings.Contains(stderr.String(), "timeout") || strings.Contains(err.Error(), "124") {
 			return stdout.String(), fmt.Errorf("command timed out after %d seconds", timeout)
 		}
 		// Include stderr in error message for debugging
 		stderrStr := strings.TrimSpace(stderr.String())
-		if stderrStr != "" {
+		if stderrStr != "" && !strings.Contains(stderrStr, "password") {
 			return stdout.String(), fmt.Errorf("command failed: %v (stderr: %s)", err, stderrStr)
 		}
 		return stdout.String(), fmt.Errorf("command failed: %v", err)
@@ -281,11 +369,9 @@ func (s *SSHConnection) buildCommand(name string, args ...string) string {
 
 			// Add -S flag if password is provided (read from stdin)
 			if s.Config.BecomePass != "" {
-				sudoCmd += " -S"
-			}
-
-			// Add -n flag if no password (non-interactive)
-			if s.Config.BecomePass == "" {
+				sudoCmd += " -S -p ''" // -S for stdin, -p '' for no prompt
+			} else {
+				// Add -n flag if no password (non-interactive)
 				sudoCmd += " -n"
 			}
 
