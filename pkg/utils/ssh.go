@@ -50,39 +50,41 @@ func (s *SSHConnection) Connect() error {
 	var authMethods []ssh.AuthMethod
 
 	// Determine authentication method
+	// Add password authentication if password is provided
 	if s.Config.Password != "" {
 		authMethods = append(authMethods, ssh.Password(s.Config.Password))
-	} else if s.Config.KeyFile != "" {
+	}
+
+	// ALSO try SSH key authentication (not else if!)
+	if s.Config.KeyFile != "" {
 		keyAuth, err := s.getKeyAuth()
 		if err == nil {
 			authMethods = append(authMethods, keyAuth)
-		} else {
-			return fmt.Errorf("failed to load SSH key from %s: %v", s.Config.KeyFile, err)
 		}
-	} else {
-		// Try default key locations
+		// Don't return error here, we might have password auth
+	} else if s.Config.Password == "" {
+		// Only if no password AND no explicit key file, try default locations
 		defaultKeys := []string{
 			filepath.Join(os.Getenv("HOME"), ".ssh", "id_rsa"),
 			filepath.Join(os.Getenv("HOME"), ".ssh", "id_ed25519"),
 			filepath.Join(os.Getenv("HOME"), ".ssh", "id_ecdsa"),
 		}
 
-		keyFound := false
 		for _, keyPath := range defaultKeys {
 			if fileExists(keyPath) {
 				s.Config.KeyFile = keyPath
 				keyAuth, err := s.getKeyAuth()
 				if err == nil {
 					authMethods = append(authMethods, keyAuth)
-					keyFound = true
 					break
 				}
 			}
 		}
+	}
 
-		if !keyFound {
-			return fmt.Errorf("no authentication method available - please provide either SSH key or password")
-		}
+	// Check if we have at least one auth method
+	if len(authMethods) == 0 {
+		return fmt.Errorf("no authentication method available - please provide either SSH key or password")
 	}
 
 	// SSH client configuration
