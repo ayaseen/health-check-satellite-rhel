@@ -1,0 +1,6249 @@
+= RHEL Health Check Report
+
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:important-caption: :heavy_exclamation_mark:
+:caution-caption: :fire:
+:warning-caption: :warning:
+endif::[]
+
+= Key
+
+[cols="1,3", options=header]
+|===
+|Value
+|Description
+
+|
+{set:cellbgcolor:#FF0000}
+Changes Required
+|
+{set:cellbgcolor!}
+Indicates Changes Required for system stability, subscription compliance, or other reason.
+
+|
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+|
+{set:cellbgcolor!}
+Indicates Changes Recommended to align with recommended practices, but not urgently required
+
+|
+{set:cellbgcolor:#A6B9BF}
+N/A
+|
+{set:cellbgcolor!}
+No advise given on line item. For line items which are data-only to provide context.
+
+|
+{set:cellbgcolor:#80E5FF}
+Advisory
+|
+{set:cellbgcolor!}
+No change required or recommended, but additional information provided.
+
+|
+{set:cellbgcolor:#00FF00}
+No Change
+|
+{set:cellbgcolor!}
+No change required. In alignment with recommended practices.
+
+|
+{set:cellbgcolor:#FFFFFF}
+To Be Evaluated
+|
+{set:cellbgcolor!}
+Not yet evaluated. Will appear only in draft copies.
+|===
+
+= Summary
+
+[cols="1,2,2,3", options=header]
+|===
+|*Category*
+|*Item Evaluated*
+|*Observed Result*
+|*Recommendation*
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/time-timezone.item
+
+// Category
+|
+{set:cellbgcolor!}
+System Information
+
+// Item Evaluated
+a|
+<<System Timezone>>
+
+| System timezone is set to Asia/Riyadh 
+
+| 
+{set:cellbgcolor:#80E5FF}
+Advisory
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/time-sync.item
+
+// Category
+|
+{set:cellbgcolor!}
+System Information
+
+// Item Evaluated
+a|
+<<Time Synchronization>>
+
+| Time synchronization is active and using chrony 
+
+| 
+{set:cellbgcolor:#00FF00}
+No Change
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/clock-consistency.item
+
+// Category
+|
+{set:cellbgcolor!}
+System Information
+
+// Item Evaluated
+a|
+<<Clock Consistency>>
+
+| System time and hardware clock time appear to be inconsistent 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/system-hostname.item
+
+// Category
+|
+{set:cellbgcolor!}
+System Information
+
+// Item Evaluated
+a|
+<<System Hostname>>
+
+| Hostname 'rhel2.example.com' resolves correctly 
+
+| 
+{set:cellbgcolor:#00FF00}
+No Change
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/rhel-version.item
+
+// Category
+|
+{set:cellbgcolor!}
+System Information
+
+// Item Evaluated
+a|
+<<RHEL Version>>
+
+| RHEL 9 is installed and supported 
+
+| 
+{set:cellbgcolor:#00FF00}
+No Change
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/system-uptime.item
+
+// Category
+|
+{set:cellbgcolor!}
+System Information
+
+// Item Evaluated
+a|
+<<System Uptime>>
+
+| System was recently rebooted (less than 1 day ago) 
+
+| 
+{set:cellbgcolor:#80E5FF}
+Advisory
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/system-registration.item
+
+// Category
+|
+{set:cellbgcolor!}
+System Information
+
+// Item Evaluated
+a|
+<<System Registration>>
+
+| System is properly registered with Red Hat 
+
+| 
+{set:cellbgcolor:#00FF00}
+No Change
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/enabled-repos.item
+
+// Category
+|
+{set:cellbgcolor!}
+System Information
+
+// Item Evaluated
+a|
+<<Enabled Repositories>>
+
+| Missing 2 required repositories 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/cpu-info.item
+
+// Category
+|
+{set:cellbgcolor!}
+Performance
+
+// Item Evaluated
+a|
+<<CPU Information>>
+
+| System has 2 CPU cores (AMD Ryzen Threadripper PRO 7965WX 24-Cores, Unknown) with normal utilization 
+
+| 
+{set:cellbgcolor:#00FF00}
+No Change
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/system-performance.item
+
+// Category
+|
+{set:cellbgcolor!}
+Performance
+
+// Item Evaluated
+a|
+<<System Performance>>
+
+| Failed to determine system uptime and load 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/performance-bottlenecks.item
+
+// Category
+|
+{set:cellbgcolor!}
+Performance
+
+// Item Evaluated
+a|
+<<Performance Bottlenecks>>
+
+| Failed to determine memory usage by process 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/system-caches.item
+
+// Category
+|
+{set:cellbgcolor!}
+Performance
+
+// Item Evaluated
+a|
+<<System Caches>>
+
+| Failed to determine cache information 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/cluster-software.item
+
+// Category
+|
+{set:cellbgcolor!}
+Performance
+
+// Item Evaluated
+a|
+<<Cluster Software>>
+
+| Cluster software installed but services are not running 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/cluster-names.item
+
+// Category
+|
+{set:cellbgcolor!}
+Performance
+
+// Item Evaluated
+a|
+<<Cluster Name Resolution>>
+
+| System hostname doesn't match any cluster node names 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/cluster-fencing.item
+
+// Category
+|
+{set:cellbgcolor!}
+Performance
+
+// Item Evaluated
+a|
+<<Fencing Agents>>
+
+| Fencing is properly configured 
+
+| 
+{set:cellbgcolor:#00FF00}
+No Change
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/cluster-constraints.item
+
+// Category
+|
+{set:cellbgcolor!}
+Performance
+
+// Item Evaluated
+a|
+<<Cluster Constraints>>
+
+| Found 2 issues with cluster constraints and timeouts 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/cluster-autostart.item
+
+// Category
+|
+{set:cellbgcolor!}
+Performance
+
+// Item Evaluated
+a|
+<<Cluster Autostart>>
+
+| Cluster is configured to auto-start on reboot 
+
+| 
+{set:cellbgcolor:#00FF00}
+No Change
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/cluster-split-brain.item
+
+// Category
+|
+{set:cellbgcolor!}
+Performance
+
+// Item Evaluated
+a|
+<<Split-Brain Prevention>>
+
+| Split-brain prevention is properly configured 
+
+| 
+{set:cellbgcolor:#00FF00}
+No Change
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/disk-io-performance.item
+
+// Category
+|
+{set:cellbgcolor!}
+Performance
+
+// Item Evaluated
+a|
+<<I/O Performance>>
+
+| Failed to determine block device information 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/tuned-profile.item
+
+// Category
+|
+{set:cellbgcolor!}
+Performance
+
+// Item Evaluated
+a|
+<<Tuned Profile>>
+
+| No tuned profile is active 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/cpu-bottlenecks.item
+
+// Category
+|
+{set:cellbgcolor!}
+Performance
+
+// Item Evaluated
+a|
+<<CPU Bottlenecks>>
+
+| No CPU bottlenecks detected 
+
+| 
+{set:cellbgcolor:#00FF00}
+No Change
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/storage-considerations-performance.item
+
+// Category
+|
+{set:cellbgcolor!}
+Storage
+
+// Item Evaluated
+a|
+<<Storage Performance>>
+
+| Storage performance settings appear to be appropriate 
+
+| 
+{set:cellbgcolor:#00FF00}
+No Change
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/storage-considerations-reliability.item
+
+// Category
+|
+{set:cellbgcolor!}
+Storage
+
+// Item Evaluated
+a|
+<<Storage Reliability>>
+
+| Virtual machine - storage redundancy managed by hypervisor 
+
+| 
+{set:cellbgcolor:#00FF00}
+No Change
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/storage-considerations-capacity.item
+
+// Category
+|
+{set:cellbgcolor!}
+Storage
+
+// Item Evaluated
+a|
+<<Storage Capacity>>
+
+| Storage capacity appears to be adequate 
+
+| 
+{set:cellbgcolor:#00FF00}
+No Change
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/storage-multipath.item
+
+// Category
+|
+{set:cellbgcolor!}
+Storage
+
+// Item Evaluated
+a|
+<<Multipath Configuration>>
+
+| Multipath is installed but not running 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/storage-filesystem-types.item
+
+// Category
+|
+{set:cellbgcolor!}
+Storage
+
+// Item Evaluated
+a|
+<<Filesystem Types>>
+
+| Could not determine filesystem types in use 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/storage-filesystem-errors.item
+
+// Category
+|
+{set:cellbgcolor!}
+Storage
+
+// Item Evaluated
+a|
+<<Filesystem Errors>>
+
+| No filesystem errors detected 
+
+| 
+{set:cellbgcolor:#00FF00}
+No Change
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/storage-partition-alignment.item
+
+// Category
+|
+{set:cellbgcolor!}
+Storage
+
+// Item Evaluated
+a|
+<<Partition Alignment>>
+
+| Partition layout does not follow Red Hat best practices 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/disk-usage.item
+
+// Category
+|
+{set:cellbgcolor!}
+Storage
+
+// Item Evaluated
+a|
+<<Disk Usage>>
+
+| Failed to determine disk usage 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/disk-mount-points.item
+
+// Category
+|
+{set:cellbgcolor!}
+Storage
+
+// Item Evaluated
+a|
+<<Mount Points>>
+
+| Failed to determine mount points 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/storage-config.item
+
+// Category
+|
+{set:cellbgcolor!}
+Storage
+
+// Item Evaluated
+a|
+<<Storage Configuration>>
+
+| Storage is properly configured 
+
+| 
+{set:cellbgcolor:#00FF00}
+No Change
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/security-auditd.item
+
+// Category
+|
+{set:cellbgcolor!}
+Security
+
+// Item Evaluated
+a|
+<<Audit Configuration>>
+
+| Found 7 issues with audit configuration 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/security-password-policy.item
+
+// Category
+|
+{set:cellbgcolor!}
+Security
+
+// Item Evaluated
+a|
+<<Password Policy>>
+
+| Found 4 password policy issues 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/security-file-permissions.item
+
+// Category
+|
+{set:cellbgcolor!}
+Security
+
+// Item Evaluated
+a|
+<<File Permissions>>
+
+| Found 2 file permission issues 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/security-ssh-hardening.item
+
+// Category
+|
+{set:cellbgcolor!}
+Security
+
+// Item Evaluated
+a|
+<<SSH Hardening>>
+
+| Found 9 SSH hardening issues 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/security-root-account.item
+
+// Category
+|
+{set:cellbgcolor!}
+Security
+
+// Item Evaluated
+a|
+<<Root Account Security>>
+
+| Found 1 root account security issues 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/security-shell-history.item
+
+// Category
+|
+{set:cellbgcolor!}
+Security
+
+// Item Evaluated
+a|
+<<Shell History Configuration>>
+
+| Found 3 shell history configuration issues 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/kernel-version.item
+
+// Category
+|
+{set:cellbgcolor!}
+Security
+
+// Item Evaluated
+a|
+<<Kernel Version>>
+
+| Repository metadata is 20306 days old - unable to reliably determine if latest kernel is installed 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/kernel-firmware.item
+
+// Category
+|
+{set:cellbgcolor!}
+Security
+
+// Item Evaluated
+a|
+<<BIOS/UEFI Firmware>>
+
+| This is a virtual machine - firmware is managed by the hypervisor 
+
+| 
+{set:cellbgcolor:#80E5FF}
+Advisory
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/kernel-unused-devices.item
+
+// Category
+|
+{set:cellbgcolor!}
+Security
+
+// Item Evaluated
+a|
+<<Unused Devices>>
+
+| This is a virtual machine - device management is handled by the hypervisor 
+
+| 
+{set:cellbgcolor:#A6B9BF}
+Not Applicable
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/compliance-rhel-cis.item
+
+// Category
+|
+{set:cellbgcolor!}
+Security
+
+// Item Evaluated
+a|
+<<RHEL CIS Compliance>>
+
+| System has low compliance with RHEL CIS standards (24%) 
+
+| 
+{set:cellbgcolor:#FF0000}
+Changes Required
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/auth-central.item
+
+// Category
+|
+{set:cellbgcolor!}
+Security
+
+// Item Evaluated
+a|
+<<Central Authentication>>
+
+| No central authentication configuration detected 
+
+| 
+{set:cellbgcolor:#FF0000}
+Changes Required
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/auth-sssd.item
+
+// Category
+|
+{set:cellbgcolor!}
+Security
+
+// Item Evaluated
+a|
+<<SSSD Configuration>>
+
+| Found 5 issues with SSSD configuration 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/auth-sudo-pam.item
+
+// Category
+|
+{set:cellbgcolor!}
+Security
+
+// Item Evaluated
+a|
+<<Sudo and PAM>>
+
+| Found 2 issues with sudo and PAM configuration 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/auth-kerberos.item
+
+// Category
+|
+{set:cellbgcolor!}
+Security
+
+// Item Evaluated
+a|
+<<Kerberos Configuration>>
+
+| Found 2 issues with Kerberos configuration 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/logs-system-errors.item
+
+// Category
+|
+{set:cellbgcolor!}
+Services
+
+// Item Evaluated
+a|
+<<System Logs Check>>
+
+| Found 18 errors in system logs 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/logs-rotation.item
+
+// Category
+|
+{set:cellbgcolor!}
+Services
+
+// Item Evaluated
+a|
+<<Log Rotation>>
+
+| Found 1 log rotation issues 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/logs-system.item
+
+// Category
+|
+{set:cellbgcolor!}
+Services
+
+// Item Evaluated
+a|
+<<Logging System>>
+
+| No logging service is active 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/backup-systems.item
+
+// Category
+|
+{set:cellbgcolor!}
+Services
+
+// Item Evaluated
+a|
+<<Backup Systems>>
+
+| Backup system appears to be configured 
+
+| 
+{set:cellbgcolor:#00FF00}
+No Change
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/backup-recovery.item
+
+// Category
+|
+{set:cellbgcolor!}
+Services
+
+// Item Evaluated
+a|
+<<Recovery Process>>
+
+| No evidence of recent recovery testing found 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/backup-application.item
+
+// Category
+|
+{set:cellbgcolor!}
+Services
+
+// Item Evaluated
+a|
+<<Application Backups>>
+
+| No applications requiring specialized backups detected 
+
+| 
+{set:cellbgcolor:#80E5FF}
+Advisory
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/monitoring-logs.item
+
+// Category
+|
+{set:cellbgcolor!}
+Services
+
+// Item Evaluated
+a|
+<<Centralized Logging>>
+
+| No active logging services detected 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/monitoring-alerts.item
+
+// Category
+|
+{set:cellbgcolor!}
+Services
+
+// Item Evaluated
+a|
+<<Alerting Rules>>
+
+| Alerting rules appear to be configured 
+
+| 
+{set:cellbgcolor:#00FF00}
+No Change
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/monitoring-agents.item
+
+// Category
+|
+{set:cellbgcolor!}
+Services
+
+// Item Evaluated
+a|
+<<Monitoring Agents>>
+
+| Monitoring agents installed but not running 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/services-unnecessary.item
+
+// Category
+|
+{set:cellbgcolor!}
+Services
+
+// Item Evaluated
+a|
+<<Unnecessary Services>>
+
+| Failed to list services 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/services-required.item
+
+// Category
+|
+{set:cellbgcolor!}
+Services
+
+// Item Evaluated
+a|
+<<Required Services>>
+
+| Found issues with 12 required services 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/boot-target.item
+
+// Category
+|
+{set:cellbgcolor!}
+Services
+
+// Item Evaluated
+a|
+<<Boot Target>>
+
+| Failed to determine default boot target 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/boot-errors.item
+
+// Category
+|
+{set:cellbgcolor!}
+Services
+
+// Item Evaluated
+a|
+<<Boot Errors>>
+
+| Failed to check boot errors 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/network-config.item
+
+// Category
+|
+{set:cellbgcolor!}
+Networking
+
+// Item Evaluated
+a|
+<<Network Configuration>>
+
+| Failed to determine IP configuration 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/connectivity-services.item
+
+// Category
+|
+{set:cellbgcolor!}
+Networking
+
+// Item Evaluated
+a|
+<<Dependent Services>>
+
+| No dependent services detected to test connectivity 
+
+| 
+{set:cellbgcolor:#80E5FF}
+Advisory
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/connectivity-dns.item
+
+// Category
+|
+{set:cellbgcolor!}
+Networking
+
+// Item Evaluated
+a|
+<<DNS Records>>
+
+| Found 2 DNS resolution issues 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/connectivity-latency.item
+
+// Category
+|
+{set:cellbgcolor!}
+Networking
+
+// Item Evaluated
+a|
+<<Network Latency>>
+
+| Network latency to key systems is within acceptable ranges 
+
+| 
+{set:cellbgcolor:#00FF00}
+No Change
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/ha-multicast.item
+
+// Category
+|
+{set:cellbgcolor!}
+Networking
+
+// Item Evaluated
+a|
+<<Multicast Configuration>>
+
+| Corosync transport method not clearly defined 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/ha-fencing-network.item
+
+// Category
+|
+{set:cellbgcolor!}
+Networking
+
+// Item Evaluated
+a|
+<<Fencing Network>>
+
+| Fencing devices configured but couldn't identify targets 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/packages-kernel.item
+
+// Category
+|
+{set:cellbgcolor!}
+Updates
+
+// Item Evaluated
+a|
+<<Kernel Consistency>>
+
+| Found 1 kernel consistency issues 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/packages-unnecessary.item
+
+// Category
+|
+{set:cellbgcolor!}
+Updates
+
+// Item Evaluated
+a|
+<<Unnecessary Packages>>
+
+| Found 1 package maintenance issues 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/packages-security.item
+
+// Category
+|
+{set:cellbgcolor!}
+Updates
+
+// Item Evaluated
+a|
+<<Security Patches>>
+
+| System appears to have all security patches applied 
+
+| 
+{set:cellbgcolor:#00FF00}
+No Change
+
+// ------------------------ITEM END
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/packages-repositories.item
+
+// Category
+|
+{set:cellbgcolor!}
+Updates
+
+// Item Evaluated
+a|
+<<Enabled Repositories>>
+
+| No repositories appear to be enabled 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+
+|===
+
+<<<
+
+{set:cellbgcolor!}
+
+# System Information
+
+[cols="1,2,2,3", options=header]
+|===
+|*Category*
+|*Item Evaluated*
+|*Observed Result*
+|*Recommendation*
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/time-timezone.item
+
+// Category
+|
+{set:cellbgcolor!}
+System Information
+
+// Item Evaluated
+a|
+<<System Timezone>>
+
+| System timezone is set to Asia/Riyadh 
+
+| 
+{set:cellbgcolor:#80E5FF}
+Advisory
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/time-sync.item
+
+// Category
+|
+{set:cellbgcolor!}
+System Information
+
+// Item Evaluated
+a|
+<<Time Synchronization>>
+
+| Time synchronization is active and using chrony 
+
+| 
+{set:cellbgcolor:#00FF00}
+No Change
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/clock-consistency.item
+
+// Category
+|
+{set:cellbgcolor!}
+System Information
+
+// Item Evaluated
+a|
+<<Clock Consistency>>
+
+| System time and hardware clock time appear to be inconsistent 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/system-hostname.item
+
+// Category
+|
+{set:cellbgcolor!}
+System Information
+
+// Item Evaluated
+a|
+<<System Hostname>>
+
+| Hostname 'rhel2.example.com' resolves correctly 
+
+| 
+{set:cellbgcolor:#00FF00}
+No Change
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/rhel-version.item
+
+// Category
+|
+{set:cellbgcolor!}
+System Information
+
+// Item Evaluated
+a|
+<<RHEL Version>>
+
+| RHEL 9 is installed and supported 
+
+| 
+{set:cellbgcolor:#00FF00}
+No Change
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/system-uptime.item
+
+// Category
+|
+{set:cellbgcolor!}
+System Information
+
+// Item Evaluated
+a|
+<<System Uptime>>
+
+| System was recently rebooted (less than 1 day ago) 
+
+| 
+{set:cellbgcolor:#80E5FF}
+Advisory
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/system-registration.item
+
+// Category
+|
+{set:cellbgcolor!}
+System Information
+
+// Item Evaluated
+a|
+<<System Registration>>
+
+| System is properly registered with Red Hat 
+
+| 
+{set:cellbgcolor:#00FF00}
+No Change
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/enabled-repos.item
+
+// Category
+|
+{set:cellbgcolor!}
+System Information
+
+// Item Evaluated
+a|
+<<Enabled Repositories>>
+
+| Missing 2 required repositories 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+|===
+
+== System Timezone
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#80E5FF}
+Advisory
+|===
+
+Timezone Information:
+[source, bash]
+----
+               Local time: Wed 2025-08-06 10:33:44 +03
+           Universal time: Wed 2025-08-06 07:33:44 UTC
+                 RTC time: Wed 2025-08-06 07:33:44
+                Time zone: Asia/Riyadh (+03, +0300)
+System clock synchronized: yes
+              NTP service: active
+          RTC in local TZ: no
+
+----
+
+
+Locale Information:
+[source, bash]
+----
+System Locale: LANG=en_US.UTF-8
+    VC Keymap: us
+   X11 Layout: us
+
+----
+
+**Observation**
+
+System timezone is set to Asia/Riyadh
+
+**Recommendation**
+
+Verify that the timezone matches the physical location or operational requirements of the server.
+
+To change timezone if needed: 'timedatectl set-timezone <timezone>'
+
+Common timezones: Asia/Riyadh (Saudi Arabia), Europe/London (UK), America/New_York (US Eastern)
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/8/html/configuring_basic_system_settings/index
+
+== Time Synchronization
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#00FF00}
+No Change
+|===
+
+Time Synchronization Status:
+
+[source, bash]
+----
+Chrony service: active
+
+Chrony Sources:
+MS Name/IP address         Stratum Poll Reach LastRx Last sample               
+===============================================================================
+^* 212.138.170.134               1   8   357   217   +496us[ +800us] +/-   21ms
+
+Chrony Tracking:
+Reference ID    : D48AAA86 (212.138.170.134)
+Stratum         : 2
+Ref time (UTC)  : Wed Aug 06 07:30:07 2025
+System time     : 0.000270179 seconds fast of NTP time
+Last offset     : +0.000303793 seconds
+RMS offset      : 0.006127177 seconds
+Frequency       : 19.151 ppm slow
+Residual freq   : +0.024 ppm
+Skew            : 0.748 ppm
+Root delay      : 0.039349224 seconds
+Root dispersion : 0.001842985 seconds
+Update interval : 517.0 seconds
+Leap status     : Normal
+
+----
+
+Timedate Control:
+[source, bash]
+----
+               Local time: Wed 2025-08-06 10:33:45 +03
+           Universal time: Wed 2025-08-06 07:33:45 UTC
+                 RTC time: Wed 2025-08-06 07:33:45
+                Time zone: Asia/Riyadh (+03, +0300)
+System clock synchronized: yes
+              NTP service: active
+          RTC in local TZ: no
+
+----
+
+**Observation**
+
+Time synchronization is active and using chrony
+
+**Recommendation**
+
+None
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/
+
+== Clock Consistency
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+|===
+
+Clock Information:
+[source, bash]
+----
+System Time: 2025-08-06 10:33:45
+Hardware Clock Time: hwclock: Cannot access the Hardware Clock via any known method.
+hwclock: Use the --verbose option to see the details of our search for an access method.
+RTC in local time: false
+
+----
+
+**Observation**
+
+System time and hardware clock time appear to be inconsistent
+
+**Recommendation**
+
+Synchronize hardware clock with system time: 'hwclock --systohc'.
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/8/html/configuring_basic_system_settings/index
+
+== System Hostname
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#00FF00}
+No Change
+|===
+
+Hostname Information:
+[source, bash]
+----
+Hostname: rhel2.example.com
+FQDN: rhel2.example.com
+----
+
+DNS Lookup Result:
+[source, bash]
+----
+
+----
+
+**Observation**
+
+Hostname 'rhel2.example.com' resolves correctly
+
+**Recommendation**
+
+None
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/
+
+== RHEL Version
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#00FF00}
+No Change
+|===
+
+RHEL Version Information:
+[source, bash]
+----
+RHEL Version: Red Hat Enterprise Linux release 9.6 (Plow)
+Kernel Version: 5.14.0-570.12.1.el9_6.x86_64
+
+----
+
+OS Release Information:
+[source, bash]
+----
+NAME="Red Hat Enterprise Linux"
+VERSION="9.6 (Plow)"
+ID="rhel"
+ID_LIKE="fedora"
+VERSION_ID="9.6"
+PLATFORM_ID="platform:el9"
+PRETTY_NAME="Red Hat Enterprise Linux 9.6 (Plow)"
+ANSI_COLOR="0;31"
+LOGO="fedora-logo-icon"
+CPE_NAME="cpe:/o:redhat:enterprise_linux:9::baseos"
+HOME_URL="https://www.redhat.com/"
+DOCUMENTATION_URL="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/9"
+BUG_REPORT_URL="https://issues.redhat.com/"
+
+REDHAT_BUGZILLA_PRODUCT="Red Hat Enterprise Linux 9"
+REDHAT_BUGZILLA_PRODUCT_VERSION=9.6
+REDHAT_SUPPORT_PRODUCT="Red Hat Enterprise Linux"
+REDHAT_SUPPORT_PRODUCT_VERSION="9.6"
+
+----
+
+**Observation**
+
+RHEL 9 is installed and supported
+
+**Recommendation**
+
+None
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/
+
+== System Uptime
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#80E5FF}
+Advisory
+|===
+
+System Uptime Information:
+[source, bash]
+----
+Current Uptime: 10:33:51 up  1:15,  0 users,  load average: 0.00, 0.00, 0.00
+System Start Time: 2025-08-06 09:18:41
+----
+
+Last Reboot Events:
+[source, bash]
+----
+reboot   system boot  5.14.0-570.12.1. Wed Aug  6 09:18   still running
+reboot   system boot  5.14.0-570.12.1. Wed Aug  6 09:14   still running
+
+
+----
+
+**Observation**
+
+System was recently rebooted (less than 1 day ago)
+
+**Recommendation**
+
+Check system logs to verify if the recent reboot was planned or unexpected.
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/8/html/configuring_basic_system_settings/index
+
+== System Registration
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#00FF00}
+No Change
+|===
+
+Identity Information:
+[source, bash]
+----
+The password you typed is invalid.
+Please try again.
+----
+
+Subscription Status:
+[source, bash]
+----
+The password you typed is invalid.
+Please try again.
+----
+
+Consumed Subscriptions:
+[source, bash]
+----
+The password you typed is invalid.
+Please try again.
+
+----
+
+**Observation**
+
+System is properly registered with Red Hat
+
+**Recommendation**
+
+None
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/
+
+== Enabled Repositories
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+|===
+
+Enabled Repositories:
+[source, bash]
+----
+The password you typed is invalid.
+Please try again.
+----
+
+RHEL Version:
+[source, bash]
+----
+Red Hat Enterprise Linux release 9.6 (Plow)
+----
+
+**Observation**
+
+Missing 2 required repositories
+
+**Recommendation**
+
+Enable the 'rhel-9-for-x86_64-baseos-rpms' repository using 'subscription-manager repos --enable=rhel-9-for-x86_64-baseos-rpms'.
+
+Enable the 'rhel-9-for-x86_64-appstream-rpms' repository using 'subscription-manager repos --enable=rhel-9-for-x86_64-appstream-rpms'.
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/configuring_basic_system_settings/assembly_registering-the-system-and-managing-subscriptions_configuring-basic-system-settings
+
+<<<
+
+{set:cellbgcolor!}
+
+# Performance
+
+[cols="1,2,2,3", options=header]
+|===
+|*Category*
+|*Item Evaluated*
+|*Observed Result*
+|*Recommendation*
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/cpu-info.item
+
+// Category
+|
+{set:cellbgcolor!}
+Performance
+
+// Item Evaluated
+a|
+<<CPU Information>>
+
+| System has 2 CPU cores (AMD Ryzen Threadripper PRO 7965WX 24-Cores, Unknown) with normal utilization 
+
+| 
+{set:cellbgcolor:#00FF00}
+No Change
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/system-performance.item
+
+// Category
+|
+{set:cellbgcolor!}
+Performance
+
+// Item Evaluated
+a|
+<<System Performance>>
+
+| Failed to determine system uptime and load 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/performance-bottlenecks.item
+
+// Category
+|
+{set:cellbgcolor!}
+Performance
+
+// Item Evaluated
+a|
+<<Performance Bottlenecks>>
+
+| Failed to determine memory usage by process 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/system-caches.item
+
+// Category
+|
+{set:cellbgcolor!}
+Performance
+
+// Item Evaluated
+a|
+<<System Caches>>
+
+| Failed to determine cache information 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/cluster-software.item
+
+// Category
+|
+{set:cellbgcolor!}
+Performance
+
+// Item Evaluated
+a|
+<<Cluster Software>>
+
+| Cluster software installed but services are not running 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/cluster-names.item
+
+// Category
+|
+{set:cellbgcolor!}
+Performance
+
+// Item Evaluated
+a|
+<<Cluster Name Resolution>>
+
+| System hostname doesn't match any cluster node names 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/cluster-fencing.item
+
+// Category
+|
+{set:cellbgcolor!}
+Performance
+
+// Item Evaluated
+a|
+<<Fencing Agents>>
+
+| Fencing is properly configured 
+
+| 
+{set:cellbgcolor:#00FF00}
+No Change
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/cluster-constraints.item
+
+// Category
+|
+{set:cellbgcolor!}
+Performance
+
+// Item Evaluated
+a|
+<<Cluster Constraints>>
+
+| Found 2 issues with cluster constraints and timeouts 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/cluster-autostart.item
+
+// Category
+|
+{set:cellbgcolor!}
+Performance
+
+// Item Evaluated
+a|
+<<Cluster Autostart>>
+
+| Cluster is configured to auto-start on reboot 
+
+| 
+{set:cellbgcolor:#00FF00}
+No Change
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/cluster-split-brain.item
+
+// Category
+|
+{set:cellbgcolor!}
+Performance
+
+// Item Evaluated
+a|
+<<Split-Brain Prevention>>
+
+| Split-brain prevention is properly configured 
+
+| 
+{set:cellbgcolor:#00FF00}
+No Change
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/disk-io-performance.item
+
+// Category
+|
+{set:cellbgcolor!}
+Performance
+
+// Item Evaluated
+a|
+<<I/O Performance>>
+
+| Failed to determine block device information 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/tuned-profile.item
+
+// Category
+|
+{set:cellbgcolor!}
+Performance
+
+// Item Evaluated
+a|
+<<Tuned Profile>>
+
+| No tuned profile is active 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/cpu-bottlenecks.item
+
+// Category
+|
+{set:cellbgcolor!}
+Performance
+
+// Item Evaluated
+a|
+<<CPU Bottlenecks>>
+
+| No CPU bottlenecks detected 
+
+| 
+{set:cellbgcolor:#00FF00}
+No Change
+
+// ------------------------ITEM END
+|===
+
+== CPU Information
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#00FF00}
+No Change
+|===
+
+CPU Information:
+[source, bash]
+----
+Architecture:                         x86_64
+CPU op-mode(s):                       32-bit, 64-bit
+Address sizes:                        52 bits physical, 57 bits virtual
+Byte Order:                           Little Endian
+CPU(s):                               2
+On-line CPU(s) list:                  0,1
+Vendor ID:                            AuthenticAMD
+Model name:                           AMD Ryzen Threadripper PRO 7965WX 24-Cores
+CPU family:                           25
+Model:                                24
+Thread(s) per core:                   1
+Core(s) per socket:                   1
+Socket(s):                            2
+Stepping:                             1
+BogoMIPS:                             8387.39
+Flags:                                fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm rep_good nopl cpuid extd_apicid tsc_known_freq pni pclmulqdq ssse3 fma cx16 pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand hypervisor lahf_lm cmp_legacy svm cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw perfctr_core ssbd perfmon_v2 ibrs ibpb stibp ibrs_enhanced vmmcall fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid avx512f avx512dq rdseed adx smap avx512ifma clflushopt clwb avx512cd sha_ni avx512bw avx512vl xsaveopt xsavec xgetbv1 xsaves avx512_bf16 clzero xsaveerptr wbnoinvd arat npt lbrv nrip_save tsc_scale vmcb_clean flushbyasid pausefilter pfthreshold vgif vnmi avx512vbmi umip pku ospke avx512_vbmi2 gfni vaes vpclmulqdq avx512_vnni avx512_bitalg avx512_vpopcntdq la57 rdpid overflow_recov succor fsrm flush_l1d
+Virtualization:                       AMD-V
+Hypervisor vendor:                    KVM
+Virtualization type:                  full
+L1d cache:                            128 KiB (2 instances)
+L1i cache:                            128 KiB (2 instances)
+L2 cache:                             1 MiB (2 instances)
+L3 cache:                             32 MiB (2 instances)
+NUMA node(s):                         1
+NUMA node0 CPU(s):                    0,1
+Vulnerability Gather data sampling:   Not affected
+Vulnerability Itlb multihit:          Not affected
+Vulnerability L1tf:                   Not affected
+Vulnerability Mds:                    Not affected
+Vulnerability Meltdown:               Not affected
+Vulnerability Mmio stale data:        Not affected
+Vulnerability Reg file data sampling: Not affected
+Vulnerability Retbleed:               Not affected
+Vulnerability Spec rstack overflow:   Mitigation; Safe RET
+Vulnerability Spec store bypass:      Mitigation; Speculative Store Bypass disabled via prctl
+Vulnerability Spectre v1:             Mitigation; usercopy/swapgs barriers and __user pointer sanitization
+Vulnerability Spectre v2:             Mitigation; Enhanced / Automatic IBRS; IBPB conditional; STIBP disabled; RSB filling; PBRSB-eIBRS Not affected; BHI Not affected
+Vulnerability Srbds:                  Not affected
+Vulnerability Tsx async abort:        Not affected
+
+----
+
+
+CPU Count: 2
+
+CPU Utilization:
+[source, bash]
+----
+%Cpu(s):  6.1 us, 12.1 sy,  0.0 ni, 81.8 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st
+
+----
+
+
+Load Average: 0.00 0.00 0.00 8/225 5956
+
+**Observation**
+
+System has 2 CPU cores (AMD Ryzen Threadripper PRO 7965WX 24-Cores, Unknown) with normal utilization
+
+**Recommendation**
+
+None
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/
+
+== System Performance
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+|===
+
+**Observation**
+
+Failed to determine system uptime and load
+
+**Recommendation**
+
+Ensure the 'uptime' command is available.
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/
+
+== Performance Bottlenecks
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+|===
+
+**Observation**
+
+Failed to determine memory usage by process
+
+**Recommendation**
+
+Ensure the 'ps' command is available.
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/
+
+== System Caches
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+|===
+
+**Observation**
+
+Failed to determine cache information
+
+**Recommendation**
+
+Ensure /proc/meminfo is readable.
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/
+
+== Cluster Software
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+|===
+
+Cluster Packages:
+[source, bash]
+----
+----
+
+Component Versions:
+[source, bash]
+----
+----
+
+Service Status:
+[source, bash]
+----
+----
+
+Cluster Status:
+[source, bash]
+----
+
+----
+
+**Observation**
+
+Cluster software installed but services are not running
+
+**Recommendation**
+
+Start cluster services with 'systemctl start pacemaker corosync pcsd'
+
+Enable services with 'systemctl enable pacemaker corosync pcsd'
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/8/html/configuring_and_managing_high_availability_clusters/assembly_configuring-controlling-cluster-services-configuring-and-managing-high-availability-clusters
+
+== Cluster Name Resolution
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+|===
+
+Cluster Nodes from Configuration:
+[source, bash]
+----
+----
+
+System Hostname:
+[source, bash]
+----
+----
+
+**Observation**
+
+System hostname doesn't match any cluster node names
+
+**Recommendation**
+
+Ensure the system hostname matches the name in corosync.conf
+
+Node names should be consistent in all cluster configuration
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/8/html/configuring_and_managing_high_availability_clusters/assembly_cluster-network-configuring-and-managing-high-availability-clusters
+
+== Fencing Agents
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#00FF00}
+No Change
+|===
+
+Fencing Configuration:
+[source, bash]
+----
+----
+
+STONITH Enabled Setting:
+[source, bash]
+----
+----
+
+Available Fence Agents:
+[source, bash]
+----
+
+----
+
+**Observation**
+
+Fencing is properly configured
+
+**Recommendation**
+
+None
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/
+
+== Cluster Constraints
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+|===
+
+Cluster Constraints:
+[source, bash]
+----
+----
+
+Resource Defaults:
+[source, bash]
+----
+----
+
+Operation Defaults:
+[source, bash]
+----
+----
+
+Configured Resources:
+[source, bash]
+----
+
+----
+
+**Observation**
+
+Found 2 issues with cluster constraints and timeouts
+
+**Recommendation**
+
+No timeout values defined in resource or operation defaults
+
+No migration-threshold defined for resources
+
+Define operation timeout defaults: 'pcs resource op defaults timeout=60s'
+
+Define migration threshold: 'pcs resource defaults migration-threshold=5'
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/8/html/configuring_and_managing_high_availability_clusters/assembly_configuring-resource-constraints-configuring-and-managing-high-availability-clusters
+
+== Cluster Autostart
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#00FF00}
+No Change
+|===
+
+Services Enabled Status:
+[source, bash]
+----
+----
+
+Cluster Status:
+[source, bash]
+----
+----
+
+Auto-start Properties:
+[source, bash]
+----
+
+----
+
+**Observation**
+
+Cluster is configured to auto-start on reboot
+
+**Recommendation**
+
+None
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/
+
+== Split-Brain Prevention
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#00FF00}
+No Change
+|===
+
+Corosync Quorum Configuration:
+[source, bash]
+----
+----
+
+Cluster Node Information:
+[source, bash]
+----
+Cluster Node Count: 0
+----
+
+Fencing Configuration:
+[source, bash]
+----
+STONITH Enabled: true
+Fencing Configured: true
+
+----
+
+**Observation**
+
+Split-brain prevention is properly configured
+
+**Recommendation**
+
+None
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/
+
+== I/O Performance
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+|===
+
+**Observation**
+
+Failed to determine block device information
+
+**Recommendation**
+
+Ensure the 'lsblk' command is available.
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/
+
+== Tuned Profile
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+|===
+
+Active Tuned Profile: None
+
+Available Profiles:
+[source, bash]
+----
+bash: line 1: tuned-adm: command not found
+
+----
+
+System Type: kvm
+Server Role: true
+
+**Observation**
+
+No tuned profile is active
+
+**Recommendation**
+
+Activate recommended profile: 'tuned-adm profile virtual-guest'
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/8/html/monitoring_and_managing_system_status_and_performance/tuned-profiles-distributed-with-rhel_monitoring-and-managing-system-status-and-performance
+
+== CPU Bottlenecks
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#00FF00}
+No Change
+|===
+
+Top CPU Consuming Processes:
+[source, bash]
+----
+    PID    PPID CMD                         %CPU %MEM
+   5471       1 /usr/lib/systemd/systemd-ti  2.0  0.1
+   5297       1 /usr/lib/systemd/systemd --  0.5  0.1
+      1       0 /usr/lib/systemd/systemd --  0.0  0.2
+      2       0 [kthreadd]                   0.0  0.0
+      3       2 [pool_workqueue_]            0.0  0.0
+      4       2 [kworker/R-rcu_g]            0.0  0.0
+      5       2 [kworker/R-sync_]            0.0  0.0
+      6       2 [kworker/R-slub_]            0.0  0.0
+      7       2 [kworker/R-netns]            0.0  0.0
+      9       2 [kworker/0:0H-events_highpr  0.0  0.0
+
+----
+
+
+CPU Statistics:
+[source, bash]
+----
+procs -----------memory---------- ---swap-- -----io---- -system-- ------cpu-----
+ r  b   swpd   free   buff  cache   si   so    bi    bo   in   cs us sy id wa st
+ 0  0      0 7385656   2708 249108    0    0    29     4   22   57  0  0 100  0  0
+ 0  0      0 7386160   2708 249200    0    0     0     9  197  230  0  0 100  0  0
+ 0  0      0 7386664   2708 249200    0    0     0     0   95  137  0  0 100  0  0
+
+----
+
+
+Interrupt Information:
+[source, bash]
+----
+           CPU0       CPU1       
+  1:          0          9   IO-APIC   1-edge      i8042
+  8:          0          0   IO-APIC   8-edge      rtc0
+  9:          0          0   IO-APIC   9-fasteoi   acpi
+ 12:         15          0   IO-APIC  12-edge      i8042
+ 16:          0          0   IO-APIC  16-fasteoi   i801_smbus
+ 24:          0          0  PCI-MSIX-0000:00:02.0   0-edge      PCIe PME, aerdrv
+ 25:          0          0  PCI-MSIX-0000:00:02.1   0-edge      PCIe PME, aerdrv
+ 26:          0          0  PCI-MSIX-0000:00:02.2   0-edge      PCIe PME, aerdrv
+ 27:          0          0  PCI-MSIX-0000:00:02.3   0-edge      PCIe PME, aerdrv
+ 28:          0          0  PCI-MSIX-0000:00:02.4   0-edge      PCIe PME, aerdrv
+ 29:          0          0  PCI-MSIX-0000:00:02.5   0-edge      PCIe PME, aerdrv
+ 30:          0          0  PCI-MSIX-0000:00:02.6   0-edge      PCIe PME, aerdrv
+ 31:          0          0  PCI-MSIX-0000:00:02.7   0-edge      PCIe PME, aerdrv
+ 32:          0          0  PCI-MSIX-0000:00:03.0   0-edge      PCIe PME, aerdrv
+ 33:          0          0  PCI-MSIX-0000:00:03.1   0-edge      PCIe PME, aerdrv
+ 34:          0          0  PCI-MSIX-0000:00:03.2   0-edge      PCIe PME, aerdrv
+ 35:          0          0  PCI-MSIX-0000:00:03.3   0-edge      PCIe PME, aerdrv
+ 36:          0          0  PCI-MSIX-0000:00:03.4   0-edge      PCIe PME, aerdrv
+ 37:          0          0  PCI-MSIX-0000:00:03.5   0-edge      PCIe PME, aerdrv
+
+----
+
+**Observation**
+
+No CPU bottlenecks detected
+
+**Recommendation**
+
+None
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/
+
+<<<
+
+{set:cellbgcolor!}
+
+# Storage
+
+[cols="1,2,2,3", options=header]
+|===
+|*Category*
+|*Item Evaluated*
+|*Observed Result*
+|*Recommendation*
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/storage-considerations-performance.item
+
+// Category
+|
+{set:cellbgcolor!}
+Storage
+
+// Item Evaluated
+a|
+<<Storage Performance>>
+
+| Storage performance settings appear to be appropriate 
+
+| 
+{set:cellbgcolor:#00FF00}
+No Change
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/storage-considerations-reliability.item
+
+// Category
+|
+{set:cellbgcolor!}
+Storage
+
+// Item Evaluated
+a|
+<<Storage Reliability>>
+
+| Virtual machine - storage redundancy managed by hypervisor 
+
+| 
+{set:cellbgcolor:#00FF00}
+No Change
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/storage-considerations-capacity.item
+
+// Category
+|
+{set:cellbgcolor!}
+Storage
+
+// Item Evaluated
+a|
+<<Storage Capacity>>
+
+| Storage capacity appears to be adequate 
+
+| 
+{set:cellbgcolor:#00FF00}
+No Change
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/storage-multipath.item
+
+// Category
+|
+{set:cellbgcolor!}
+Storage
+
+// Item Evaluated
+a|
+<<Multipath Configuration>>
+
+| Multipath is installed but not running 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/storage-filesystem-types.item
+
+// Category
+|
+{set:cellbgcolor!}
+Storage
+
+// Item Evaluated
+a|
+<<Filesystem Types>>
+
+| Could not determine filesystem types in use 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/storage-filesystem-errors.item
+
+// Category
+|
+{set:cellbgcolor!}
+Storage
+
+// Item Evaluated
+a|
+<<Filesystem Errors>>
+
+| No filesystem errors detected 
+
+| 
+{set:cellbgcolor:#00FF00}
+No Change
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/storage-partition-alignment.item
+
+// Category
+|
+{set:cellbgcolor!}
+Storage
+
+// Item Evaluated
+a|
+<<Partition Alignment>>
+
+| Partition layout does not follow Red Hat best practices 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/disk-usage.item
+
+// Category
+|
+{set:cellbgcolor!}
+Storage
+
+// Item Evaluated
+a|
+<<Disk Usage>>
+
+| Failed to determine disk usage 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/disk-mount-points.item
+
+// Category
+|
+{set:cellbgcolor!}
+Storage
+
+// Item Evaluated
+a|
+<<Mount Points>>
+
+| Failed to determine mount points 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/storage-config.item
+
+// Category
+|
+{set:cellbgcolor!}
+Storage
+
+// Item Evaluated
+a|
+<<Storage Configuration>>
+
+| Storage is properly configured 
+
+| 
+{set:cellbgcolor:#00FF00}
+No Change
+
+// ------------------------ITEM END
+|===
+
+== Storage Performance
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#00FF00}
+No Change
+|===
+
+I/O Scheduler Settings:
+[source, bash]
+----
+/dev/:: -c: line 2: syntax error: unexpected end of file
+
+----
+
+Disk Readahead Settings:
+[source, bash]
+----
+/dev/: -c: line 2: syntax error: unexpected end of file
+
+----
+
+Disk Types:
+[source, bash]
+----
+/dev/: -c: line 2: syntax error: unexpected end of file
+
+----
+
+Disk NUMA Assignments:
+[source, bash]
+----
+/dev/: -c: line 2: syntax error: unexpected end of file
+
+----
+
+I/O Statistics:
+[source, bash]
+----
+bash: line 1: iostat: command not found
+
+----
+
+**Observation**
+
+Storage performance settings appear to be appropriate
+
+**Recommendation**
+
+None
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/
+
+== Storage Reliability
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#00FF00}
+No Change
+|===
+
+Software RAID Status:
+[source, bash]
+----
+
+----
+
+Hardware RAID Controller:
+[source, bash]
+----
+
+----
+
+LVM Configuration:
+[source, bash]
+----
+
+----
+
+Multipath Configuration:
+[source, bash]
+----
+
+----
+
+Disk Health Status:
+[source, bash]
+----
+Virtual machine - SMART data not applicable
+----
+
+**Observation**
+
+Virtual machine - storage redundancy managed by hypervisor
+
+**Recommendation**
+
+None
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/
+
+== Storage Capacity
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#00FF00}
+No Change
+|===
+
+Filesystem Disk Usage:
+[source, bash]
+----
+
+----
+
+Filesystem Inode Usage:
+[source, bash]
+----
+
+----
+
+Disk Usage Trend:
+[source, bash]
+----
+
+----
+
+Historical Capacity Alerts:
+[source, bash]
+----
+
+----
+
+**Observation**
+
+Storage capacity appears to be adequate
+
+**Recommendation**
+
+None
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/
+
+== Multipath Configuration
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+|===
+
+Multipath Package:
+[source, bash]
+----
+
+----
+
+Multipath Service Status:
+[source, bash]
+----
+
+----
+
+Multipath Configuration:
+[source, bash]
+----
+
+----
+
+Multipath Devices:
+[source, bash]
+----
+
+----
+
+Multipath Errors:
+[source, bash]
+----
+
+----
+
+**Observation**
+
+Multipath is installed but not running
+
+**Recommendation**
+
+Start multipath service: 'systemctl start multipathd'
+
+Enable multipath service: 'systemctl enable multipathd'
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/8/html/managing_storage_devices/configuring-device-mapper-multipath_managing-storage-devices
+
+== Filesystem Types
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+|===
+
+Filesystems in Use:
+[source, bash]
+----
+
+----
+
+Mounted Filesystems:
+[source, bash]
+----
+
+----
+
+Kernel-Supported Filesystems:
+[source, bash]
+----
+
+----
+
+Filesystem Configuration in /etc/fstab:
+[source, bash]
+----
+
+----
+
+**Observation**
+
+Could not determine filesystem types in use
+
+**Recommendation**
+
+Verify filesystem configuration manually
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/
+
+== Filesystem Errors
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#00FF00}
+No Change
+|===
+
+No filesystem errors found in kernel log
+
+No filesystem errors found in journal
+
+Filesystem Check Configuration in fstab:
+[source, bash]
+----
+No explicit fsck configuration found
+
+----
+
+No regular filesystems remounted read-only
+
+Root Filesystem Space Usage:
+[source, bash]
+----
+
+----
+
+**Observation**
+
+No filesystem errors detected
+
+**Recommendation**
+
+Consider configuring periodic filesystem checks in fstab
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/
+
+== Partition Alignment
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+|===
+
+Partition Information:
+[source, bash]
+----
+
+----
+
+Partition Alignment Details:
+[source, bash]
+----
+
+----
+
+Disk Parameters (optimal_io_size physical_block_size alignment_offset):
+[source, bash]
+----
+
+----
+
+Disk Types:
+[source, bash]
+----
+
+----
+
+Mount Points:
+[source, bash]
+----
+
+----
+
+LUKS Encryption Status:
+[source, bash]
+----
+No LUKS encrypted devices detected
+
+----
+
+System Type:
+[source, bash]
+----
+Virtual Machine: 
+
+----
+
+Missing Recommended Mount Points:
+[source, bash]
+----
+/boot
+/home
+/var
+/tmp
+/var/log
+/var/tmp
+/var/log/audit
+
+----
+
+**Observation**
+
+Partition layout does not follow Red Hat best practices
+
+**Recommendation**
+
+For virtual environments, separate partitions for /boot, /home, /tmp, and /var/tmp are optional but recommended
+
+Set up monitoring to check partition usage regularly, and increase virtual disk size if needed
+
+Consider implementing LUKS encryption for security-sensitive data
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/8/html/installation_guide/performing-a-standard-rhel-installation#recommended-partitioning-scheme_partitioning-guidance
+
+== Disk Usage
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+|===
+
+**Observation**
+
+Failed to determine disk usage
+
+**Recommendation**
+
+Ensure the 'df' command is available.
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/
+
+== Mount Points
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+|===
+
+**Observation**
+
+Failed to determine mount points
+
+**Recommendation**
+
+Ensure the 'mount' command is available.
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/
+
+== Storage Configuration
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#00FF00}
+No Change
+|===
+
+LVM Configuration:
+
+
+LVM not configured or lvs command not available
+
+
+RAID Configuration:
+
+[source, bash]
+----
+
+No software RAID configured
+
+----
+
+Multipath Configuration:
+
+[source, bash]
+----
+
+Multipath not configured or not installed
+
+----
+
+**Observation**
+
+Storage is properly configured
+
+**Recommendation**
+
+None
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/
+
+<<<
+
+{set:cellbgcolor!}
+
+# Security
+
+[cols="1,2,2,3", options=header]
+|===
+|*Category*
+|*Item Evaluated*
+|*Observed Result*
+|*Recommendation*
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/security-auditd.item
+
+// Category
+|
+{set:cellbgcolor!}
+Security
+
+// Item Evaluated
+a|
+<<Audit Configuration>>
+
+| Found 7 issues with audit configuration 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/security-password-policy.item
+
+// Category
+|
+{set:cellbgcolor!}
+Security
+
+// Item Evaluated
+a|
+<<Password Policy>>
+
+| Found 4 password policy issues 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/security-file-permissions.item
+
+// Category
+|
+{set:cellbgcolor!}
+Security
+
+// Item Evaluated
+a|
+<<File Permissions>>
+
+| Found 2 file permission issues 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/security-ssh-hardening.item
+
+// Category
+|
+{set:cellbgcolor!}
+Security
+
+// Item Evaluated
+a|
+<<SSH Hardening>>
+
+| Found 9 SSH hardening issues 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/security-root-account.item
+
+// Category
+|
+{set:cellbgcolor!}
+Security
+
+// Item Evaluated
+a|
+<<Root Account Security>>
+
+| Found 1 root account security issues 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/security-shell-history.item
+
+// Category
+|
+{set:cellbgcolor!}
+Security
+
+// Item Evaluated
+a|
+<<Shell History Configuration>>
+
+| Found 3 shell history configuration issues 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/kernel-version.item
+
+// Category
+|
+{set:cellbgcolor!}
+Security
+
+// Item Evaluated
+a|
+<<Kernel Version>>
+
+| Repository metadata is 20306 days old - unable to reliably determine if latest kernel is installed 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/kernel-firmware.item
+
+// Category
+|
+{set:cellbgcolor!}
+Security
+
+// Item Evaluated
+a|
+<<BIOS/UEFI Firmware>>
+
+| This is a virtual machine - firmware is managed by the hypervisor 
+
+| 
+{set:cellbgcolor:#80E5FF}
+Advisory
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/kernel-unused-devices.item
+
+// Category
+|
+{set:cellbgcolor!}
+Security
+
+// Item Evaluated
+a|
+<<Unused Devices>>
+
+| This is a virtual machine - device management is handled by the hypervisor 
+
+| 
+{set:cellbgcolor:#A6B9BF}
+Not Applicable
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/compliance-rhel-cis.item
+
+// Category
+|
+{set:cellbgcolor!}
+Security
+
+// Item Evaluated
+a|
+<<RHEL CIS Compliance>>
+
+| System has low compliance with RHEL CIS standards (24%) 
+
+| 
+{set:cellbgcolor:#FF0000}
+Changes Required
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/auth-central.item
+
+// Category
+|
+{set:cellbgcolor!}
+Security
+
+// Item Evaluated
+a|
+<<Central Authentication>>
+
+| No central authentication configuration detected 
+
+| 
+{set:cellbgcolor:#FF0000}
+Changes Required
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/auth-sssd.item
+
+// Category
+|
+{set:cellbgcolor!}
+Security
+
+// Item Evaluated
+a|
+<<SSSD Configuration>>
+
+| Found 5 issues with SSSD configuration 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/auth-sudo-pam.item
+
+// Category
+|
+{set:cellbgcolor!}
+Security
+
+// Item Evaluated
+a|
+<<Sudo and PAM>>
+
+| Found 2 issues with sudo and PAM configuration 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/auth-kerberos.item
+
+// Category
+|
+{set:cellbgcolor!}
+Security
+
+// Item Evaluated
+a|
+<<Kerberos Configuration>>
+
+| Found 2 issues with Kerberos configuration 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+|===
+
+== Audit Configuration
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+|===
+
+Auditd Service Active: false
+
+Audit Configuration:
+[source, bash]
+----
+
+----
+
+Audit Rules:
+[source, bash]
+----
+
+----
+
+Audit Log File:
+[source, bash]
+----
+
+----
+
+TTY Auditing Configuration:
+[source, bash]
+----
+
+----
+
+**Observation**
+
+Found 7 issues with audit configuration
+
+**Recommendation**
+
+Audit daemon (auditd) is not active
+
+Few audit rules defined (0 rules)
+
+max_log_file setting not configured properly
+
+num_logs setting not configured properly
+
+space_left setting not found
+
+space_left_action setting not found
+
+TTY auditing not configured for root user
+
+Install and enable auditd: 'yum install audit && systemctl enable --now auditd'
+
+Configure audit rules in /etc/audit/rules.d/
+
+Follow security guidelines for critical events to audit
+
+Set max_log_file to at least 8 (MB) in /etc/audit/auditd.conf
+
+Set num_logs to at least 5 in /etc/audit/auditd.conf
+
+Configure space_left in /etc/audit/auditd.conf
+
+Configure space_left_action in /etc/audit/auditd.conf
+
+Enable TTY auditing for root in /etc/pam.d/system-auth and password-auth: 'session required pam_tty_audit.so enable=root'
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/8/html/security_hardening/configuring-auditd_security-hardening
+
+== Password Policy
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+|===
+
+Password Quality Configuration:
+[source, bash]
+----
+
+----
+
+Password Aging Policy:
+[source, bash]
+----
+
+----
+
+Account Lockout Policy:
+[source, bash]
+----
+
+----
+
+Sudo Access Rules:
+[source, bash]
+----
+
+----
+
+Sudo Logging Configuration:
+[source, bash]
+----
+
+----
+
+Password Hashing Algorithm:
+[source, bash]
+----
+
+----
+
+**Observation**
+
+Found 4 password policy issues
+
+**Recommendation**
+
+Password minimum length should be at least 8 characters
+
+Password complexity requirements incomplete
+
+Password maximum age (99999 days) exceeds 90 days
+
+Secure password hashing (SHA-512) not configured
+
+Set minlen=8 in /etc/security/pwquality.conf
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/8/html/security_hardening/using-tools-and-services-to-enhance-security_security-hardening#configuring-password-security_using-tools-and-services-to-enhance-security
+
+== File Permissions
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+|===
+
+File Permissions for Sensitive Files:
+[source, bash]
+----
+
+----
+
+No world-writable files found in key directories.
+
+No world-readable log files found.
+
+Cron Directory Permissions:
+[source, bash]
+----
+
+----
+
+Immutable Critical Files:
+[source, bash]
+----
+
+----
+
+SELinux Contexts for Critical Files:
+[source, bash]
+----
+
+----
+
+Audit Rules for Critical Files:
+[source, bash]
+----
+
+----
+
+SCAP Security Tools Installation:
+[source, bash]
+----
+
+----
+
+No unapproved SUID/SGID binaries found.
+
+**Observation**
+
+Found 2 file permission issues
+
+**Recommendation**
+
+/etc/cron.d directory has incorrect permissions (should be 700)
+
+SELinux contexts may not be properly set for critical files
+
+Fix /etc/cron.d directory permissions: 'chmod 700 /etc/cron.d'
+
+Restore proper SELinux contexts: 'restorecon -v /etc/passwd /etc/shadow /etc/ssh/sshd_config'
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/8/html/security_hardening/assembly_securing-files-and-directories_security-hardening
+
+== SSH Hardening
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+|===
+
+SSH Configuration File Content:
+[source, bash]
+----
+
+----
+
+SSH Server Configuration Highlights:
+[source, bash]
+----
+Protocol: 
+Root Login: 
+Empty Passwords: 
+X11 Forwarding: 
+Max Auth Tries: 
+Password Authentication: 
+Challenge Response Auth: 
+Login Grace Time: 
+Client Alive Interval: 
+Client Alive Count Max: 
+Hostbased Authentication: 
+TCP Forwarding: 
+Banner: 
+Allow Users/Groups: 
+UseDNS: 
+Ciphers: 
+MACs: 
+Key Exchange Algorithms: 
+
+----
+
+SSH Configuration File Permissions:
+[source, bash]
+----
+sshd_config: 
+
+----
+
+SSH Host Key File Permissions:
+[source, bash]
+----
+
+
+----
+
+PAM SSH Configuration:
+[source, bash]
+----
+
+----
+
+**Observation**
+
+Found 9 SSH hardening issues
+
+**Recommendation**
+
+SSH MaxAuthTries is set to 6 (recommended max: 4)
+
+LoginGraceTime is 120 seconds (recommended: 60s or less)
+
+ClientAliveInterval is 0 (recommended: 300s or less, but not 0)
+
+HostbasedAuthentication is not explicitly disabled
+
+TCP forwarding is not explicitly disabled
+
+UseDNS is not set to 'no' (can cause connection delays)
+
+SSH config file has incorrect permissions or ownership (should be 600 or 644, owned by root)
+
+PAM faillock not configured for SSH (account lockout protection missing)
+
+PAM password quality not configured for SSH (password complexity checks missing)
+
+Edit /etc/ssh/sshd_config and set recommended values:
+
+- Protocol 2
+
+- PermitRootLogin no
+
+- PermitEmptyPasswords no
+
+- X11Forwarding no
+
+- MaxAuthTries 4
+
+- PasswordAuthentication no (if key-based auth is set up)
+
+- ChallengeResponseAuthentication no
+
+- LoginGraceTime 60
+
+- ClientAliveInterval 300
+
+- ClientAliveCountMax 3
+
+- HostbasedAuthentication no
+
+- AllowTcpForwarding no
+
+- Banner /etc/issue.net
+
+- UseDNS no
+
+Configure AllowUsers or AllowGroups to restrict SSH access
+
+Ensure SSH configuration files have appropriate permissions (chmod 600 /etc/ssh/sshd_config)
+
+Restart SSH after changes: 'systemctl restart sshd'
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/8/html/security_hardening/assembly_securing-the-openssh-service_security-hardening
+
+== Root Account Security
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+|===
+
+Root Account Security Analysis:
+
+Root Login Shell:
+[source, bash]
+----
+
+
+----
+
+Securetty Configuration (terminals allowed for root login):
+[source, bash]
+----
+
+----
+
+Wheel Group Configuration in Sudoers:
+[source, bash]
+----
+
+----
+
+Root Idle Timeout Configuration:
+[source, bash]
+----
+
+----
+
+GRUB Password Protection:
+[source, bash]
+----
+GRUB password configured
+
+----
+
+Members of Wheel Group:
+[source, bash]
+----
+
+----
+
+TTY Auditing for SU Command:
+[source, bash]
+----
+
+----
+
+**Observation**
+
+Found 1 root account security issues
+
+**Recommendation**
+
+Root account has a valid login shell
+
+Change the root shell to /sbin/nologin in /etc/passwd to prevent direct logins
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/8/html/security_hardening/configuring-automated-password-security_security-hardening
+
+== Shell History Configuration
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+|===
+
+Shell History Configuration Analysis:
+
+Global Bash History Settings:
+[source, bash]
+----
+
+----
+
+Root Bash History File Attributes:
+[source, bash]
+----
+
+----
+
+History Size Settings:
+[source, bash]
+----
+
+----
+
+History Timestamp Configuration:
+[source, bash]
+----
+
+----
+
+History Append Configuration:
+[source, bash]
+----
+
+----
+
+PROMPT_COMMAND History Configuration:
+[source, bash]
+----
+
+----
+
+Command Logging to Syslog:
+[source, bash]
+----
+
+----
+
+**Observation**
+
+Found 3 shell history configuration issues
+
+**Recommendation**
+
+HISTSIZE is not set or too small (should be at least 1000)
+
+HISTFILESIZE is not set or too small (should be at least 10000)
+
+Root's bash_history file is not set as append-only
+
+Set appropriate history sizes in /etc/profile.d/history.sh:
+
+export HISTSIZE=10000
+
+export HISTFILESIZE=20000
+
+Make root's history append-only: 'chattr +a /root/.bash_history'
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/8/html/security_hardening/assembly_securing-the-system-against-intrusion_security-hardening
+
+== Kernel Version
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+|===
+
+Current Running Kernel:
+[source, bash]
+----
+
+----
+
+Latest Available Kernel:
+[source, bash]
+----
+
+----
+
+Repository Metadata Status:
+[source, bash]
+----
+Could not determine repository metadata age
+
+----
+
+Kernel Version Status Summary:
+[source, text]
+----
+Running kernel: 
+Latest available kernel: 
+Formatted for comparison: 
+Repository metadata age: 20306 days
+Running latest kernel: true
+
+----
+
+**Observation**
+
+Repository metadata is 20306 days old - unable to reliably determine if latest kernel is installed
+
+**Recommendation**
+
+Refresh repository metadata with 'subscription-manager refresh'
+
+For disconnected environments, sync content from Satellite server
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/8/html/configuring_basic_system_settingsindex
+
+== BIOS/UEFI Firmware
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#80E5FF}
+Advisory
+|===
+
+System Information:
+[source, bash]
+----
+System Manufacturer: Unknown
+System Model: Unknown
+Firmware Vendor: Unknown
+Firmware Version: Unknown
+Firmware Date: Unknown
+System Type: 
+
+----
+
+Firmware Information:
+[source, bash]
+----
+
+----
+
+System Information:
+[source, bash]
+----
+
+----
+
+Intel MDS Vulnerability Status:
+[source, bash]
+----
+
+----
+
+**Observation**
+
+This is a virtual machine - firmware is managed by the hypervisor
+
+**Recommendation**
+
+Ensure the hypervisor host's firmware is up to date
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/8/#Virtualization
+
+== Unused Devices
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#A6B9BF}
+Not Applicable
+|===
+
+Device Status:
+[source, bash]
+----
+- thunderbolt: Loaded
+- webcam: Loaded
+- smartcard: Loaded
+- fingerprint: Loaded
+- bluetooth: Loaded
+- firewire: Loaded
+- wireless: Loaded
+- sound: Loaded
+
+----
+
+Kernel Module Blacklisting:
+[source, bash]
+----
+
+----
+
+Kernel Boot Parameters for Blacklisting:
+[source, bash]
+----
+
+----
+
+PCI Devices and Drivers:
+[source, bash]
+----
+
+----
+
+**Observation**
+
+This is a virtual machine - device management is handled by the hypervisor
+
+**Recommendation**
+
+None
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/
+
+== RHEL CIS Compliance
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#FF0000}
+Changes Required
+|===
+
+RHEL CIS Compliance and Best Practices Report
+
+Overall Score: 24/100 (24%)
+
+{set:cellbgcolor!}
+Category Scores:
+[cols="2,1,1,1", options="header"]
+|===
+|Category|Score|Max Score|Percentage
+|Partitioning|0|10|0%
+|Filesystem Configuration|0|10|0%
+|Authentication|4|10|40%
+|Network Security|0|10|0%
+|Services|4|10|40%
+|SELinux & MAC|0|10|0%
+|System Updates|10|10|100%
+|Logging & Auditing|0|10|0%
+|Time Synchronization|0|10|0%
+|Additional Security|6|10|60%
+|===
+
+
+== Detailed Findings:
+
+=== Partitioning (0/10)
+* ✗ /home is NOT on a separate partition
+* ✗ /tmp is NOT on a separate partition
+* ✗ /var is NOT on a separate partition
+* ✗ /var/log is NOT on a separate partition
+* ✗ /var/tmp is NOT on a separate partition
+
+Recommendations:
+* Create a separate partition for /home
+* Create a separate partition for /tmp
+* Create a separate partition for /var
+* Create a separate partition for /var/log
+* Create a separate partition for /var/tmp
+
+=== Filesystem Configuration (0/10)
+* No filesystem options checked
+
+=== Authentication (4/10)
+* ✓ SSSD is installed
+* ✗ SSSD service is not active
+* ✗ System is not joined to Red Hat IDM or Active Directory
+* ✓ PAM has password quality requirements
+
+Recommendations:
+* Start SSSD service: 'systemctl start sssd'
+* Join system to Red Hat IDM or Active Directory
+
+=== Network Security (0/10)
+* ✗ Firewall (firewalld) is not active
+* ✗ SSH root login is not explicitly disabled
+* ✗ SSH password authentication is not disabled
+
+Recommendations:
+* Enable firewalld: 'systemctl enable --now firewalld'
+* Disable SSH root login: 'PermitRootLogin no'
+* Disable SSH password auth: 'PasswordAuthentication no'
+
+=== Services (4/10)
+* ✓ 0/11 unnecessary services are disabled or not installed
+* ✓ Low number of enabled services: 0
+
+=== SELinux & MAC (0/10)
+* ✗ SELinux is disabled
+* ✗ SELinux policy is not set to targeted
+
+Recommendations:
+* Enable SELinux in enforcing mode
+* Set SELinux policy to targeted
+
+=== System Updates (10/10)
+* ✓ No security updates pending
+* ✓ Automatic updates are configured
+
+=== Logging & Auditing (0/10)
+* ✗ rsyslog service is not active
+* ✗ auditd service is not active
+* ✗ Log rotation may not be properly configured
+
+Recommendations:
+* Enable rsyslog: 'systemctl enable --now rsyslog'
+* Enable auditd: 'systemctl enable --now auditd'
+* Review and configure log rotation settings
+
+=== Time Synchronization (0/10)
+* ✗ No time synchronization service is active
+* ✗ Timezone not properly configured
+
+Recommendations:
+* Enable chronyd: 'systemctl enable --now chronyd'
+* Set timezone with timedatectl
+
+=== Additional Security (6/10)
+* ✓ AIDE (file integrity) is installed
+* ✓ Account lockout after failed logins is configured
+* ✗ GRUB boot password is not configured
+* ✓ USB storage is disabled by policy
+
+Recommendations:
+* Configure GRUB password protection
+
+**Observation**
+
+System has low compliance with RHEL CIS standards (24%)
+
+**Recommendation**
+
+Create a separate partition for /home
+
+Create a separate partition for /tmp
+
+Create a separate partition for /var
+
+Create a separate partition for /var/log
+
+Create a separate partition for /var/tmp
+
+... and 13 more recommendations (see details)
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/8/html/security_hardening/index
+
+== Central Authentication
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#FF0000}
+Changes Required
+|===
+
+SSSD Installation:
+[source, bash]
+----
+
+----
+
+Realm Membership:
+[source, bash]
+----
+
+----
+
+Authentication Configuration:
+[source, bash]
+----
+
+----
+
+Kerberos Configuration Excerpt:
+[source, bash]
+----
+
+----
+
+LDAP Configuration Excerpt:
+[source, bash]
+----
+
+----
+
+Non-Local Users (first 5):
+[source, bash]
+----
+No non-local users detected
+
+----
+
+**Observation**
+
+No central authentication configuration detected
+
+**Recommendation**
+
+Consider implementing central authentication for easier user management
+
+Options include FreeIPA, Active Directory, or LDAP
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/8/html/configuring_authentication_and_authorization_in_rhel/index
+
+== SSSD Configuration
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+|===
+
+SSSD Status:
+[source, bash]
+----
+
+----
+
+SSSD Configuration Excerpt:
+[source, bash]
+----
+
+----
+
+SSSD Log Issues (last 10):
+[source, bash]
+----
+
+----
+
+**Observation**
+
+Found 5 issues with SSSD configuration
+
+**Recommendation**
+
+SSSD service is not running
+
+cache_credentials setting not found
+
+offline_credentials setting not found
+
+services setting not found
+
+PAM not configured for SSSD authentication
+
+Start SSSD service: 'systemctl start sssd'
+
+Enable SSSD service: 'systemctl enable sssd'
+
+Add 'cache_credentials = true' to SSSD domain section for offline authentication
+
+Add 'offline_credentials_expiration = 7' to SSSD domain section
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/8/html/configuring_authentication_and_authorization_in_rhel/index
+
+== Sudo and PAM
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+|===
+
+Sudo Rules:
+[source, bash]
+----
+
+----
+
+LDAP Sudo Configuration:
+[source, bash]
+----
+
+----
+
+PAM System Auth Configuration:
+[source, bash]
+----
+
+----
+
+PAM Password Auth Configuration:
+[source, bash]
+----
+
+----
+
+Sudo Logging:
+[source, bash]
+----
+
+----
+
+Users with Sudo Privileges:
+[source, bash]
+----
+
+----
+
+Non-root Users in Sudo/Wheel Groups:
+[source, bash]
+----
+None
+
+----
+
+Users with UID 0 (root privileges):
+[source, bash]
+----
+None
+
+----
+
+**Observation**
+
+Found 2 issues with sudo and PAM configuration
+
+**Recommendation**
+
+No account lockout protection configured in PAM
+
+No wheel group in sudoers for administrative access
+
+Add '%wheel ALL=(ALL) ALL' to /etc/sudoers
+
+Configure account lockout with pam_faillock in PAM configuration
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/8/html/configuring_basic_system_settings
+
+== Kerberos Configuration
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+|===
+
+Kerberos Installation:
+[source, bash]
+----
+
+----
+
+Kerberos Configuration Excerpt:
+[source, bash]
+----
+
+----
+
+Keytab Status:
+[source, bash]
+----
+
+----
+
+Kerberos Tickets:
+[source, bash]
+----
+
+----
+
+**Observation**
+
+Found 2 issues with Kerberos configuration
+
+**Recommendation**
+
+No default realm set in krb5.conf
+
+No KDC defined in krb5.conf
+
+Ensure krb5.conf has proper default_realm and KDC definitions
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/8/html/configuring_and_managing_identity_management/index
+
+<<<
+
+{set:cellbgcolor!}
+
+# Services
+
+[cols="1,2,2,3", options=header]
+|===
+|*Category*
+|*Item Evaluated*
+|*Observed Result*
+|*Recommendation*
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/logs-system-errors.item
+
+// Category
+|
+{set:cellbgcolor!}
+Services
+
+// Item Evaluated
+a|
+<<System Logs Check>>
+
+| Found 18 errors in system logs 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/logs-rotation.item
+
+// Category
+|
+{set:cellbgcolor!}
+Services
+
+// Item Evaluated
+a|
+<<Log Rotation>>
+
+| Found 1 log rotation issues 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/logs-system.item
+
+// Category
+|
+{set:cellbgcolor!}
+Services
+
+// Item Evaluated
+a|
+<<Logging System>>
+
+| No logging service is active 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/backup-systems.item
+
+// Category
+|
+{set:cellbgcolor!}
+Services
+
+// Item Evaluated
+a|
+<<Backup Systems>>
+
+| Backup system appears to be configured 
+
+| 
+{set:cellbgcolor:#00FF00}
+No Change
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/backup-recovery.item
+
+// Category
+|
+{set:cellbgcolor!}
+Services
+
+// Item Evaluated
+a|
+<<Recovery Process>>
+
+| No evidence of recent recovery testing found 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/backup-application.item
+
+// Category
+|
+{set:cellbgcolor!}
+Services
+
+// Item Evaluated
+a|
+<<Application Backups>>
+
+| No applications requiring specialized backups detected 
+
+| 
+{set:cellbgcolor:#80E5FF}
+Advisory
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/monitoring-logs.item
+
+// Category
+|
+{set:cellbgcolor!}
+Services
+
+// Item Evaluated
+a|
+<<Centralized Logging>>
+
+| No active logging services detected 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/monitoring-alerts.item
+
+// Category
+|
+{set:cellbgcolor!}
+Services
+
+// Item Evaluated
+a|
+<<Alerting Rules>>
+
+| Alerting rules appear to be configured 
+
+| 
+{set:cellbgcolor:#00FF00}
+No Change
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/monitoring-agents.item
+
+// Category
+|
+{set:cellbgcolor!}
+Services
+
+// Item Evaluated
+a|
+<<Monitoring Agents>>
+
+| Monitoring agents installed but not running 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/services-unnecessary.item
+
+// Category
+|
+{set:cellbgcolor!}
+Services
+
+// Item Evaluated
+a|
+<<Unnecessary Services>>
+
+| Failed to list services 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/services-required.item
+
+// Category
+|
+{set:cellbgcolor!}
+Services
+
+// Item Evaluated
+a|
+<<Required Services>>
+
+| Found issues with 12 required services 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/boot-target.item
+
+// Category
+|
+{set:cellbgcolor!}
+Services
+
+// Item Evaluated
+a|
+<<Boot Target>>
+
+| Failed to determine default boot target 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/boot-errors.item
+
+// Category
+|
+{set:cellbgcolor!}
+Services
+
+// Item Evaluated
+a|
+<<Boot Errors>>
+
+| Failed to check boot errors 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+|===
+
+== System Logs Check
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+|===
+
+Recent Journal Errors (Priority 0-3):
+[source, bash]
+----
+Aug 06 09:14:18 rhel1.example.com kernel: Warning: Unmaintained driver is detected: ip_set
+-- Boot 2066615bc443457481a817c13d4df648 --
+Aug 06 09:16:08 rhel1.example.com kernel: Warning: Unmaintained driver is detected: ip_set
+Aug 06 09:16:09 rhel1.example.com rsyslogd[921]: imjournal: fscanf on state file `/var/lib/rsyslog/imjournal.state' failed  [v8.2412.0-1.el9 try https://www.rsyslog.com/e/2027 ]
+Aug 06 09:16:09 rhel1.example.com rsyslogd[921]: imjournal: ignoring invalid state file /var/lib/rsyslog/imjournal.state [v8.2412.0-1.el9]
+Aug 06 09:17:09 rhel2.example.com dbus-broker-launch[817]: Activation request for 'org.freedesktop.nm_dispatcher' failed.
+-- Boot 7e5644bc304e4056903ea88d12f9d4b2 --
+Aug 06 09:17:21 rhel2.example.com kernel: Warning: Unmaintained driver is detected: ip_set
+Aug 06 10:11:32 rhel2.example.com sshd[1668]: error: no more sessions
+Aug 06 10:11:32 rhel2.example.com sshd[1668]: error: no more sessions
+Aug 06 10:11:32 rhel2.example.com sshd[1668]: error: no more sessions
+Aug 06 10:11:32 rhel2.example.com sshd[1668]: error: no more sessions
+
+----
+
+Kernel Log Errors:
+[source, bash]
+----
+[    0.102545] ACPI: _OSC evaluation for CPUs failed, trying _PDC
+[    0.103194] PCI: Using host bridge windows from ACPI; if necessary, use "pci=nocrs" and report a bug
+[    1.961721] SGI XFS with ACLs, security attributes, scrub, quota, no debug enabled
+[    2.328377] systemd[1]: Mounting Kernel Debug File System...
+[    2.368980] systemd[1]: Mounted Kernel Debug File System.
+[    5.062672] Warning: Unmaintained driver is detected: ip_set
+
+----
+
+Authentication Failures:
+[source, bash]
+----
+No recent authentication failures found
+
+----
+
+**Observation**
+
+Found 18 errors in system logs
+
+**Recommendation**
+
+Review system logs for potential issues
+
+Review journal logs with 'journalctl -p 0..3'
+
+Review kernel messages with 'dmesg | grep -i error'
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/8/html/monitoring_and_managing_system_status_and_performance/indexviewing-problems-with-journalctl_logging-and-monitoring
+
+== Log Rotation
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+|===
+
+Logrotate Configuration:
+[source, bash]
+----
+# see "man logrotate" for details
+
+# global options do not affect preceding include directives
+
+# rotate log files weekly
+weekly
+
+# keep 4 weeks worth of backlogs
+rotate 4
+
+# create new (empty) log files after rotating old ones
+create
+
+# use date as a suffix of the rotated file
+dateext
+
+# uncomment this if you want your log files compressed
+#compress
+
+# packages drop log rotation information into this directory
+include /etc/logrotate.d
+
+# system-specific logs may be also be configured here.
+
+----
+
+Logrotate.d Directory Contents:
+[source, bash]
+----
+total 44
+-rw-r--r--. 1 root root 155 Jan 17  2025 aide
+-rw-r--r--. 1 root root 130 Oct 14  2019 btmp
+-rw-r--r--. 1 root root 160 Oct  8  2024 chrony
+-rw-r--r--. 1 root root  88 Sep  9  2022 dnf
+-rw-r--r--. 1 root root  93 Nov  7  2024 firewalld
+-rw-r--r--. 1 root root 105 Aug 19  2024 insights-client
+-rw-r--r--. 1 root root 162 Apr  4 17:49 kvm_stat
+-rw-r--r--. 1 root root 226 Dec 17  2024 rsyslog
+-rw-r--r--. 1 root root 289 Feb 12 18:38 sssd
+-rw-r--r--. 1 root root  88 Feb 11 19:35 subscription-manager
+-rw-r--r--. 1 root root 145 Oct 14  2019 wtmp
+
+----
+
+No log files larger than 100MB found
+
+No logrotate configuration errors detected
+
+**Observation**
+
+Found 1 log rotation issues
+
+**Recommendation**
+
+Log compression not enabled (consider enabling for better space utilization)
+
+Review logrotate configuration in /etc/logrotate.conf and /etc/logrotate.d/
+
+Test logrotate configuration with 'logrotate -d /etc/logrotate.conf'
+
+Enable compression by uncommenting the 'compress' line in /etc/logrotate.conf
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/8/html/monitoring_and_managing_system_status_and_performance/indexassembly_managing-logs_logging-and-monitoring
+
+== Logging System
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+|===
+
+Rsyslog Service Active: false
+
+Journald Service Active: false
+
+
+Rsyslog Configuration:
+[source, bash]
+----
+Rsyslog configuration not found or empty
+
+----
+
+Journald Configuration:
+[source, bash]
+----
+Journald configuration not found or empty
+
+----
+
+Journal Disk Usage:
+[source, bash]
+----
+
+----
+
+Configured Log Destinations:
+[source, bash]
+----
+No log destinations found in rsyslog configuration
+
+----
+
+Configured Syslog Facilities:
+[source, bash]
+----
+No syslog facilities found in rsyslog configuration
+
+----
+
+Remote Logging Configuration:
+[source, bash]
+----
+
+----
+
+**Observation**
+
+No logging service is active
+
+**Recommendation**
+
+Start at least one logging service: 'systemctl start rsyslog'
+
+Enable the service to start at boot: 'systemctl enable rsyslog'
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/8/html/monitoring_and_managing_system_status_and_performance/indexconfiguring-and-managing-logging_logging-and-monitoring
+
+== Backup Systems
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#00FF00}
+No Change
+|===
+
+Backup Tools Installed:
+[source, bash]
+----
+
+----
+
+Backup Cron Jobs:
+[source, bash]
+----
+
+----
+
+Backup Directories:
+[source, bash]
+----
+
+----
+
+Backup Mounts:
+[source, bash]
+----
+
+----
+
+LVM Snapshots:
+[source, bash]
+----
+
+----
+
+**Observation**
+
+Backup system appears to be configured
+
+**Recommendation**
+
+None
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/
+
+== Recovery Process
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+|===
+
+Recovery Documentation:
+[source, bash]
+----
+
+----
+
+Recovery Scripts:
+[source, bash]
+----
+
+----
+
+Restore/Recovery Logs:
+[source, bash]
+----
+
+----
+
+**Observation**
+
+No evidence of recent recovery testing found
+
+**Recommendation**
+
+Perform and document regular recovery testing
+
+Keep logs of recovery tests for verification
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/8/html/system_design_guide/backup-and-recovery
+
+== Application Backups
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#80E5FF}
+Advisory
+|===
+
+Detected Applications:
+[source, bash]
+----
+
+----
+
+Database Backup Configurations:
+[source, bash]
+----
+
+----
+
+Recent Database Dumps (last 30 days):
+[source, bash]
+----
+
+----
+
+Application Backup Tools:
+[source, bash]
+----
+
+----
+
+**Observation**
+
+No applications requiring specialized backups detected
+
+**Recommendation**
+
+Ensure system-level backups are in place
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/8/html/system_design_guide/backup-and-recovery
+
+== Centralized Logging
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+|===
+
+Rsyslog Remote Logging Configuration:
+[source, bash]
+----
+
+----
+
+Journald Forwarding Configuration:
+[source, bash]
+----
+
+----
+
+Logging Agents Installed:
+[source, bash]
+----
+
+----
+
+Logging Services Status:
+No active logging services detected
+
+
+Logging Network Connections:
+[source, bash]
+----
+
+----
+
+Outbound Logging Connections:
+[source, bash]
+----
+
+----
+
+**Observation**
+
+No active logging services detected
+
+**Recommendation**
+
+Start and enable rsyslog: 'systemctl enable --now rsyslog'
+
+Or configure another logging solution for centralized logging
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/8/html/monitoring_and_managing_system_status_and_performance/index
+
+== Alerting Rules
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#00FF00}
+No Change
+|===
+
+Monitoring Systems Installed:
+[source, bash]
+----
+
+----
+
+Alerting Configurations:
+[source, bash]
+----
+
+----
+
+Monitoring Agents Status:
+No active monitoring agents detected
+
+
+Alert Manager Connections:
+[source, bash]
+----
+
+----
+
+Email Alerting Configuration:
+[source, bash]
+----
+
+----
+
+Cluster Monitoring Configuration:
+[source, bash]
+----
+
+----
+
+**Observation**
+
+Alerting rules appear to be configured
+
+**Recommendation**
+
+None
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/
+
+== Monitoring Agents
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+|===
+
+Monitoring Agents Installed:
+[source, bash]
+----
+
+----
+
+Monitoring Agent Services:
+No monitoring agent services found
+
+
+Monitoring Ports Open:
+[source, bash]
+----
+
+----
+
+Monitoring Agent Configurations:
+[source, bash]
+----
+
+----
+
+Firewall Rules for Monitoring:
+[source, bash]
+----
+
+----
+
+**Observation**
+
+Monitoring agents installed but not running
+
+**Recommendation**
+
+Start and enable monitoring agent services
+
+Example: 'systemctl enable --now zabbix-agent'
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/8/html/monitoring_and_managing_system_status_and_performance/index
+
+== Unnecessary Services
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+|===
+
+**Observation**
+
+Failed to list services
+
+**Recommendation**
+
+Ensure systemd is properly working.
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/
+
+== Required Services
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+|===
+
+Status of Required Services:
+[source, bash]
+----
+sshd: Status=, Boot=
+chronyd: Status=, Boot=
+auditd: Status=, Boot=
+rsyslog: Status=, Boot=
+crond: Status=, Boot=
+firewalld: Status=, Boot=
+
+----
+
+All Active Services:
+[source, bash]
+----
+
+----
+
+**Observation**
+
+Found issues with 12 required services
+
+**Recommendation**
+
+Start service 'sshd': 'systemctl start sshd'
+
+Start service 'chronyd': 'systemctl start chronyd'
+
+Start service 'auditd': 'systemctl start auditd'
+
+Start service 'rsyslog': 'systemctl start rsyslog'
+
+Start service 'crond': 'systemctl start crond'
+
+Start service 'firewalld': 'systemctl start firewalld'
+
+Enable and start service 'sshd': 'systemctl enable --now sshd'
+
+Enable and start service 'chronyd': 'systemctl enable --now chronyd'
+
+Enable and start service 'auditd': 'systemctl enable --now auditd'
+
+Enable and start service 'rsyslog': 'systemctl enable --now rsyslog'
+
+Enable and start service 'crond': 'systemctl enable --now crond'
+
+Enable and start service 'firewalld': 'systemctl enable --now firewalld'
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/8/html/using_systemd_unit_files_to_customize_and_optimize_your_system/index
+
+== Boot Target
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+|===
+
+**Observation**
+
+Failed to determine default boot target
+
+**Recommendation**
+
+Check systemd configuration.
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/
+
+== Boot Errors
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+|===
+
+**Observation**
+
+Failed to check boot errors
+
+**Recommendation**
+
+Ensure journalctl is available.
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/
+
+<<<
+
+{set:cellbgcolor!}
+
+# Networking
+
+[cols="1,2,2,3", options=header]
+|===
+|*Category*
+|*Item Evaluated*
+|*Observed Result*
+|*Recommendation*
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/network-config.item
+
+// Category
+|
+{set:cellbgcolor!}
+Networking
+
+// Item Evaluated
+a|
+<<Network Configuration>>
+
+| Failed to determine IP configuration 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/connectivity-services.item
+
+// Category
+|
+{set:cellbgcolor!}
+Networking
+
+// Item Evaluated
+a|
+<<Dependent Services>>
+
+| No dependent services detected to test connectivity 
+
+| 
+{set:cellbgcolor:#80E5FF}
+Advisory
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/connectivity-dns.item
+
+// Category
+|
+{set:cellbgcolor!}
+Networking
+
+// Item Evaluated
+a|
+<<DNS Records>>
+
+| Found 2 DNS resolution issues 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/connectivity-latency.item
+
+// Category
+|
+{set:cellbgcolor!}
+Networking
+
+// Item Evaluated
+a|
+<<Network Latency>>
+
+| Network latency to key systems is within acceptable ranges 
+
+| 
+{set:cellbgcolor:#00FF00}
+No Change
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/ha-multicast.item
+
+// Category
+|
+{set:cellbgcolor!}
+Networking
+
+// Item Evaluated
+a|
+<<Multicast Configuration>>
+
+| Corosync transport method not clearly defined 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/ha-fencing-network.item
+
+// Category
+|
+{set:cellbgcolor!}
+Networking
+
+// Item Evaluated
+a|
+<<Fencing Network>>
+
+| Fencing devices configured but couldn't identify targets 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+|===
+
+== Network Configuration
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+|===
+
+**Observation**
+
+Failed to determine IP configuration
+
+**Recommendation**
+
+Ensure the 'ip' command is available.
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/
+
+== Dependent Services
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#80E5FF}
+Advisory
+|===
+
+Local Services:
+[source, bash]
+----
+No common service ports detected
+
+----
+
+Database Configurations Found:
+[source, bash]
+----
+No database configurations detected
+
+----
+
+Connectivity Tests:
+[source, bash]
+----
+
+----
+
+**Observation**
+
+No dependent services detected to test connectivity
+
+**Recommendation**
+
+If this system connects to dependent services, they should be tested manually
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/
+
+== DNS Records
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+|===
+
+Hostname Information:
+[source, bash]
+----
+Hostname: 
+IP Addresses: 
+
+----
+
+Forward DNS Lookup:
+[source, bash]
+----
+No hostname available to lookup
+----
+
+Reverse DNS Lookups:
+[source, bash]
+----
+
+----
+
+DNS Configuration:
+[source, bash]
+----
+
+----
+
+**Observation**
+
+Found 2 DNS resolution issues
+
+**Recommendation**
+
+Forward DNS lookup for  failed
+
+Only 0 nameserver(s) configured
+
+Configure proper DNS records for this system's hostname and IP addresses
+
+Configure at least two nameservers in /etc/resolv.conf for redundancy
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/8/html/configuring_and_managing_networking/using-networkmanager-with-network-scripts_configuring-and-managing-networking
+
+== Network Latency
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#00FF00}
+No Change
+|===
+
+Network Latency Tests:
+[source, bash]
+----
+Google DNS (8.8.8.8): Completed but couldn't determine latency
+  Ping Output:
+
+Cloudflare DNS (1.1.1.1): Completed but couldn't determine latency
+  Ping Output:
+
+Red Hat (access.redhat.com): Completed but couldn't determine latency
+  Ping Output:
+
+
+----
+
+Network Path to access.redhat.com:
+[source, bash]
+----
+
+----
+
+**Observation**
+
+Network latency to key systems is within acceptable ranges
+
+**Recommendation**
+
+None
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/
+
+== Multicast Configuration
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+|===
+
+Cluster Package Status:
+[source, bash]
+----
+
+----
+
+Corosync Configuration:
+[source, bash]
+----
+
+----
+
+Multicast Kernel Setting:
+[source, bash]
+----
+icmp_echo_ignore_broadcasts =  (0 means multicast enabled)
+
+----
+Firewall Multicast Rules:
+[source, bash]
+----
+
+----
+
+**Observation**
+
+Corosync transport method not clearly defined
+
+**Recommendation**
+
+Configure Corosync transport method (multicast or unicast)
+
+Recommended: Add 'transport: udpu' for unicast in corosync.conf
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/8/html/configuring_and_managing_high_availability_clusters/assembly_creating-cluster-configuring-managing-high-availability-clusters
+
+== Fencing Network
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+|===
+
+Cluster Package Status:
+[source, bash]
+----
+
+----
+
+Fencing Devices Configuration:
+[source, bash]
+----
+
+----
+
+Fencing Targets:
+[source, bash]
+----
+No fencing targets identified
+
+----
+
+Fencing Reachability Tests:
+[source, bash]
+----
+No fencing targets to test
+
+----
+
+Fencing devices use separate network interface: false
+
+**Observation**
+
+Fencing devices configured but couldn't identify targets
+
+**Recommendation**
+
+Verify fencing device configuration is correct
+
+Ensure fencing device parameters are properly set
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/8/html/configuring_and_managing_high_availability_clusters/assembly_fencing-configuring-managing-high-availability-clusters
+
+<<<
+
+{set:cellbgcolor!}
+
+# Updates
+
+[cols="1,2,2,3", options=header]
+|===
+|*Category*
+|*Item Evaluated*
+|*Observed Result*
+|*Recommendation*
+
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/packages-kernel.item
+
+// Category
+|
+{set:cellbgcolor!}
+Updates
+
+// Item Evaluated
+a|
+<<Kernel Consistency>>
+
+| Found 1 kernel consistency issues 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/packages-unnecessary.item
+
+// Category
+|
+{set:cellbgcolor!}
+Updates
+
+// Item Evaluated
+a|
+<<Unnecessary Packages>>
+
+| Found 1 package maintenance issues 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/packages-security.item
+
+// Category
+|
+{set:cellbgcolor!}
+Updates
+
+// Item Evaluated
+a|
+<<Security Patches>>
+
+| System appears to have all security patches applied 
+
+| 
+{set:cellbgcolor:#00FF00}
+No Change
+
+// ------------------------ITEM END
+// ------------------------ITEM START
+// ----ITEM SOURCE:  ./content/healthcheck-items/packages-repositories.item
+
+// Category
+|
+{set:cellbgcolor!}
+Updates
+
+// Item Evaluated
+a|
+<<Enabled Repositories>>
+
+| No repositories appear to be enabled 
+
+| 
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+
+// ------------------------ITEM END
+|===
+
+== Kernel Consistency
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+|===
+
+Current Running Kernel:
+[source, bash]
+----
+
+----
+
+Installed Kernel Packages:
+[source, bash]
+----
+
+----
+
+Latest Available Kernel:
+[source, bash]
+----
+
+----
+
+Repository Metadata Status:
+[source, bash]
+----
+Could not determine repository metadata age
+
+----
+
+Loaded Kernel Modules (Top 10):
+[source, bash]
+----
+
+----
+
+Kernel Version Status Summary:
+[source, text]
+----
+Running kernel: 
+Latest available kernel: 
+Formatted for comparison: 
+Repository metadata age: 20306 days
+Running latest kernel: true
+
+----
+
+**Observation**
+
+Found 1 kernel consistency issues
+
+**Recommendation**
+
+Repository metadata is 20306 days old - unable to reliably determine if latest kernel is installed
+
+Refresh repository metadata with 'subscription-manager refresh'
+
+For disconnected environments, sync content from Satellite server
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/8/html/managing_monitoring_and_updating_the_kernel/index
+
+== Unnecessary Packages
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+|===
+
+Obsolete Packages:
+[source, bash]
+----
+
+----
+
+Duplicate Packages:
+[source, bash]
+----
+
+----
+
+Installed Kernel Packages:
+[source, bash]
+----
+
+----
+
+Current Running Kernel:
+[source, bash]
+----
+
+----
+
+**Observation**
+
+Found 1 package maintenance issues
+
+**Recommendation**
+
+Obsolete packages are installed
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/8/html/configuring_basic_system_settings
+
+== Security Patches
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#00FF00}
+No Change
+|===
+
+Security Updates Available:
+[source, bash]
+----
+
+----
+
+Update Information Summary:
+[source, bash]
+----
+
+----
+
+Last Updated Packages:
+[source, bash]
+----
+
+----
+
+Yum Update History:
+[source, bash]
+----
+
+----
+
+**Observation**
+
+System appears to have all security patches applied
+
+**Recommendation**
+
+None
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/
+
+== Enabled Repositories
+
+[cols="^"] 
+|===
+|
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+|===
+
+Enabled Repositories:
+[source, bash]
+----
+
+----
+
+Repository Configuration Files:
+[source, bash]
+----
+
+----
+
+RHEL Version:
+[source, bash]
+----
+
+----
+
+**Observation**
+
+No repositories appear to be enabled
+
+**Recommendation**
+
+Check system registration status
+
+Enable appropriate repositories for your RHEL version
+
+*Reference Link(s)*
+
+* https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/8/html/configuring_basic_system_settings
+
+<<<
+
+{set:cellbgcolor!}
+
+// Reset bgcolor for future tables
+[grid=none,frame=none]
+|===
+|{set:cellbgcolor!}
+|===
+

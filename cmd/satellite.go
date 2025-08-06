@@ -6,12 +6,12 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/schollz/progressbar/v3"
+	"github.com/spf13/cobra"
 	"gitlab.consulting.redhat.com/ksa/health-check-satellite-rhel/pkg/checks/rhel"
 	"gitlab.consulting.redhat.com/ksa/health-check-satellite-rhel/pkg/checks/satellite"
 	"gitlab.consulting.redhat.com/ksa/health-check-satellite-rhel/pkg/report"
 	"gitlab.consulting.redhat.com/ksa/health-check-satellite-rhel/pkg/utils"
-	"github.com/schollz/progressbar/v3"
-	"github.com/spf13/cobra"
 )
 
 // newSatelliteCmd creates the Satellite subcommand
@@ -38,8 +38,9 @@ host management, database health, and Satellite services.`,
 
 // runSatelliteChecks performs all Satellite health checks
 func runSatelliteChecks(cmd *cobra.Command, args []string) error {
-	// Check if running as root
-	if !utils.RunningAsRoot() {
+	// Check if running as root only for local execution and not in multi-host mode
+	executor := utils.GetExecutor()
+	if !multiHostMode && executor.IsLocal() && !utils.RunningAsRoot() {
 		fmt.Println("WARNING: This tool should be run with root/sudo privileges for complete results.")
 		fmt.Println("Some checks may fail or provide incomplete information.")
 	}
@@ -100,15 +101,13 @@ func runSatelliteChecks(cmd *cobra.Command, args []string) error {
 			"storage":     {rhel.RunDiskChecks, rhel.RunStorageConsiderationsChecks},
 			"performance": {}, // Skip RHEL performance checks as Satellite has its own performance checks
 			"network":     {rhel.RunNetworkChecks, rhel.RunConnectivityChecks, rhel.RunHANetworkingChecks},
-			"security":    {}, // Skip RHEL security checks as Satellite has its own security checks
+			"security":    {rhel.RunSecurityChecks, rhel.RunComplianceChecks},
 			"services":    {rhel.RunServicesChecks},
-			"logs":        {rhel.RunLogsChecks}, // Skip RHEL monitoring checks
+			"logs":        {rhel.RunLogsChecks, rhel.RunMonitoringChecks},
 			"packages":    {rhel.RunPackagesChecks},
 			"auth":        {rhel.RunAuthChecks},
-			"backup":      {}, // Skip RHEL backup checks as Satellite has its own backup checks
+			"backup":      {rhel.RunBackupChecks},
 			"kernel":      {rhel.RunKernelChecks},
-			"compliance":  {rhel.RunComplianceChecks}, // Skip RHEL storage checks as Satellite has its own storage checks
-			// Intentionally excluding "cluster" category which contains cluster.go checks
 		}
 
 		// Add enabled RHEL checks
@@ -164,6 +163,11 @@ func runSatelliteChecks(cmd *cobra.Command, args []string) error {
 		}
 	})
 
+	// Call the hook if it's set (for multi-host mode)
+	if satelliteReportHook != nil {
+		satelliteReportHook(reportGenerator)
+	}
+
 	// Generate and save the report
 	outputPath, err := reportGenerator.Generate()
 	if err != nil {
@@ -173,10 +177,14 @@ func runSatelliteChecks(cmd *cobra.Command, args []string) error {
 	// Compress the report with password protection automatically
 	finalPath, err := compressReportIfNeeded(outputPath)
 	if err != nil {
-		fmt.Printf("Warning: %v\n", err)
+		if !multiHostMode {
+			fmt.Printf("Warning: %v\n", err)
+		}
 	}
 
-	fmt.Printf("Report saved to: %s\n", finalPath)
+	if !multiHostMode {
+		fmt.Printf("Report saved to: %s\n", finalPath)
+	}
 	return nil
 }
 

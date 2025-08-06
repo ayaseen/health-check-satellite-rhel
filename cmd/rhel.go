@@ -32,8 +32,9 @@ This includes system information, memory, disk, security, and other checks.`,
 
 // runRhelChecks performs all RHEL health checks
 func runRhelChecks(cmd *cobra.Command, args []string) error {
-	// Check if running as root
-	if !utils.RunningAsRoot() {
+	// Check if running as root only for local execution and not in multi-host mode
+	executor := utils.GetExecutor()
+	if !multiHostMode && executor.IsLocal() && !utils.RunningAsRoot() {
 		fmt.Println("WARNING: This tool should be run with root/sudo privileges for complete results.")
 		fmt.Println("Some checks may fail or provide incomplete information.")
 	}
@@ -101,6 +102,11 @@ func runRhelChecks(cmd *cobra.Command, args []string) error {
 		}
 	})
 
+	// Call the hook if it's set (for multi-host mode)
+	if rhelReportHook != nil {
+		rhelReportHook(reportGenerator)
+	}
+
 	// Generate and save the report
 	outputPath, err := reportGenerator.Generate()
 	if err != nil {
@@ -110,9 +116,13 @@ func runRhelChecks(cmd *cobra.Command, args []string) error {
 	// Compress the report with password protection automatically
 	finalPath, err := compressReportIfNeeded(outputPath)
 	if err != nil {
-		fmt.Printf("Warning: %v\n", err)
+		if !multiHostMode {
+			fmt.Printf("Warning: %v\n", err)
+		}
 	}
 
-	fmt.Printf("Report saved to: %s\n", finalPath)
+	if !multiHostMode {
+		fmt.Printf("Report saved to: %s\n", finalPath)
+	}
 	return nil
 }

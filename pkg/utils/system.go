@@ -7,7 +7,6 @@ import (
 	"io"
 	"os"
 	"os/exec"
-	"path/filepath"
 	"strings"
 
 	"github.com/alexmullins/zip"
@@ -69,7 +68,15 @@ func RunningAsRoot() bool {
 }
 
 // RunCommand executes a command and returns its output
+// This now uses the executor interface to support both local and remote execution
 func RunCommand(name string, args ...string) (string, error) {
+	executor := GetExecutor()
+	if executor != nil && !executor.IsLocal() {
+		// Use the remote executor
+		return executor.RunCommand(name, args...)
+	}
+
+	// Local execution
 	cmd := exec.Command(name, args...)
 	output, err := cmd.CombinedOutput()
 	if err != nil {
@@ -79,8 +86,15 @@ func RunCommand(name string, args ...string) (string, error) {
 }
 
 // RunCommandWithTimeout executes a command with a timeout
+// This now uses the executor interface to support both local and remote execution
 func RunCommandWithTimeout(name string, timeout int, args ...string) (string, error) {
-	// Using context with timeout would be better, but for simplicity:
+	executor := GetExecutor()
+	if executor != nil && !executor.IsLocal() {
+		// Use the remote executor
+		return executor.RunCommandWithTimeout(name, timeout, args...)
+	}
+
+	// Local execution with timeout
 	timeoutArg := fmt.Sprintf("timeout %d %s %s", timeout, name, strings.Join(args, " "))
 
 	cmd := exec.Command("bash", "-c", timeoutArg)
@@ -97,55 +111,86 @@ func RunCommandWithTimeout(name string, timeout int, args ...string) (string, er
 // CompressWithPassword compresses a file with password protection
 func CompressWithPassword(sourcePath string, password string) (string, error) {
 	// Check if source exists
-	if _, err := os.Stat(sourcePath); os.IsNotExist(err) {
-		return "", fmt.Errorf("source file not found: %s", sourcePath)
+	if _, err := os.Stat(sourcePath); err != nil {
+		return "", fmt.Errorf("source file does not exist: %v", err)
 	}
 
-	// Create zip file path
-	zipPath := sourcePath + ".zip"
+	// Create output filename
+	outputPath := sourcePath + ".zip"
 
-	// Create the zip file
-	zipFile, err := os.Create(zipPath)
+	// Create a new zip file
+	zipFile, err := os.Create(outputPath)
 	if err != nil {
 		return "", fmt.Errorf("failed to create zip file: %v", err)
 	}
 	defer zipFile.Close()
 
-	// Create zip writer
+	// Create a new zip writer with password
 	zipWriter := zip.NewWriter(zipFile)
 	defer zipWriter.Close()
 
-	// Open source file
+	// Open the source file
 	sourceFile, err := os.Open(sourcePath)
 	if err != nil {
 		return "", fmt.Errorf("failed to open source file: %v", err)
 	}
 	defer sourceFile.Close()
 
-	// Get base filename
-	baseFilename := filepath.Base(sourcePath)
-
-	// Create encrypted entry
-	writer, err := zipWriter.Encrypt(baseFilename, password)
+	// Get file info
+	fileInfo, err := sourceFile.Stat()
 	if err != nil {
-		return "", fmt.Errorf("failed to create encrypted entry: %v", err)
+		return "", fmt.Errorf("failed to get file info: %v", err)
 	}
 
-	// Copy file content
-	if _, err := io.Copy(writer, sourceFile); err != nil {
-		return "", fmt.Errorf("failed to write to zip: %v", err)
+	// Create a new file header
+	header, err := zip.FileInfoHeader(fileInfo)
+	if err != nil {
+		return "", fmt.Errorf("failed to create file header: %v", err)
 	}
 
-	return zipPath, nil
+	// Set compression method
+	header.Method = zip.Deflate
+
+	// Set password
+	header.SetPassword(password)
+
+	// Create a writer for this file
+	writer, err := zipWriter.CreateHeader(header)
+	if err != nil {
+		return "", fmt.Errorf("failed to create file in zip: %v", err)
+	}
+
+	// Copy the file contents
+	_, err = io.Copy(writer, sourceFile)
+	if err != nil {
+		return "", fmt.Errorf("failed to write file to zip: %v", err)
+	}
+
+	return outputPath, nil
 }
 
-// GetRedHatVersion returns the major version of RHEL, defaulting to 8 for older versions
+// GetRedHatVersion returns the major version of RHEL (e.g., "7", "8", "9")
 func GetRedHatVersion() string {
-	rhelVersionCmd := "cat /etc/redhat-release 2>/dev/null | grep -oE '[0-9]+\\.[0-9]+' | cut -d. -f1 || echo '8'"
-	rhelVersionOutput, _ := RunCommand("bash", "-c", rhelVersionCmd)
-	rhelVersion := strings.TrimSpace(rhelVersionOutput)
-	if rhelVersion == "" || rhelVersion < "8" {
-		rhelVersion = "8" // Default to RHEL 8 if detection fails or version is less than 8
+	content, err := os.ReadFile("/etc/redhat-release")
+	if err != nil {
+		return "8" // Default to RHEL 8
 	}
-	return rhelVersion
+
+	// Parse version from content
+	// Example: "Red Hat Enterprise Linux release 8.9 (Ootpa)"
+	contentStr := string(content)
+	parts := strings.Fields(contentStr)
+
+	for i, part := range parts {
+		if part == "release" && i+1 < len(parts) {
+			version := parts[i+1]
+			// Extract major version
+			if dotIndex := strings.Index(version, "."); dotIndex > 0 {
+				return version[:dotIndex]
+			}
+			return version
+		}
+	}
+
+	return "8" // Default to RHEL 8
 }
