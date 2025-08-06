@@ -3,6 +3,7 @@
 /.vscode/*
 content/
 checksum.go
+hosts.ini
 
 # Binaries for programs and plugins
 *.exe
