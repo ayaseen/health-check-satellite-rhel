@@ -1,0 +1,779 @@
+= Infrastructure Health Check Summary
+Generated: 2025-08-06 12:02:02
+Total Hosts: 3 | Critical: 3 | Warnings: 0 | Healthy: 0
+
+= Key
+
+[cols="1,3", options=header]
+|===
+|Value
+|Description
+
+|
+{set:cellbgcolor:#FF0000}
+Changes Required
+|
+{set:cellbgcolor!}
+Indicates Changes Required for system stability, subscription compliance, or other reason.
+
+|
+{set:cellbgcolor:#FEFE20}
+Changes Recommended
+|
+{set:cellbgcolor!}
+Indicates Changes Recommended to align with recommended practices, but not urgently required
+
+|
+{set:cellbgcolor:#A6B9BF}
+N/A
+|
+{set:cellbgcolor!}
+No advise given on line item. For line items which are data-only to provide context.
+
+|
+{set:cellbgcolor:#80E5FF}
+Advisory
+|
+{set:cellbgcolor!}
+No change required or recommended, but additional information provided.
+
+|
+{set:cellbgcolor:#00FF00}
+No Change
+|
+{set:cellbgcolor!}
+No change required. In alignment with recommended practices.
+
+|
+{set:cellbgcolor:#FFFFFF}
+To Be Evaluated
+|
+{set:cellbgcolor!}
+Not yet evaluated.
+|===
+
+== Executive Dashboard
+
+=== Host Status Summary
+
+[listing]
+----
+Critical Hosts:  ███████████████ 3 (100%)
+Warning Hosts:    0 (0%)
+Healthy Hosts:    0 (0%)
+----
+
+=== Total Issues Across Infrastructure
+
+* Critical Issues: 14
+* Warning Issues: 154
+* Advisory Issues: 9
+
+=== Host Breakdown by Type
+
+* RHEL Systems: 3
+
+== PRIORITY 1: Critical Issues Requiring Immediate Action
+
+=== 🔴 Central Authentication (Affects 3 hosts)
+
+[cols="2,4,2", options=header]
+|===
+|Host |Issue |Action Required
+
+|rhel3.example.com |No central authentication configuration detected |Consider implementing central authentication for easier user management
+|rhel2.example.com |No central authentication configuration detected |Consider implementing central authentication for easier user management
+|rhel1.example.com |No central authentication configuration detected |Consider implementing central authentication for easier user management
+|===
+
+=== 🔴 RHEL CIS Compliance (Affects 1 hosts)
+
+[cols="2,4,2", options=header]
+|===
+|Host |Issue |Action Required
+
+|rhel3.example.com |System has low compliance with RHEL CIS standards (34%) |Start SSSD service: 'systemctl start sssd'
+|rhel2.example.com |System has low compliance with RHEL CIS standards (24%) |Create a separate partition for /home
+|rhel1.example.com |System has low compliance with RHEL CIS standards (24%) |Create a separate partition for /home
+|===
+
+=== 🔴 RHEL Version (Affects 3 hosts)
+
+[cols="2,4,2", options=header]
+|===
+|Host |Issue |Action Required
+
+|rhel3.example.com |Failed to determine RHEL version |Check if this is a Red Hat Enterprise Linux system.
+|rhel2.example.com |Failed to determine RHEL version |Check if this is a Red Hat Enterprise Linux system.
+|rhel1.example.com |Failed to determine RHEL version |Check if this is a Red Hat Enterprise Linux system.
+|===
+
+=== 🔴 System Hostname (Affects 2 hosts)
+
+[cols="2,4,2", options=header]
+|===
+|Host |Issue |Action Required
+
+|rhel3.example.com |Failed to get system hostname |Check if the hostname command is available and working properly.
+|rhel1.example.com |Failed to get system hostname |Check if the hostname command is available and working properly.
+|===
+
+=== 🔴 System Registration (Affects 3 hosts)
+
+[cols="2,4,2", options=header]
+|===
+|Host |Issue |Action Required
+
+|rhel3.example.com |subscription-manager not found |Install subscription-manager package.
+|rhel2.example.com |subscription-manager not found |Install subscription-manager package.
+|rhel1.example.com |subscription-manager not found |Install subscription-manager package.
+|===
+
+== PRIORITY 2: Warnings - Plan to Address Soon
+
+=== ⚠️ DNS Records (Affects 3 hosts)
+
+[cols="2,4,2", options=header]
+|===
+|Host |Issue |Action Required
+
+|rhel3.example.com |Found 2 DNS resolution issues |Forward DNS lookup for  failed
+|rhel2.example.com |Found 2 DNS resolution issues |Forward DNS lookup for  failed
+|rhel1.example.com |Found 2 DNS resolution issues |Forward DNS lookup for  failed
+|===
+
+=== ⚠️ Fencing Network (Affects 3 hosts)
+
+[cols="2,4,2", options=header]
+|===
+|Host |Issue |Action Required
+
+|rhel3.example.com |Fencing devices configured but couldn't identify targets |Verify fencing device configuration is correct
+|rhel2.example.com |Fencing devices configured but couldn't identify targets |Verify fencing device configuration is correct
+|rhel1.example.com |Fencing devices configured but couldn't identify targets |Verify fencing device configuration is correct
+|===
+
+=== ⚠️ Firewall Rules (Affects 2 hosts)
+
+[cols="2,4,2", options=header]
+|===
+|Host |Issue |Action Required
+
+|rhel3.example.com |No firewall service is active |Start and enable firewalld: 'systemctl enable --now firewalld'
+|rhel2.example.com |No firewall service is active |Start and enable firewalld: 'systemctl enable --now firewalld'
+|rhel1.example.com |Firewall is running but no rules are configured |Configure firewall rules for your services
+|===
+
+=== ⚠️ Hostname Resolution (Affects 2 hosts)
+
+[cols="2,4,2", options=header]
+|===
+|Host |Issue |Action Required
+
+|rhel3.example.com |Failed to determine hostname |Ensure the 'hostname' command is available.
+|rhel2.example.com |Failed to determine hostname |Ensure the 'hostname' command is available.
+|===
+
+=== ⚠️ MTU Configuration (Affects 2 hosts)
+
+[cols="2,4,2", options=header]
+|===
+|Host |Issue |Action Required
+
+|rhel3.example.com |Failed to determine interface MTU values |Ensure the 'ip' command is available.
+|rhel2.example.com |Failed to determine interface MTU values |Ensure the 'ip' command is available.
+|===
+
+=== ⚠️ Multicast Configuration (Affects 3 hosts)
+
+[cols="2,4,2", options=header]
+|===
+|Host |Issue |Action Required
+
+|rhel3.example.com |Corosync transport method not clearly defined |Configure Corosync transport method (multicast or unicast)
+|rhel2.example.com |Corosync transport method not clearly defined |Configure Corosync transport method (multicast or unicast)
+|rhel1.example.com |Corosync transport method not clearly defined |Configure Corosync transport method (multicast or unicast)
+|===
+
+=== ⚠️ Network Configuration (Affects 1 hosts)
+
+[cols="2,4,2", options=header]
+|===
+|Host |Issue |Action Required
+
+|rhel3.example.com |Failed to determine IP configuration |Ensure the 'ip' command is available.
+|rhel2.example.com |Found 1 network configuration issues |No DNS servers configured
+|rhel1.example.com |Found 1 network configuration issues |No DNS servers configured
+|===
+
+=== ⚠️ TCP/IP Stack Hardening (Affects 2 hosts)
+
+[cols="2,4,2", options=header]
+|===
+|Host |Issue |Action Required
+
+|rhel3.example.com |Failed to determine TCP/IP stack security settings |Ensure sysctl command is available
+|rhel2.example.com |Failed to determine TCP/IP stack security settings |Ensure sysctl command is available
+|===
+
+=== ⚠️ CPU Bottlenecks (Affects 1 hosts)
+
+[cols="2,4,2", options=header]
+|===
+|Host |Issue |Action Required
+
+|rhel3.example.com |Failed to determine CPU utilization by process |Ensure the 'ps' command is available.
+|===
+
+=== ⚠️ CPU Information (Affects 1 hosts)
+
+[cols="2,4,2", options=header]
+|===
+|Host |Issue |Action Required
+
+|rhel3.example.com |Failed to determine CPU information |Ensure the 'lscpu' command is available.
+|===
+
+=== ⚠️ Cluster Constraints (Affects 3 hosts)
+
+[cols="2,4,2", options=header]
+|===
+|Host |Issue |Action Required
+
+|rhel3.example.com |Found 2 issues with cluster constraints and timeouts |No timeout values defined in resource or operation defaults
+|rhel2.example.com |Found 2 issues with cluster constraints and timeouts |No timeout values defined in resource or operation defaults
+|rhel1.example.com |Found 2 issues with cluster constraints and timeouts |No timeout values defined in resource or operation defaults
+|===
+
+=== ⚠️ Cluster Name Resolution (Affects 3 hosts)
+
+[cols="2,4,2", options=header]
+|===
+|Host |Issue |Action Required
+
+|rhel3.example.com |System hostname doesn't match any cluster node names |Ensure the system hostname matches the name in corosync.conf
+|rhel2.example.com |System hostname doesn't match any cluster node names |Ensure the system hostname matches the name in corosync.conf
+|rhel1.example.com |System hostname doesn't match any cluster node names |Ensure the system hostname matches the name in corosync.conf
+|===
+
+=== ⚠️ Cluster Software (Affects 3 hosts)
+
+[cols="2,4,2", options=header]
+|===
+|Host |Issue |Action Required
+
+|rhel3.example.com |Cluster software installed but services are not running |Start cluster services with 'systemctl start pacemaker corosync pcsd'
+|rhel2.example.com |Cluster software installed but services are not running |Start cluster services with 'systemctl start pacemaker corosync pcsd'
+|rhel1.example.com |Cluster software installed but services are not running |Start cluster services with 'systemctl start pacemaker corosync pcsd'
+|===
+
+=== ⚠️ I/O Performance (Affects 3 hosts)
+
+[cols="2,4,2", options=header]
+|===
+|Host |Issue |Action Required
+
+|rhel3.example.com |Failed to determine block device information |Ensure the 'lsblk' command is available.
+|rhel2.example.com |Failed to determine block device information |Ensure the 'lsblk' command is available.
+|rhel1.example.com |Failed to determine block device information |Ensure the 'lsblk' command is available.
+|===
+
+=== ⚠️ Performance Bottlenecks (Affects 3 hosts)
+
+[cols="2,4,2", options=header]
+|===
+|Host |Issue |Action Required
+
+|rhel3.example.com |Failed to determine memory usage by process |Ensure the 'ps' command is available.
+|rhel2.example.com |Failed to determine memory usage by process |Ensure the 'ps' command is available.
+|rhel1.example.com |Failed to determine memory usage by process |Ensure the 'ps' command is available.
+|===
+
+=== ⚠️ Physical Memory (Affects 3 hosts)
+
+[cols="2,4,2", options=header]
+|===
+|Host |Issue |Action Required
+
+|rhel3.example.com |Failed to determine physical memory information |Ensure the 'free' command is available.
+|rhel2.example.com |Failed to determine physical memory information |Ensure the 'free' command is available.
+|rhel1.example.com |Failed to determine physical memory information |Ensure the 'free' command is available.
+|===
+
+=== ⚠️ Swap Configuration (Affects 3 hosts)
+
+[cols="2,4,2", options=header]
+|===
+|Host |Issue |Action Required
+
+|rhel3.example.com |Failed to determine swap information |Ensure the 'free' command is available.
+|rhel2.example.com |Failed to determine swap information |Ensure the 'free' command is available.
+|rhel1.example.com |Failed to determine swap information |Ensure the 'free' command is available.
+|===
+
+=== ⚠️ System Caches (Affects 3 hosts)
+
+[cols="2,4,2", options=header]
+|===
+|Host |Issue |Action Required
+
+|rhel3.example.com |Failed to determine cache information |Ensure /proc/meminfo is readable.
+|rhel2.example.com |Failed to determine cache information |Ensure /proc/meminfo is readable.
+|rhel1.example.com |Failed to determine cache information |Ensure /proc/meminfo is readable.
+|===
+
+=== ⚠️ System Performance (Affects 3 hosts)
+
+[cols="2,4,2", options=header]
+|===
+|Host |Issue |Action Required
+
+|rhel3.example.com |Failed to determine system uptime and load |Ensure the 'uptime' command is available.
+|rhel2.example.com |Failed to determine system uptime and load |Ensure the 'uptime' command is available.
+|rhel1.example.com |Failed to determine system uptime and load |Ensure the 'uptime' command is available.
+|===
+
+=== ⚠️ Tuned Profile (Affects 1 hosts)
+
+[cols="2,4,2", options=header]
+|===
+|Host |Issue |Action Required
+
+|rhel3.example.com |Tuned is not installed |Install tuned: 'yum install tuned'
+|rhel2.example.com |No tuned profile is active |Activate recommended profile: 'tuned-adm profile virtual-guest'
+|rhel1.example.com |No tuned profile is active |Activate recommended profile: 'tuned-adm profile virtual-guest'
+|===
+
+=== ⚠️ VM Tuning Parameters (Affects 3 hosts)
+
+[cols="2,4,2", options=header]
+|===
+|Host |Issue |Action Required
+
+|rhel3.example.com |Failed to determine VM swappiness |Check if /proc/sys/vm/swappiness is readable.
+|rhel2.example.com |Failed to determine VM swappiness |Check if /proc/sys/vm/swappiness is readable.
+|rhel1.example.com |Failed to determine VM swappiness |Check if /proc/sys/vm/swappiness is readable.
+|===
+
+=== ⚠️ Audit Configuration (Affects 3 hosts)
+
+[cols="2,4,2", options=header]
+|===
+|Host |Issue |Action Required
+
+|rhel3.example.com |Found 7 issues with audit configuration |Audit daemon (auditd) is not active
+|rhel2.example.com |Found 7 issues with audit configuration |Audit daemon (auditd) is not active
+|rhel1.example.com |Found 7 issues with audit configuration |Audit daemon (auditd) is not active
+|===
+
+=== ⚠️ File Permissions (Affects 3 hosts)
+
+[cols="2,4,2", options=header]
+|===
+|Host |Issue |Action Required
+
+|rhel3.example.com |Found 2 file permission issues |/etc/cron.d directory has incorrect permissions (should be 700)
+|rhel2.example.com |Found 2 file permission issues |/etc/cron.d directory has incorrect permissions (should be 700)
+|rhel1.example.com |Found 2 file permission issues |/etc/cron.d directory has incorrect permissions (should be 700)
+|===
+
+=== ⚠️ Kerberos Configuration (Affects 3 hosts)
+
+[cols="2,4,2", options=header]
+|===
+|Host |Issue |Action Required
+
+|rhel3.example.com |Found 2 issues with Kerberos configuration |No default realm set in krb5.conf
+|rhel2.example.com |Found 2 issues with Kerberos configuration |No default realm set in krb5.conf
+|rhel1.example.com |Found 2 issues with Kerberos configuration |No default realm set in krb5.conf
+|===
+
+=== ⚠️ Kernel Version (Affects 3 hosts)
+
+[cols="2,4,2", options=header]
+|===
+|Host |Issue |Action Required
+
+|rhel3.example.com |Repository metadata is 20306 days old - unable to reliably determine if latest kernel is installed |Refresh repository metadata with 'subscription-manager refresh'
+|rhel2.example.com |Repository metadata is 20306 days old - unable to reliably determine if latest kernel is installed |Refresh repository metadata with 'subscription-manager refresh'
+|rhel1.example.com |Repository metadata is 20306 days old - unable to reliably determine if latest kernel is installed |Refresh repository metadata with 'subscription-manager refresh'
+|===
+
+=== ⚠️ Password Policy (Affects 3 hosts)
+
+[cols="2,4,2", options=header]
+|===
+|Host |Issue |Action Required
+
+|rhel3.example.com |Found 4 password policy issues |Password minimum length should be at least 8 characters
+|rhel2.example.com |Found 4 password policy issues |Password minimum length should be at least 8 characters
+|rhel1.example.com |Found 4 password policy issues |Password minimum length should be at least 8 characters
+|===
+
+=== ⚠️ Root Account Security (Affects 3 hosts)
+
+[cols="2,4,2", options=header]
+|===
+|Host |Issue |Action Required
+
+|rhel3.example.com |Found 1 root account security issues |Root account has a valid login shell
+|rhel2.example.com |Found 1 root account security issues |Root account has a valid login shell
+|rhel1.example.com |Found 1 root account security issues |Root account has a valid login shell
+|===
+
+=== ⚠️ SELinux Status (Affects 3 hosts)
+
+[cols="2,4,2", options=header]
+|===
+|Host |Issue |Action Required
+
+|rhel3.example.com |Failed to determine SELinux status |Ensure the 'sestatus' command is available.
+|rhel2.example.com |Failed to determine SELinux status |Ensure the 'sestatus' command is available.
+|rhel1.example.com |Failed to determine SELinux status |Ensure the 'sestatus' command is available.
+|===
+
+=== ⚠️ SSH Hardening (Affects 3 hosts)
+
+[cols="2,4,2", options=header]
+|===
+|Host |Issue |Action Required
+
+|rhel3.example.com |Found 9 SSH hardening issues |SSH MaxAuthTries is set to 6 (recommended max: 4)
+|rhel2.example.com |Found 9 SSH hardening issues |SSH MaxAuthTries is set to 6 (recommended max: 4)
+|rhel1.example.com |Found 9 SSH hardening issues |SSH MaxAuthTries is set to 6 (recommended max: 4)
+|===
+
+=== ⚠️ SSSD Configuration (Affects 3 hosts)
+
+[cols="2,4,2", options=header]
+|===
+|Host |Issue |Action Required
+
+|rhel3.example.com |Found 5 issues with SSSD configuration |SSSD service is not running
+|rhel2.example.com |Found 5 issues with SSSD configuration |SSSD service is not running
+|rhel1.example.com |Found 5 issues with SSSD configuration |SSSD service is not running
+|===
+
+=== ⚠️ Shell History Configuration (Affects 3 hosts)
+
+[cols="2,4,2", options=header]
+|===
+|Host |Issue |Action Required
+
+|rhel3.example.com |Found 3 shell history configuration issues |HISTSIZE is not set or too small (should be at least 1000)
+|rhel2.example.com |Found 3 shell history configuration issues |HISTSIZE is not set or too small (should be at least 1000)
+|rhel1.example.com |Found 3 shell history configuration issues |HISTSIZE is not set or too small (should be at least 1000)
+|===
+
+=== ⚠️ Sudo and PAM (Affects 3 hosts)
+
+[cols="2,4,2", options=header]
+|===
+|Host |Issue |Action Required
+
+|rhel3.example.com |Found 2 issues with sudo and PAM configuration |No account lockout protection configured in PAM
+|rhel2.example.com |Found 2 issues with sudo and PAM configuration |No account lockout protection configured in PAM
+|rhel1.example.com |Found 2 issues with sudo and PAM configuration |No account lockout protection configured in PAM
+|===
+
+=== ⚠️ Boot Errors (Affects 3 hosts)
+
+[cols="2,4,2", options=header]
+|===
+|Host |Issue |Action Required
+
+|rhel3.example.com |Failed to check boot errors |Ensure journalctl is available.
+|rhel2.example.com |Failed to check boot errors |Ensure journalctl is available.
+|rhel1.example.com |Failed to check boot errors |Ensure journalctl is available.
+|===
+
+=== ⚠️ Boot Target (Affects 3 hosts)
+
+[cols="2,4,2", options=header]
+|===
+|Host |Issue |Action Required
+
+|rhel3.example.com |Failed to determine default boot target |Check systemd configuration.
+|rhel2.example.com |Failed to determine default boot target |Check systemd configuration.
+|rhel1.example.com |Failed to determine default boot target |Check systemd configuration.
+|===
+
+=== ⚠️ Centralized Logging (Affects 3 hosts)
+
+[cols="2,4,2", options=header]
+|===
+|Host |Issue |Action Required
+
+|rhel3.example.com |No active logging services detected |Start and enable rsyslog: 'systemctl enable --now rsyslog'
+|rhel2.example.com |No active logging services detected |Start and enable rsyslog: 'systemctl enable --now rsyslog'
+|rhel1.example.com |No active logging services detected |Start and enable rsyslog: 'systemctl enable --now rsyslog'
+|===
+
+=== ⚠️ Log Rotation (Affects 3 hosts)
+
+[cols="2,4,2", options=header]
+|===
+|Host |Issue |Action Required
+
+|rhel3.example.com |Found 2 log rotation issues |Logrotate configuration may be missing or incomplete
+|rhel2.example.com |Found 2 log rotation issues |Logrotate configuration may be missing or incomplete
+|rhel1.example.com |Found 2 log rotation issues |Logrotate configuration may be missing or incomplete
+|===
+
+=== ⚠️ Logging System (Affects 2 hosts)
+
+[cols="2,4,2", options=header]
+|===
+|Host |Issue |Action Required
+
+|rhel3.example.com |No logging service is active |Start at least one logging service: 'systemctl start rsyslog'
+|rhel2.example.com |No logging service is active |Start at least one logging service: 'systemctl start rsyslog'
+|===
+
+=== ⚠️ Monitoring Agents (Affects 3 hosts)
+
+[cols="2,4,2", options=header]
+|===
+|Host |Issue |Action Required
+
+|rhel3.example.com |Monitoring agents installed but not running |Start and enable monitoring agent services
+|rhel2.example.com |Monitoring agents installed but not running |Start and enable monitoring agent services
+|rhel1.example.com |Monitoring agents installed but not running |Start and enable monitoring agent services
+|===
+
+=== ⚠️ Recovery Process (Affects 3 hosts)
+
+[cols="2,4,2", options=header]
+|===
+|Host |Issue |Action Required
+
+|rhel3.example.com |No evidence of recent recovery testing found |Perform and document regular recovery testing
+|rhel2.example.com |No evidence of recent recovery testing found |Perform and document regular recovery testing
+|rhel1.example.com |No evidence of recent recovery testing found |Perform and document regular recovery testing
+|===
+
+=== ⚠️ Required Services (Affects 3 hosts)
+
+[cols="2,4,2", options=header]
+|===
+|Host |Issue |Action Required
+
+|rhel3.example.com |Found issues with 12 required services |Start service 'sshd': 'systemctl start sshd'
+|rhel2.example.com |Found issues with 12 required services |Start service 'sshd': 'systemctl start sshd'
+|rhel1.example.com |Found issues with 12 required services |Start service 'sshd': 'systemctl start sshd'
+|===
+
+=== ⚠️ System Logs Check (Affects 1 hosts)
+
+[cols="2,4,2", options=header]
+|===
+|Host |Issue |Action Required
+
+|rhel1.example.com |Found 20 errors in system logs |Review system logs for potential issues
+|===
+
+=== ⚠️ Unnecessary Services (Affects 3 hosts)
+
+[cols="2,4,2", options=header]
+|===
+|Host |Issue |Action Required
+
+|rhel3.example.com |Failed to list services |Ensure systemd is properly working.
+|rhel2.example.com |Failed to list services |Ensure systemd is properly working.
+|rhel1.example.com |Failed to list services |Ensure systemd is properly working.
+|===
+
+=== ⚠️ Disk Usage (Affects 2 hosts)
+
+[cols="2,4,2", options=header]
+|===
+|Host |Issue |Action Required
+
+|rhel3.example.com |Failed to determine disk usage |Ensure the 'df' command is available.
+|rhel2.example.com |Failed to determine disk usage |Ensure the 'df' command is available.
+|===
+
+=== ⚠️ Filesystem Types (Affects 3 hosts)
+
+[cols="2,4,2", options=header]
+|===
+|Host |Issue |Action Required
+
+|rhel3.example.com |Could not determine filesystem types in use |Verify filesystem configuration manually
+|rhel2.example.com |Could not determine filesystem types in use |Verify filesystem configuration manually
+|rhel1.example.com |Could not determine filesystem types in use |Verify filesystem configuration manually
+|===
+
+=== ⚠️ Mount Points (Affects 3 hosts)
+
+[cols="2,4,2", options=header]
+|===
+|Host |Issue |Action Required
+
+|rhel3.example.com |Failed to determine mount points |Ensure the 'mount' command is available.
+|rhel2.example.com |Failed to determine mount points |Ensure the 'mount' command is available.
+|rhel1.example.com |Failed to determine mount points |Ensure the 'mount' command is available.
+|===
+
+=== ⚠️ Multipath Configuration (Affects 2 hosts)
+
+[cols="2,4,2", options=header]
+|===
+|Host |Issue |Action Required
+
+|rhel2.example.com |Multipath is installed but not running |Start multipath service: 'systemctl start multipathd'
+|rhel1.example.com |Multipath is installed but not running |Start multipath service: 'systemctl start multipathd'
+|===
+
+=== ⚠️ Partition Alignment (Affects 3 hosts)
+
+[cols="2,4,2", options=header]
+|===
+|Host |Issue |Action Required
+
+|rhel3.example.com |Partition layout does not follow Red Hat best practices |For virtual environments, separate partitions for /boot, /home, /tmp, and /var/tmp are optional but recommended
+|rhel2.example.com |Partition layout does not follow Red Hat best practices |For virtual environments, separate partitions for /boot, /home, /tmp, and /var/tmp are optional but recommended
+|rhel1.example.com |Partition layout does not follow Red Hat best practices |For virtual environments, separate partitions for /boot, /home, /tmp, and /var/tmp are optional but recommended
+|===
+
+=== ⚠️ Clock Consistency (Affects 3 hosts)
+
+[cols="2,4,2", options=header]
+|===
+|Host |Issue |Action Required
+
+|rhel3.example.com |Failed to determine system time |Check if date command is available.
+|rhel2.example.com |Failed to determine system time |Check if date command is available.
+|rhel1.example.com |Failed to determine system time |Check if date command is available.
+|===
+
+=== ⚠️ Enabled Repositories (Affects 3 hosts)
+
+[cols="2,4,2", options=header]
+|===
+|Host |Issue |Action Required
+
+|rhel3.example.com |Failed to get repository information |Verify that subscription-manager is working properly.
+|rhel2.example.com |Failed to get repository information |Verify that subscription-manager is working properly.
+|rhel1.example.com |Failed to get repository information |Verify that subscription-manager is working properly.
+|===
+
+=== ⚠️ System Hostname (Affects 1 hosts)
+
+[cols="2,4,2", options=header]
+|===
+|Host |Issue |Action Required
+
+|rhel2.example.com |Hostname '' doesn't resolve in DNS |Ensure the hostname is properly configured in DNS.
+|===
+
+=== ⚠️ System Timezone (Affects 3 hosts)
+
+[cols="2,4,2", options=header]
+|===
+|Host |Issue |Action Required
+
+|rhel3.example.com |Failed to determine system timezone |Ensure timedatectl is available (systemd-based systems).
+|rhel2.example.com |Failed to determine system timezone |Ensure timedatectl is available (systemd-based systems).
+|rhel1.example.com |Failed to determine system timezone |Ensure timedatectl is available (systemd-based systems).
+|===
+
+=== ⚠️ System Uptime (Affects 3 hosts)
+
+[cols="2,4,2", options=header]
+|===
+|Host |Issue |Action Required
+
+|rhel3.example.com |Failed to get system uptime |Check if the 'uptime' command is available.
+|rhel2.example.com |Failed to get system uptime |Check if the 'uptime' command is available.
+|rhel1.example.com |Failed to get system uptime |Check if the 'uptime' command is available.
+|===
+
+=== ⚠️ Time Synchronization (Affects 3 hosts)
+
+[cols="2,4,2", options=header]
+|===
+|Host |Issue |Action Required
+
+|rhel3.example.com |Time synchronization is not enabled |Install and configure chrony using 'yum install chrony'.
+|rhel2.example.com |Time synchronization is not enabled |Install and configure chrony using 'yum install chrony'.
+|rhel1.example.com |Time synchronization is not enabled |Install and configure chrony using 'yum install chrony'.
+|===
+
+=== ⚠️ Enabled Repositories (Affects 3 hosts)
+
+[cols="2,4,2", options=header]
+|===
+|Host |Issue |Action Required
+
+|rhel3.example.com |No repositories appear to be enabled |Check system registration status
+|rhel2.example.com |No repositories appear to be enabled |Check system registration status
+|rhel1.example.com |No repositories appear to be enabled |Check system registration status
+|===
+
+=== ⚠️ Kernel Consistency (Affects 3 hosts)
+
+[cols="2,4,2", options=header]
+|===
+|Host |Issue |Action Required
+
+|rhel3.example.com |Found 1 kernel consistency issues |Repository metadata is 20306 days old - unable to reliably determine if latest kernel is installed
+|rhel2.example.com |Found 1 kernel consistency issues |Repository metadata is 20306 days old - unable to reliably determine if latest kernel is installed
+|rhel1.example.com |Found 1 kernel consistency issues |Repository metadata is 20306 days old - unable to reliably determine if latest kernel is installed
+|===
+
+=== ⚠️ Unnecessary Packages (Affects 3 hosts)
+
+[cols="2,4,2", options=header]
+|===
+|Host |Issue |Action Required
+
+|rhel3.example.com |Found 1 package maintenance issues |Obsolete packages are installed
+|rhel2.example.com |Found 1 package maintenance issues |Obsolete packages are installed
+|rhel1.example.com |Found 1 package maintenance issues |Obsolete packages are installed
+|===
+
+== System Patterns & Trends
+
+=== Common Issues Detected:
+
+1. **100% of hosts** (3/3) Found 1 root account security issues
+   - Affected hosts: rhel3.example.com, rhel2.example.com, rhel1.example.com
+   - Action: Root account has a valid login shell
+
+2. **100% of hosts** (3/3) Failed to determine system uptime and load
+   - Affected hosts: rhel3.example.com, rhel2.example.com, rhel1.example.com
+   - Action: Ensure the 'uptime' command is available.
+
+3. **100% of hosts** (3/3) Found 3 shell history configuration issues
+   - Affected hosts: rhel3.example.com, rhel2.example.com, rhel1.example.com
+   - Action: HISTSIZE is not set or too small (should be at least 1000)
+
+4. **100% of hosts** (3/3) No active logging services detected
+   - Affected hosts: rhel3.example.com, rhel2.example.com, rhel1.example.com
+   - Action: Start and enable rsyslog: 'systemctl enable --now rsyslog'
+
+5. **100% of hosts** (3/3) Found 2 issues with cluster constraints and timeouts
+   - Affected hosts: rhel3.example.com, rhel2.example.com, rhel1.example.com
+   - Action: No timeout values defined in resource or operation defaults
+
+== Host Health Matrix
+
+[cols="3,1,1,1,1,1", options=header]
+|===
+|Host |Type |Critical |Warning |Advisory |Score
+
+|link:hosts/rhel1.example.com-health-check.adoc[rhel1.example.com] |RHEL |5 |48 |3 |{set:cellbgcolor:#FF0000}Critical
+|link:hosts/rhel2.example.com-health-check.adoc[rhel2.example.com] |RHEL |4 |53 |3 |{set:cellbgcolor:#FF0000}Critical
+|link:hosts/rhel3.example.com-health-check.adoc[rhel3.example.com] |RHEL |5 |53 |3 |{set:cellbgcolor:#FF0000}Critical
+|===
+
+{set:cellbgcolor!}
+
+== Individual Host Reports
+
+Detailed reports for each host are available in the `hosts/` directory:
+
+* link:hosts/rhel1.example.com-health-check.adoc[rhel1.example.com - RHEL Health Check Report]
+* link:hosts/rhel2.example.com-health-check.adoc[rhel2.example.com - RHEL Health Check Report]
+* link:hosts/rhel3.example.com-health-check.adoc[rhel3.example.com - RHEL Health Check Report]

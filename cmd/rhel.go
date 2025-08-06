@@ -30,13 +30,18 @@ This includes system information, memory, disk, security, and other checks.`,
 	return cmd
 }
 
-// runRhelChecks performs all RHEL health checks
+// runRhelChecks runs all RHEL health checks
 func runRhelChecks(cmd *cobra.Command, args []string) error {
-	// Check if running as root only for local execution and not in multi-host mode
+	// Set the executor
 	executor := utils.GetExecutor()
-	if !multiHostMode && executor.IsLocal() && !utils.RunningAsRoot() {
-		fmt.Println("WARNING: This tool should be run with root/sudo privileges for complete results.")
-		fmt.Println("Some checks may fail or provide incomplete information.")
+	if executor == nil {
+		return fmt.Errorf("failed to get executor")
+	}
+
+	// Check if we're running remotely
+	isRemote := !executor.IsLocal()
+	if isRemote {
+		fmt.Println("Running checks on remote system...")
 	}
 
 	// Parse command flags
@@ -111,6 +116,18 @@ func runRhelChecks(cmd *cobra.Command, args []string) error {
 	outputPath, err := reportGenerator.Generate()
 	if err != nil {
 		return fmt.Errorf("failed to generate report: %v", err)
+	}
+
+	// Cache the report for multi-host summary
+	if multiHostMode && reportGenerator != nil {
+		report.CacheHostReport(hostname, reportGenerator)
+		// Also save to JSON for persistence
+		if err := report.SaveCheckResults(outputPath, reportGenerator); err != nil {
+			// Log warning but don't fail
+			if !multiHostMode {
+				fmt.Printf("Warning: failed to save check results: %v\n", err)
+			}
+		}
 	}
 
 	// Compress the report with password protection automatically

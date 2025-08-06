@@ -390,14 +390,22 @@ func runMultiHostChecks(cmd *cobra.Command, args []string) error {
 		} else if result.report != nil {
 			successHosts = append(successHosts, result)
 
-			// Load the actual report data from the generated file
-			if result.filepath != "" {
-				loadedReport := report.NewAsciiDocReport(result.filepath)
-				if err := loadedReport.LoadFromFile(result.filepath); err == nil {
+			// First try to get from cache
+			if cachedReport, exists := report.GetCachedHostReport(result.hostname); exists {
+				summaryReport.AddHostReport(result.hostname, cachedReport)
+			} else if result.filepath != "" {
+				// Try to load from JSON file
+				if loadedReport, err := report.LoadCheckResults(result.filepath); err == nil {
 					summaryReport.AddHostReport(result.hostname, loadedReport)
 				} else {
-					// If loading fails, use the original report
-					summaryReport.AddHostReport(result.hostname, result.report)
+					// Fallback to parsing the AsciiDoc file if needed
+					loadedReport := report.NewAsciiDocReport(result.filepath)
+					if err := loadedReport.LoadFromFile(result.filepath); err == nil {
+						summaryReport.AddHostReport(result.hostname, loadedReport)
+					} else {
+						// Last resort: use the in-memory report
+						summaryReport.AddHostReport(result.hostname, result.report)
+					}
 				}
 			} else {
 				summaryReport.AddHostReport(result.hostname, result.report)

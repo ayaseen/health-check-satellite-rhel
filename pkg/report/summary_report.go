@@ -11,46 +11,27 @@ import (
 	"time"
 )
 
-// SummaryReport generates consolidated summary reports from multiple host reports
+// SummaryReport handles generation of consolidated summary reports
 type SummaryReport struct {
-	HostReports      map[string]*AsciiDocReport
-	GeneratedTime    time.Time
-	OutputDir        string
-	TotalHosts       int
-	HostsByType      map[string]int
-	CriticalCount    int
-	WarningCount     int
-	AdvisoryCount    int
-	HealthyHostCount int
+	GeneratedTime       time.Time
+	OutputDir           string
+	HostReports         map[string]*AsciiDocReport
+	TotalHosts          int
+	CriticalHostCount   int // Number of hosts with critical issues
+	WarningHostCount    int // Number of hosts with warnings
+	HealthyHostCount    int // Number of hosts with no issues
+	TotalCriticalIssues int // Total number of critical issues across all hosts
+	TotalWarningIssues  int // Total number of warning issues across all hosts
+	TotalAdvisoryIssues int // Total number of advisory issues across all hosts
+	HostsByType         map[string]int
 }
 
-// HostSummary contains summary information for a single host
-type HostSummary struct {
-	Hostname      string
-	Type          string
-	CriticalCount int
-	WarningCount  int
-	AdvisoryCount int
-	OverallStatus Status
-	Issues        []IssueSummary
-}
-
-// IssueSummary represents a single issue found
-type IssueSummary struct {
-	Category    Category
-	CheckName   string
-	Message     string
-	Severity    ResultKey
-	Hosts       []string
-	Remediation string
-}
-
-// NewSummaryReport creates a new summary report
+// NewSummaryReport creates a new summary report generator
 func NewSummaryReport(outputDir string) *SummaryReport {
 	return &SummaryReport{
-		HostReports:   make(map[string]*AsciiDocReport),
 		GeneratedTime: time.Now(),
 		OutputDir:     outputDir,
+		HostReports:   make(map[string]*AsciiDocReport),
 		HostsByType:   make(map[string]int),
 	}
 }
@@ -58,15 +39,15 @@ func NewSummaryReport(outputDir string) *SummaryReport {
 // AddHostReport adds a host report to the summary
 func (s *SummaryReport) AddHostReport(hostname string, report *AsciiDocReport) {
 	s.HostReports[hostname] = report
-	s.TotalHosts++
+	s.TotalHosts = len(s.HostReports)
 }
 
 // GenerateAllReports generates all summary reports
 func (s *SummaryReport) GenerateAllReports() error {
-	// First analyze all host reports
+	// Analyze all reports to gather statistics
 	s.analyzeReports()
 
-	// Generate main summary report
+	// Generate the main summary report
 	if err := s.GenerateSummaryReport(); err != nil {
 		return fmt.Errorf("failed to generate summary report: %v", err)
 	}
@@ -81,6 +62,14 @@ func (s *SummaryReport) GenerateAllReports() error {
 
 // analyzeReports analyzes all host reports to gather statistics
 func (s *SummaryReport) analyzeReports() {
+	// Reset counters
+	s.CriticalHostCount = 0
+	s.WarningHostCount = 0
+	s.HealthyHostCount = 0
+	s.TotalCriticalIssues = 0
+	s.TotalWarningIssues = 0
+	s.TotalAdvisoryIssues = 0
+
 	for _, report := range s.HostReports {
 		hostType := "RHEL"
 		if strings.Contains(report.Title, "Satellite") {
@@ -88,25 +77,30 @@ func (s *SummaryReport) analyzeReports() {
 		}
 		s.HostsByType[hostType]++
 
-		criticalCount := 0
-		warningCount := 0
-		advisoryCount := 0
+		hostCriticalCount := 0
+		hostWarningCount := 0
+		hostAdvisoryCount := 0
 
 		for _, check := range report.Checks {
 			switch check.Result.ResultKey {
 			case ResultKeyRequired:
-				criticalCount++
-				s.CriticalCount++
+				hostCriticalCount++
+				s.TotalCriticalIssues++
 			case ResultKeyRecommended:
-				warningCount++
-				s.WarningCount++
+				hostWarningCount++
+				s.TotalWarningIssues++
 			case ResultKeyAdvisory:
-				advisoryCount++
-				s.AdvisoryCount++
+				hostAdvisoryCount++
+				s.TotalAdvisoryIssues++
 			}
 		}
 
-		if criticalCount == 0 && warningCount == 0 {
+		// Categorize host based on its worst issue
+		if hostCriticalCount > 0 {
+			s.CriticalHostCount++
+		} else if hostWarningCount > 0 {
+			s.WarningHostCount++
+		} else {
 			s.HealthyHostCount++
 		}
 	}
@@ -119,11 +113,11 @@ func (s *SummaryReport) GenerateSummaryReport() error {
 
 	var content strings.Builder
 
-	// Header
+	// Header - Now showing host counts, not issue counts
 	content.WriteString("= Infrastructure Health Check Summary\n")
 	content.WriteString(fmt.Sprintf("Generated: %s\n", s.GeneratedTime.Format("2006-01-02 15:04:05")))
 	content.WriteString(fmt.Sprintf("Total Hosts: %d | Critical: %d | Warnings: %d | Healthy: %d\n\n",
-		s.TotalHosts, s.CriticalCount, s.WarningCount, s.HealthyHostCount))
+		s.TotalHosts, s.CriticalHostCount, s.WarningHostCount, s.HealthyHostCount))
 
 	// Add the Key section (only appears here)
 	content.WriteString(s.generateKeySection())
@@ -234,18 +228,29 @@ Not yet evaluated.
 func (s *SummaryReport) generateDashboard() string {
 	var sb strings.Builder
 
-	// Simple ASCII visualization
+	// Host Status Summary
+	sb.WriteString("=== Host Status Summary\n\n")
 	sb.WriteString("[listing]\n----\n")
-	sb.WriteString(fmt.Sprintf("Critical Issues: %s %d\n",
-		strings.Repeat("█", min(s.CriticalCount, 20)), s.CriticalCount))
-	sb.WriteString(fmt.Sprintf("Warnings:       %s %d\n",
-		strings.Repeat("█", min(s.WarningCount, 20)), s.WarningCount))
-	sb.WriteString(fmt.Sprintf("Advisory:       %s %d\n",
-		strings.Repeat("█", min(s.AdvisoryCount, 20)), s.AdvisoryCount))
+	sb.WriteString(fmt.Sprintf("Critical Hosts:  %s %d (%.0f%%)\n",
+		strings.Repeat("█", min(s.CriticalHostCount*5, 20)), s.CriticalHostCount,
+		float64(s.CriticalHostCount)/float64(s.TotalHosts)*100))
+	sb.WriteString(fmt.Sprintf("Warning Hosts:   %s %d (%.0f%%)\n",
+		strings.Repeat("█", min(s.WarningHostCount*5, 20)), s.WarningHostCount,
+		float64(s.WarningHostCount)/float64(s.TotalHosts)*100))
+	sb.WriteString(fmt.Sprintf("Healthy Hosts:   %s %d (%.0f%%)\n",
+		strings.Repeat("█", min(s.HealthyHostCount*5, 20)), s.HealthyHostCount,
+		float64(s.HealthyHostCount)/float64(s.TotalHosts)*100))
 	sb.WriteString("----\n\n")
 
+	// Issue Summary
+	sb.WriteString("=== Total Issues Across Infrastructure\n\n")
+	sb.WriteString(fmt.Sprintf("* Critical Issues: %d\n", s.TotalCriticalIssues))
+	sb.WriteString(fmt.Sprintf("* Warning Issues: %d\n", s.TotalWarningIssues))
+	sb.WriteString(fmt.Sprintf("* Advisory Issues: %d\n", s.TotalAdvisoryIssues))
+	sb.WriteString("\n")
+
 	// Host type breakdown
-	sb.WriteString("Host Breakdown:\n\n")
+	sb.WriteString("=== Host Breakdown by Type\n\n")
 	for hostType, count := range s.HostsByType {
 		sb.WriteString(fmt.Sprintf("* %s Systems: %d\n", hostType, count))
 	}
@@ -348,6 +353,11 @@ func (s *SummaryReport) generatePatternAnalysis() string {
 
 	sb.WriteString("=== Common Issues Detected:\n\n")
 
+	if len(commonIssues) == 0 {
+		sb.WriteString("No common patterns detected across multiple hosts.\n\n")
+		return sb.String()
+	}
+
 	for i, pattern := range commonIssues {
 		percentage := float64(len(pattern.Hosts)) / float64(s.TotalHosts) * 100
 		sb.WriteString(fmt.Sprintf("%d. **%.0f%% of hosts** (%d/%d) %s\n",
@@ -422,7 +432,7 @@ func (s *SummaryReport) generateHealthMatrix() string {
 	var sb strings.Builder
 
 	sb.WriteString("[cols=\"3,1,1,1,1,1\", options=header]\n|===\n")
-	sb.WriteString("|Host |Type |Critical |Warning |Advisory |Health Score\n\n")
+	sb.WriteString("|Host |Type |Critical |Warning |Advisory |Score\n\n")
 
 	// Sort hosts for consistent output
 	var hostnames []string
@@ -486,7 +496,7 @@ func (s *SummaryReport) GenerateCriticalIssuesReport() error {
 	content.WriteString("= Critical Issues Report\n")
 	content.WriteString(fmt.Sprintf("Generated: %s\n", s.GeneratedTime.Format("2006-01-02 15:04:05")))
 	content.WriteString(fmt.Sprintf("Total Critical Issues: %d across %d hosts\n\n",
-		s.CriticalCount, s.TotalHosts))
+		s.TotalCriticalIssues, s.CriticalHostCount))
 
 	// Get only critical issues
 	criticalIssues := s.groupIssuesBySeverity(ResultKeyRequired)
@@ -529,6 +539,16 @@ func (s *SummaryReport) generateRemediationGuide(issues map[string][]IssueSummar
 	sb.WriteString("----\n\n")
 
 	return sb.String()
+}
+
+// IssueSummary represents a summary of an issue for reporting
+type IssueSummary struct {
+	Category    Category
+	CheckName   string
+	Message     string
+	Severity    ResultKey
+	Hosts       []string
+	Remediation string
 }
 
 // min returns the minimum of two integers

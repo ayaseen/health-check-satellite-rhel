@@ -298,6 +298,15 @@ func executeHostCheck(host config.HostEntry, outputDir string, defaults config.D
 		return nil, fmt.Errorf("failed to generate report: %v", err)
 	}
 
+	// Cache the report
+	report.CacheHostReport(host.Hostname, reportGenerator)
+
+	// Save check results to JSON
+	if err := report.SaveCheckResults(outputFile, reportGenerator); err != nil {
+		// Log warning but don't fail
+		fmt.Printf("Warning: failed to save check results for %s: %v\n", host.Hostname, err)
+	}
+
 	return reportGenerator, nil
 }
 
