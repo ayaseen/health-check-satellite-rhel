@@ -18,7 +18,11 @@ type CommandExecutor interface {
 
 // LocalExecutor executes commands locally
 type LocalExecutor struct {
-	hostname string
+	hostname     string
+	useSudo      bool
+	sudoMethod   string
+	sudoUser     string
+	sudoPassword string
 }
 
 // RemoteExecutor executes commands via SSH
@@ -39,7 +43,27 @@ func NewLocalExecutor() (*LocalExecutor, error) {
 	if err != nil {
 		hostname = "localhost"
 	}
-	return &LocalExecutor{hostname: strings.TrimSpace(hostname)}, nil
+	return &LocalExecutor{
+		hostname:   strings.TrimSpace(hostname),
+		useSudo:    false,
+		sudoMethod: "sudo",
+		sudoUser:   "root",
+	}, nil
+}
+
+// NewLocalExecutorWithSudo creates a new local executor with sudo configuration
+func NewLocalExecutorWithSudo(useSudo bool, sudoMethod, sudoUser, sudoPassword string) (*LocalExecutor, error) {
+	hostname, err := RunCommand("hostname", "-f")
+	if err != nil {
+		hostname = "localhost"
+	}
+	return &LocalExecutor{
+		hostname:     strings.TrimSpace(hostname),
+		useSudo:      useSudo,
+		sudoMethod:   sudoMethod,
+		sudoUser:     sudoUser,
+		sudoPassword: sudoPassword,
+	}, nil
 }
 
 // NewRemoteExecutor creates a new remote executor
@@ -67,12 +91,91 @@ func NewRemoteExecutor(config *SSHConfig) (*RemoteExecutor, error) {
 
 // RunCommand executes a command locally
 func (e *LocalExecutor) RunCommand(name string, args ...string) (string, error) {
+	// Apply sudo if configured
+	if e.useSudo {
+		return e.runWithSudo(name, args...)
+	}
 	return RunCommand(name, args...)
 }
 
 // RunCommandWithTimeout executes a command locally with timeout
 func (e *LocalExecutor) RunCommandWithTimeout(name string, timeout int, args ...string) (string, error) {
+	// Apply sudo if configured
+	if e.useSudo {
+		return e.runWithSudoTimeout(name, timeout, args...)
+	}
 	return RunCommandWithTimeout(name, timeout, args...)
+}
+
+// runWithSudo executes a command with sudo
+func (e *LocalExecutor) runWithSudo(name string, args ...string) (string, error) {
+	var cmd string
+
+	// Build the original command
+	originalCmd := name
+	if len(args) > 0 {
+		// Properly escape arguments
+		escapedArgs := make([]string, len(args))
+		for i, arg := range args {
+			escapedArgs[i] = fmt.Sprintf("'%s'", strings.ReplaceAll(arg, "'", "'\\''"))
+		}
+		originalCmd = fmt.Sprintf("%s %s", name, strings.Join(escapedArgs, " "))
+	}
+
+	// Apply sudo based on method
+	switch e.sudoMethod {
+	case "su":
+		if e.sudoPassword != "" {
+			// su with password is complex - for now just use without password
+			cmd = fmt.Sprintf("su - %s -c '%s'", e.sudoUser, originalCmd)
+		} else {
+			cmd = fmt.Sprintf("su - %s -c '%s'", e.sudoUser, originalCmd)
+		}
+		return RunCommand("bash", "-c", cmd)
+	default: // sudo
+		if e.sudoPassword != "" {
+			// Use echo to provide password to sudo
+			escapedPass := strings.ReplaceAll(e.sudoPassword, "'", "'\\''")
+			cmd = fmt.Sprintf("echo '%s' | sudo -S -u %s %s", escapedPass, e.sudoUser, originalCmd)
+			return RunCommand("bash", "-c", cmd)
+		} else {
+			// Try sudo without password (NOPASSWD)
+			return RunCommand("sudo", append([]string{"-u", e.sudoUser, name}, args...)...)
+		}
+	}
+}
+
+// runWithSudoTimeout executes a command with sudo and timeout
+func (e *LocalExecutor) runWithSudoTimeout(name string, timeout int, args ...string) (string, error) {
+	var cmd string
+
+	// Build the original command with timeout
+	originalCmd := fmt.Sprintf("timeout %d %s", timeout, name)
+	if len(args) > 0 {
+		// Properly escape arguments
+		escapedArgs := make([]string, len(args))
+		for i, arg := range args {
+			escapedArgs[i] = fmt.Sprintf("'%s'", strings.ReplaceAll(arg, "'", "'\\''"))
+		}
+		originalCmd = fmt.Sprintf("timeout %d %s %s", timeout, name, strings.Join(escapedArgs, " "))
+	}
+
+	// Apply sudo based on method
+	switch e.sudoMethod {
+	case "su":
+		cmd = fmt.Sprintf("su - %s -c '%s'", e.sudoUser, originalCmd)
+		return RunCommand("bash", "-c", cmd)
+	default: // sudo
+		if e.sudoPassword != "" {
+			// Use echo to provide password to sudo
+			escapedPass := strings.ReplaceAll(e.sudoPassword, "'", "'\\''")
+			cmd = fmt.Sprintf("echo '%s' | sudo -S -u %s %s", escapedPass, e.sudoUser, originalCmd)
+			return RunCommand("bash", "-c", cmd)
+		} else {
+			// Try sudo without password (NOPASSWD)
+			return RunCommand("sudo", append([]string{"-u", e.sudoUser, "timeout", fmt.Sprintf("%d", timeout), name}, args...)...)
+		}
+	}
 }
 
 // GetHostname returns the hostname

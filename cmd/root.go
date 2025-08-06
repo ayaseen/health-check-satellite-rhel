@@ -55,6 +55,8 @@ func init() {
 	rootCmd.AddCommand(newRhelCmd())
 	rootCmd.AddCommand(newSatelliteCmd())
 	rootCmd.AddCommand(newMultiCmd()) // New command for multi-host checks
+	// Check environment variables after flag parsing
+	cobra.OnInitialize(loadEnvConfig)
 }
 
 // autoDetectAndRun automatically detects if running on RHEL or Satellite and runs appropriate checks
@@ -630,3 +632,34 @@ var (
 	rhelReportHook      func(*report.AsciiDocReport)
 	satelliteReportHook func(*report.AsciiDocReport)
 )
+
+// loadEnvConfig loads configuration from environment variables
+func loadEnvConfig() {
+	// Load sudo password from environment if not set via flags
+	if sudoPass := os.Getenv("HEALTH_CHECK_SUDO_PASS"); sudoPass != "" {
+		if cmd := rootCmd.Flag("sudo-password"); cmd != nil && cmd.Value.String() == "" {
+			cmd.Value.Set(sudoPass)
+		}
+	}
+
+	// Load use-sudo flag from environment
+	if useSudo := os.Getenv("HEALTH_CHECK_USE_SUDO"); useSudo == "true" || useSudo == "1" {
+		if cmd := rootCmd.Flag("use-sudo"); cmd != nil {
+			cmd.Value.Set("true")
+		}
+	}
+
+	// Load sudo method from environment
+	if sudoMethod := os.Getenv("HEALTH_CHECK_SUDO_METHOD"); sudoMethod != "" {
+		if cmd := rootCmd.Flag("sudo-method"); cmd != nil {
+			cmd.Value.Set(sudoMethod)
+		}
+	}
+
+	// Load sudo user from environment
+	if sudoUser := os.Getenv("HEALTH_CHECK_SUDO_USER"); sudoUser != "" {
+		if cmd := rootCmd.Flag("sudo-user"); cmd != nil {
+			cmd.Value.Set(sudoUser)
+		}
+	}
+}
