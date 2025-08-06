@@ -623,112 +623,91 @@ func (r *AsciiDocReport) LoadFromFile(filepath string) error {
 
 	contentStr := string(content)
 
-	// Extract hostname from the report if not already set
-	if r.Hostname == "" {
-		if matches := regexp.MustCompile(`Hostname:\s*(.+)`).FindStringSubmatch(contentStr); len(matches) > 1 {
-			r.Hostname = strings.TrimSpace(matches[1])
-		}
-	}
-
-	// Extract title if not already set
-	if r.Title == "" {
-		if matches := regexp.MustCompile(`^=\s+(.+)$`).FindStringSubmatch(contentStr); len(matches) > 1 {
-			r.Title = strings.TrimSpace(matches[1])
-		}
-	}
-
-	// Parse checks from the report content
+	// Initialize checks slice
 	r.Checks = []*Check{}
 
-	// Parse the summary tables to extract check results
+	// Split content into lines for parsing
 	lines := strings.Split(contentStr, "\n")
 
-	// Track current category and check parsing state
-	var currentCategory Category
-	var currentCheck *Check
+	// Variables to track parsing state
 	inTable := false
-	inDetailSection := false
-	var detailSectionName string
+	var currentCategory Category
+	tableStartLine := -1
 
+	// Parse line by line
 	for i := 0; i < len(lines); i++ {
-		line := strings.TrimSpace(lines[i])
+		line := lines[i]
 
-		// Skip empty lines
-		if line == "" {
-			continue
-		}
-
-		// Detect category headers
-		if strings.HasPrefix(line, "=== ") && strings.Contains(line, "Checks") {
-			categoryName := strings.TrimPrefix(line, "=== ")
-			categoryName = strings.TrimSpace(strings.Replace(categoryName, "Checks", "", 1))
-			currentCategory = Category(categoryName)
-			continue
-		}
-
-		// Detect table start
-		if line == "|===" && i > 0 && strings.Contains(lines[i-1], "Category") {
-			inTable = true
-			continue
+		// Detect table start - look for the header row pattern
+		if strings.Contains(line, "|===") && i+1 < len(lines) {
+			nextLine := lines[i+1]
+			if strings.Contains(nextLine, "Category") &&
+				strings.Contains(nextLine, "Item Evaluated") &&
+				strings.Contains(nextLine, "Observed Result") &&
+				strings.Contains(nextLine, "Recommendation") {
+				inTable = true
+				tableStartLine = i
+				i++ // Skip the header line
+				continue
+			}
 		}
 
 		// Detect table end
-		if line == "|===" && inTable {
+		if inTable && strings.TrimSpace(line) == "|===" && i > tableStartLine+2 {
 			inTable = false
 			continue
 		}
 
 		// Parse table rows
-		if inTable && strings.HasPrefix(line, "|") && !strings.Contains(line, "Category") {
-			// Handle multi-line table cells by collecting all parts
-			fullLine := line
-			j := i + 1
+		if inTable && strings.HasPrefix(strings.TrimSpace(line), "|") {
+			// Split by | and clean up
+			parts := strings.Split(line, "|")
 
-			// Collect continuation lines
-			for j < len(lines) && !strings.HasPrefix(lines[j], "|") && lines[j] != "|===" {
-				if strings.TrimSpace(lines[j]) != "" && !strings.HasPrefix(lines[j], "//") {
-					fullLine += " " + strings.TrimSpace(lines[j])
+			// Filter out empty parts
+			var cleanParts []string
+			for _, part := range parts {
+				trimmed := strings.TrimSpace(part)
+				if trimmed != "" {
+					cleanParts = append(cleanParts, trimmed)
 				}
-				j++
 			}
 
-			// Skip comment lines
-			if strings.Contains(fullLine, "// Category") || strings.Contains(fullLine, "// Item Evaluated") {
-				i = j - 1
-				continue
-			}
+			// We need at least 4 parts: Category, Item Evaluated, Observed Result, Recommendation
+			if len(cleanParts) >= 4 {
+				category := cleanParts[0]
+				itemEvaluated := cleanParts[1]
+				observedResult := cleanParts[2]
+				recommendation := cleanParts[3]
 
-			// Parse the table row
-			parts := strings.Split(fullLine, "|")
-			if len(parts) >= 5 {
-				// Extract fields
-				category := strings.TrimSpace(parts[1])
-				itemEvaluated := strings.TrimSpace(parts[2])
-				observedResult := strings.TrimSpace(parts[3])
-				recommendation := strings.TrimSpace(parts[4])
-
-				// Skip empty or comment rows
-				if category == "" || strings.HasPrefix(category, "//") {
-					i = j - 1
+				// Skip header row or empty rows
+				if category == "Category" || category == "" {
 					continue
 				}
 
-				// Update current category if specified
-				if category != "" && !strings.HasPrefix(category, "{set:") {
+				// Update category if it's specified
+				if category != "" && !strings.Contains(category, "{set:") {
 					currentCategory = Category(category)
 				}
 
-				// Extract check name from link if present
+				// Clean up item evaluated - remove link markup if present
 				checkName := itemEvaluated
 				if strings.Contains(itemEvaluated, "<<") && strings.Contains(itemEvaluated, ">>") {
+					// Extract text between << and >>
 					start := strings.Index(itemEvaluated, "<<") + 2
 					end := strings.Index(itemEvaluated, ">>")
-					if start < end {
+					if start < end && end > 0 {
 						checkName = itemEvaluated[start:end]
+					}
+				} else if strings.HasPrefix(itemEvaluated, "link:") {
+					// Handle link: format
+					linkStart := strings.Index(itemEvaluated, "[") + 1
+					linkEnd := strings.Index(itemEvaluated, "]")
+					if linkStart < linkEnd && linkEnd > 0 {
+						checkName = itemEvaluated[linkStart:linkEnd]
 					}
 				}
 
-				// Create check
+				// Create the check
 				check := &Check{
 					ID:          fmt.Sprintf("%s-%s", currentCategory, strings.ReplaceAll(checkName, " ", "-")),
 					Name:        checkName,
@@ -736,61 +715,74 @@ func (r *AsciiDocReport) LoadFromFile(filepath string) error {
 					Category:    currentCategory,
 				}
 
-				// Determine result based on recommendation
-				resultKey := ResultKeyNotApplicable
-				status := StatusInfo
+				// Determine status based on recommendation column
+				// The recommendation contains both color formatting and text
+				var resultKey ResultKey
+				var status Status
 
-				if strings.Contains(recommendation, "Changes Required") {
+				// Remove color formatting to get clean text
+				cleanRec := recommendation
+				// Remove {set:cellbgcolor:#...} patterns
+				colorPattern := regexp.MustCompile(`\{set:cellbgcolor:[^}]*\}`)
+				cleanRec = colorPattern.ReplaceAllString(cleanRec, "")
+				cleanRec = strings.TrimSpace(cleanRec)
+
+				// Check for the actual status text
+				if strings.Contains(cleanRec, "Changes Required") ||
+					strings.Contains(recommendation, "#FF0000") { // Red color
 					resultKey = ResultKeyRequired
 					status = StatusCritical
-				} else if strings.Contains(recommendation, "Changes Recommended") {
+				} else if strings.Contains(cleanRec, "Changes Recommended") ||
+					strings.Contains(recommendation, "#FEFE20") { // Yellow color
 					resultKey = ResultKeyRecommended
 					status = StatusWarning
-				} else if strings.Contains(recommendation, "Advisory") {
+				} else if strings.Contains(cleanRec, "Advisory") ||
+					strings.Contains(recommendation, "#80E5FF") { // Light blue color
 					resultKey = ResultKeyAdvisory
 					status = StatusInfo
-				} else if strings.Contains(recommendation, "No Change") {
+				} else if strings.Contains(cleanRec, "No Change") ||
+					strings.Contains(recommendation, "#00FF00") { // Green color
 					resultKey = ResultKeyNoChange
 					status = StatusOK
-				} else if strings.Contains(recommendation, "N/A") {
-					resultKey = ResultKeyNotApplicable
+				} else if strings.Contains(cleanRec, "N/A") ||
+					strings.Contains(recommendation, "#A6B9BF") { // Gray color
+					resultKey = ResultKeyNoChange
+					status = StatusInfo
+				} else {
+					// Default case
+					resultKey = ResultKeyNoChange
 					status = StatusInfo
 				}
 
+				// Create the result
 				check.Result = NewResult(status, observedResult, resultKey)
 
-				// Add to checks
+				// Add the check
 				r.Checks = append(r.Checks, check)
 			}
-
-			i = j - 1
 		}
+	}
 
-		// Parse detail sections to get recommendations
-		if strings.HasPrefix(line, "== ") && !strings.Contains(line, "===") {
-			detailSectionName = strings.TrimPrefix(line, "== ")
-			inDetailSection = true
-
-			// Find corresponding check
-			for _, check := range r.Checks {
-				if check.Name == detailSectionName {
-					currentCheck = check
+	// Also extract hostname and title if not set
+	if r.Hostname == "" {
+		// Look for hostname in the content
+		for _, line := range lines {
+			if strings.Contains(line, "Hostname:") {
+				parts := strings.Split(line, ":")
+				if len(parts) >= 2 {
+					r.Hostname = strings.TrimSpace(parts[1])
 					break
 				}
 			}
-			continue
 		}
+	}
 
-		// Extract recommendations from detail sections
-		if inDetailSection && currentCheck != nil && line == "**Recommendation**" {
-			// Read recommendations until next section
-			j := i + 2 // Skip the blank line
-			for j < len(lines) && !strings.HasPrefix(lines[j], "**") && !strings.HasPrefix(lines[j], "==") {
-				recLine := strings.TrimSpace(lines[j])
-				if recLine != "" && recLine != "None" {
-					currentCheck.Result.Recommendations = append(currentCheck.Result.Recommendations, recLine)
-				}
-				j++
+	if r.Title == "" {
+		// Look for title (first line starting with =)
+		for _, line := range lines {
+			if strings.HasPrefix(line, "= ") && !strings.HasPrefix(line, "==") {
+				r.Title = strings.TrimSpace(strings.TrimPrefix(line, "= "))
+				break
 			}
 		}
 	}
