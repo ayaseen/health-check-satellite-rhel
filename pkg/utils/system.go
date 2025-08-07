@@ -8,6 +8,7 @@ import (
 	"io"
 	"os"
 	"os/exec"
+	"path/filepath"
 	"strings"
 )
 
@@ -161,6 +162,42 @@ func GetRHELVersionInfo() RHELVersionInfo {
 	return info
 }
 
+// IsRHEL checks if the current system is a Red Hat Enterprise Linux system
+// This is the MISSING function that was causing compilation errors
+func IsRHEL() bool {
+	// Method 1: Check /etc/redhat-release
+	releaseCmd := "cat /etc/redhat-release 2>/dev/null || cat /etc/system-release 2>/dev/null || echo ''"
+	releaseContent, _ := RunCommand("bash", "-c", releaseCmd)
+	if strings.Contains(releaseContent, "Red Hat Enterprise Linux") {
+		return true
+	}
+
+	// Method 2: Check /etc/os-release
+	idCmd := "grep '^ID=' /etc/os-release 2>/dev/null | cut -d'=' -f2 | tr -d '\"'"
+	idOutput, _ := RunCommand("bash", "-c", idCmd)
+	if strings.TrimSpace(idOutput) == "rhel" {
+		return true
+	}
+
+	// Method 3: Check rpm database
+	rpmCmd := "rpm -E %{rhel} 2>/dev/null"
+	rpmOutput, _ := RunCommand("bash", "-c", rpmCmd)
+	rpmOutput = strings.TrimSpace(rpmOutput)
+	if rpmOutput != "" && rpmOutput != "%{rhel}" {
+		// If rpm returns a number, it's RHEL
+		return true
+	}
+
+	// Method 4: Check for redhat-release package
+	pkgCmd := "rpm -q redhat-release 2>/dev/null"
+	pkgOutput, _ := RunCommand("bash", "-c", pkgCmd)
+	if pkgOutput != "" && !strings.Contains(pkgOutput, "not installed") {
+		return true
+	}
+
+	return false
+}
+
 // SystemInfo contains system information
 type SystemInfo struct {
 	Hostname     string
@@ -243,13 +280,49 @@ func IsRoot() bool {
 	return strings.TrimSpace(output) == "0"
 }
 
-// CreatePasswordProtectedZip creates a password-protected ZIP file
-// Note: Go's archive/zip package doesn't support password protection natively
-// This is a basic implementation - for production use, consider using external tools
-func CreatePasswordProtectedZip(sourcePath, outputPath, password string) (string, error) {
-	// For now, we'll create a regular zip without password
-	// In production, you might want to use external tools like 7zip or use a third-party library
+// CompressWithPassword creates a password-protected ZIP file
+// This is the MISSING function that was causing compilation errors
+func CompressWithPassword(sourcePath string, password string) (string, error) {
+	// Generate output filename
+	outputPath := sourcePath + ".zip"
 
+	// Check if the 'zip' command is available
+	checkZipCmd := "which zip 2>/dev/null"
+	zipCheck, _ := RunCommand("bash", "-c", checkZipCmd)
+
+	if zipCheck != "" {
+		// Use system zip command for password protection
+		zipCmd := fmt.Sprintf("zip -P '%s' '%s' '%s'", password, outputPath, sourcePath)
+		output, err := RunCommand("bash", "-c", zipCmd)
+		if err != nil {
+			return "", fmt.Errorf("failed to compress with password: %v, output: %s", err, output)
+		}
+		return outputPath, nil
+	}
+
+	// Fallback to 7z if available
+	check7zCmd := "which 7z 2>/dev/null"
+	sevenZipCheck, _ := RunCommand("bash", "-c", check7zCmd)
+
+	if sevenZipCheck != "" {
+		// Use 7zip for password protection
+		sevenZipCmd := fmt.Sprintf("7z a -p'%s' '%s' '%s'", password, outputPath, sourcePath)
+		output, err := RunCommand("bash", "-c", sevenZipCmd)
+		if err != nil {
+			return "", fmt.Errorf("failed to compress with 7z: %v, output: %s", err, output)
+		}
+		return outputPath, nil
+	}
+
+	// If no password-capable compression tool is available,
+	// create a regular zip without password and warn the user
+	return CreatePasswordProtectedZip(sourcePath, outputPath, password)
+}
+
+// CreatePasswordProtectedZip creates a password-protected ZIP file using Go's archive/zip
+// Note: Go's standard library doesn't support password protection natively
+// This creates a regular ZIP and returns a warning
+func CreatePasswordProtectedZip(sourcePath, outputPath, password string) (string, error) {
 	// Create the ZIP file
 	zipFile, err := os.Create(outputPath)
 	if err != nil {
@@ -282,10 +355,7 @@ func CreatePasswordProtectedZip(sourcePath, outputPath, password string) (string
 
 	// Set compression
 	header.Method = zip.Deflate
-
-	// Note: Go's standard library doesn't support SetPassword
-	// For password protection, you would need a third-party library like:
-	// github.com/alexmullins/zip or use external tools
+	header.Name = filepath.Base(sourcePath)
 
 	// Create writer
 	writer, err := zipWriter.CreateHeader(header)
@@ -300,8 +370,118 @@ func CreatePasswordProtectedZip(sourcePath, outputPath, password string) (string
 	}
 
 	// Note: This creates a regular ZIP without password protection
-	// Consider using external tools for password protection:
-	// cmd := exec.Command("zip", "-P", password, outputPath, sourcePath)
+	// The password parameter is ignored in this implementation
+	// For true password protection, install 'zip' or '7z' command-line tools
+
+	fmt.Println("Warning: Created unencrypted ZIP file. Install 'zip' or '7z' for password protection.")
 
 	return outputPath, nil
+}
+
+// FileExists checks if a file exists
+func FileExists(path string) bool {
+	_, err := os.Stat(path)
+	return !os.IsNotExist(err)
+}
+
+// GetFileSize returns the size of a file in bytes
+func GetFileSize(path string) (int64, error) {
+	info, err := os.Stat(path)
+	if err != nil {
+		return 0, err
+	}
+	return info.Size(), nil
+}
+
+// GetDiskUsage returns disk usage information for a given path
+func GetDiskUsage(path string) (string, error) {
+	cmd := fmt.Sprintf("df -h %s | tail -1", path)
+	output, err := RunCommand("bash", "-c", cmd)
+	if err != nil {
+		return "", err
+	}
+	return strings.TrimSpace(output), nil
+}
+
+// GetMemoryUsage returns current memory usage
+func GetMemoryUsage() (string, error) {
+	cmd := "free -h | grep '^Mem:' | awk '{print $3 \"/\" $2}'"
+	output, err := RunCommand("bash", "-c", cmd)
+	if err != nil {
+		return "", err
+	}
+	return strings.TrimSpace(output), nil
+}
+
+// GetLoadAverage returns system load average
+func GetLoadAverage() (string, error) {
+	output, err := RunCommand("bash", "-c", "uptime | awk -F'load average:' '{print $2}'")
+	if err != nil {
+		return "", err
+	}
+	return strings.TrimSpace(output), nil
+}
+
+// GetUptime returns system uptime
+func GetUptime() (string, error) {
+	output, err := RunCommand("bash", "-c", "uptime -p 2>/dev/null || uptime")
+	if err != nil {
+		return "", err
+	}
+	return strings.TrimSpace(output), nil
+}
+
+// GetServiceStatus checks if a service is running
+func GetServiceStatus(serviceName string) (bool, string) {
+	cmd := fmt.Sprintf("systemctl is-active %s 2>/dev/null", serviceName)
+	output, _ := RunCommand("bash", "-c", cmd)
+	status := strings.TrimSpace(output)
+	return status == "active", status
+}
+
+// GetProcessCount returns the number of running processes
+func GetProcessCount() (int, error) {
+	output, err := RunCommand("bash", "-c", "ps aux | wc -l")
+	if err != nil {
+		return 0, err
+	}
+
+	count := 0
+	fmt.Sscanf(strings.TrimSpace(output), "%d", &count)
+	return count, nil
+}
+
+// GetKernelParameters returns kernel boot parameters
+func GetKernelParameters() (string, error) {
+	output, err := RunCommand("bash", "-c", "cat /proc/cmdline")
+	if err != nil {
+		return "", err
+	}
+	return strings.TrimSpace(output), nil
+}
+
+// GetSELinuxStatus returns SELinux status
+func GetSELinuxStatus() (string, error) {
+	output, err := RunCommand("bash", "-c", "getenforce 2>/dev/null || echo 'Not installed'")
+	if err != nil {
+		return "Unknown", err
+	}
+	return strings.TrimSpace(output), nil
+}
+
+// GetFirewallStatus returns firewall status
+func GetFirewallStatus() (string, error) {
+	// Try firewalld first
+	output, err := RunCommand("bash", "-c", "systemctl is-active firewalld 2>/dev/null")
+	if err == nil && strings.TrimSpace(output) == "active" {
+		return "firewalld: active", nil
+	}
+
+	// Try iptables
+	output, err = RunCommand("bash", "-c", "systemctl is-active iptables 2>/dev/null")
+	if err == nil && strings.TrimSpace(output) == "active" {
+		return "iptables: active", nil
+	}
+
+	return "No firewall active", nil
 }

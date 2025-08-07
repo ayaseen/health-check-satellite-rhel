@@ -310,7 +310,6 @@ func checkSystemRegistration(r *report.AsciiDocReport) {
 
 	if err != nil {
 		detail.WriteString("Error: System is not registered\n")
-		detail.WriteString(err.Error())
 	} else {
 		detail.WriteString(identityOutput)
 	}
