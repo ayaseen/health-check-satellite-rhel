@@ -4,6 +4,7 @@ package utils
 
 import (
 	"fmt"
+	"os/exec"
 	"strings"
 	"sync"
 	"time"
@@ -42,12 +43,16 @@ var (
 
 // NewLocalExecutor creates a new local executor
 func NewLocalExecutor() (*LocalExecutor, error) {
-	hostname, err := RunCommand("hostname", "-f")
-	if err != nil {
-		hostname = "localhost"
+	// Get hostname locally
+	cmd := exec.Command("hostname", "-f")
+	output, err := cmd.CombinedOutput()
+	hostname := "localhost"
+	if err == nil {
+		hostname = strings.TrimSpace(string(output))
 	}
+
 	return &LocalExecutor{
-		hostname:   strings.TrimSpace(hostname),
+		hostname:   hostname,
 		useSudo:    false,
 		sudoMethod: "sudo",
 		sudoUser:   "root",
@@ -56,24 +61,22 @@ func NewLocalExecutor() (*LocalExecutor, error) {
 
 // NewLocalExecutorWithSudo creates a new local executor with sudo configuration
 func NewLocalExecutorWithSudo(useSudo bool, sudoMethod, sudoUser, sudoPassword string) (*LocalExecutor, error) {
-	hostname, err := RunCommand("hostname", "-f")
+	exec, err := NewLocalExecutor()
 	if err != nil {
-		hostname = "localhost"
+		return nil, err
 	}
-	return &LocalExecutor{
-		hostname:     strings.TrimSpace(hostname),
-		useSudo:      useSudo,
-		sudoMethod:   sudoMethod,
-		sudoUser:     sudoUser,
-		sudoPassword: sudoPassword,
-	}, nil
+	exec.useSudo = useSudo
+	exec.sudoMethod = sudoMethod
+	exec.sudoUser = sudoUser
+	exec.sudoPassword = sudoPassword
+	return exec, nil
 }
 
 // NewRemoteExecutor creates a new remote executor
 func NewRemoteExecutor(config *SSHConfig) (*RemoteExecutor, error) {
 	conn, err := NewSSHConnection(config)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("failed to create SSH connection: %v", err)
 	}
 
 	// Connect with retry logic
@@ -90,14 +93,29 @@ func NewRemoteExecutor(config *SSHConfig) (*RemoteExecutor, error) {
 			continue
 		}
 
-		// Connection successful, get hostname
-		hostname, err := conn.RunCommandWithTimeout("hostname", 5, "-f")
+		// Connection successful, test it
+		testOutput, err := conn.RunCommandWithTimeout("echo", 5, "test")
 		if err != nil {
-			hostname = config.Host
+			lastErr = fmt.Errorf("connection test failed: %v", err)
+			conn.Close()
+			continue
+		}
+
+		if !strings.Contains(testOutput, "test") {
+			lastErr = fmt.Errorf("unexpected test output: %s", testOutput)
+			conn.Close()
+			continue
+		}
+
+		// Get hostname from remote system
+		hostname := config.Host
+		hostnameOutput, err := conn.RunCommandWithTimeout("hostname", 5, "-f")
+		if err == nil && hostnameOutput != "" {
+			hostname = strings.TrimSpace(hostnameOutput)
 		}
 
 		return &RemoteExecutor{
-			hostname:   strings.TrimSpace(hostname),
+			hostname:   hostname,
 			connection: conn,
 		}, nil
 	}
@@ -111,7 +129,11 @@ func (e *LocalExecutor) RunCommand(name string, args ...string) (string, error) 
 	if e.useSudo {
 		return e.runWithSudo(name, args...)
 	}
-	return RunCommand(name, args...)
+
+	// Direct local execution
+	cmd := exec.Command(name, args...)
+	output, err := cmd.CombinedOutput()
+	return string(output), err
 }
 
 // RunCommandWithTimeout executes a command locally with timeout
@@ -120,78 +142,56 @@ func (e *LocalExecutor) RunCommandWithTimeout(name string, timeout int, args ...
 	if e.useSudo {
 		return e.runWithSudoTimeout(name, timeout, args...)
 	}
-	return RunCommandWithTimeout(name, timeout, args...)
+
+	// Build timeout command
+	timeoutArgs := []string{fmt.Sprintf("%d", timeout), name}
+	timeoutArgs = append(timeoutArgs, args...)
+	cmd := exec.Command("timeout", timeoutArgs...)
+	output, err := cmd.CombinedOutput()
+	return string(output), err
 }
 
 // runWithSudo executes a command with sudo
 func (e *LocalExecutor) runWithSudo(name string, args ...string) (string, error) {
-	var cmd string
+	// Build the command
+	var cmd *exec.Cmd
 
-	// Build the original command
-	originalCmd := name
-	if len(args) > 0 {
-		// Properly escape arguments
-		escapedArgs := make([]string, len(args))
-		for i, arg := range args {
-			escapedArgs[i] = fmt.Sprintf("'%s'", strings.ReplaceAll(arg, "'", "'\\''"))
-		}
-		originalCmd = fmt.Sprintf("%s %s", name, strings.Join(escapedArgs, " "))
-	}
-
-	// Apply sudo based on method
 	switch e.sudoMethod {
 	case "su":
-		if e.sudoPassword != "" {
-			// su with password is complex - for now just use without password
-			cmd = fmt.Sprintf("su - %s -c '%s'", e.sudoUser, originalCmd)
-		} else {
-			cmd = fmt.Sprintf("su - %s -c '%s'", e.sudoUser, originalCmd)
+		// Build command string
+		cmdStr := name
+		if len(args) > 0 {
+			escapedArgs := make([]string, len(args))
+			for i, arg := range args {
+				escapedArgs[i] = fmt.Sprintf("'%s'", strings.ReplaceAll(arg, "'", "'\\''"))
+			}
+			cmdStr = fmt.Sprintf("%s %s", name, strings.Join(escapedArgs, " "))
 		}
-		return RunCommand("bash", "-c", cmd)
+		cmd = exec.Command("su", "-", e.sudoUser, "-c", cmdStr)
 	default: // sudo
+		sudoArgs := []string{"-u", e.sudoUser}
 		if e.sudoPassword != "" {
-			// Use echo to provide password to sudo
-			escapedPass := strings.ReplaceAll(e.sudoPassword, "'", "'\\''")
-			cmd = fmt.Sprintf("echo '%s' | sudo -S -u %s %s", escapedPass, e.sudoUser, originalCmd)
-			return RunCommand("bash", "-c", cmd)
-		} else {
-			// Try sudo without password (NOPASSWD)
-			return RunCommand("sudo", append([]string{"-u", e.sudoUser, name}, args...)...)
+			sudoArgs = append(sudoArgs, "-S")
+		}
+		sudoArgs = append(sudoArgs, name)
+		sudoArgs = append(sudoArgs, args...)
+		cmd = exec.Command("sudo", sudoArgs...)
+
+		if e.sudoPassword != "" {
+			cmd.Stdin = strings.NewReader(e.sudoPassword + "\n")
 		}
 	}
+
+	output, err := cmd.CombinedOutput()
+	return string(output), err
 }
 
 // runWithSudoTimeout executes a command with sudo and timeout
 func (e *LocalExecutor) runWithSudoTimeout(name string, timeout int, args ...string) (string, error) {
-	var cmd string
-
-	// Build the original command with timeout
-	originalCmd := fmt.Sprintf("timeout %d %s", timeout, name)
-	if len(args) > 0 {
-		// Properly escape arguments
-		escapedArgs := make([]string, len(args))
-		for i, arg := range args {
-			escapedArgs[i] = fmt.Sprintf("'%s'", strings.ReplaceAll(arg, "'", "'\\''"))
-		}
-		originalCmd = fmt.Sprintf("timeout %d %s %s", timeout, name, strings.Join(escapedArgs, " "))
-	}
-
-	// Apply sudo based on method
-	switch e.sudoMethod {
-	case "su":
-		cmd = fmt.Sprintf("su - %s -c '%s'", e.sudoUser, originalCmd)
-		return RunCommand("bash", "-c", cmd)
-	default: // sudo
-		if e.sudoPassword != "" {
-			// Use echo to provide password to sudo
-			escapedPass := strings.ReplaceAll(e.sudoPassword, "'", "'\\''")
-			cmd = fmt.Sprintf("echo '%s' | sudo -S -u %s %s", escapedPass, e.sudoUser, originalCmd)
-			return RunCommand("bash", "-c", cmd)
-		} else {
-			// Try sudo without password (NOPASSWD)
-			return RunCommand("sudo", append([]string{"-u", e.sudoUser, "timeout", fmt.Sprintf("%d", timeout), name}, args...)...)
-		}
-	}
+	// For local with sudo and timeout, combine them
+	timeoutArgs := []string{fmt.Sprintf("%d", timeout), name}
+	timeoutArgs = append(timeoutArgs, args...)
+	return e.runWithSudo("timeout", timeoutArgs...)
 }
 
 // GetHostname returns the hostname
@@ -210,6 +210,7 @@ func (e *LocalExecutor) Close() error {
 }
 
 // RunCommand executes a command remotely
+// THIS IS THE KEY METHOD FOR REMOTE EXECUTION
 func (e *RemoteExecutor) RunCommand(name string, args ...string) (string, error) {
 	e.mu.Lock()
 	defer e.mu.Unlock()
@@ -219,8 +220,15 @@ func (e *RemoteExecutor) RunCommand(name string, args ...string) (string, error)
 		return "", fmt.Errorf("remote connection is not established")
 	}
 
-	// Use a default timeout of 30 seconds for all commands
-	return e.connection.RunCommandWithTimeout(name, 30, args...)
+	// For remote execution, we need to be careful with command building
+	// If the command is already "bash -c", just pass it through
+	if name == "bash" && len(args) >= 2 && args[0] == "-c" {
+		// This is already a bash command, execute as-is
+		return e.connection.RunCommandWithTimeout(name, 60, args...)
+	}
+
+	// For simple commands, execute directly
+	return e.connection.RunCommandWithTimeout(name, 60, args...)
 }
 
 // RunCommandWithTimeout executes a command remotely with timeout
@@ -252,7 +260,9 @@ func (e *RemoteExecutor) Close() error {
 	defer e.mu.Unlock()
 
 	if e.connection != nil {
-		return e.connection.Close()
+		err := e.connection.Close()
+		e.connection = nil
+		return err
 	}
 	return nil
 }
@@ -284,7 +294,6 @@ func GetExecutor() CommandExecutor {
 }
 
 // ExecuteCommand is a wrapper that uses the current executor
-// This allows existing code to work with minimal changes
 func ExecuteCommand(name string, args ...string) (string, error) {
 	executor := GetExecutor()
 	return executor.RunCommand(name, args...)
