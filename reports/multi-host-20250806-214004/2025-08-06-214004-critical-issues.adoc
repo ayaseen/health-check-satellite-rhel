@@ -1,0 +1,75 @@
+= Critical Issues Report
+Generated: 2025-08-06 21:40:04
+Total Critical Issues: 12 across 3 hosts
+
+== Critical Issues Requiring Immediate Attention
+
+=== 🔴 Central Authentication (Affects 3 hosts)
+
+[cols="2,4,2", options=header]
+|===
+|Host |Issue |Action Required
+
+|192.168.1.100 |No central authentication configuration detected |Consider implementing central authentication for easier user management
+|192.168.1.102 |No central authentication configuration detected |Consider implementing central authentication for easier user management
+|192.168.1.101 |No central authentication configuration detected |Consider implementing central authentication for easier user management
+|===
+
+=== 🔴 RHEL CIS Compliance (Affects 2 hosts)
+
+[cols="2,4,2", options=header]
+|===
+|Host |Issue |Action Required
+
+|192.168.1.100 |System has low compliance with RHEL CIS standards (37%) |Create a separate partition for /home
+|192.168.1.101 |System has low compliance with RHEL CIS standards (37%) |Create a separate partition for /home
+|192.168.1.102 |System has low compliance with RHEL CIS standards (35%) |Create a separate partition for /home
+|===
+
+=== 🔴 Sudo and PAM (Affects 3 hosts)
+
+[cols="2,4,2", options=header]
+|===
+|Host |Issue |Action Required
+
+|192.168.1.100 |Local users with root or sudo privileges detected |Consider implementing Red Hat IdM (Identity Management) for centralized and granular control of user privileges
+|192.168.1.102 |Local users with root or sudo privileges detected |Consider implementing Red Hat IdM (Identity Management) for centralized and granular control of user privileges
+|192.168.1.101 |Local users with root or sudo privileges detected |Consider implementing Red Hat IdM (Identity Management) for centralized and granular control of user privileges
+|===
+
+=== 🔴 Filesystem Errors (Affects 3 hosts)
+
+[cols="2,4,2", options=header]
+|===
+|Host |Issue |Action Required
+
+|192.168.1.100 |Filesystem errors detected |Filesystem remounted read-only due to errors - recovery needed
+|192.168.1.102 |Filesystem errors detected |Filesystem remounted read-only due to errors - recovery needed
+|192.168.1.101 |Filesystem errors detected |Filesystem remounted read-only due to errors - recovery needed
+|===
+
+== Quick Remediation Guide
+
+=== Priority Order:
+
+1. Address certificate expiry issues first (if any)
+2. Resolve disk space issues
+3. Fix security vulnerabilities
+4. Address service failures
+
+=== Common Remediation Commands:
+
+[source,bash]
+----
+# For certificate issues on Satellite:
+satellite-installer --scenario satellite --certs-regenerate
+
+# For disk space issues:
+foreman-maintain content clean-pulp-cache
+find /var/log -name '*.log' -mtime +30 -delete
+
+# For subscription issues:
+subscription-manager refresh
+subscription-manager attach --auto
+----
+
